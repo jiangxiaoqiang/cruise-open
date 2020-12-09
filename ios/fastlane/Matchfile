@@ -1,11 +1,10 @@
-GIT_URL(ENV['GIT_URL'])
+git_url("https://github.com/jiangxiaoqiang/certificate.git")
 
 storage_mode("git")
-# The default type, can be: appstore, adhoc, enterprise or development
-type("adhoc")
 
-app_identifier([ENV['APP_IDENTIFIER']])
-# Your Apple Developer Portal username
-username(ENV['APPLE_ID'])
+type("adhoc") # The default type, can be: appstore, adhoc, enterprise or development
+
+app_identifier(["com.earth.dolphin"])
+username(ENV['APPLE_ID']) # Your Apple Developer Portal username
 
 
