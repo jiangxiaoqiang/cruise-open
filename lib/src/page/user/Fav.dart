@@ -1,0 +1,25 @@
+import 'package:Cruise/src/component/home_list.dart';
+import 'package:Cruise/src/component/home_list_default.dart';
+import 'package:Cruise/src/models/Item.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+
+class Fav extends HookWidget {
+
+  Fav({
+    Key key,
+    @required this.currentStoriesType,
+  }) : super(key: key);
+
+  final StoriesType currentStoriesType;
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Scaffold(
+      body: SafeArea(
+        child:HomeList(currentStoriesType: currentStoriesType,)
+      )
+    );
+  }
+}
