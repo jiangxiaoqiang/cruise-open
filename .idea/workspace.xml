@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8fccd2ca-d7eb-41ce-b0d2-dd8071b6d08f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/.idea/modules/android.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/Cruise_android.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/dolphin_android.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/fastlane/Matchfile" beforeDir="false" afterPath="$PROJECT_DIR$/ios/fastlane/Matchfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
