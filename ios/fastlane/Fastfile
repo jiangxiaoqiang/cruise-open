@@ -17,7 +17,7 @@ platform :ios do
       )
     end
 
-    match
+    match(
       app_identifier: ENV["APP_IDENTIFIER"],
       git_url: ENV["GIT_URL"],
       type: "adhoc",
