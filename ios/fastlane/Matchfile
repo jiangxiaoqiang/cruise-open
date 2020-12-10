@@ -1,4 +1,4 @@
-git_url("[GIT_URL]")
+git_url(ENV["GIT_URL"])
 
 storage_mode("git")
 
