@@ -1,4 +1,4 @@
-git_url("https://github.com/jiangxiaoqiang/certificate.git")
+git_url(ENV['GIT_URL'])
 
 storage_mode("git")
 
