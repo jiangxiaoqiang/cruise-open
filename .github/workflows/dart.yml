@@ -42,10 +42,12 @@ jobs:
         ssh-add "$SSH_PATH/id_rsa"
       env:
         PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-    - name: Deploy to TestFlight
+    - name: Deploy to TestFlight/PGY
       run: |
         cd ./ios && bundle exec fastlane beta
       env:
+        APPLE_ID: ${{ secrets.APPLE_ID }}
+        GIT_URL: ${{ secrets.GIT_URL }}
         PGY_USER_KEY: ${{ secrets.PGY_USER_KEY }}
         PGY_API_KEY: ${{ secrets.PGY_API_KEY }}
         TEAM_ID: ${{ secrets.TEAM_ID }}
