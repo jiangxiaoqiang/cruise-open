@@ -22,6 +22,8 @@ platform :ios do
     end
 
     match(
+      app_identifier: ENV["APP_IDENTIFIER"],
+      git_url: ENV["GIT_URL"],
       type: "adhoc",
       readonly: is_ci,
       keychain_name: ENV['MATCH_KEYCHAIN_NAME'],
