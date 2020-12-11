@@ -5,6 +5,10 @@ default_platform(:ios)
 
 platform :ios do
   desc "Push a new beta build to pgy"
+  before_all do
+    ENV["CACHE_GIT_URL"] = ENV["GIT_URL"]
+  end
+
   lane :beta do
     if is_ci
       create_keychain(
