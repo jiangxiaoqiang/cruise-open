@@ -39,7 +39,10 @@ class Item {
     this.type,
     this.link,
     this.isFav,
-    this.subSourceId
+    this.favCount,
+    this.subSourceId,
+    this.isUpvote,
+    this.upvoteCount
   });
 
   int depth;
@@ -59,6 +62,9 @@ class Item {
   StoryType type;
   String link;
   int isFav;
+  int favCount;
+  int isUpvote;
+  int upvoteCount;
   String subSourceId;
 
   factory Item.fromJson(String str) => Item.fromMap(json.decode(str));
@@ -92,6 +98,9 @@ class Item {
     type: json["type"] == null ? null : castType(json["type"]),
     link: json["link"] == null ? "" : json["link"],
     isFav: json["isFav"] == null ? "" : json["isFav"],
+    favCount: json["favCount"] == null ? "" : json["favCount"],
+    isUpvote: json["isUpvote"] == null ? "" : json["isUpvote"],
+    upvoteCount: json["upvoteCount"] == null ? "" : json["upvoteCount"],
     subSourceId: json["subSourceId"] == null ? "" : json["subSourceId"],
   );
 
@@ -112,6 +121,9 @@ class Item {
     "type": type == null ? null : type,
     "link": link == null ? null : link,
     "isFav": isFav == null ? null : isFav,
+    "favCount": favCount == null ? null : favCount,
+    "isUpvote": isUpvote == null ? null : isUpvote,
+    "upvoteCount": upvoteCount == null ? null : upvoteCount,
     "subSourceId": subSourceId == null ? null : subSourceId,
   };
 

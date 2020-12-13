@@ -1,6 +1,7 @@
 import 'package:Cruise/src/widgets/CruiseApp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluwx/fluwx.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -32,6 +33,7 @@ void main() async {
   final theme = ThemeManager.fromThemeName(themeName);
   String viewName = pref.getString('view');
   final view = ViewManager.fromViewName(viewName);
+  registerWxApi(appId: "your app id", doOnAndroid: true, doOnIOS: true,universalLink:"https://example.com");
   await SentryFlutter.init(
     (options) => options.dsn = _exampleDsn,
     appRunner: () => {
