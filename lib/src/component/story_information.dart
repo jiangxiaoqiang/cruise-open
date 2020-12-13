@@ -254,7 +254,7 @@ class StoryInformation extends HookWidget {
                               Padding(
                                 padding: const EdgeInsets.only(left: 0.0),
                                 child: Text(
-                                  "${item.score}",
+                                  "${favCount.value}",
                                   textAlign: TextAlign.center,
                                   style: Theme.of(context)
                                       .textTheme
