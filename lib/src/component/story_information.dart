@@ -1,6 +1,8 @@
 import 'package:Cruise/src/common/article_action.dart';
 import 'package:Cruise/src/common/net/rest/http_result.dart';
 import 'package:Cruise/src/models/Channel.dart';
+import 'package:Cruise/src/models/api/fav_status.dart';
+import 'package:Cruise/src/models/api/upvote_status.dart';
 import 'package:Cruise/src/page/channel_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -12,11 +14,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:Cruise/src/component/part_snippet.dart';
 import 'package:Cruise/src/common/helpers.dart';
 import 'package:Cruise/src/models/Item.dart';
-import 'package:Cruise/src/page/profile.dart';
 import 'package:Cruise/src/common/Repo.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import 'channel_information.dart';
 
 final partsProvider = FutureProvider.family((ref, int id) async {
   return await Repo.fetchArticleItem(id);
@@ -40,6 +39,12 @@ class StoryInformation extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    var counter = useState<Item>(item);
+    var isFav = useState(counter.value.isFav);
+    var isUpvote = useState(counter.value.isUpvote);
+    var favCount = useState(counter.value.favCount);
+    var upvoteCount = useState(counter.value.upvoteCount);
+
     final parts = item.parts.map((i) => useProvider(partsProvider(i))).toList();
 
     Offset _initialSwipeOffset;
@@ -62,13 +67,13 @@ class StoryInformation extends HookWidget {
       }
     }
 
-    void touchFav(String action) async {
-      HttpResult result = await ArticleAction.fav(
+    void touchUpvote(String action, UpvoteStatus upvoteStatus) async {
+      HttpResult result = await ArticleAction.upvote(
           articleId: item.id.toString(), action: action);
 
       if (result.result == Result.error) {
         Fluttertoast.showToast(
-            msg: "添加收藏失败",
+            msg: "点赞失败",
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 1,
@@ -76,8 +81,49 @@ class StoryInformation extends HookWidget {
             textColor: Colors.white,
             fontSize: 16.0);
       } else {
+        isUpvote.value = upvoteStatus.statusCode == "upvote" ? 1 : 0;
+        counter.value.isUpvote = isUpvote.value;
+        if (upvoteStatus.statusCode == "upvote") {
+          upvoteCount.value = upvoteCount.value + 1;
+        }
+        if (upvoteStatus.statusCode == "unupvote" && upvoteCount.value > 0) {
+          upvoteCount.value = upvoteCount.value - 1;
+        }
         Fluttertoast.showToast(
-            msg: "添加收藏成功",
+            msg: upvoteStatus.statusCode == "upvote" ? "点赞成功" : "取消点赞成功",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
+    }
+
+    void touchFav(String action, FavStatus favStatus) async {
+      HttpResult result = await ArticleAction.fav(
+          articleId: item.id.toString(), action: action);
+
+      if (result.result == Result.error) {
+        Fluttertoast.showToast(
+            msg: favStatus.statusCode == "fav" ? "添加收藏失败" : "取消收藏失败",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      } else {
+        isFav.value = favStatus.statusCode == "fav" ? 1 : 0;
+        counter.value.isFav = isFav.value;
+        if (favStatus.statusCode == "fav") {
+          favCount.value = favCount.value + 1;
+        }
+        if (favStatus.statusCode == "unfav" && favCount.value > 0) {
+          favCount.value = favCount.value - 1;
+        }
+        Fluttertoast.showToast(
+            msg: favStatus.statusCode == "fav" ? "添加收藏成功" : "取消收藏成功",
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 1,
@@ -88,17 +134,15 @@ class StoryInformation extends HookWidget {
     }
 
     return GestureDetector(
-          onHorizontalDragStart: _onHorizontalDragStart,
-          onHorizontalDragUpdate: _onHorizontalDragUpdate,
-          onHorizontalDragEnd: _onHorizontalDragEnd,
-          child: Container(
-            constraints: BoxConstraints(
-              minHeight: MediaQuery.of(context).size.height*0.9,
-            ),
-            color: Theme
-                .of(context)
-                .scaffoldBackgroundColor,
-            child: Padding(
+        onHorizontalDragStart: _onHorizontalDragStart,
+        onHorizontalDragUpdate: _onHorizontalDragUpdate,
+        onHorizontalDragEnd: _onHorizontalDragEnd,
+        child: Container(
+          constraints: BoxConstraints(
+            minHeight: MediaQuery.of(context).size.height * 0.9,
+          ),
+          color: Theme.of(context).scaffoldBackgroundColor,
+          child: Padding(
             padding: const EdgeInsets.all(
               16.0,
             ),
@@ -128,32 +172,28 @@ class StoryInformation extends HookWidget {
                               int.parse(item.subSourceId));
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => ChannelPage(item:channel)),
-                              //ProfilePage(username: item.author))
-                        );
-                      }, child: Text(
-                      item.domain,
-                      style: Theme
-                          .of(context)
-                          .textTheme
-                          .caption
-                          .copyWith(color: Theme.of(context).primaryColor),
-                      )
-                    ),
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    ChannelPage(item: channel)),
+                            //ProfilePage(username: item.author))
+                          );
+                        },
+                        child: Text(
+                          item.domain,
+                          style: Theme.of(context)
+                              .textTheme
+                              .caption
+                              .copyWith(color: Theme.of(context).primaryColor),
+                        )),
                   ),
                 InkWell(
-                  onTap: () {
-
-                  },
+                  onTap: () {},
                   child: RichText(
                     text: TextSpan(
                       children: <TextSpan>[
                         TextSpan(
                           text: item.author,
-                          style: Theme
-                              .of(context)
-                              .textTheme
-                              .caption,
+                          style: Theme.of(context).textTheme.caption,
                         ),
                         TextSpan(
                           text: " ${String.fromCharCode(8226)} ",
@@ -200,15 +240,16 @@ class StoryInformation extends HookWidget {
                             children: [
                               if (item.isFav == 1)
                                 IconButton(
-                                  icon: Icon(Feather.bookmark,
+                                  icon: Icon(Icons.bookmark,
                                       color: Theme.of(context).primaryColor),
-                                  onPressed: () => touchFav("unfav"),
+                                  onPressed: () =>
+                                      touchFav("unfav", FavStatus.UNFAV),
                                 ),
                               if (item.isFav != 1)
                                 IconButton(
-                                  icon: Icon(Feather.bookmark,
-                                      color: Theme.of(context).primaryColor),
-                                  onPressed: () => touchFav("fav"),
+                                  icon: Icon(Icons.bookmark),
+                                  onPressed: () =>
+                                      touchFav("fav", FavStatus.FAV),
                                 ),
                               Padding(
                                 padding: const EdgeInsets.only(left: 0.0),
@@ -230,13 +271,23 @@ class StoryInformation extends HookWidget {
                           padding: const EdgeInsets.only(bottom: 0.0),
                           child: Row(
                             children: [
-                              Icon(
-                                Feather.arrow_up,
-                              ),
+                              if (isUpvote.value == 1)
+                                IconButton(
+                                  icon: Icon(Icons.thumb_up,
+                                      color: Theme.of(context).primaryColor),
+                                  onPressed: () => touchUpvote(
+                                      "unupvote", UpvoteStatus.UNUPVOTE),
+                                ),
+                              if (isUpvote.value != 1)
+                                IconButton(
+                                  icon: Icon(Icons.thumb_up),
+                                  onPressed: () => touchUpvote(
+                                      "upvote", UpvoteStatus.UPVOTE),
+                                ),
                               Padding(
                                 padding: const EdgeInsets.only(left: 8.0),
                                 child: Text(
-                                  "${item.score}",
+                                  "${upvoteCount.value}",
                                   textAlign: TextAlign.center,
                                   style: Theme.of(context)
                                       .textTheme
