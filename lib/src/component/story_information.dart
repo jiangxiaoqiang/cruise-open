@@ -12,11 +12,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:Cruise/src/component/part_snippet.dart';
 import 'package:Cruise/src/common/helpers.dart';
 import 'package:Cruise/src/models/Item.dart';
-import 'package:Cruise/src/page/profile.dart';
 import 'package:Cruise/src/common/Repo.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import 'channel_information.dart';
 
 final partsProvider = FutureProvider.family((ref, int id) async {
   return await Repo.fetchArticleItem(id);
@@ -60,6 +57,10 @@ class StoryInformation extends HookWidget {
           Navigator.pop(context);
         }
       }
+    }
+
+    void touchUpvote() async{
+
     }
 
     void touchFav(String action) async {
@@ -213,7 +214,7 @@ class StoryInformation extends HookWidget {
                               Padding(
                                 padding: const EdgeInsets.only(left: 0.0),
                                 child: Text(
-                                  "${item.score}",
+                                  "${item.favCount}",
                                   textAlign: TextAlign.center,
                                   style: Theme.of(context)
                                       .textTheme
@@ -230,13 +231,15 @@ class StoryInformation extends HookWidget {
                           padding: const EdgeInsets.only(bottom: 0.0),
                           child: Row(
                             children: [
-                              Icon(
-                                Feather.arrow_up,
+                              IconButton(
+                                icon: Icon(Feather.thumbs_up,
+                                    color: Theme.of(context).primaryColor),
+                                onPressed: () => touchUpvote(),
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(left: 8.0),
                                 child: Text(
-                                  "${item.score}",
+                                  "${item.upvoteCount}",
                                   textAlign: TextAlign.center,
                                   style: Theme.of(context)
                                       .textTheme
