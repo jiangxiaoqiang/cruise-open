@@ -77,9 +77,6 @@ class HomeNew extends HookWidget {
       }
     }
 
-    void _onAdd(){
-    }
-
     return Scaffold(
       body: HomeList(currentStoriesType: storyType.value),
       bottomNavigationBar: BottomNavigationBar( // 底部导航
