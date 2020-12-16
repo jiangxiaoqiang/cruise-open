@@ -14,23 +14,21 @@ class StoryPage extends HookWidget {
 
   final Item item;
   final bool toTop = false;
-  final String percent = "0%";
+  final int percent = 0;
 
   final ScrollController scrollController = new ScrollController();
-
-  void initState() {
-    scrollController.addListener(() {
-      //打印监听位置
-      print(scrollController.offset);
-      if (scrollController.offset < 1000 && toTop) {
-      } else if (scrollController.offset >= 1000 && toTop == false) {}
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     var percent = useState<String>("0");
-    useEffect(() => initState, const []);
+    var showToTopBtn = useState(false);
+
+    scrollController.addListener(()=>{
+      if (scrollController.offset < 1000 && toTop) {
+      } else if (scrollController.offset >= 1000 && toTop == false) {
+        showToTopBtn.value = true
+    }
+    });
 
     return Scaffold(
         appBar: AppBar(
@@ -53,14 +51,24 @@ class StoryPage extends HookWidget {
         body: NotificationListener<ScrollNotification>(
           onNotification: (ScrollNotification sn) {
             double progress = sn.metrics.pixels / sn.metrics.maxScrollExtent;
-            percent.value = "${(progress * 100).toInt()}%";
+            percent.value = "${(progress * 100).toInt()}";
           },
           child: CustomScrollView(
+            controller:scrollController,
             slivers: [
               SliverToBoxAdapter(child: StoryInformation(item: item)),
-              CommentList(item: item)
+              CommentList(item: item),
             ],
           ),
-        ));
+
+        ),
+    floatingActionButton: !showToTopBtn.value ? null : FloatingActionButton(
+    child: Icon(Icons.arrow_upward),
+    onPressed: () {
+      if (scrollController.hasClients) {
+        scrollController.animateTo(.0, duration: Duration(milliseconds: 200), curve: Curves.ease);
+      }
+    }
+    ),);
   }
 }

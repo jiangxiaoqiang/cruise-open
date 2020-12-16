@@ -44,7 +44,6 @@ class StoryList extends HookWidget {
 
   Widget build(BuildContext context) {
     final currentView = useProvider(viewProvider.state);
-    var counter = useState<StoriesType>(storiesType);
 
     return SliverList(
       delegate: SliverChildBuilderDelegate(
