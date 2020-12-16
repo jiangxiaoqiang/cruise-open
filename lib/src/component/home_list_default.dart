@@ -75,7 +75,6 @@ class HomeListDefault extends HookWidget{
                 enablePullDown: true,
                 controller: _refreshController,
                 onLoading: () {
-                  print("loading");
                   _refreshController.loadComplete();
                 },
                 footer: CustomFooter(
