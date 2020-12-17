@@ -20,7 +20,7 @@ class StoryPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    var percent = useState<String>("0");
+    //var percent = useState<String>("0");
     var showToTopBtn = useState(false);
 
     scrollController.addListener(()=>{
@@ -50,8 +50,8 @@ class StoryPage extends HookWidget {
         ),
         body: NotificationListener<ScrollNotification>(
           onNotification: (ScrollNotification sn) {
-            double progress = sn.metrics.pixels / sn.metrics.maxScrollExtent;
-            percent.value = "${(progress * 100).toInt()}";
+            //double progress = sn.metrics.pixels / sn.metrics.maxScrollExtent;
+            //percent.value = "${(progress * 100).toInt()}";
           },
           child: CustomScrollView(
             controller:scrollController,
