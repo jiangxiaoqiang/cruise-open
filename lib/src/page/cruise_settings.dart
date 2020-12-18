@@ -144,6 +144,10 @@ class CruiseSettingsPage extends HookWidget {
             ListTile(
               leading: Icon(Feather.award),
               title: Text("关于Cruise"),
+            ),
+            ListTile(
+              leading: Icon(Feather.settings),
+              title: Text("设置"),
             )
           ],
         ),
