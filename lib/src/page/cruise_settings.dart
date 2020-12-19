@@ -4,6 +4,7 @@ import 'package:Cruise/src/common/view_manager.dart';
 import 'package:Cruise/src/models/Item.dart';
 import 'package:Cruise/src/page/login.dart';
 import 'package:Cruise/src/page/profile.dart';
+import 'package:Cruise/src/page/settings/custom_setting.dart';
 import 'package:Cruise/src/page/user/Fav.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -114,7 +115,7 @@ class CruiseSettingsPage extends HookWidget {
                 bool isLoggedIn = await Auth.isLoggedIn();
                 if (!isLoggedIn) {
                   page = LoginPage();
-                 //page = BottomNavigationDemo(type: BottomNavigationDemoType.withLabels);
+                  //page = BottomNavigationDemo(type: BottomNavigationDemoType.withLabels);
                 } else {
                   var username = await Auth.currentUser();
 
@@ -148,6 +149,13 @@ class CruiseSettingsPage extends HookWidget {
             ListTile(
               leading: Icon(Feather.settings),
               title: Text("设置"),
+              onTap: () async {
+                Widget page = CustomSetting();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => page),
+                );
+              },
             )
           ],
         ),
