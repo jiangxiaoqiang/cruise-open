@@ -18,7 +18,6 @@ class StoryPage extends HookWidget {
       : super(key: key);
 
   final Item item;
-  final bool toTop = false;
   final PageStorageBucket pageStorageBucket;
   ScrollController scrollController;
 
@@ -30,9 +29,9 @@ class StoryPage extends HookWidget {
     scrollController = scrollControllers[item.id];
 
     scrollController.addListener(() => {
-          if (scrollController.offset < 1000 && toTop)
+          if (scrollController.offset < 1000)
             {showToTopBtn.value = false}
-          else if (scrollController.offset >= 1000 && toTop == false)
+          else if (scrollController.offset >= 1000)
             {showToTopBtn.value = true}
         });
 
@@ -57,10 +56,7 @@ class StoryPage extends HookWidget {
             ],
           ),
           body: NotificationListener<ScrollNotification>(
-            onNotification: (ScrollNotification sn) {
-              //double progress = sn.metrics.pixels / sn.metrics.maxScrollExtent;
-              //percent.value = "${(progress * 100).toInt()}";
-            },
+            onNotification: (ScrollNotification sn) {},
             child: CustomScrollView(
               key: PageStorageKey(item.id),
               controller: scrollController,
