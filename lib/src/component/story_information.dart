@@ -24,14 +24,10 @@ final partsProvider = FutureProvider.family((ref, int id) async {
 class StoryInformation extends HookWidget {
   const StoryInformation(
       {Key key,
-      @required this.item,
-      @required this.scrollController,
-      @required this.offset})
+      @required this.item})
       : super(key: key);
 
   final Item item;
-  final ScrollController scrollController;
-  final double offset;
 
   void launchUrl(url) async {
     if (await canLaunch(url)) {
@@ -43,9 +39,6 @@ class StoryInformation extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (offset != null && offset > 0) {
-      scrollController.jumpTo(offset);
-    }
     var counter = useState<Item>(item);
     var isFav = useState(counter.value.isFav);
     var isUpvote = useState(counter.value.isUpvote);

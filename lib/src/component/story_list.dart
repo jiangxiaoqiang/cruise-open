@@ -43,11 +43,11 @@ class StoryList extends HookWidget {
   }
 
   final pageStorageBucket = PageStorageBucket();
-  final Map<int,ScrollController> scrollController =new Map();
+  final Map<String,ScrollController> scrollController =new Map();
 
   Widget build(BuildContext context) {
     ids.forEach((element) {
-        scrollController.putIfAbsent(element, () => new ScrollController());
+        scrollController.putIfAbsent(element.toString(), () => new ScrollController());
     });
 
     final currentView = useProvider(viewProvider.state);

@@ -19,27 +19,22 @@ class StoryPage extends HookWidget {
 
   final Item item;
   final bool toTop = false;
-  final pageStorageBucket;
+  final PageStorageBucket pageStorageBucket;
   ScrollController scrollController;
 
-  final Map<int, ScrollController> scrollControllers;
+  final Map<String, ScrollController> scrollControllers;
 
   @override
   Widget build(BuildContext context) {
     var showToTopBtn = useState(false);
-    double storedValue =
-        PageStorage.of(context).readState(context, identifier: item.id);
-    scrollControllers.forEach((key, value) {
-      if (key == int.parse(item.id)) {
-        scrollController = value;
-        scrollController.addListener(() => {
-              if (scrollController.offset < 1000 && toTop)
-                {showToTopBtn.value = false}
-              else if (scrollController.offset >= 1000 && toTop == false)
-                {showToTopBtn.value = true}
-            });
-      }
-    });
+    scrollController = scrollControllers[item.id];
+
+    scrollController.addListener(() => {
+          if (scrollController.offset < 1000 && toTop)
+            {showToTopBtn.value = false}
+          else if (scrollController.offset >= 1000 && toTop == false)
+            {showToTopBtn.value = true}
+        });
 
     return PageStorage(
         bucket: pageStorageBucket,
@@ -65,19 +60,14 @@ class StoryPage extends HookWidget {
             onNotification: (ScrollNotification sn) {
               //double progress = sn.metrics.pixels / sn.metrics.maxScrollExtent;
               //percent.value = "${(progress * 100).toInt()}";
-              PageStorage.of(context).writeState(
-                  context, scrollController.offset,
-                  identifier: item.id);
             },
             child: CustomScrollView(
-              key: PageStorageKey(0),
+              key: PageStorageKey(item.id),
               controller: scrollController,
               slivers: [
                 SliverToBoxAdapter(
                     child: StoryInformation(
                   item: item,
-                  scrollController: scrollController,
-                  offset: storedValue,
                 )),
                 CommentList(item: item),
               ],
