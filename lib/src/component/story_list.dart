@@ -15,7 +15,7 @@ import 'package:Cruise/src/page/story_page.dart';
 import 'package:Cruise/src/common/view_manager.dart';
 
 class StoryList extends HookWidget {
-  const StoryList({
+  StoryList({
     Key key,
     @required this.ids,
     @required this.storiesType,
@@ -42,7 +42,14 @@ class StoryList extends HookWidget {
     }
   }
 
+  final pageStorageBucket = PageStorageBucket();
+  final Map<int,ScrollController> scrollController =new Map();
+
   Widget build(BuildContext context) {
+    ids.forEach((element) {
+        scrollController.putIfAbsent(element, () => new ScrollController());
+    });
+
     final currentView = useProvider(viewProvider.state);
 
     return SliverList(
@@ -88,7 +95,9 @@ class StoryList extends HookWidget {
                         closedBuilder: (BuildContext c, VoidCallback action) =>
                             _getViewType(currentView, item),
                         openBuilder: (BuildContext c, VoidCallback action) =>
-                            StoryPage(item: item),
+                            StoryPage(item: item,
+                            pageStorageBucket: pageStorageBucket,
+                            scrollControllers: scrollController,),
                       ),
                     ),
                   );
