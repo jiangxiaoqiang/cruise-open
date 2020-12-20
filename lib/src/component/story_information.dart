@@ -36,7 +36,6 @@ class StoryInformation extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    var article = useState<Item>(item);
 
     final parts = item.parts.map((i) => useProvider(partsProvider(i))).toList();
 
@@ -74,13 +73,13 @@ class StoryInformation extends HookWidget {
             textColor: Colors.white,
             fontSize: 16.0);
       } else {
-        article.value.isUpvote = upvoteStatus.statusCode == "upvote" ? 1 : 0;
+        item.isUpvote = upvoteStatus.statusCode == "upvote" ? 1 : 0;
         if (upvoteStatus.statusCode == "upvote") {
-          article.value.upvoteCount = article.value.upvoteCount + 1;
+          item.upvoteCount = item.upvoteCount + 1;
         }
         if (upvoteStatus.statusCode == "unupvote" &&
-            article.value.upvoteCount > 0) {
-          article.value.upvoteCount = article.value.upvoteCount - 1;
+            item.upvoteCount > 0) {
+          item.upvoteCount = item.upvoteCount - 1;
         }
         Fluttertoast.showToast(
             msg: upvoteStatus.statusCode == "upvote" ? "点赞成功" : "取消点赞成功",
@@ -107,12 +106,12 @@ class StoryInformation extends HookWidget {
             textColor: Colors.white,
             fontSize: 16.0);
       } else {
-        article.value.isFav = favStatus.statusCode == "fav" ? 1 : 0;
+        item.isFav = favStatus.statusCode == "fav" ? 1 : 0;
         if (favStatus.statusCode == "fav") {
-          article.value.favCount = article.value.favCount + 1;
+          item.favCount = item.favCount + 1;
         }
-        if (favStatus.statusCode == "unfav" && article.value.favCount > 0) {
-          article.value.favCount = article.value.favCount - 1;
+        if (favStatus.statusCode == "unfav" && item.favCount > 0) {
+          item.favCount = item.favCount - 1;
         }
         Fluttertoast.showToast(
             msg: favStatus.statusCode == "fav" ? "添加收藏成功" : "取消收藏成功",
@@ -246,7 +245,7 @@ class StoryInformation extends HookWidget {
                               Padding(
                                 padding: const EdgeInsets.only(left: 0.0),
                                 child: Text(
-                                  "${article.value.favCount}",
+                                  "${item.favCount}",
                                   textAlign: TextAlign.center,
                                   style: Theme.of(context)
                                       .textTheme
@@ -263,14 +262,14 @@ class StoryInformation extends HookWidget {
                           padding: const EdgeInsets.only(bottom: 0.0),
                           child: Row(
                             children: [
-                              if (article.value.isUpvote == 1)
+                              if (item.isUpvote == 1)
                                 IconButton(
                                   icon: Icon(Icons.thumb_up,
                                       color: Theme.of(context).primaryColor),
                                   onPressed: () => touchUpvote(
                                       "unupvote", UpvoteStatus.UNUPVOTE),
                                 ),
-                              if (article.value.isUpvote != 1)
+                              if (item.isUpvote != 1)
                                 IconButton(
                                   icon: Icon(Icons.thumb_up),
                                   onPressed: () => touchUpvote(
@@ -279,7 +278,7 @@ class StoryInformation extends HookWidget {
                               Padding(
                                 padding: const EdgeInsets.only(left: 8.0),
                                 child: Text(
-                                  "${article.value.upvoteCount}",
+                                  "${item.upvoteCount}",
                                   textAlign: TextAlign.center,
                                   style: Theme.of(context)
                                       .textTheme

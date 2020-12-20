@@ -25,6 +25,7 @@ class StoryPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    var article = useState<Item>(item);
     var showToTopBtn = useState(false);
     scrollController = scrollControllers[item.id];
 
@@ -63,7 +64,7 @@ class StoryPage extends HookWidget {
               slivers: [
                 SliverToBoxAdapter(
                     child: StoryInformation(
-                  item: item,
+                  item: article.value,
                 )),
                 CommentList(item: item),
               ],
