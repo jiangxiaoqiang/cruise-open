@@ -14,5 +14,5 @@ void _onAction(Action action, Context<HomeState> ctx) {
 }
 
 void _onSwitchNav(Action action, Context<HomeState> ctx) {
-  ctx.dispatch(HomeActionCreator.onSwitchNavSuccess());
+  ctx.dispatch(HomeActionCreator.onSwitchNavSuccess(action.payload));
 }
