@@ -6,6 +6,8 @@ import 'package:Cruise/src/page/login.dart';
 import 'package:Cruise/src/page/profile.dart';
 import 'package:Cruise/src/page/settings/custom_setting.dart';
 import 'package:Cruise/src/page/user/Fav.dart';
+import 'package:Cruise/src/page/user/about.dart';
+import 'package:Cruise/src/page/user/feedback_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -141,10 +143,24 @@ class CruiseSettingsPage extends HookWidget {
             ListTile(
               leading: Icon(Feather.mail),
               title: Text("问题反馈"),
+              onTap: () async {
+                Widget page = FeedbackPage();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => page),
+                );
+              },
             ),
             ListTile(
               leading: Icon(Feather.award),
               title: Text("关于Cruise"),
+              onTap: () async {
+                Widget page = About();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => page),
+                );
+              },
             ),
             ListTile(
               leading: Icon(Feather.settings),
