@@ -41,8 +41,8 @@ class CruiseApp extends HookWidget {
       routes: {
         "home": (context) => HomeNew(),
       },
-      home: HomeNew(),
-      //home:routes.buildPage('home', null),
+      //home: HomeNew(),
+      home:routes.buildPage('home', null),
     );
   }
 }
