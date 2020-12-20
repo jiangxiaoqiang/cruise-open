@@ -5,18 +5,18 @@ import 'reducer.dart';
 import 'state.dart';
 import 'view.dart';
 
-class LoginPage extends Page<LoginState, Map<String, dynamic>> {
-  LoginPage()
+class HomePage extends Page<HomeState, Map<String, dynamic>> {
+  HomePage()
       : super(
             initState: initState,
             effect: buildEffect(),
             reducer: buildReducer(),
             view: buildView,
-            dependencies: Dependencies<LoginState>(
+            dependencies: Dependencies<HomeState>(
                 adapter: null,
-                slots: <String, Dependent<LoginState>>{
+                slots: <String, Dependent<HomeState>>{
                 }),
-            middleware: <Middleware<LoginState>>[
+            middleware: <Middleware<HomeState>>[
             ],);
 
 }
