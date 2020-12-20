@@ -1,6 +1,6 @@
 # This is a generated file; do not edit or check into version control.
 flutter_secure_storage=/Users/dolphin/.pub-cache/hosted/pub.flutter-io.cn/flutter_secure_storage-3.3.5/
-fluttertoast=/Users/dolphin/.pub-cache/hosted/pub.flutter-io.cn/fluttertoast-7.1.5/
+fluttertoast=/Users/dolphin/.pub-cache/hosted/pub.flutter-io.cn/fluttertoast-7.1.6/
 libphonenumber=/Users/dolphin/.pub-cache/hosted/pub.flutter-io.cn/libphonenumber-1.0.2/
 package_info=/Users/dolphin/.pub-cache/hosted/pub.flutter-io.cn/package_info-0.4.3+2/
 path_provider=/Users/dolphin/.pub-cache/hosted/pub.flutter-io.cn/path_provider-1.6.24/
@@ -8,7 +8,7 @@ path_provider_linux=/Users/dolphin/.pub-cache/hosted/pub.flutter-io.cn/path_prov
 path_provider_macos=/Users/dolphin/.pub-cache/hosted/pub.flutter-io.cn/path_provider_macos-0.0.4+6/
 path_provider_windows=/Users/dolphin/.pub-cache/hosted/pub.flutter-io.cn/path_provider_windows-0.0.4+3/
 screen=/Users/dolphin/.pub-cache/hosted/pub.flutter-io.cn/screen-0.0.5/
-sentry_flutter=/Users/dolphin/.pub-cache/hosted/pub.flutter-io.cn/sentry_flutter-4.0.0/
+sentry_flutter=/Users/dolphin/.pub-cache/hosted/pub.flutter-io.cn/sentry_flutter-4.0.1/
 share=/Users/dolphin/.pub-cache/hosted/pub.flutter-io.cn/share-0.6.5+4/
 shared_preferences=/Users/dolphin/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences-0.5.12+4/
 shared_preferences_linux=/Users/dolphin/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences_linux-0.0.2+4/
