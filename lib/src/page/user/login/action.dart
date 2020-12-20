@@ -1,8 +1,8 @@
 import 'package:fish_redux/fish_redux.dart';
 
-//TODO replace with your own action
 enum loginAction { login,emailFail,loginSuccess}
-class loginActionCreator {
+
+class LoginActionCreator {
   static Action onEmailFail() {
     return Action(loginAction.emailFail);
   }

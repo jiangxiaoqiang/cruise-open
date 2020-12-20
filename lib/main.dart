@@ -20,8 +20,7 @@ class CustomEn extends timeago.EnMessages {
   String days(int days) => '${days}d';
 }
 
-const String _exampleDsn =
-    'https://de8b8babf1d64e729b7798b2b761fda5@o485171.ingest.sentry.io/5539934';
+const String _exampleDsn = 'https://de8b8babf1d64e729b7798b2b761fda5@o485171.ingest.sentry.io/5539934';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
