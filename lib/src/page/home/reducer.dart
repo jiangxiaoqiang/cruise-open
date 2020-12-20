@@ -18,8 +18,10 @@ HomeState _onAction(HomeState state, Action action) {
   return newState;
 }
 
-
 HomeState _onSwitchNavSuccess(HomeState state, Action action) {
+  if (action.payload == null) {
+    return state;
+  }
   final HomeState newState = state.clone();
   newState.storiesType = (action.payload as HomeModel).storiesType;
   newState.selectIndex = (action.payload as HomeModel).selectIndex;

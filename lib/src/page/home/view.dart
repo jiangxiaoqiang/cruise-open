@@ -9,7 +9,6 @@ import 'state.dart';
 Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
 
   void _onItemTapped(int index) {
-    final HomeState newState = state.clone();
     var homeModel = new HomeModel();
     if(index == MenuType.my.value) {
       homeModel.selectIndex = index;
