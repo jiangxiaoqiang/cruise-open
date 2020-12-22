@@ -54,19 +54,12 @@ Widget buildView(
         ].map((type) {
           if (currentStoriesType == StoriesType.topStories) {
             return viewService.buildComponent("homelistdefault");
-            /*return HomeListDefault(
-              type: currentStoriesType,
-            );*/
           } else if (currentStoriesType == StoriesType.channels) {
-            /*return ChannelListDefault(
-              storiesType: currentStoriesType,
-            );*/
+            return viewService.buildComponent("channellistdefault");
           } else if (currentStoriesType == StoriesType.subStories) {
-            //return HomeListDefault(type: currentStoriesType);
+            return viewService.buildComponent("homelistdefault");
           }else if(currentStoriesType == StoriesType.favStories) {
-            /*return HomeListDefault(
-              type: currentStoriesType,
-            );*/
+            return viewService.buildComponent("homelistdefault");
           }else if (currentStoriesType == StoriesType.profile) {
             //return CruiseSettingsPage();
           }
