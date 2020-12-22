@@ -8,7 +8,7 @@ class HomeListState implements Cloneable<HomeListState> {
 
   StoriesType currentStoriesType;
 
-  HomeListDefaultState homeListDefaultState;
+  HomeListDefaultState homeListDefaultState = new HomeListDefaultState();
 
   @override
   HomeListState clone() {
