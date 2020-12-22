@@ -1,7 +1,9 @@
+import 'package:Cruise/src/page/home/components/homelistdefault_component/component.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'components/homelist_component/component.dart';
 import 'components/homelist_component/state.dart';
+import 'components/homelistdefault_component/state.dart';
 import 'effect.dart';
 import 'reducer.dart';
 import 'state.dart';
