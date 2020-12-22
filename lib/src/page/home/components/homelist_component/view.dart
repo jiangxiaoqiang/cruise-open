@@ -15,36 +15,38 @@ Widget buildView(
   return DefaultTabController(
     length: tabs.length,
     child: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-      return <Widget>[
-        SliverOverlapAbsorber(
-            handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-              context,
-            ),
-            sliver: SliverAppBar(
-              title: Text(
-                'Cruise',
-                style: TextStyle(
-                  color: Theme.of(context).brightness == Brightness.light
-                      ? Colors.black
-                      : Colors.white,
-                ),
+      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+        return <Widget>[
+          SliverOverlapAbsorber(
+              handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                context,
               ),
-              pinned: true,
-              expandedHeight: 10.0,
-              floating: true,
-              snap: true,
-              forceElevated: innerBoxIsScrolled,
-              actions: [
-                if (state.currentStoriesType == StoriesType.channels)
-                  IconButton(
-                    onPressed: () =>
-                        {dispatch(HomeListActionCreator.onJumpAddChannel())},
-                    icon: Icon(Feather.plus),
+              sliver: SliverAppBar(
+                title: Text(
+                  'Cruise',
+                  style: TextStyle(
+                    color: Theme.of(context).brightness == Brightness.light
+                        ? Colors.black
+                        : Colors.white,
                   ),
-              ],
-            )),
-      ];
-    }),
+                ),
+                pinned: true,
+                expandedHeight: 10.0,
+                floating: true,
+                snap: true,
+                forceElevated: innerBoxIsScrolled,
+                actions: [
+                  if (state.currentStoriesType == StoriesType.channels)
+                    IconButton(
+                      onPressed: () =>
+                          {dispatch(HomeListActionCreator.onJumpAddChannel())},
+                      icon: Icon(Feather.plus),
+                    ),
+                ],
+              )),
+        ];
+      },
+      body: TabBarView(),
+    ),
   );
 }
