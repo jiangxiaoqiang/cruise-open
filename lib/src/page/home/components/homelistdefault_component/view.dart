@@ -31,7 +31,7 @@ Widget buildView(
     HomeListDefaultState state, Dispatch dispatch, ViewService viewService) {
 
   ArticleRequest articleRequest = new ArticleRequest();
-  articleRequest.storiesType = StoriesType.topStories;
+  articleRequest.storiesType = state.currentStoriesType;
 
   return Scaffold(
     body: SafeArea(
