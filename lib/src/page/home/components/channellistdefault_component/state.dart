@@ -1,3 +1,4 @@
+import 'package:Cruise/src/models/Item.dart';
 import 'package:Cruise/src/page/home/components/homelist_component/state.dart';
 import 'package:fish_redux/fish_redux.dart';
 

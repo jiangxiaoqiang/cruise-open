@@ -1,4 +1,5 @@
 import 'package:Cruise/src/models/Item.dart';
+import 'package:Cruise/src/page/home/components/channellistdefault_component/state.dart';
 import 'package:Cruise/src/page/home/components/homelist_component/state.dart';
 import 'package:Cruise/src/page/home/components/homelistdefault_component/state.dart';
 import 'package:fish_redux/fish_redux.dart';
@@ -13,11 +14,14 @@ class HomeState implements Cloneable<HomeState> {
 
   HomeListDefaultState homeListDefaultState;
 
+  ChannelListDefaultState channelListDefaultState;
+
   @override
   HomeState clone() {
     return HomeState()
       ..selectIndex = this.selectIndex
       ..homeListDefaultState = this.homeListDefaultState
+      ..channelListDefaultState = this.channelListDefaultState
       ..homeListState = this.homeListState
       ..storiesType = this.storiesType;
   }
