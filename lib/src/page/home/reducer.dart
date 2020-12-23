@@ -25,5 +25,6 @@ HomeState _onSwitchNavSuccess(HomeState state, Action action) {
   final HomeState newState = state.clone();
   newState.storiesType = (action.payload as HomeModel).storiesType;
   newState.selectIndex = (action.payload as HomeModel).selectIndex;
+  newState.homeListState.currentStoriesType = (action.payload as HomeModel).storiesType;
   return newState;
 }

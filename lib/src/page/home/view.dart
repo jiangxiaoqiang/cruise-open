@@ -30,7 +30,7 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
   }
 
   return Scaffold(
-    body: Text("Home"),
+    body: viewService.buildComponent("homelist"),
     bottomNavigationBar: BottomNavigationBar(
       items: [
         BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('首页')),
