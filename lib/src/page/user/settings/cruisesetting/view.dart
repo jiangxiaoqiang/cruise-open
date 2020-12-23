@@ -1,66 +1,118 @@
-import 'dart:js';
-
-import 'package:Cruise/src/common/theme.dart';
+import 'package:Cruise/src/common/auth.dart';
 import 'package:Cruise/src/common/view_manager.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import 'action.dart';
+import '../../../login.dart';
+import '../custom_setting.dart';
 import 'state.dart';
 
-final currentView = useProvider(viewProvider.state);
-final ViewManager viewManager = useProvider(viewProvider);
-final currentTheme = useProvider(themeProvider.state);
-final ThemeManager themeManager = useProvider(themeProvider);
+Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewService) {
 
-Widget buildView(
-    CruiseSettingState state, Dispatch dispatch, ViewService viewService) {
+  BuildContext context= viewService.context;
+
   return Scaffold(
     body: SafeArea(
       child: ListView(
         children: [
+
           ListTile(
-            title: Text("主题"),
-            leading: Icon(Feather.moon),
-            onTap: () => {
-              showDialog(builder: (context) {
-                return StatefulBuilder(
-                  builder: (context, setState) => SimpleDialog(
-                    title: Text("Theme"),
-                    children: [
-                      RadioListTile(
-                        title: const Text('Light'),
-                        value: lightTheme,
-                        groupValue: currentTheme,
-                        onChanged: (value) {
-                          themeManager.setTheme(value);
-                          Navigator.pop(context);
-                        },
-                      ),
-                      RadioListTile(
-                        title: const Text('Dark'),
-                        value: darkTheme,
-                        groupValue: currentTheme,
-                        onChanged: (value) {
-                          themeManager.setTheme(value);
-                          Navigator.pop(context);
-                        },
-                      ),
-                      RadioListTile(
-                        title: const Text('True Black'),
-                        value: trueBlackTheme,
-                        groupValue: currentTheme,
-                        onChanged: (value) {
-                          themeManager.setTheme(value);
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ],
-                  ),
+            title: Text("视图"),
+            leading: Icon(Feather.grid),
+            onTap: () => showDialog(
+              context: context,
+              builder: (context) {
+                return SimpleDialog(
+                  title: Text("View"),
+                  children: <Widget>[
+                    RadioListTile(
+                      title: const Text('Card'),
+                      value: ViewType.itemCard,
+                      onChanged: (value) {
+                        Navigator.pop(context);
+                      },
+                    ),
+                    RadioListTile(
+                      title: const Text('Compact'),
+                      value: ViewType.compactTile,
+                      onChanged: (value) {
+                        Navigator.pop(context);
+                      },
+                    ),
+                    RadioListTile(
+                      title: const Text('Tile'),
+                      value: ViewType.itemTile,
+                      onChanged: (value) {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
                 );
-              })
+              },
+            ),
+          ),
+          ListTile(
+            leading: Icon(Feather.user),
+            title: Text("我的"),
+            onTap: () async {
+              Widget page;
+              bool isLoggedIn = await Auth.isLoggedIn();
+              if (!isLoggedIn) {
+                page = LoginPage();
+                //page = BottomNavigationDemo(type: BottomNavigationDemoType.withLabels);
+              } else {
+                var username = await Auth.currentUser();
+
+                //page = ProfilePage(username: "dolphin", isMe: true);
+              }
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => page),
+              );
+            },
+          ),
+          ListTile(
+            leading: Icon(Feather.bookmark),
+            title: Text("收藏"),
+            onTap: () async {
+             /* Widget page = Fav(currentStoriesType: StoriesType.favStories);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => page),
+              );*/
+            },
+          ),
+          ListTile(
+            leading: Icon(Feather.mail),
+            title: Text("问题反馈"),
+            onTap: () async {
+              /*Widget page = FeedbackPage();
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => page),
+              );*/
+            },
+          ),
+          ListTile(
+            leading: Icon(Feather.award),
+            title: Text("关于Cruise"),
+            onTap: () async {
+              /*Widget page = About();
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => page),
+              );*/
+            },
+          ),
+          ListTile(
+            leading: Icon(Feather.settings),
+            title: Text("设置"),
+            onTap: () async {
+              Widget page = CustomSetting();
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => page),
+              );
             },
           )
         ],
