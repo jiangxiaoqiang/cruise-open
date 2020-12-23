@@ -7,7 +7,7 @@ import '../../state.dart';
 
 class HomeListState implements Cloneable<HomeListState> {
 
-  StoriesType currentStoriesType;
+  StoriesType currentStoriesType = StoriesType.topStories;
 
   HomeListDefaultState homeListDefaultState = new HomeListDefaultState();
 

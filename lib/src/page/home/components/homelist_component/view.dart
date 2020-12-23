@@ -10,10 +10,10 @@ final List tabs = [
   IconTab(name: "Top", icon: Feather.trending_up),
 ];
 
-final StoriesType currentStoriesType = StoriesType.topStories;
-
 Widget buildView(
     HomeListState state, Dispatch dispatch, ViewService viewService) {
+  StoriesType currentStoriesType = state.currentStoriesType;
+
   return DefaultTabController(
     length: tabs.length,
     child: NestedScrollView(
@@ -49,18 +49,16 @@ Widget buildView(
         ];
       },
       body: TabBarView(
-        children: [
-          currentStoriesType
-        ].map((type) {
+        children: [currentStoriesType].map((type) {
           if (currentStoriesType == StoriesType.topStories) {
             return viewService.buildComponent("homelistdefault");
           } else if (currentStoriesType == StoriesType.channels) {
             return viewService.buildComponent("channellistdefault");
           } else if (currentStoriesType == StoriesType.subStories) {
             return viewService.buildComponent("homelistdefault");
-          }else if(currentStoriesType == StoriesType.favStories) {
+          } else if (currentStoriesType == StoriesType.favStories) {
             return viewService.buildComponent("homelistdefault");
-          }else if (currentStoriesType == StoriesType.profile) {
+          } else if (currentStoriesType == StoriesType.profile) {
             //return CruiseSettingsPage();
           }
         }).toList(),
