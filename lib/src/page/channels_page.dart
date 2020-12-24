@@ -18,16 +18,16 @@ final storyChannelProvider = FutureProvider.family((ref, id) async {
 class ChannelsPage extends HookWidget {
   const ChannelsPage({
     Key key,
-    @required this.type,
+    @required this.articleRequest,
   }) : super(key: key);
 
-  final ArticleRequest type;
+  final ArticleRequest articleRequest;
 
   @override
   Widget build(BuildContext context) {
     return Consumer(
             (context, read) {
-          return read(storiesTypeProvider(type)).when(
+          return read(storiesTypeProvider(articleRequest)).when(
             loading: () {
               // return SliverFillRemaining(
               // child: Center(child: CircularProgressIndicator()));

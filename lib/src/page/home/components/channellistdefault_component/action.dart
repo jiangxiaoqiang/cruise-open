@@ -1,3 +1,4 @@
+import 'package:Cruise/src/models/request/article/article_request.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 //TODO replace with your own action
@@ -8,7 +9,7 @@ class ChannelListDefaultActionCreator {
     return const Action(ChannelListDefaultAction.action);
   }
 
-  static Action onLoadingChannels() {
-    return const Action(ChannelListDefaultAction.loading_channels);
+  static Action onLoadingChannels(ArticleRequest request) {
+    return Action(ChannelListDefaultAction.loading_channels,payload: request);
   }
 }

@@ -3,7 +3,7 @@ import 'package:fish_redux/fish_redux.dart';
 
 class ChannelsState implements Cloneable<ChannelsState> {
 
-  ArticleRequest type;
+  ArticleRequest articleRequest;
 
   @override
   ChannelsState clone() {

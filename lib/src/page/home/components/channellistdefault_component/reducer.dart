@@ -1,3 +1,4 @@
+import 'package:Cruise/src/models/request/article/article_request.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'action.dart';
@@ -12,12 +13,16 @@ Reducer<ChannelListDefaultState> buildReducer() {
   );
 }
 
-ChannelListDefaultState _onAction(ChannelListDefaultState state, Action action) {
+ChannelListDefaultState _onAction(
+    ChannelListDefaultState state, Action action) {
   final ChannelListDefaultState newState = state.clone();
   return newState;
 }
 
-ChannelListDefaultState _onLoadingChannels(ChannelListDefaultState state, Action action) {
+ChannelListDefaultState _onLoadingChannels(
+    ChannelListDefaultState state, Action action) {
   final ChannelListDefaultState newState = state.clone();
+  ArticleRequest newReq = (action.payload as ArticleRequest);
+  newState.articleRequest = newReq;
   return newState;
 }

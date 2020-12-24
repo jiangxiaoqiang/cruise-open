@@ -47,7 +47,7 @@ class ChannelListDefault extends HookWidget{
                       padding:
                       const EdgeInsets.symmetric(vertical: 8.0),
                       sliver: ChannelsPage(
-                        type: counter.value,
+                        articleRequest: counter.value,
                       ),
                     )
                   ],
