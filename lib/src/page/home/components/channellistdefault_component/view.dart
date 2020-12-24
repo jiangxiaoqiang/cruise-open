@@ -20,7 +20,6 @@ void _onScroll(offset) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
   }
   appBarAlpha = alpha;
-  print(alpha);
 }
 
 RefreshController _refreshController = RefreshController(initialRefresh: false);
@@ -28,9 +27,7 @@ RefreshController _refreshController = RefreshController(initialRefresh: false);
 Widget buildView(
     ChannelListDefaultState state, Dispatch dispatch, ViewService viewService) {
   StoriesType storiesType = StoriesType.channels;
-
-  ArticleRequest articleRequest = new ArticleRequest();
-  articleRequest.storiesType = storiesType;
+  ArticleRequest articleRequest = state.articleRequest;
 
   return Scaffold(
     body: SafeArea(
@@ -57,8 +54,11 @@ Widget buildView(
                   enablePullDown: true,
                   controller: _refreshController,
                   onLoading: () {
-                    dispatch(
-                        ChannelListDefaultActionCreator.onLoadingChannels());
+                    articleRequest.pageNum = articleRequest.pageNum + 1;
+                    articleRequest.latestTime =
+                        DateTime.now().millisecondsSinceEpoch;
+                    dispatch(ChannelListDefaultActionCreator.onLoadingChannels(
+                        articleRequest));
 
                     _refreshController.loadComplete();
                   },
@@ -93,7 +93,10 @@ Widget buildView(
                       SliverPadding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         sliver: ChannelsPage(
-                          type: articleRequest,
+                          articleRequest: new ArticleRequest(
+                              storiesType: StoriesType.channels,
+                              pageSize: 10,
+                              pageNum: 1),
                         ),
                       )
                     ],

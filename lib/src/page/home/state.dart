@@ -10,11 +10,11 @@ class HomeState implements Cloneable<HomeState> {
 
   StoriesType storiesType = StoriesType.topStories;
 
-  HomeListState homeListState;
+  HomeListState homeListState = new HomeListState();
 
-  HomeListDefaultState homeListDefaultState;
+  HomeListDefaultState homeListDefaultState = new HomeListDefaultState();
 
-  ChannelListDefaultState channelListDefaultState;
+  ChannelListDefaultState channelListDefaultState = new ChannelListDefaultState();
 
   @override
   HomeState clone() {

@@ -23,11 +23,9 @@ void _onScroll(offset) {
   print(alpha);
 }
 
-
-Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService viewService) {
-
-  ArticleRequest articleRequest = new ArticleRequest();
-  articleRequest.storiesType = state.currentStoriesType;
+Widget buildView(
+    HomeListDefaultState state, Dispatch dispatch, ViewService viewService) {
+  ArticleRequest articleRequest = state.articleRequest;
 
   return Scaffold(
     body: SafeArea(
@@ -35,18 +33,19 @@ Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService view
       bottom: false,
       child: Builder(
         builder: (context) {
-          return  NotificationListener(
+          return NotificationListener(
               onNotification: (scrollNotification) {
                 if (scrollNotification is ScrollUpdateNotification &&
                     scrollNotification.depth == 0) {
                   _onScroll(scrollNotification.metrics.pixels);
                 }
                 return true;
-              } ,
-              child:SmartRefresher(
+              },
+              child: SmartRefresher(
                   onRefresh: () {
                     Future.delayed(Duration(milliseconds: 1000));
-                    articleRequest.latestTime = DateTime.now().millisecondsSinceEpoch;
+                    articleRequest.latestTime =
+                        DateTime.now().millisecondsSinceEpoch;
                     _refreshController.refreshCompleted();
                   },
                   enablePullUp: true,
@@ -78,14 +77,12 @@ Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService view
                   child: CustomScrollView(
                     slivers: <Widget>[
                       SliverOverlapInjector(
-                        handle: NestedScrollView
-                            .sliverOverlapAbsorberHandleFor(
+                        handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
                           context,
                         ),
                       ),
                       SliverPadding(
-                        padding:
-                        const EdgeInsets.symmetric(vertical: 8.0),
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
                         sliver: ArticlesPage(
                           articleRequest: articleRequest,
                         ),

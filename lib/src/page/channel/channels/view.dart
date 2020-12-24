@@ -8,14 +8,14 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'action.dart';
 import 'state.dart';
 
-final storiesTypeProvider = FutureProvider.family((ref, type) async {
-  return await Repo.getArticles(type);
+final storiesTypeProvider = FutureProvider.family((ref, articleRequest) async {
+  return await Repo.getArticles(articleRequest);
 });
 
 Widget buildView(ChannelsState state, Dispatch dispatch, ViewService viewService) {
   return Consumer(
         (context, read) {
-      return read(storiesTypeProvider(state.type)).when(
+      return read(storiesTypeProvider(state.articleRequest)).when(
         loading: () {
           // return SliverFillRemaining(
           // child: Center(child: CircularProgressIndicator()));
