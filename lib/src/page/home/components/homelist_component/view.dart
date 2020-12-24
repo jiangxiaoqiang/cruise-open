@@ -60,7 +60,6 @@ Widget buildView(
             return viewService.buildComponent("homelistdefault");
           } else if (currentStoriesType == StoriesType.profile) {
             return viewService.buildComponent("cruisesetting");
-            //return CruiseSettingsPage();
           }
         }).toList(),
       ),

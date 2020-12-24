@@ -1,19 +1,16 @@
-import 'package:Cruise/src/models/Item.dart';
 import 'package:Cruise/src/models/request/article/article_request.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-
 import '../../../stories_page.dart';
-import 'action.dart';
 import 'state.dart';
 
 const APPBAR_SCROLL_OFFSET = 100;
 double appBarAlpha = 0;
 RefreshController _refreshController = RefreshController(initialRefresh: false);
 
+/// 自动隐藏Appbar
 void _onScroll(offset) {
   double alpha = offset / APPBAR_SCROLL_OFFSET;
   if (alpha < 0) {
@@ -27,8 +24,7 @@ void _onScroll(offset) {
 }
 
 
-Widget buildView(
-    HomeListDefaultState state, Dispatch dispatch, ViewService viewService) {
+Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService viewService) {
 
   ArticleRequest articleRequest = new ArticleRequest();
   articleRequest.storiesType = state.currentStoriesType;
