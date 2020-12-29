@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:Cruise/src/common/auth.dart';
 import 'package:Cruise/src/component/story_list.dart';
 import 'package:Cruise/src/common/CruiseUser.dart';
@@ -13,9 +12,10 @@ class ProfilePage extends HookWidget {
   final String username;
   final bool isMe;
 
+  get user => null;
+
   @override
   Widget build(BuildContext context) {
-    AsyncValue<CruiseUser> user = useProvider(usersProvider(username));
 
     return Scaffold(
       appBar: AppBar(
@@ -137,7 +137,7 @@ class ProfilePage extends HookWidget {
                 ),
                 SliverPadding(
                   padding: const EdgeInsets.all(8.0),
-                  sliver: StoryList(ids: user.submitted),
+                  //sliver: StoryList(ids: user.submitted),
                 ),
               ],
             );

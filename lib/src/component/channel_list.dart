@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:Cruise/src/component/loading_item.dart';
 import 'package:Cruise/src/common/view_manager.dart';
 import 'channel_compact_tile.dart';
@@ -41,12 +40,11 @@ class ChannelList extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentView = useProvider(viewProvider.state);
 
     return SliverList(
       delegate: SliverChildBuilderDelegate(
             (context, index) {
-          return Consumer(
+          /*return Consumer(
                 (context, read) {
               return read(storyChannelProvider(ids[index])).when(
                 loading: () => LoadingItem(count: 1),
@@ -100,7 +98,7 @@ class ChannelList extends HookWidget {
                 },
               );
             },
-          );
+          );*/
         },
         childCount: ids.length,
       ),

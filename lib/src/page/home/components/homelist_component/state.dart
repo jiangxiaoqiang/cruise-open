@@ -10,19 +10,10 @@ class HomeListState implements Cloneable<HomeListState> {
 
   StoriesType currentStoriesType = StoriesType.topStories;
 
-  HomeListDefaultState homeListDefaultState = new HomeListDefaultState();
-
-  ChannelListDefaultState channelListDefaultState = new ChannelListDefaultState();
-
-  CruiseSettingState cruiseSettingState = new CruiseSettingState();
-
   @override
   HomeListState clone() {
     return HomeListState()
-    ..currentStoriesType = this.currentStoriesType
-    ..channelListDefaultState = this.channelListDefaultState
-    ..cruiseSettingState = this.cruiseSettingState
-    ..homeListDefaultState = this.homeListDefaultState;
+    ..currentStoriesType = this.currentStoriesType;
   }
 }
 

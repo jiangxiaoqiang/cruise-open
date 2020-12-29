@@ -31,5 +31,7 @@ HomeState initState(Map<String, dynamic> args) {
   return HomeState()
     ..selectIndex = 0
     ..homeListState = HomeListState()
+    ..channelListDefaultState = new ChannelListDefaultState()
+    ..homeListDefaultState = new HomeListDefaultState()
     ..storiesType = StoriesType.topStories;
 }
