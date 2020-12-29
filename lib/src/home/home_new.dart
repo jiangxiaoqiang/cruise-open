@@ -3,41 +3,11 @@ import 'package:Cruise/src/models/request/article/article_request.dart';
 import 'package:Cruise/src/models/system_enumn.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:Cruise/src/common/deeplink_handler.dart';
 import 'package:Cruise/src/models/Item.dart';
 import 'package:Cruise/src/common/Repo.dart';
 
-final FutureProvider topStories = FutureProvider((ref) async {
-  ArticleRequest request = new ArticleRequest();
-  request.storiesType = StoriesType.topStories;
-  return await Repo.getArticles(request);
-});
 
-final FutureProvider newStories = FutureProvider((ref) async {
-  ArticleRequest request = new ArticleRequest();
-  request.storiesType = StoriesType.subStories;
-  return await Repo.getArticles(request);
-});
-
-final FutureProvider bestStories = FutureProvider((ref) async {
-  ArticleRequest request = new ArticleRequest();
-  request.storiesType = StoriesType.channels;
-  return await Repo.getArticles(request);
-});
-
-final FutureProvider showStories = FutureProvider((ref) async {
-  ArticleRequest request = new ArticleRequest();
-  request.storiesType = StoriesType.showStories;
-  return await Repo.getArticles(request);
-});
-
-final FutureProvider jobStories = FutureProvider((ref) async {
-  ArticleRequest request = new ArticleRequest();
-  request.storiesType = StoriesType.jobStories;
-  return await Repo.getArticles(request);
-});
 
 class IconTab {
   IconTab({

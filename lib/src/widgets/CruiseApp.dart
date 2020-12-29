@@ -4,8 +4,6 @@ import 'package:Cruise/src/page/user/login/page.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:Cruise/src/common/theme.dart';
 import 'package:Cruise/src/common/view_manager.dart';
 import 'package:fish_redux/src/redux_component/page.dart' as fishPage;
@@ -18,15 +16,7 @@ class CruiseApp extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeManager = useProvider(themeProvider);
-    final viewManager = useProvider(viewProvider);
-    useMemoized(() {
-      // TODO: Right now this triggers a rebuild, so unfortunately you'll see a flash of default theme.
-      themeManager.setTheme(theme);
-      viewManager.setView(view);
-    });
-
-    final currentTheme = useProvider(themeProvider.state);
+    final currentTheme = ThemeManager.fromThemeName("lightTheme");
 
     final AbstractRoutes routes = PageRoutes(
       pages: <String, fishPage.Page<Object, dynamic>>{

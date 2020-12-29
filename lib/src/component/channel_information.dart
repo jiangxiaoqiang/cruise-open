@@ -8,16 +8,10 @@ import 'package:flutter_html/style.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:Cruise/src/page/profile.dart';
-import 'package:Cruise/src/common/Repo.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'channel_part_snippet.dart';
 
-final partsProvider = FutureProvider.family((ref, int id) async {
-  return await Repo.fetchChannelItem(id);
-});
 
 class ChannelInformation extends HookWidget {
   const ChannelInformation({
@@ -37,7 +31,6 @@ class ChannelInformation extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final parts = item.parts.map((i) => useProvider(partsProvider(i))).toList();
     var counter = useState<Channel>(item);
     var isFav = useState(counter.value.isFav);
 
@@ -203,14 +196,6 @@ class ChannelInformation extends HookWidget {
                 if (item.parts.isNotEmpty)
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0),
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: item.parts.length,
-                      itemBuilder: (context, index) {
-                        return ChannelPartSnippet(part: parts[index]);
-                      },
-                    ),
                   ),
               ],
             ),

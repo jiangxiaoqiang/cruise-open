@@ -1,25 +1,23 @@
-import 'package:Cruise/src/page/story_page.dart';
-import 'package:animations/animations.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:Cruise/src/common/view_manager.dart';
 import 'package:Cruise/src/component/compact_tile.dart';
 import 'package:Cruise/src/component/item_card.dart';
 import 'package:Cruise/src/component/item_tile.dart';
+import 'package:Cruise/src/component/story_list.dart';
 import 'package:Cruise/src/models/Item.dart';
-import 'package:Cruise/src/common/view_manager.dart';
+import 'package:Cruise/src/models/request/article/article_request.dart';
+import 'package:animations/animations.dart';
+import 'package:fish_redux/fish_redux.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-class StoryList extends HookWidget {
-  StoryList({
-    Key key,
-    @required this.articles,
-    @required this.storiesType,
-  }) : super(key: key);
+import '../../../story_page.dart';
+import 'action.dart';
+import 'state.dart';
 
-  final List<Item> articles;
-
-  final StoriesType storiesType;
+Widget buildView(
+    ArticleListState state, Dispatch dispatch, ViewService viewService) {
+  final articles = state.articles;
 
   _getViewType(ViewType type, Item item) {
     switch (type) {
@@ -38,21 +36,13 @@ class StoryList extends HookWidget {
     }
   }
 
+  final currentView = ViewManager.fromViewName("itemCard");
   final pageStorageBucket = PageStorageBucket();
   final Map<String, ScrollController> scrollController = new Map();
 
-  Widget build(BuildContext context) {
-    if (articles != null && articles.length > 0) {
-      articles.forEach((element) {
-        scrollController.putIfAbsent(
-            element.toString(), () => new ScrollController());
-      });
-    }
-    final currentView = ViewManager.fromViewName("itemCard");
-
-    return SliverList(
-      delegate: SliverChildBuilderDelegate((context, index) {
-        /*if (articles != null) {
+  return SliverList(
+    delegate: SliverChildBuilderDelegate((context, index) {
+      if (articles != null) {
           articles.forEach((element) {
             return Slidable(
               key: Key(element.id.toString()),
@@ -98,8 +88,7 @@ class StoryList extends HookWidget {
             );
           });
         }
-        return null;*/
-      }),
-    );
-  }
+        return null;
+    }),
+  );
 }

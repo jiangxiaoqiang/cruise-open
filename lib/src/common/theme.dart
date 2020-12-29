@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
 
 // ignore: top_level_function_literal_block
-final themeProvider = StateNotifierProvider((ref) {
-  return ThemeManager();
-});
 
 class ThemeManager extends StateNotifier<ThemeData> {
   ThemeManager() : super(darkTheme);

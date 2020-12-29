@@ -1,3 +1,4 @@
+import 'package:Cruise/src/common/theme.dart';
 import 'package:Cruise/src/common/view_manager.dart';
 import 'package:Cruise/src/component/channel_compact_tile.dart';
 import 'package:Cruise/src/component/channel_item_card.dart';
@@ -9,7 +10,6 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../channel_page.dart';
 import '../../channels_page.dart';
@@ -35,12 +35,13 @@ _getChannelViewType(ViewType type, Channel item) {
 
 Widget buildView(ChannelListState state, Dispatch dispatch, ViewService viewService) {
 
-  final currentView = useProvider(viewProvider.state);
+  final currentTheme = ThemeManager.fromThemeName("lightTheme");
+  final currentView = ViewManager.fromViewName("itemCard");
 
   return SliverList(
     delegate: SliverChildBuilderDelegate(
           (context, index) {
-        return Consumer(
+        /*return Consumer(
               (context, read) {
             return read(storyChannelProvider(state.ids[index])).when(
               loading: () => LoadingItem(count: 1),
@@ -94,7 +95,7 @@ Widget buildView(ChannelListState state, Dispatch dispatch, ViewService viewServ
               },
             );
           },
-        );
+        );*/
       },
       childCount: state.ids.length,
     ),
