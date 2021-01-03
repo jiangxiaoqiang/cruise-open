@@ -10,7 +10,7 @@ Effect<ArticleListState> buildEffect() {
     ArticleListAction.action: _onAction,
     ArticleListAction.get_articles: _onGetArticleIds,
     Lifecycle.initState: _onInit,
-    Lifecycle.build: _didUpdateWidget,
+    //Lifecycle.build: _didUpdateWidget,
 
   });
 }

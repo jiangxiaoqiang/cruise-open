@@ -87,10 +87,12 @@ Widget buildView(
                             context,
                           ),
                         ),
-                        SliverPadding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          sliver: viewService.buildComponent("articlelist"),
-                        )
+                        if (state.articleListState.articleIds != null &&
+                            state.articleListState.articleIds.length > 0)
+                          SliverPadding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            sliver: viewService.buildComponent("articlelist"),
+                          )
                       ],
                     )));
           },
