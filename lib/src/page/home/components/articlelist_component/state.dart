@@ -29,18 +29,27 @@ class ArticleListConnector
     }
     HomeListDefaultState homeListDefaultState = state.clone();
     ArticleListState articleListState = homeListDefaultState.articleListState;
-    if (state.articleListState.articleIds != null &&
-        state.articleListState.articleIds.length > 0) {
-      articleListState.articleIds = state.articleIds;
-    }else{
-      articleListState.articleIds.add(2235);
-
-    }
+    articleListState.articleIds.add(2236);
+    List<Item> items = getStaticArticle();
+    articleListState.articles = items;
     return articleListState;
   }
 
-  @override
-  void set(HomeListDefaultState state, ArticleListState subState) {
-    state.articleListState = subState;
+  List<Item> getStaticArticle() {
+    List<Item> items = new List();
+    Item item = new Item();
+    item.id = 2236.toString();
+    item.title = "dddd";
+    item.favCount = 0;
+    item.upvoteCount = 0;
+    item.isUpvote = 1;
+    item.isFav = 1;
+    item.author = "dd";
+    item.content = "dddd";
+    item.type = StoryType.story;
+    item.link = "www.baidu.com";
+    item.pubTime = 2222;
+    items.add(item);
+    return items;
   }
 }

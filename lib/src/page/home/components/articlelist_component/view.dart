@@ -17,7 +17,6 @@ import 'state.dart';
 
 Widget buildView(
     ArticleListState state, Dispatch dispatch, ViewService viewService) {
-  final articles = state.articles;
 
   _getViewType(ViewType type, Item item) {
     switch (type) {
@@ -42,53 +41,47 @@ Widget buildView(
 
   return SliverList(
     delegate: SliverChildBuilderDelegate((context, index) {
-      if (articles != null) {
-          articles.forEach((element) {
-            return Slidable(
-              key: Key(element.id.toString()),
-              closeOnScroll: true,
-              actionPane: SlidableScrollActionPane(),
-              actions: <Widget>[
-                IconSlideAction(
-                  color: Colors.deepOrangeAccent,
-                  icon: Feather.arrow_up_circle,
-                  //onTap: () => handleUpvote(context, item: item),
-                ),
-              ],
-              dismissal: SlidableDismissal(
-                closeOnCanceled: true,
-                dismissThresholds: {
-                  SlideActionType.primary: 0.2,
-                  SlideActionType.secondary: 0.2,
-                },
-                child: SlidableDrawerDismissal(),
-                onWillDismiss: (actionType) {
-                  //handleUpvote(context, item: item);
-                  return false;
-                },
+          return Slidable(
+            key: Key("123"),
+            closeOnScroll: true,
+            actionPane: SlidableScrollActionPane(),
+            actions: <Widget>[
+              IconSlideAction(
+                color: Colors.deepOrangeAccent,
+                icon: Feather.arrow_up_circle,
+                //onTap: () => handleUpvote(context, item: item),
               ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: OpenContainer(
-                  tappable: true,
-                  closedElevation: 0,
-                  closedColor: Theme.of(context).scaffoldBackgroundColor,
-                  openColor: Theme.of(context).scaffoldBackgroundColor,
-                  transitionDuration: Duration(milliseconds: 500),
-                  closedBuilder: (BuildContext c, VoidCallback action) =>
-                      _getViewType(currentView, element),
-                  openBuilder: (BuildContext c, VoidCallback action) =>
-                      StoryPage(
-                    item: element,
-                    pageStorageBucket: pageStorageBucket,
-                    scrollControllers: scrollController,
-                  ),
+            ],
+            dismissal: SlidableDismissal(
+              closeOnCanceled: true,
+              dismissThresholds: {
+                SlideActionType.primary: 0.2,
+                SlideActionType.secondary: 0.2,
+              },
+              child: SlidableDrawerDismissal(),
+              onWillDismiss: (actionType) {
+                //handleUpvote(context, item: item);
+                return false;
+              },
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: OpenContainer(
+                tappable: true,
+                closedElevation: 0,
+                closedColor: Theme.of(context).scaffoldBackgroundColor,
+                openColor: Theme.of(context).scaffoldBackgroundColor,
+                transitionDuration: Duration(milliseconds: 500),
+                closedBuilder: (BuildContext c, VoidCallback action) =>
+                    _getViewType(currentView, state.articles[0]),
+                openBuilder: (BuildContext c, VoidCallback action) => StoryPage(
+                  item: state.articles[0],
+                  pageStorageBucket: pageStorageBucket,
+                  scrollControllers: scrollController,
                 ),
               ),
-            );
-          });
-        }
-        return null;
-    }),
+            ),
+          );
+    },childCount: 1),
   );
 }

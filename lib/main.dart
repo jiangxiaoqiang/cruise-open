@@ -33,7 +33,7 @@ void main() async {
   await SentryFlutter.init(
     (options) => options.dsn = _exampleDsn,
     appRunner: () => {
-      runApp( CruiseApp(
+      runApp(CruiseApp(
           theme: theme,
           view: view,
         ),
