@@ -29,11 +29,6 @@ Widget buildView(
     HomeListDefaultState state, Dispatch dispatch, ViewService viewService) {
   ArticleRequest articleRequest = state.articleRequest;
   articleRequest.storiesType = StoriesType.topStories;
-  List<Item> articles = state.articles;
-  List<int> ids = state.articleIds;
-  if (ids == null) {
-    dispatch(HomeListDefaultActionCreator.onGetArticleIds(articleRequest));
-  }
 
   return Scaffold(
     body: SafeArea(

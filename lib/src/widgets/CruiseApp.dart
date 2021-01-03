@@ -26,13 +26,14 @@ class CruiseApp extends HookWidget {
     );
 
     return MaterialApp(
-      title: 'Cruise',
-      theme: currentTheme,
-      routes: {
-        "home": (context) => HomeNew(),
-      },
-      //home: HomeNew(),
-      home:routes.buildPage('home', null),
-    );
+        title: 'Cruise',
+        theme: currentTheme,
+        //home: HomeNew(),
+        home: routes.buildPage('home', null),
+        onGenerateRoute: (RouteSettings settings) {
+          return MaterialPageRoute<Object>(builder: (BuildContext context) {
+            return routes.buildPage(settings.name, settings.arguments);
+          });
+        });
   }
 }

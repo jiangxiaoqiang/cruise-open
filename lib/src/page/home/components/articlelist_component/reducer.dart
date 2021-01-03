@@ -22,6 +22,6 @@ ArticleListState _onSetArticles(ArticleListState state, Action action) {
   ArticleListState newState = state.clone();
   List<Item> articles = (action.payload as List<Item>);
   newState.articles = articles;
-  newState.articleRequest.latestTime = 1;
+  newState.articleRequest.latestTime = 2;
   return newState;
 }

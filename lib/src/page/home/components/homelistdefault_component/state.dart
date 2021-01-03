@@ -12,8 +12,6 @@ class HomeListDefaultState implements Cloneable<HomeListDefaultState> {
   );
 
   StoriesType currentStoriesType = StoriesType.topStories;
-  List<int> articleIds;
-  List<Item> articles;
 
   ArticleListState articleListState = new ArticleListState();
 
@@ -21,8 +19,6 @@ class HomeListDefaultState implements Cloneable<HomeListDefaultState> {
   HomeListDefaultState clone() {
     return HomeListDefaultState()
       ..currentStoriesType = this.currentStoriesType
-      ..articleIds = this.articleIds
-      ..articles = this.articles
       ..articleListState = this.articleListState
     ..articleRequest=this.articleRequest;
   }

@@ -31,7 +31,6 @@ HomeListDefaultState _onSetArticleIds(
     HomeListDefaultState state, Action action) {
   final HomeListDefaultState newState = state.clone();
   List<int> articleIds = (action.payload as List<int>);
-  newState.articleIds = articleIds;
   newState.articleListState.articleIds = articleIds;
   newState.currentStoriesType = state.currentStoriesType;
   return newState;
