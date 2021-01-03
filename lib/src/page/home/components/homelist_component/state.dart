@@ -10,10 +10,13 @@ class HomeListState implements Cloneable<HomeListState> {
 
   StoriesType currentStoriesType = StoriesType.topStories;
 
+  HomeListDefaultState homeListDefaultState = HomeListDefaultState();
+
   @override
   HomeListState clone() {
     return HomeListState()
-    ..currentStoriesType = this.currentStoriesType;
+    ..currentStoriesType = this.currentStoriesType
+    ..homeListDefaultState = this.homeListDefaultState;
   }
 }
 
@@ -22,5 +25,10 @@ class HomeListConnector extends ConnOp<HomeState, HomeListState> {
   HomeListState get(HomeState state) {
     HomeListState substate = state.homeListState.clone();
     return substate;
+  }
+
+  @override
+  void set(HomeState state, HomeListState subState) {
+    state.homeListState = subState;
   }
 }
