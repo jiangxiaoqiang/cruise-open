@@ -10,19 +10,40 @@ Effect<ArticleListState> buildEffect() {
     ArticleListAction.action: _onAction,
     ArticleListAction.get_articles: _onGetArticleIds,
     Lifecycle.initState: _onInit,
+    Lifecycle.build: _didUpdateWidget,
+
   });
 }
+
+void _didUpdateWidget(Action action, Context<ArticleListState> ctx) async {
+  ArticleListState articleListState = ctx.state;
+  List<int> ids = articleListState.articleIds;
+  List<Item> articles = new List();
+  for (int id in ids) {
+    Item article = await Repo.fetchArticleItem(id);
+    if (article != null) {
+      articles.add(article);
+    }
+  }
+
+  if (articles != null && articles.length > 0) {
+    ctx.dispatch(ArticleListActionCreator.onSetArticles(articles));
+  }
+}
+
 
 Future _onInit(Action action, Context<ArticleListState> ctx) async {
   ArticleListState articleListState = ctx.state;
   List<int> ids = articleListState.articleIds;
-  List<Item> articles = getStaticArticle();
-  //Item article = await Repo.fetchArticleItem(2336);
-  /*if (article != null) {
-    articles.add(article);
-  }*/
+  List<Item> articles = new List();
+  for (int id in ids) {
+    Item article = await Repo.fetchArticleItem(id);
+    if (article != null) {
+      articles.add(article);
+    }
+  }
 
-  if (articles != null) {
+  if (articles != null && articles.length > 0) {
     ctx.dispatch(ArticleListActionCreator.onSetArticles(articles));
   }
 }
@@ -56,7 +77,7 @@ Future _onGetArticleIds(Action action, Context<ArticleListState> ctx) async {
       //articles.add(article);
     }
   });
-  if (articles != null) {
+  if (articles != null && articles.length > 0) {
     ctx.dispatch(ArticleListActionCreator.onSetArticles(articles));
   }
 }

@@ -14,7 +14,11 @@ Effect<HomeListDefaultState> buildEffect() {
 }
 
 Future _onInit(Action action, Context<HomeListDefaultState> ctx) async {
-  ArticleRequest articleRequest = (action.payload as ArticleRequest);
+  ArticleRequest articleRequest = new ArticleRequest(
+      pageSize: 15,
+      pageNum: 1,
+      storiesType: StoriesType.topStories
+  );
   List<int> ids = await Repo.getArticleIds(articleRequest);
   if (ids != null) {
     ctx.dispatch(HomeListDefaultActionCreator.onSetArticleIds(ids));
