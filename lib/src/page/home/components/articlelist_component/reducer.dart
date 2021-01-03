@@ -9,8 +9,16 @@ Reducer<ArticleListState> buildReducer() {
     <Object, Reducer<ArticleListState>>{
       ArticleListAction.action: _onAction,
       ArticleListAction.set_articles: _onSetArticles,
+      ArticleListAction.set_detail_article: _onSetDetailArticle,
     },
   );
+}
+
+ArticleListState _onSetDetailArticle(ArticleListState state, Action action){
+  ArticleListState newState = state.clone();
+  Item article = (action.payload as Item);
+  newState.article = article;
+  return newState;
 }
 
 ArticleListState _onAction(ArticleListState state, Action action) {
