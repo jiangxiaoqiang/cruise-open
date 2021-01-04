@@ -18,13 +18,7 @@ import 'state.dart';
 
 Widget buildView(
     ArticleDetailState state, Dispatch dispatch, ViewService viewService) {
-  Item item = new Item();
-  item.title = "ddddd";
-  item.id = 12321.toString();
-  item.pubTime = 232;
-  item.content ="dfwfwge";
-  item.author ="dfwg";
-  item.link ="www.baidu.com";
+  Item item = state.article;
   BuildContext context = viewService.context;
   Offset _initialSwipeOffset;
   Offset _finalSwipeOffset;
