@@ -53,7 +53,7 @@ Widget buildView(
           if (currentStoriesType == StoriesType.topStories) {
             return viewService.buildComponent("homelistdefault");
           } else if (currentStoriesType == StoriesType.channels) {
-            //return viewService.buildComponent("channellistdefault");
+            return viewService.buildComponent("channellistdefault");
           } else if (currentStoriesType == StoriesType.subStories) {
             //return viewService.buildComponent("homelistdefault");
           } else if (currentStoriesType == StoriesType.favStories) {

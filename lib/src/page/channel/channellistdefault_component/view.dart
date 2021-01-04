@@ -4,7 +4,6 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import '../../../channels_page.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -28,6 +27,12 @@ Widget buildView(
     ChannelListDefaultState state, Dispatch dispatch, ViewService viewService) {
   StoriesType storiesType = StoriesType.channels;
   ArticleRequest articleRequest = state.articleRequest;
+
+  Widget navChannelPage() {
+    ArticleRequest articleRequest = new ArticleRequest(
+        storiesType: StoriesType.channels, pageSize: 10, pageNum: 1);
+    viewService.buildComponent("name");
+  }
 
   return Scaffold(
     body: SafeArea(
@@ -92,12 +97,7 @@ Widget buildView(
                       ),
                       SliverPadding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        sliver: ChannelsPage(
-                          articleRequest: new ArticleRequest(
-                              storiesType: StoriesType.channels,
-                              pageSize: 10,
-                              pageNum: 1),
-                        ),
+                        sliver: navChannelPage(),
                       )
                     ],
                   )));
