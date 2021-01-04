@@ -1,23 +1,18 @@
 import 'package:Cruise/src/common/Repo.dart';
-import 'package:Cruise/src/component/story_information.dart';
 import 'package:Cruise/src/models/Item.dart';
+import 'package:Cruise/src/page/home/components/articlepg_component/action.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-
-import 'action.dart';
 import 'state.dart';
 
 Widget buildView(
     ArticlePgState state, Dispatch dispatch, ViewService viewService) {
-  Item item = new Item();
-  item.id = 1112.toString();
-  item.title = "ddd";
+  Item item = state.article;
   var showToTopBtn = state.showToTopBtn;
   PageStorageBucket pageStorageBucket = state.pageStorageBucket;
-  ScrollController scrollController;
   Map<String, ScrollController> scrollControllers = state.scrollControllers;
-  scrollController = scrollControllers[item.id];
+  ScrollController scrollController = scrollControllers[item.id];
 
   if (scrollController != null) {
     scrollController.addListener(() => {
@@ -26,6 +21,11 @@ Widget buildView(
           else if (scrollController.offset >= 1000)
             {showToTopBtn = true}
         });
+  }
+
+  Widget navDetail(Item article) {
+    dispatch(ArticlePgActionCreator.onSetDetailArticle(article));
+    return viewService.buildComponent("articledetail");
   }
 
   return PageStorage(
@@ -49,8 +49,7 @@ Widget buildView(
             key: PageStorageKey(item.id),
             controller: scrollController,
             slivers: [
-              SliverToBoxAdapter(
-                  child: viewService.buildComponent("articledetail")),
+              SliverToBoxAdapter(child: navDetail(item)),
               //CommentList(item: item),
             ],
           ),

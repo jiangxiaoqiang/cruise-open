@@ -3,6 +3,7 @@ import 'package:Cruise/src/component/compact_tile.dart';
 import 'package:Cruise/src/component/item_card.dart';
 import 'package:Cruise/src/component/item_tile.dart';
 import 'package:Cruise/src/models/Item.dart';
+import 'package:Cruise/src/page/home/components/articlelist_component/action.dart';
 import 'package:animations/animations.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
@@ -30,14 +31,8 @@ Widget buildView(
   }
 
   Widget buildArticle(Item item) {
-   return viewService.buildComponent("articlepg");
-
-    /*if (item != null) {
-      viewService.buildComponent("articlepage");
-      dispatch(ArticleListActionCreator.onSetDetailArticle(item));
-    } else {
-      return Container(width: 0.0, height: 0.0);
-    }*/
+    dispatch(ArticleListActionCreator.onSetDetailArticle(item));
+    return viewService.buildComponent("articlepg");
   }
 
   final currentView = ViewManager.fromViewName("itemCard");

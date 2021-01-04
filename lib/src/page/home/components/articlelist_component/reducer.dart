@@ -17,7 +17,7 @@ Reducer<ArticleListState> buildReducer() {
 ArticleListState _onSetDetailArticle(ArticleListState state, Action action){
   ArticleListState newState = state.clone();
   Item article = (action.payload as Item);
-  newState.article = article;
+  newState.articlePgState.article = article;
   return newState;
 }
 
