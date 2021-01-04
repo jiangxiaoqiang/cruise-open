@@ -1,8 +1,9 @@
+import 'package:Cruise/src/models/Channel.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 class ChannelListState implements Cloneable<ChannelListState> {
 
-  List<int> ids;
+  Channel channel;
 
   @override
   ChannelListState clone() {
