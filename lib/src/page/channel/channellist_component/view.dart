@@ -33,7 +33,6 @@ Widget buildView(ChannelListState state, Dispatch dispatch, ViewService viewServ
   }
   final currentView = ViewManager.fromViewName("itemCard");
 
-
   return SliverList(delegate: SliverChildBuilderDelegate((context,index){
     return Slidable(
       key: Key(item.id.toString()),

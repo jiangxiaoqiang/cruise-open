@@ -15,7 +15,6 @@ Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewSe
     body: SafeArea(
       child: ListView(
         children: [
-
           ListTile(
             title: Text("视图"),
             leading: Icon(Feather.grid),
