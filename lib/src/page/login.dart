@@ -104,7 +104,7 @@ class LoginPage extends HookWidget {
                   child: Builder(
                     builder: (context) {
                       return ButtonTheme(
-                          minWidth: screenWidth * 0.9,
+                          minWidth: screenWidth * 0.85,
                           height: 50.0,
                           child: Center(
                               child: RaisedButton(

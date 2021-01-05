@@ -15,7 +15,7 @@ class Repo {
   static final _usersCache = <String, CruiseUser>{};
   static const baseUrl = global.baseUrl;
 
-  static Future<List<int>> getArticles(ArticleRequest request) async {
+  static Future<List<int>> getArticleIds(ArticleRequest request) async {
       return await _getIds(request);
   }
 
@@ -65,7 +65,7 @@ class Repo {
 
   static Future<List<int>> _getIds(ArticleRequest articleRequest) async {
     final typeQuery = _getStoryTypeQuery(articleRequest.storiesType);
-    Map jsonMap = {'pageSize': 100};
+    Map jsonMap = articleRequest.toMap();
     final response = await RestClient.postHttp("$typeQuery", jsonMap);
     if (response.statusCode == 200 && response.data["statusCode"] == "200") {
       Map result = response.data["result"];

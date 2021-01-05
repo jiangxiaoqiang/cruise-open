@@ -1,11 +1,8 @@
 import 'dart:convert';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:Cruise/src/common/Repo.dart';
 
-final usersProvider = FutureProvider.family((ref, String id) async {
-  return await Repo.fetchUser(id);
-});
+
 
 class CruiseUser {
   CruiseUser({

@@ -1,7 +1,5 @@
 import 'package:Cruise/src/widgets/CruiseApp.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:Cruise/src/common/history.dart';
@@ -35,12 +33,11 @@ void main() async {
   await SentryFlutter.init(
     (options) => options.dsn = _exampleDsn,
     appRunner: () => {
-      runApp(ProviderScope(
-        child: CruiseApp(
+      runApp(CruiseApp(
           theme: theme,
           view: view,
         ),
-      ))
+      )
     },
   );
 }

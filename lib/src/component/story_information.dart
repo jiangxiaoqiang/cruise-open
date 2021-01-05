@@ -10,16 +10,14 @@ import 'package:flutter_html/style.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:Cruise/src/component/part_snippet.dart';
 import 'package:Cruise/src/common/helpers.dart';
 import 'package:Cruise/src/models/Item.dart';
 import 'package:Cruise/src/common/Repo.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-final partsProvider = FutureProvider.family((ref, int id) async {
+/*final partsProvider = FutureProvider.family((ref, int id) async {
   return await Repo.fetchArticleItem(id);
-});
+});*/
 
 class StoryInformation extends HookWidget {
   const StoryInformation({Key key, @required this.item}) : super(key: key);
@@ -37,7 +35,6 @@ class StoryInformation extends HookWidget {
   @override
   Widget build(BuildContext context) {
 
-    final parts = item.parts.map((i) => useProvider(partsProvider(i))).toList();
 
     Offset _initialSwipeOffset;
     Offset _finalSwipeOffset;
@@ -211,14 +208,6 @@ class StoryInformation extends HookWidget {
                 if (item.parts.isNotEmpty)
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0),
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: item.parts.length,
-                      itemBuilder: (context, index) {
-                        return PartSnippet(part: parts[index]);
-                      },
-                    ),
                   ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
