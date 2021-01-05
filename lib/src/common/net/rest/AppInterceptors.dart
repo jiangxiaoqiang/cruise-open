@@ -10,7 +10,7 @@ class AppInterceptors extends InterceptorsWrapper {
   Future onRequest(RequestOptions options) async{
     if (!options.headers.containsKey("token")) {
       String token = await storage.read(key: "token");
-      options.headers["token"] = "eyJ1c2VyX2lkIjoiNyJ9.317a1ac70103c7a1753fdcca57d654fd2327c2b916097619155ff3047b";
+      options.headers["token"] = token;
       return options;
     }
     return super.onRequest(options);
