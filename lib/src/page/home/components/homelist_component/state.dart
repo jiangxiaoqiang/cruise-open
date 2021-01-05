@@ -1,5 +1,7 @@
 import 'package:Cruise/src/models/Item.dart';
+import 'package:Cruise/src/page/channel/channellistdefault_component/state.dart';
 import 'package:Cruise/src/page/home/components/homelistdefault_component/state.dart';
+import 'package:Cruise/src/page/user/settings/cruisesetting/state.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import '../../state.dart';
@@ -7,14 +9,17 @@ import '../../state.dart';
 class HomeListState implements Cloneable<HomeListState> {
 
   StoriesType currentStoriesType = StoriesType.topStories;
-
   HomeListDefaultState homeListDefaultState = HomeListDefaultState();
+  ChannelListDefaultState channelListDefaultState = ChannelListDefaultState();
+  CruiseSettingState cruiseSettingState = CruiseSettingState();
 
   @override
   HomeListState clone() {
     return HomeListState()
     ..currentStoriesType = this.currentStoriesType
-    ..homeListDefaultState = this.homeListDefaultState;
+    ..homeListDefaultState = this.homeListDefaultState
+    ..channelListDefaultState = this.channelListDefaultState
+    ..cruiseSettingState = this.cruiseSettingState;
   }
 }
 
