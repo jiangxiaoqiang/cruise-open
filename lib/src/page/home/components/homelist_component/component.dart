@@ -1,5 +1,5 @@
-import 'package:Cruise/src/page/home/components/channellistdefault_component/component.dart';
-import 'package:Cruise/src/page/home/components/channellistdefault_component/state.dart';
+import 'package:Cruise/src/page/channel/channellistdefault_component/component.dart';
+import 'package:Cruise/src/page/channel/channellistdefault_component/state.dart';
 import 'package:Cruise/src/page/home/components/homelistdefault_component/component.dart';
 import 'package:Cruise/src/page/home/components/homelistdefault_component/state.dart';
 import 'package:Cruise/src/page/user/settings/cruisesetting/component.dart';

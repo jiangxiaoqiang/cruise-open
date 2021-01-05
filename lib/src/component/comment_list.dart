@@ -2,16 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:Cruise/src/component/comment_tile.dart';
 import 'package:Cruise/src/component/loading_item.dart';
 import 'package:Cruise/src/common/helpers.dart';
 import 'package:Cruise/src/models/Item.dart';
 import 'package:Cruise/src/common/Repo.dart';
 
-final commentsProvider = FutureProvider.family((ref, int id) async {
-  return await Repo.fetchArticleItem(id);
-});
 
 class CommentList extends HookWidget {
   const CommentList({

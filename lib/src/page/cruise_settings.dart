@@ -11,15 +11,14 @@ import 'package:Cruise/src/page/user/settings/custom_setting.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class CruiseSettingsPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
-    final currentView = useProvider(viewProvider.state);
-    final ViewManager viewManager = useProvider(viewProvider);
-    final currentTheme = useProvider(themeProvider.state);
-    final ThemeManager themeManager = useProvider(themeProvider);
+    final currentView = ViewManager.fromViewName("itemCard");
+    final ViewManager viewManager = new ViewManager();
+    final currentTheme = ThemeManager.fromThemeName("lightTheme");
+    final ThemeManager themeManager = new ThemeManager();
 
     return Scaffold(
       body: SafeArea(
