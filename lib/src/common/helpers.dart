@@ -51,3 +51,14 @@ Widget getViewType(ViewType type, Item item) {
   }
 }
 
+Item getStatisticArticle() {
+  Item item = new Item();
+  item.title = "dfegeg";
+  item.author = "dfe";
+  item.pubTime = 0;
+  item.id = 23433.toString();
+  item.isFav = 1;
+  item.link = "www.baidu.com";
+  item.content = "fwegewg";
+  return item;
+}

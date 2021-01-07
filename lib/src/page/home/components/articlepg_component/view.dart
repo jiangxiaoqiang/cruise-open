@@ -1,4 +1,5 @@
 import 'package:Cruise/src/common/Repo.dart';
+import 'package:Cruise/src/common/helpers.dart';
 import 'package:Cruise/src/models/Item.dart';
 import 'package:Cruise/src/page/home/components/articlepg_component/action.dart';
 import 'package:fish_redux/fish_redux.dart';
@@ -9,6 +10,7 @@ import 'state.dart';
 Widget buildView(
     ArticlePgState state, Dispatch dispatch, ViewService viewService) {
   Item item = state.article;
+  //Item item = getStatisticArticle();
   var showToTopBtn = state.showToTopBtn;
   PageStorageBucket pageStorageBucket = state.pageStorageBucket;
   Map<String, ScrollController> scrollControllers = state.scrollControllers;
@@ -24,7 +26,9 @@ Widget buildView(
   }
 
   Widget navDetail(Item article) {
-    dispatch(ArticlePgActionCreator.onSetDetailArticle(article));
+    if (state.articleDetailState.article == null) {
+      dispatch(ArticlePgActionCreator.onSetDetailArticle(article));
+    }
     return viewService.buildComponent("articledetail");
   }
 
