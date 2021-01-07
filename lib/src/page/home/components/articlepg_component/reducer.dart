@@ -7,15 +7,9 @@ import 'state.dart';
 Reducer<ArticlePgState> buildReducer() {
   return asReducer(
     <Object, Reducer<ArticlePgState>>{
-      ArticlePgAction.action: _onAction,
       ArticlePgAction.set_detail_article: _onSetDetailArticle,
     },
   );
-}
-
-ArticlePgState _onAction(ArticlePgState state, Action action) {
-  final ArticlePgState newState = state.clone();
-  return newState;
 }
 
 ArticlePgState _onSetDetailArticle(ArticlePgState state, Action action) {
