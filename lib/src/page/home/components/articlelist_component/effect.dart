@@ -7,7 +7,6 @@ import 'state.dart';
 
 Effect<ArticleListState> buildEffect() {
   return combineEffects(<Object, Effect<ArticleListState>>{
-    ArticleListAction.action: _onAction,
     ArticleListAction.get_articles: _onGetArticleIds,
     Lifecycle.initState: _onInit,
     //Lifecycle.build: _didUpdateWidget,
@@ -30,8 +29,6 @@ Future _onInit(Action action, Context<ArticleListState> ctx) async {
     ctx.dispatch(ArticleListActionCreator.onSetArticles(articles));
   }
 }
-
-void _onAction(Action action, Context<ArticleListState> ctx) {}
 
 Future _onGetArticleIds(Action action, Context<ArticleListState> ctx) async {
   List<int> ids = (action.payload as List<int>);

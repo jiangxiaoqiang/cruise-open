@@ -6,6 +6,7 @@ import 'package:Cruise/src/models/Channel.dart';
 import 'package:Cruise/src/models/Item.dart';
 import 'package:Cruise/src/models/api/fav_status.dart';
 import 'package:Cruise/src/models/api/upvote_status.dart';
+import 'package:Cruise/src/page/home/components/articledetail_component/action.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -19,6 +20,8 @@ import 'state.dart';
 Widget buildView(
     ArticleDetailState state, Dispatch dispatch, ViewService viewService) {
   Item item = state.article;
+
+  //Item item = getStatisticArticle();
   BuildContext context = viewService.context;
   Offset _initialSwipeOffset;
   Offset _finalSwipeOffset;
@@ -35,6 +38,7 @@ Widget buildView(
     if (_initialSwipeOffset != null) {
       final offsetDifference = _initialSwipeOffset.dx - _finalSwipeOffset.dx;
       if (offsetDifference < 0) {
+        dispatch(ArticleDetailActionCreator.onClearDetailArticle());
         Navigator.pop(context);
       }
     }
