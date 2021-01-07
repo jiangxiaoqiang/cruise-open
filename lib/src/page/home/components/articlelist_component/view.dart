@@ -2,6 +2,7 @@ import 'package:Cruise/src/common/view_manager.dart';
 import 'package:Cruise/src/component/compact_tile.dart';
 import 'package:Cruise/src/component/item_card.dart';
 import 'package:Cruise/src/component/item_tile.dart';
+import 'package:Cruise/src/common/helpers.dart';
 import 'package:Cruise/src/models/Item.dart';
 import 'package:Cruise/src/page/home/components/articlelist_component/action.dart';
 import 'package:animations/animations.dart';
@@ -11,24 +12,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'state.dart';
 
-Widget buildView(
-    ArticleListState state, Dispatch dispatch, ViewService viewService) {
-  _getViewType(ViewType type, Item item) {
-    switch (type) {
-      case ViewType.compactTile:
-        return CompactTile(item: item);
-        break;
-      case ViewType.itemCard:
-        return ItemCard(item: item);
-        break;
-      case ViewType.itemTile:
-        return ItemTile(item: item);
-        break;
-      default:
-        return ItemCard(item: item);
-        break;
-    }
-  }
+Widget buildView(ArticleListState state, Dispatch dispatch, ViewService viewService) {
 
   Widget buildArticle(Item item) {
     dispatch(ArticleListActionCreator.onSetDetailArticle(item));
@@ -71,7 +55,7 @@ Widget buildView(
             openColor: Theme.of(context).scaffoldBackgroundColor,
             transitionDuration: Duration(milliseconds: 500),
             closedBuilder: (BuildContext c, VoidCallback action) =>
-                _getViewType(currentView, state.articles[index]),
+                getViewType(currentView, state.articles[index]),
             openBuilder: (BuildContext c, VoidCallback action) =>
                 buildArticle(state.articles[index]),
           ),

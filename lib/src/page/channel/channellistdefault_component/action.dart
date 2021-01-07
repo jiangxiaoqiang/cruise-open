@@ -9,7 +9,7 @@ class ChannelListDefaultActionCreator {
     return const Action(ChannelListDefaultAction.action);
   }
 
-  static Action onLoadingChannels(ArticleRequest request) {
-    return Action(ChannelListDefaultAction.loading_channels,payload: request);
+  static Action onLoadingChannels(List<int> ids) {
+    return Action(ChannelListDefaultAction.loading_channels,payload: ids);
   }
 }

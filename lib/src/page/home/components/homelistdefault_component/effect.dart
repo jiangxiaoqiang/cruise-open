@@ -15,7 +15,7 @@ Effect<HomeListDefaultState> buildEffect() {
 
 Future _onInit(Action action, Context<HomeListDefaultState> ctx) async {
   ArticleRequest articleRequest = new ArticleRequest(
-      pageSize: 15,
+      pageSize: 250,
       pageNum: 1,
       storiesType: StoriesType.topStories
   );

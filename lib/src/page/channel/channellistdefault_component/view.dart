@@ -29,9 +29,7 @@ Widget buildView(
   ArticleRequest articleRequest = state.articleRequest;
 
   Widget navChannelPage() {
-    ArticleRequest articleRequest = new ArticleRequest(
-        storiesType: StoriesType.channels, pageSize: 10, pageNum: 1);
-    viewService.buildComponent("name");
+      return viewService.buildComponent("channellist");
   }
 
   return Scaffold(
@@ -62,8 +60,7 @@ Widget buildView(
                     articleRequest.pageNum = articleRequest.pageNum + 1;
                     articleRequest.latestTime =
                         DateTime.now().millisecondsSinceEpoch;
-                    dispatch(ChannelListDefaultActionCreator.onLoadingChannels(
-                        articleRequest));
+                    //dispatch(ChannelListDefaultActionCreator.onLoadingChannels(articleRequest));
 
                     _refreshController.loadComplete();
                   },
@@ -95,10 +92,11 @@ Widget buildView(
                           context,
                         ),
                       ),
-                      SliverPadding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        sliver: navChannelPage(),
-                      )
+                      if (state.channelListState.channelIds != null && state.channelListState.channelIds.length > 0)
+                        SliverPadding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          sliver: navChannelPage(),
+                        )
                     ],
                   )));
         },
