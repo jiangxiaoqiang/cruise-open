@@ -33,6 +33,6 @@ class ArticleListConnector
 
   @override
   void set(HomeListDefaultState state, ArticleListState subState) {
-    state.articleListState.articles = subState.articles;
+    state.articleListState = subState;
   }
 }
