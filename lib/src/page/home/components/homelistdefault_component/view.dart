@@ -40,23 +40,20 @@ Widget buildView(
                 onNotification: (scrollNotification) {
                   if (scrollNotification is ScrollUpdateNotification &&
                       scrollNotification.depth == 0) {
-                    _onScroll(scrollNotification.metrics.pixels);
+                    //_onScroll(scrollNotification.metrics.pixels);
                   }
                   return true;
                 },
                 child: SmartRefresher(
                     onRefresh: () {
-                      Future.delayed(Duration(milliseconds: 1000));
-                      articleRequest.latestTime =
-                          DateTime.now().millisecondsSinceEpoch;
                       _refreshController.refreshCompleted();
                     },
                     enablePullUp: true,
                     enablePullDown: true,
                     controller: _refreshController,
                     onLoading: () {
-                      dispatch(HomeListDefaultActionCreator.onLoadingHomeList(
-                          articleRequest));
+                      //dispatch(HomeListDefaultActionCreator.onLoadingHomeList(
+                      //    articleRequest));
                       _refreshController.loadComplete();
                     },
                     footer: CustomFooter(

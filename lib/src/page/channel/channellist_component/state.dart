@@ -4,10 +4,15 @@ import 'package:fish_redux/fish_redux.dart';
 
 class ChannelListState implements Cloneable<ChannelListState> {
   Channel channel;
+  List<int> channelIds = new List();
+  List<Channel> channels = new List();
 
   @override
   ChannelListState clone() {
-    return ChannelListState();
+    return ChannelListState()
+    ..channel = this.channel
+    ..channelIds = this.channelIds
+    ..channels = this.channels;
   }
 }
 

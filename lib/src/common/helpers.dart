@@ -1,3 +1,7 @@
+import 'package:Cruise/src/common/view_manager.dart';
+import 'package:Cruise/src/component/compact_tile.dart';
+import 'package:Cruise/src/component/item_card.dart';
+import 'package:Cruise/src/component/item_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
 import 'package:Cruise/src/common/auth.dart';
@@ -29,3 +33,21 @@ void handleUpvote(context, {Item item}) async {
     await HistoryManager.markAsVoted(item.id);
   }
 }
+
+Widget getViewType(ViewType type, Item item) {
+  switch (type) {
+    case ViewType.compactTile:
+      return CompactTile(item: item);
+      break;
+    case ViewType.itemCard:
+      return ItemCard(item: item);
+      break;
+    case ViewType.itemTile:
+      return ItemTile(item: item);
+      break;
+    default:
+      return ItemCard(item: item);
+      break;
+  }
+}
+
