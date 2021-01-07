@@ -11,10 +11,8 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import '../../channel_page.dart';
 import 'state.dart';
 
-Widget buildView(ChannelListState state, Dispatch dispatch, ViewService viewService) {
-
-  Channel item = state.channel;
-
+Widget buildView(
+    ChannelListState state, Dispatch dispatch, ViewService viewService) {
   _getChannelViewType(ViewType type, Channel item) {
     switch (type) {
       case ViewType.compactTile:
@@ -31,11 +29,16 @@ Widget buildView(ChannelListState state, Dispatch dispatch, ViewService viewServ
         break;
     }
   }
+
   final currentView = ViewManager.fromViewName("itemCard");
 
-  return SliverList(delegate: SliverChildBuilderDelegate((context,index){
+  if (state.channels == null || state.channels.length == 0) {
+    return Container(height: 0.0, width: 0.0);
+  }
+
+  return SliverList(delegate: SliverChildBuilderDelegate((context, index) {
     return Slidable(
-      key: Key(item.id.toString()),
+      key: Key(state.channels[index].id.toString()),
       closeOnScroll: true,
       actionPane: SlidableScrollActionPane(),
       actions: <Widget>[
@@ -62,17 +65,13 @@ Widget buildView(ChannelListState state, Dispatch dispatch, ViewService viewServ
         child: OpenContainer(
           tappable: true,
           closedElevation: 0,
-          closedColor:
-          Theme.of(context).scaffoldBackgroundColor,
-          openColor:
-          Theme.of(context).scaffoldBackgroundColor,
+          closedColor: Theme.of(context).scaffoldBackgroundColor,
+          openColor: Theme.of(context).scaffoldBackgroundColor,
           transitionDuration: Duration(milliseconds: 500),
-          closedBuilder:
-              (BuildContext c, VoidCallback action) =>
-              _getChannelViewType(currentView, item),
-          openBuilder:
-              (BuildContext c, VoidCallback action) =>
-              ChannelPage(item: item),
+          closedBuilder: (BuildContext c, VoidCallback action) =>
+              _getChannelViewType(currentView, state.channels[index]),
+          openBuilder: (BuildContext c, VoidCallback action) =>
+              ChannelPage(item: state.channels[index]),
         ),
       ),
     );
