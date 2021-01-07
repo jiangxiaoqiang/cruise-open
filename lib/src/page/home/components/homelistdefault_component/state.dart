@@ -6,7 +6,7 @@ import 'package:fish_redux/fish_redux.dart';
 
 class HomeListDefaultState implements Cloneable<HomeListDefaultState> {
   ArticleRequest articleRequest = new ArticleRequest(
-    pageSize: 15,
+    pageSize: 60,
     pageNum: 1,
     storiesType: StoriesType.topStories
   );
