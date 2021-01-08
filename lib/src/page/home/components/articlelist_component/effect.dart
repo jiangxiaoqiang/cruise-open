@@ -1,6 +1,5 @@
 import 'package:Cruise/src/common/Repo.dart';
 import 'package:Cruise/src/models/Item.dart';
-import 'package:Cruise/src/models/request/article/article_request.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'action.dart';
 import 'state.dart';
