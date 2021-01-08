@@ -15,8 +15,9 @@ class ArticleDetailConnector
     extends ConnOp<ArticlePgState, ArticleDetailState> {
   @override
   ArticleDetailState get(ArticlePgState state) {
-    ArticleDetailState articlePageState = state.articleDetailState.clone();
-    return articlePageState;
+    ArticleDetailState articleDetailState = state.articleDetailState.clone();
+    articleDetailState.article = state.article;
+    return articleDetailState;
   }
 
   @override
