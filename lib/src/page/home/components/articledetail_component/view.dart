@@ -38,7 +38,6 @@ Widget buildView(
     if (_initialSwipeOffset != null) {
       final offsetDifference = _initialSwipeOffset.dx - _finalSwipeOffset.dx;
       if (offsetDifference < 0) {
-        //dispatch(ArticleDetailActionCreator.onClearDetailArticle());
         Navigator.pop(context);
       }
     }

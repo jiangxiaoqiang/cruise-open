@@ -8,7 +8,8 @@ Reducer<HomeListDefaultState> buildReducer() {
   return asReducer(
     <Object, Reducer<HomeListDefaultState>>{
       HomeListDefaultAction.action: _onAction,
-      HomeListDefaultAction.onloading_homelist: _onLoadingHomelist,
+      HomeListDefaultAction.onloading_more_homelist_update:
+          _onLoadingMoreHomelistUpdate,
       HomeListDefaultAction.set_articleIds: _onSetArticleIds,
     },
   );
@@ -19,21 +20,20 @@ HomeListDefaultState _onAction(HomeListDefaultState state, Action action) {
   return newState;
 }
 
-HomeListDefaultState _onLoadingHomelist(
+HomeListDefaultState _onLoadingMoreHomelistUpdate(
     HomeListDefaultState state, Action action) {
   final HomeListDefaultState newState = state.clone();
-  newState.articleRequest.latestTime = 2;
-  newState.articleRequest.storiesType = StoriesType.topStories;
+  List<Item> articles = (action.payload as List<Item>);
+  newState.articleListState.articles = articles;
   return newState;
 }
 
 HomeListDefaultState _onSetArticleIds(
     HomeListDefaultState state, Action action) {
   final HomeListDefaultState newState = state.clone();
-  List<int> articleIds = (action.payload as List<int>);
-  newState.articleListState.articleIds = articleIds;
+  ArticlePayload payload = (action.payload as ArticlePayload);
+  newState.articleListState.articleIds = payload.articleIds;
+  newState.articleRequest = payload.articleRequest;
   newState.currentStoriesType = state.currentStoriesType;
   return newState;
 }
-
-
