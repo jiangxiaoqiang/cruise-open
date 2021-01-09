@@ -4,7 +4,6 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import '../../../stories_page.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -52,8 +51,7 @@ Widget buildView(
                     enablePullDown: true,
                     controller: _refreshController,
                     onLoading: () {
-                      //dispatch(HomeListDefaultActionCreator.onLoadingHomeList(
-                      //    articleRequest));
+                      dispatch(HomeListDefaultActionCreator.onLoadingMoreHomeList(articleRequest));
                       _refreshController.loadComplete();
                     },
                     footer: CustomFooter(
