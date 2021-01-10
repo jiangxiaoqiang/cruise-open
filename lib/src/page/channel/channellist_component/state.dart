@@ -26,4 +26,9 @@ class ChannelListConnector
     ChannelListState substate = state.channelListState.clone();
     return substate;
   }
+
+  @override
+  void set(ChannelListDefaultState state, ChannelListState subState) {
+    state.channelListState = subState;
+  }
 }
