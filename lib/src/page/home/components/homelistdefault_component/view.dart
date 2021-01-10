@@ -22,7 +22,6 @@ void _onScroll(offset) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
   }
   appBarAlpha = alpha;
-  print(alpha);
 }
 
 Widget buildView(
@@ -40,13 +39,16 @@ Widget buildView(
                 onNotification: (scrollNotification) {
                   if (scrollNotification is ScrollUpdateNotification &&
                       scrollNotification.depth == 0) {
-                    //_onScroll(scrollNotification.metrics.pixels);
+                    _onScroll(scrollNotification.metrics.pixels);
                   }
                   return true;
                 },
                 child: CupertinoScrollbar(
                     child:SmartRefresher(
                     onRefresh: () {
+                      dispatch(
+                          HomeListDefaultActionCreator.onFetchNewestArticles(
+                              articleRequest));
                       _refreshController.refreshCompleted();
                     },
                     enablePullUp: true,
