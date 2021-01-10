@@ -9,7 +9,7 @@ Effect<HomeListDefaultState> buildEffect() {
   return combineEffects(<Object, Effect<HomeListDefaultState>>{
     HomeListDefaultAction.action: _onAction,
     HomeListDefaultAction.fetch_articleIds: _onFetchArticleIds,
-    HomeListDefaultAction.onloading_more_homelist: _onLoadingHomeMoreList,
+    HomeListDefaultAction.loading_more_articles: _onLoadingHomeMoreList,
     Lifecycle.initState: _onInit,
   });
 }
@@ -40,7 +40,7 @@ Future _onLoadingHomeMoreList(
       }
     }
     ctx.dispatch(
-        HomeListDefaultActionCreator.onLoadingMoreHomeListUpdate(articles));
+        HomeListDefaultActionCreator.onLoadingMoreArticlesUpdate(articles));
   }
 }
 
