@@ -51,14 +51,19 @@ Widget buildView(
       body: TabBarView(
         children: [currentStoriesType].map((type) {
           if (currentStoriesType == StoriesType.topStories) {
+            dispatch(HomeListActionCreator.onChangeStoriesType(StoriesType.topStories));
             return viewService.buildComponent("homelistdefault");
           } else if (currentStoriesType == StoriesType.channels) {
+            dispatch(HomeListActionCreator.onChangeStoriesType(StoriesType.channels));
             return viewService.buildComponent("channellistdefault");
           } else if (currentStoriesType == StoriesType.subStories) {
-            //return viewService.buildComponent("homelistdefault");
+            dispatch(HomeListActionCreator.onChangeStoriesType(StoriesType.subStories));
+            return viewService.buildComponent("homelistdefault");
           } else if (currentStoriesType == StoriesType.favStories) {
-            //return viewService.buildComponent("homelistdefault");
+            dispatch(HomeListActionCreator.onChangeStoriesType(StoriesType.favStories));
+            return viewService.buildComponent("homelistdefault");
           } else if (currentStoriesType == StoriesType.profile) {
+            dispatch(HomeListActionCreator.onChangeStoriesType(StoriesType.profile));
             return viewService.buildComponent("cruisesetting");
           }
         }).toList(),
