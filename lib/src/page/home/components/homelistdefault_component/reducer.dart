@@ -16,11 +16,6 @@ Reducer<HomeListDefaultState> buildReducer() {
   );
 }
 
-HomeListDefaultState _onAction(HomeListDefaultState state, Action action) {
-  final HomeListDefaultState newState = state.clone();
-  return newState;
-}
-
 HomeListDefaultState _onLoadingMoreArticlesUpdate(
     HomeListDefaultState state, Action action) {
   final HomeListDefaultState newState = state.clone();
