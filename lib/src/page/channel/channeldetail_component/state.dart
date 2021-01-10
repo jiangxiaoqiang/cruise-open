@@ -9,7 +9,9 @@ class ChannelDetailState implements Cloneable<ChannelDetailState> {
 
   @override
   ChannelDetailState clone() {
-    return ChannelDetailState();
+    return ChannelDetailState()
+    ..channel = this.channel
+    ..isFav = this.isFav;
   }
 }
 
@@ -18,6 +20,7 @@ class ChannelDetailConnector
   @override
   ChannelDetailState get(ChannelPgState state) {
     ChannelDetailState substate = state.channelDetailState.clone();
+    substate.channel = state.channel;
     return substate;
   }
 
