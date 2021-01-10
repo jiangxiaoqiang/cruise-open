@@ -20,4 +20,9 @@ class ChannelDetailConnector
     ChannelDetailState substate = state.channelDetailState.clone();
     return substate;
   }
+
+  @override
+  void set(ChannelPgState state, ChannelDetailState subState) {
+    state.channelDetailState = subState;
+  }
 }

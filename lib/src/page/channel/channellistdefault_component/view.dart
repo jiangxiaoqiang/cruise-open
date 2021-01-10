@@ -26,7 +26,6 @@ RefreshController _refreshController = RefreshController(initialRefresh: false);
 Widget buildView(
     ChannelListDefaultState state, Dispatch dispatch, ViewService viewService) {
   StoriesType storiesType = StoriesType.channels;
-  ArticleRequest articleRequest = state.articleRequest;
 
   Widget navChannelPage() {
       return viewService.buildComponent("channellist");
