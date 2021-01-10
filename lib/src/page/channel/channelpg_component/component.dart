@@ -1,3 +1,5 @@
+import 'package:Cruise/src/page/channel/channeldetail_component/component.dart';
+import 'package:Cruise/src/page/channel/channeldetail_component/state.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'reducer.dart';
@@ -12,6 +14,8 @@ class ChannelPgComponent extends Component<ChannelPgState> {
             dependencies: Dependencies<ChannelPgState>(
                 adapter: null,
                 slots: <String, Dependent<ChannelPgState>>{
+                  'channeldetail': ChannelDetailConnector() +
+                      ChannelDetailComponent()
                 }),);
 
 }

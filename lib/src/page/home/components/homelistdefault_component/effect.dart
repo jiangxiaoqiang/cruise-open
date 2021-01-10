@@ -30,7 +30,7 @@ Future _onLoadingHomeMoreList(
   ArticleRequest articleRequest = (action.payload as ArticleRequest);
   articleRequest.pageNum = articleRequest.pageNum + 1;
   List<int> ids = await Repo.getArticleIds(articleRequest);
-  List<Item> articles = new List();
+  List<Item> articles = [];
   if (ids != null) {
     for (int id in ids) {
       Item article = await Repo.fetchArticleItem(id);
