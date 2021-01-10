@@ -1,6 +1,7 @@
 import 'package:Cruise/src/models/Item.dart';
 import 'package:Cruise/src/models/request/article/article_request.dart';
 import 'package:fish_redux/fish_redux.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -21,7 +22,6 @@ void _onScroll(offset) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
   }
   appBarAlpha = alpha;
-  print(alpha);
 }
 
 Widget buildView(
@@ -39,19 +39,25 @@ Widget buildView(
                 onNotification: (scrollNotification) {
                   if (scrollNotification is ScrollUpdateNotification &&
                       scrollNotification.depth == 0) {
-                    //_onScroll(scrollNotification.metrics.pixels);
+                    _onScroll(scrollNotification.metrics.pixels);
                   }
                   return true;
                 },
-                child: SmartRefresher(
+                child: CupertinoScrollbar(
+                    child:SmartRefresher(
                     onRefresh: () {
+                      dispatch(
+                          HomeListDefaultActionCreator.onFetchNewestArticles(
+                              articleRequest));
                       _refreshController.refreshCompleted();
                     },
                     enablePullUp: true,
                     enablePullDown: true,
                     controller: _refreshController,
                     onLoading: () {
-                      dispatch(HomeListDefaultActionCreator.onLoadingMoreArticles(articleRequest));
+                      dispatch(
+                          HomeListDefaultActionCreator.onLoadingMoreArticles(
+                              articleRequest));
                       _refreshController.loadComplete();
                     },
                     footer: CustomFooter(
@@ -89,7 +95,7 @@ Widget buildView(
                             sliver: viewService.buildComponent("articlelist"),
                           )
                       ],
-                    )));
+                    ))));
           },
         )),
   );

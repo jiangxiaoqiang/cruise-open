@@ -7,9 +7,10 @@ import 'state.dart';
 Reducer<HomeListDefaultState> buildReducer() {
   return asReducer(
     <Object, Reducer<HomeListDefaultState>>{
-      HomeListDefaultAction.action: _onAction,
       HomeListDefaultAction.loading_more_articles_update:
           _onLoadingMoreArticlesUpdate,
+      HomeListDefaultAction.fetch_newest_articles_update:
+          _onFetchNewestArticlesUpdate,
       HomeListDefaultAction.set_articleIds: _onSetArticleIds,
     },
   );
@@ -25,6 +26,14 @@ HomeListDefaultState _onLoadingMoreArticlesUpdate(
   final HomeListDefaultState newState = state.clone();
   List<Item> articles = (action.payload as List<Item>);
   newState.articleListState.articles.addAll(articles);
+  return newState;
+}
+
+HomeListDefaultState _onFetchNewestArticlesUpdate(
+    HomeListDefaultState state, Action action) {
+  final HomeListDefaultState newState = state.clone();
+  List<Item> articles = (action.payload as List<Item>);
+  newState.articleListState.articles = articles;
   return newState;
 }
 
