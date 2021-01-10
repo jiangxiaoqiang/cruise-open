@@ -9,6 +9,7 @@ Reducer<ChannelListState> buildReducer() {
     <Object, Reducer<ChannelListState>>{
       ChannelListAction.action: _onAction,
       ChannelListAction.set_channels: _onSetChannels,
+      ChannelListAction.set_detail_channel: _onSetDetailChannel,
     },
   );
 }
@@ -22,5 +23,12 @@ ChannelListState _onSetChannels(ChannelListState state, Action action) {
   final ChannelListState newState = state.clone();
   List<Channel> channels = (action.payload as List<Channel>);
   newState.channels = channels;
+  return newState;
+}
+
+ChannelListState _onSetDetailChannel(ChannelListState state, Action action) {
+  final ChannelListState newState = state.clone();
+  Channel channel = (action.payload as Channel);
+  newState.channelPgState.channel = channel;
   return newState;
 }
