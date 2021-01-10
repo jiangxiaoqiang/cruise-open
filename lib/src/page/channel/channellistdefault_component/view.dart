@@ -48,20 +48,13 @@ Widget buildView(
               },
               child: SmartRefresher(
                   onRefresh: () {
-                    Future.delayed(Duration(milliseconds: 1000));
-                    articleRequest.latestTime =
-                        DateTime.now().millisecondsSinceEpoch;
                     _refreshController.refreshCompleted();
                   },
                   enablePullUp: true,
                   enablePullDown: true,
                   controller: _refreshController,
                   onLoading: () {
-                    articleRequest.pageNum = articleRequest.pageNum + 1;
-                    articleRequest.latestTime =
-                        DateTime.now().millisecondsSinceEpoch;
                     //dispatch(ChannelListDefaultActionCreator.onLoadingChannels(articleRequest));
-
                     _refreshController.loadComplete();
                   },
                   footer: CustomFooter(

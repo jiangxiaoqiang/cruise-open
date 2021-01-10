@@ -3,6 +3,7 @@ import 'package:Cruise/src/component/channel_compact_tile.dart';
 import 'package:Cruise/src/component/channel_item_card.dart';
 import 'package:Cruise/src/component/channel_item_tile.dart';
 import 'package:Cruise/src/models/Channel.dart';
+import 'package:Cruise/src/page/channel/channellist_component/action.dart';
 import 'package:animations/animations.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +35,11 @@ Widget buildView(
 
   if (state.channels == null || state.channels.length == 0) {
     return Container(height: 0.0, width: 0.0);
+  }
+
+  Widget buildChannel(Channel channel) {
+    dispatch(ChannelListActionCreator.onSetDetailChannel(channel));
+    return viewService.buildComponent("articlepg");
   }
 
   return SliverList(delegate: SliverChildBuilderDelegate((context, index) {
