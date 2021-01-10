@@ -24,8 +24,7 @@ class HomeListDefaultActionCreator {
   }
 
   static Action onFetchNewestArticlesUpdate(List<Item> articles) {
-    return Action(HomeListDefaultAction.fetch_newest_articles_update,
-        payload: articles);
+    return Action(HomeListDefaultAction.fetch_newest_articles_update, payload: articles);
   }
 
   static Action onLoadingMoreArticlesUpdate(List<Item> articles) {
