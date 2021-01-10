@@ -5,8 +5,8 @@ import 'package:fish_redux/fish_redux.dart';
 //TODO replace with your own action
 enum HomeListDefaultAction {
   action,
-  onloading_more_homelist,
-  onloading_more_homelist_update,
+  loading_more_articles,
+  loading_more_articles_update,
   fetch_articleIds,
   set_articleIds,
 }
@@ -16,13 +16,13 @@ class HomeListDefaultActionCreator {
     return const Action(HomeListDefaultAction.action);
   }
 
-  static Action onLoadingMoreHomeList(ArticleRequest articleRequest) {
-    return Action(HomeListDefaultAction.onloading_more_homelist,
+  static Action onLoadingMoreArticles(ArticleRequest articleRequest) {
+    return Action(HomeListDefaultAction.loading_more_articles,
         payload: articleRequest);
   }
 
-  static Action onLoadingMoreHomeListUpdate(List<Item> articles) {
-    return Action(HomeListDefaultAction.onloading_more_homelist_update,
+  static Action onLoadingMoreArticlesUpdate(List<Item> articles) {
+    return Action(HomeListDefaultAction.loading_more_articles_update,
         payload: articles);
   }
 
@@ -36,8 +36,6 @@ class HomeListDefaultActionCreator {
     articlePayload.articleIds = articleIds;
     return Action(HomeListDefaultAction.set_articleIds, payload: articlePayload);
   }
-
-
 }
 
 class ArticlePayload{

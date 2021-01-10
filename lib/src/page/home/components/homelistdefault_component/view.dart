@@ -51,18 +51,18 @@ Widget buildView(
                     enablePullDown: true,
                     controller: _refreshController,
                     onLoading: () {
-                      dispatch(HomeListDefaultActionCreator.onLoadingMoreHomeList(articleRequest));
+                      dispatch(HomeListDefaultActionCreator.onLoadingMoreArticles(articleRequest));
                       _refreshController.loadComplete();
                     },
                     footer: CustomFooter(
                       builder: (BuildContext context, LoadStatus mode) {
                         Widget body;
                         if (mode == LoadStatus.idle) {
-                          body = Text("pull up load");
+                          body = Text("上拉加载更多");
                         } else if (mode == LoadStatus.loading) {
                           //body =  CupertinoActivityIndicator();
                         } else if (mode == LoadStatus.failed) {
-                          body = Text("Load Failed!Click retry!");
+                          body = Text("加载失败!点击重试!");
                         } else if (mode == LoadStatus.canLoading) {
                           body = Text("release to load more");
                         } else {
