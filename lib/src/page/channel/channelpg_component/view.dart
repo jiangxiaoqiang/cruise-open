@@ -9,11 +9,17 @@ import '../../channel_page.dart';
 import 'action.dart';
 import 'state.dart';
 
-Widget buildView(ChannelPgState state, Dispatch dispatch, ViewService viewService) {
-
+Widget buildView(
+    ChannelPgState state, Dispatch dispatch, ViewService viewService) {
   Channel item = state.channel;
-
   BuildContext context = viewService.context;
+
+  Widget navChannelDetail(Channel channel) {
+    if (state.channelDetailState.channel == null) {
+      dispatch(ChannelPgActionCreator.onSetDetailChannel(channel));
+    }
+    return viewService.buildComponent("channeldetail");
+  }
 
   return Scaffold(
     appBar: AppBar(
@@ -35,7 +41,7 @@ Widget buildView(ChannelPgState state, Dispatch dispatch, ViewService viewServic
     ),
     body: CustomScrollView(
       slivers: [
-        SliverToBoxAdapter(child: ChannelInformation(item: item)),
+        SliverToBoxAdapter(child: navChannelDetail(item)),
       ],
     ),
   );

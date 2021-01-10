@@ -11,7 +11,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../profile.dart';
-import 'action.dart';
 import 'state.dart';
 
 Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewService) {
