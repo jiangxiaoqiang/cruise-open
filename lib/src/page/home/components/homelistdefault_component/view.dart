@@ -1,6 +1,7 @@
 import 'package:Cruise/src/models/Item.dart';
 import 'package:Cruise/src/models/request/article/article_request.dart';
 import 'package:fish_redux/fish_redux.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -43,7 +44,8 @@ Widget buildView(
                   }
                   return true;
                 },
-                child: SmartRefresher(
+                child: CupertinoScrollbar(
+                    child:SmartRefresher(
                     onRefresh: () {
                       _refreshController.refreshCompleted();
                     },
@@ -51,7 +53,9 @@ Widget buildView(
                     enablePullDown: true,
                     controller: _refreshController,
                     onLoading: () {
-                      dispatch(HomeListDefaultActionCreator.onLoadingMoreArticles(articleRequest));
+                      dispatch(
+                          HomeListDefaultActionCreator.onLoadingMoreArticles(
+                              articleRequest));
                       _refreshController.loadComplete();
                     },
                     footer: CustomFooter(
@@ -89,7 +93,7 @@ Widget buildView(
                             sliver: viewService.buildComponent("articlelist"),
                           )
                       ],
-                    )));
+                    ))));
           },
         )),
   );
