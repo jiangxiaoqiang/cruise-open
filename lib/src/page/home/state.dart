@@ -5,15 +5,10 @@ import 'package:Cruise/src/page/home/components/homelistdefault_component/state.
 import 'package:fish_redux/fish_redux.dart';
 
 class HomeState implements Cloneable<HomeState> {
-
   int selectIndex = 0;
-
   StoriesType storiesType = StoriesType.topStories;
-
   HomeListState homeListState = new HomeListState();
-
   HomeListDefaultState homeListDefaultState = new HomeListDefaultState();
-
   ChannelListDefaultState channelListDefaultState = new ChannelListDefaultState();
 
   @override
