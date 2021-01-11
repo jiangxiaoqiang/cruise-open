@@ -14,6 +14,14 @@ Widget buildView(
     HomeListState state, Dispatch dispatch, ViewService viewService) {
   StoriesType currentStoriesType = state.currentStoriesType;
 
+  Widget switchNavTab(StoriesType switchStoriesType, String tabName) {
+    if (state.currentStoriesType == null ||
+        state.currentStoriesType != switchStoriesType) {
+      dispatch(HomeListActionCreator.onChangeStoriesType(switchStoriesType));
+    }
+    return viewService.buildComponent(tabName);
+  }
+
   return DefaultTabController(
     length: tabs.length,
     child: NestedScrollView(
@@ -51,20 +59,15 @@ Widget buildView(
       body: TabBarView(
         children: [currentStoriesType].map((type) {
           if (currentStoriesType == StoriesType.topStories) {
-            dispatch(HomeListActionCreator.onChangeStoriesType(StoriesType.topStories));
-            return viewService.buildComponent("homelistdefault");
+            return switchNavTab(StoriesType.topStories, "homelistdefault");
           } else if (currentStoriesType == StoriesType.channels) {
-            dispatch(HomeListActionCreator.onChangeStoriesType(StoriesType.channels));
-            return viewService.buildComponent("channellistdefault");
+            return switchNavTab(StoriesType.channels, "channellistdefault");
           } else if (currentStoriesType == StoriesType.subStories) {
-            dispatch(HomeListActionCreator.onChangeStoriesType(StoriesType.subStories));
-            return viewService.buildComponent("homelistdefault");
+            return switchNavTab(StoriesType.subStories, "homelistdefault");
           } else if (currentStoriesType == StoriesType.favStories) {
-            dispatch(HomeListActionCreator.onChangeStoriesType(StoriesType.favStories));
-            return viewService.buildComponent("homelistdefault");
+            return switchNavTab(StoriesType.favStories, "homelistdefault");
           } else if (currentStoriesType == StoriesType.profile) {
-            dispatch(HomeListActionCreator.onChangeStoriesType(StoriesType.profile));
-            return viewService.buildComponent("cruisesetting");
+            return switchNavTab(StoriesType.profile, "cruisesetting");
           }
         }).toList(),
       ),
