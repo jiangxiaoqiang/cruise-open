@@ -7,7 +7,6 @@ import 'state.dart';
 Reducer<HomeListState> buildReducer() {
   return asReducer(
     <Object, Reducer<HomeListState>>{
-      HomeListAction.action: _onAction,
       HomeListAction.change_stories_type: _onChangeStoriesType,
     },
   );
