@@ -29,6 +29,12 @@ Widget buildView(
   ArticleRequest articleRequest = state.articleRequest;
   articleRequest.storiesType = StoriesType.topStories;
 
+  void loadingMoreArticle() {
+    dispatch(
+        HomeListDefaultActionCreator.onLoadingMoreArticles(articleRequest));
+    _refreshController.loadComplete();
+  }
+
   return Scaffold(
     body: SafeArea(
         top: false,
@@ -44,58 +50,56 @@ Widget buildView(
                   return true;
                 },
                 child: CupertinoScrollbar(
-                    child:SmartRefresher(
-                    onRefresh: () {
-                      dispatch(
-                          HomeListDefaultActionCreator.onFetchNewestArticles(
-                              articleRequest));
-                      _refreshController.refreshCompleted();
-                    },
-                    enablePullUp: true,
-                    enablePullDown: true,
-                    controller: _refreshController,
-                    onLoading: () {
-                      dispatch(
-                          HomeListDefaultActionCreator.onLoadingMoreArticles(
-                              articleRequest));
-                      _refreshController.loadComplete();
-                    },
-                    footer: CustomFooter(
-                      builder: (BuildContext context, LoadStatus mode) {
-                        Widget body;
-                        if (mode == LoadStatus.idle) {
-                          body = Text("上拉加载更多");
-                        } else if (mode == LoadStatus.loading) {
-                          //body =  CupertinoActivityIndicator();
-                        } else if (mode == LoadStatus.failed) {
-                          body = Text("加载失败!点击重试!");
-                        } else if (mode == LoadStatus.canLoading) {
-                          body = Text("release to load more");
-                        } else {
-                          body = Text("No more Data");
-                        }
-                        return Container(
-                          height: 55.0,
-                          child: Center(child: body),
-                        );
-                      },
-                    ),
-                    child: CustomScrollView(
-                      slivers: <Widget>[
-                        SliverOverlapInjector(
-                          handle:
-                              NestedScrollView.sliverOverlapAbsorberHandleFor(
-                            context,
-                          ),
+                    child: SmartRefresher(
+                        onRefresh: () {
+                          dispatch(HomeListDefaultActionCreator
+                              .onFetchNewestArticles(articleRequest));
+                          _refreshController.refreshCompleted();
+                        },
+                        enablePullUp: true,
+                        enablePullDown: true,
+                        controller: _refreshController,
+                        onLoading: () {
+                          loadingMoreArticle();
+                        },
+                        footer: CustomFooter(
+                          builder: (BuildContext context, LoadStatus mode) {
+                            Widget body;
+                            if (mode == LoadStatus.idle) {
+                              body = Text("上拉加载更多");
+                            } else if (mode == LoadStatus.loading) {
+                              //body =  CupertinoActivityIndicator();
+                            } else if (mode == LoadStatus.failed) {
+                              body = Text("加载失败!点击重试!");
+                            } else if (mode == LoadStatus.canLoading) {
+                              body = Text("release to load more");
+                            } else {
+                              body = Text("No more Data");
+                            }
+                            return Container(
+                              height: 55.0,
+                              child: Center(child: body),
+                            );
+                          },
                         ),
-                        if (state.articleListState.articleIds != null &&
-                            state.articleListState.articleIds.length > 0)
-                          SliverPadding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0),
-                            sliver: viewService.buildComponent("articlelist"),
-                          )
-                      ],
-                    ))));
+                        child: CustomScrollView(
+                          slivers: <Widget>[
+                            SliverOverlapInjector(
+                              handle: NestedScrollView
+                                  .sliverOverlapAbsorberHandleFor(
+                                context,
+                              ),
+                            ),
+                            if (state.articleListState.articleIds != null &&
+                                state.articleListState.articleIds.length > 0)
+                              SliverPadding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 8.0),
+                                sliver:
+                                    viewService.buildComponent("articlelist"),
+                              )
+                          ],
+                        ))));
           },
         )),
   );

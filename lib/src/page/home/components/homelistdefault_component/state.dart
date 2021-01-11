@@ -6,13 +6,8 @@ import 'package:fish_redux/fish_redux.dart';
 
 class HomeListDefaultState implements Cloneable<HomeListDefaultState> {
   ArticleRequest articleRequest = new ArticleRequest(
-    pageSize: 15,
-    pageNum: 1,
-    storiesType: StoriesType.topStories
-  );
-
+      pageSize: 15, pageNum: 1, storiesType: StoriesType.topStories);
   StoriesType currentStoriesType = StoriesType.topStories;
-
   ArticleListState articleListState = ArticleListState();
 
   @override
@@ -20,7 +15,7 @@ class HomeListDefaultState implements Cloneable<HomeListDefaultState> {
     return HomeListDefaultState()
       ..currentStoriesType = this.currentStoriesType
       ..articleListState = this.articleListState
-      ..articleRequest=this.articleRequest;
+      ..articleRequest = this.articleRequest;
   }
 }
 

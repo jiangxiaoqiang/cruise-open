@@ -2,15 +2,12 @@ import 'package:Cruise/src/models/Item.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 //TODO replace with your own action
-enum HomeListAction { action, jumpAddChannel, change_stories_type }
+enum HomeListAction {  jumpAddChannel, change_stories_type }
 
 class HomeListActionCreator {
-  static Action onAction() {
-    return const Action(HomeListAction.action);
-  }
 
   static Action onJumpAddChannel() {
-    return const Action(HomeListAction.action);
+    return const Action(HomeListAction.jumpAddChannel);
   }
 
   static Action onChangeStoriesType(StoriesType currentStoriesType) {

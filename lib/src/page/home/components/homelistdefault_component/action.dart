@@ -9,7 +9,7 @@ enum HomeListDefaultAction {
   fetch_articleIds,
   fetch_newest_articles,
   fetch_newest_articles_update,
-  set_articleIds,
+  set_articleIds
 }
 
 class HomeListDefaultActionCreator {

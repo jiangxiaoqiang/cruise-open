@@ -20,6 +20,11 @@ enum StoriesType {
   favStories,
 }
 
+enum ArticleLoadingStatus {
+  loading,
+  complete
+}
+
 class Item {
   Item({
     this.depth = 0,

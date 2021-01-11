@@ -1,4 +1,3 @@
-import 'package:Cruise/src/home/home_new.dart';
 import 'package:Cruise/src/page/home/page.dart';
 import 'package:Cruise/src/page/user/login/page.dart';
 import 'package:fish_redux/fish_redux.dart';
