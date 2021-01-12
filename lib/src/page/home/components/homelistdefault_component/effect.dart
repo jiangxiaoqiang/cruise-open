@@ -8,7 +8,7 @@ import 'state.dart';
 Effect<HomeListDefaultState> buildEffect() {
   return combineEffects(<Object, Effect<HomeListDefaultState>>{
     HomeListDefaultAction.fetch_articleIds: _onFetchArticleIds,
-    HomeListDefaultAction.loading_more_articles: _onLoadingHomeMoreList,
+    HomeListDefaultAction.loading_more_articles: _onLoadingMoreArticles,
     HomeListDefaultAction.fetch_newest_articles: _onFetchNewestArticles,
     Lifecycle.initState: _onInit,
   });
@@ -24,11 +24,15 @@ Future _onInit(Action action, Context<HomeListDefaultState> ctx) async {
   }
 }
 
-
-Future _onLoadingHomeMoreList(
+Future _onLoadingMoreArticles(
     Action action, Context<HomeListDefaultState> ctx) async {
   ArticleRequest articleRequest = (action.payload as ArticleRequest);
   articleRequest.pageNum = articleRequest.pageNum + 1;
+  HomeListDefaultState homeListDefaultState = ctx.state;
+  if (homeListDefaultState.articleRequest.offset != null &&
+      homeListDefaultState.articleRequest.offset > 0) {
+    articleRequest.offset = homeListDefaultState.articleRequest.offset;
+  }
   List<int> ids = await Repo.getArticleIds(articleRequest);
   List<Item> articles = [];
   if (ids != null) {
@@ -43,7 +47,8 @@ Future _onLoadingHomeMoreList(
   }
 }
 
-Future _onFetchNewestArticles(Action action, Context<HomeListDefaultState> ctx) async {
+Future _onFetchNewestArticles(
+    Action action, Context<HomeListDefaultState> ctx) async {
   ArticleRequest articleRequest = (action.payload as ArticleRequest);
   List<int> ids = await Repo.getArticleIds(articleRequest);
   List<Item> articles = [];
