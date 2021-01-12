@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:Cruise/src/models/Item.dart';
 import 'package:fish_redux/fish_redux.dart';
 
@@ -39,5 +41,8 @@ HomeListDefaultState _onSetArticleIds(
   newState.articleListState.articleIds = payload.articleIds;
   newState.articleRequest = payload.articleRequest;
   newState.currentStoriesType = state.currentStoriesType;
+  if (payload.articleRequest.pageNum == 1 && payload.articleIds.isNotEmpty) {
+    newState.articleRequest.offset = payload.articleIds.reduce(max);
+  }
   return newState;
 }
