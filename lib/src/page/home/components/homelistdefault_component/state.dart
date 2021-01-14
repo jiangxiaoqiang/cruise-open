@@ -9,6 +9,7 @@ class HomeListDefaultState implements Cloneable<HomeListDefaultState> {
       pageSize: 15, pageNum: 1, storiesType: StoriesType.topStories);
   StoriesType currentStoriesType = StoriesType.topStories;
   ArticleListState articleListState = ArticleListState();
+  ArticleLoadingStatus articleLoadingStatus = ArticleLoadingStatus.complete;
 
   @override
   HomeListDefaultState clone() {

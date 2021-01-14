@@ -84,9 +84,9 @@ class Repo {
     } else {
       final response = await RestClient.getHttp("/post/article/$id");
       if (response.statusCode == 200 && response.data["statusCode"] == "200") {
-        Map itemIds1 = response.data["result"];
-        String rejson = JsonEncoder().convert(itemIds1);
-        Item parseItem = Item.fromJson(rejson);
+        Map articleResult = response.data["result"];
+        String articleJson = JsonEncoder().convert(articleResult);
+        Item parseItem = Item.fromJson(articleJson);
         return _itemsCache[id] = parseItem;
       } else {
         CruiseLogHandler.logError(CruiseApiError('Item $id failed to fetch.'), JsonEncoder().convert(response));

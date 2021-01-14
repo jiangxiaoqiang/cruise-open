@@ -9,10 +9,16 @@ enum HomeListDefaultAction {
   fetch_articleIds,
   fetch_newest_articles,
   fetch_newest_articles_update,
-  set_articleIds
+  set_articleIds,
+  update_article_loading_status,
 }
 
 class HomeListDefaultActionCreator {
+
+  static Action onUpdateArticleLoadingStatus(ArticleLoadingStatus loadingStatus) {
+    return Action(HomeListDefaultAction.update_article_loading_status,
+        payload: loadingStatus);
+  }
 
   static Action onLoadingMoreArticles(ArticleRequest articleRequest) {
     return Action(HomeListDefaultAction.loading_more_articles,

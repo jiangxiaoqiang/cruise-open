@@ -1,3 +1,4 @@
+import 'package:Cruise/src/common/log/CruiseLogHandler.dart';
 import 'package:Cruise/src/models/Item.dart';
 import 'package:Cruise/src/models/request/article/article_request.dart';
 import 'package:fish_redux/fish_redux.dart';
@@ -10,6 +11,7 @@ import 'state.dart';
 
 const APPBAR_SCROLL_OFFSET = 100;
 double appBarAlpha = 0;
+bool isDispatched = false;
 RefreshController _refreshController = RefreshController(initialRefresh: false);
 
 /// 自动隐藏Appbar
@@ -30,9 +32,31 @@ Widget buildView(
   articleRequest.storiesType = StoriesType.topStories;
 
   void loadingMoreArticle() {
-    dispatch(
-        HomeListDefaultActionCreator.onLoadingMoreArticles(articleRequest));
+    if (state.articleLoadingStatus == ArticleLoadingStatus.complete) {
+      CruiseLogHandler.logWaring("Article is loading...");
+
+      dispatch(HomeListDefaultActionCreator.onUpdateArticleLoadingStatus(
+          ArticleLoadingStatus.loading));
+      dispatch(
+          HomeListDefaultActionCreator.onLoadingMoreArticles(articleRequest));
+    } else {
+      CruiseLogHandler.logWaring("Article is loading...");
+    }
     _refreshController.loadComplete();
+  }
+
+  void autoPreloadMoreArticles(ScrollNotification notification) {
+    if (notification is ScrollUpdateNotification) {
+      ScrollMetrics metrics = notification.metrics;
+      double buttonDistance = metrics.extentAfter;
+      if (buttonDistance < 500 && !isDispatched) {
+        isDispatched = true;
+        loadingMoreArticle();
+      }
+      if (buttonDistance > 500) {
+        isDispatched = false;
+      }
+    }
   }
 
   return Scaffold(
@@ -43,6 +67,11 @@ Widget buildView(
           builder: (context) {
             return NotificationListener(
                 onNotification: (scrollNotification) {
+                  if (scrollNotification is! ScrollNotification) {
+                    // 如果不是滚动事件，直接返回
+                    return false;
+                  }
+                  autoPreloadMoreArticles(scrollNotification);
                   if (scrollNotification is ScrollUpdateNotification &&
                       scrollNotification.depth == 0) {
                     _onScroll(scrollNotification.metrics.pixels);
