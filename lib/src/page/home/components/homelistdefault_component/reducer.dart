@@ -14,8 +14,18 @@ Reducer<HomeListDefaultState> buildReducer() {
       HomeListDefaultAction.fetch_newest_articles_update:
           _onFetchNewestArticlesUpdate,
       HomeListDefaultAction.set_articleIds: _onSetArticleIds,
+      HomeListDefaultAction.update_article_loading_status:
+          _onUpdateArticleLoadingStatus,
     },
   );
+}
+
+HomeListDefaultState _onUpdateArticleLoadingStatus(
+    HomeListDefaultState state, Action action) {
+  final HomeListDefaultState newState = state.clone();
+  ArticleLoadingStatus loadingStatus = (action.payload as ArticleLoadingStatus);
+  newState.articleLoadingStatus = loadingStatus;
+  return newState;
 }
 
 HomeListDefaultState _onLoadingMoreArticlesUpdate(
