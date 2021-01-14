@@ -14,4 +14,16 @@ class CruiseLogHandler {
       stackTrace: message,
     );
   }
+
+  static Future<void> logWaring(String message) async {
+    logger.w(message);
+  }
+
+  static Future<void> logDebugging(CruiseApiError error, String message) async {
+    logger.d(message);
+    await Sentry.captureException(
+      error,
+      stackTrace: message,
+    );
+  }
 }
