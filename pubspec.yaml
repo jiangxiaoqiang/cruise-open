@@ -23,6 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   rally_assets: ^2.0.0
   meta: ^1.1.8
   logger: ^0.9.4
@@ -59,7 +61,7 @@ dependencies:
   intl_phone_number_input: ^0.5.2+2
   dio: 3.0.10
   sentry_flutter: ^4.0.0-alpha.2
-  intl: ^0.16.1
+  intl: 0.17.0-nullsafety.2
   fish_redux: ^0.3.4
   hive_flutter:
     git:
@@ -67,7 +69,6 @@ dependencies:
       path: hive_flutter
 
 dev_dependencies:
-  intl_translation: ^0.17.10+1
   flutter_test:
     sdk: flutter
   flutter_driver:

@@ -1,4 +1,3 @@
-import 'package:Cruise/src/common/log/CruiseLogHandler.dart';
 import 'package:Cruise/src/models/Item.dart';
 import 'package:Cruise/src/models/request/article/article_request.dart';
 import 'package:fish_redux/fish_redux.dart';
@@ -6,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+
 import 'action.dart';
 import 'state.dart';
 
@@ -26,22 +26,12 @@ void _onScroll(offset) {
   appBarAlpha = alpha;
 }
 
-Widget buildView(
-    HomeListDefaultState state, Dispatch dispatch, ViewService viewService) {
+Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService viewService) {
   ArticleRequest articleRequest = state.articleRequest;
   articleRequest.storiesType = StoriesType.topStories;
 
   void loadingMoreArticle() {
-    if (state.articleLoadingStatus == ArticleLoadingStatus.complete) {
-      CruiseLogHandler.logWaring("Article is loading...");
-
-      dispatch(HomeListDefaultActionCreator.onUpdateArticleLoadingStatus(
-          ArticleLoadingStatus.loading));
-      dispatch(
-          HomeListDefaultActionCreator.onLoadingMoreArticles(articleRequest));
-    } else {
-      CruiseLogHandler.logWaring("Article is loading...");
-    }
+    dispatch(HomeListDefaultActionCreator.onLoadingMoreArticles(articleRequest));
     _refreshController.loadComplete();
   }
 
@@ -49,11 +39,11 @@ Widget buildView(
     if (notification is ScrollUpdateNotification) {
       ScrollMetrics metrics = notification.metrics;
       double buttonDistance = metrics.extentAfter;
-      if (buttonDistance < 500 && !isDispatched) {
+      if (buttonDistance < 800 && !isDispatched) {
         isDispatched = true;
         loadingMoreArticle();
       }
-      if (buttonDistance > 500) {
+      if (buttonDistance > 800) {
         isDispatched = false;
       }
     }
@@ -72,8 +62,7 @@ Widget buildView(
                     return false;
                   }
                   autoPreloadMoreArticles(scrollNotification);
-                  if (scrollNotification is ScrollUpdateNotification &&
-                      scrollNotification.depth == 0) {
+                  if (scrollNotification is ScrollUpdateNotification && scrollNotification.depth == 0) {
                     _onScroll(scrollNotification.metrics.pixels);
                   }
                   return true;
@@ -81,8 +70,7 @@ Widget buildView(
                 child: CupertinoScrollbar(
                     child: SmartRefresher(
                         onRefresh: () {
-                          dispatch(HomeListDefaultActionCreator
-                              .onFetchNewestArticles(articleRequest));
+                          dispatch(HomeListDefaultActionCreator.onFetchNewestArticles(articleRequest));
                           _refreshController.refreshCompleted();
                         },
                         enablePullUp: true,
@@ -114,18 +102,15 @@ Widget buildView(
                         child: CustomScrollView(
                           slivers: <Widget>[
                             SliverOverlapInjector(
-                              handle: NestedScrollView
-                                  .sliverOverlapAbsorberHandleFor(
+                              handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
                                 context,
                               ),
                             ),
                             if (state.articleListState.articleIds != null &&
                                 state.articleListState.articleIds.length > 0)
                               SliverPadding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 8.0),
-                                sliver:
-                                    viewService.buildComponent("articlelist"),
+                                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                sliver: viewService.buildComponent("articlelist"),
                               )
                           ],
                         ))));

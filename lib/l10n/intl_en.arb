@@ -8,6 +8,10 @@
       }
     }
   },
+  "cruiseNavigatorHome":"Home",
+  "@cruiseNavigatorHome":{
+    "description": "A description about how to view the source code for this app."
+  },
   "aboutDialogDescription": "To see the source code for this app, please visit the {repoLink}.",
   "@aboutDialogDescription": {
     "description": "A description about how to view the source code for this app.",
