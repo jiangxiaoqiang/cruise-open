@@ -6,6 +6,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:Cruise/src/common/theme.dart';
 import 'package:Cruise/src/common/view_manager.dart';
 import 'package:fish_redux/src/redux_component/page.dart' as fishPage;
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 class CruiseApp extends HookWidget {
   const CruiseApp({@required this.theme, @required this.view});
@@ -27,6 +28,15 @@ class CruiseApp extends HookWidget {
     return MaterialApp(
         title: 'Cruise',
         theme: currentTheme,
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: [
+          const Locale('en', ''), // English, no country code
+          const Locale.fromSubtags(languageCode: 'zh'), // Chinese *See Advanced Locales below*
+        ],
         //home: HomeNew(),
         home: routes.buildPage('home', null),
         onGenerateRoute: (RouteSettings settings) {

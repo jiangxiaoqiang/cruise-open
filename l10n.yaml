@@ -1,6 +1,7 @@
+arb-dir: lib/l10n
 template-arb-file: intl_en.arb
-output-localization-file: gallery_localizations.dart
-output-class: GalleryLocalizations
+output-localization-file: cruise_localizations.dart
+output-class: CruiseLocalizations
 preferred-supported-locales:
   - en
 use-deferred-loading: false
