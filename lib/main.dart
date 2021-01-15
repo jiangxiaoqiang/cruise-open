@@ -29,6 +29,7 @@ void main() async {
   final theme = ThemeManager.fromThemeName(themeName);
   String viewName = pref.getString('view');
   final view = ViewManager.fromViewName(viewName);
+
   //registerWxApi(appId: "your app id", doOnAndroid: true, doOnIOS: true,universalLink:"https://example.com");
   await SentryFlutter.init(
     (options) => options.dsn = _exampleDsn,
