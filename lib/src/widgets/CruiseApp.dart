@@ -1,3 +1,4 @@
+import 'package:Cruise/l10n/flutter_gen/gen_l10n/cruise_localizations.dart';
 import 'package:Cruise/src/page/home/page.dart';
 import 'package:Cruise/src/page/user/login/page.dart';
 import 'package:fish_redux/fish_redux.dart';
@@ -9,13 +10,16 @@ import 'package:fish_redux/src/redux_component/page.dart' as fishPage;
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 class CruiseApp extends HookWidget {
-  const CruiseApp({@required this.theme, @required this.view});
+  CruiseApp({@required this.theme, @required this.view});
 
   final ThemeData theme;
   final ViewType view;
 
+
   @override
   Widget build(BuildContext context) {
+    CruiseLocalizations cruiseLocalizations = CruiseLocalizations.of(context);
+    var home = null; //cruiseLocalizations.cruiseNavigatorHome;
     final currentTheme = ThemeManager.fromThemeName("lightTheme");
 
     final AbstractRoutes routes = PageRoutes(
