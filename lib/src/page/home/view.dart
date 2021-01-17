@@ -32,9 +32,6 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
     dispatch(HomeActionCreator.onSwitchNav(homeModel));
   }
 
-  //CruiseLocalizations cruiseLocalizations = CruiseLocalizations.of(context);
-  var home = null; //cruiseLocalizations.cruiseNavigatorHome;
-
   return Scaffold(
     body: viewService.buildComponent("homelist"),
     bottomNavigationBar: BottomNavigationBar(
