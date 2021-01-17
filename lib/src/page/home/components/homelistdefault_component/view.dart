@@ -63,7 +63,7 @@ Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService view
                   }
                   autoPreloadMoreArticles(scrollNotification);
                   if (scrollNotification is ScrollUpdateNotification && scrollNotification.depth == 0) {
-                    _onScroll(scrollNotification.metrics.pixels);
+                    //_onScroll(scrollNotification.metrics.pixels);
                   }
                   return true;
                 },

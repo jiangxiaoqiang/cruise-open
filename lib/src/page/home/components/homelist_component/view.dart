@@ -3,6 +3,7 @@ import 'package:Cruise/src/models/Item.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+
 import 'action.dart';
 import 'state.dart';
 
@@ -10,13 +11,11 @@ final List tabs = [
   IconTab(name: "Top", icon: Feather.trending_up),
 ];
 
-Widget buildView(
-    HomeListState state, Dispatch dispatch, ViewService viewService) {
+Widget buildView(HomeListState state, Dispatch dispatch, ViewService viewService) {
   StoriesType currentStoriesType = state.currentStoriesType;
 
   Widget switchNavTab(StoriesType switchStoriesType, String tabName) {
-    if (state.currentStoriesType == null ||
-        state.currentStoriesType != switchStoriesType) {
+    if (state.currentStoriesType == null || state.currentStoriesType != switchStoriesType) {
       dispatch(HomeListActionCreator.onChangeStoriesType(switchStoriesType));
     }
     return viewService.buildComponent(tabName);
@@ -35,9 +34,7 @@ Widget buildView(
                 title: Text(
                   'Cruise',
                   style: TextStyle(
-                    color: Theme.of(context).brightness == Brightness.light
-                        ? Colors.black
-                        : Colors.white,
+                    color: Theme.of(context).brightness == Brightness.light ? Colors.black : Colors.white,
                   ),
                 ),
                 pinned: true,
@@ -48,8 +45,7 @@ Widget buildView(
                 actions: [
                   if (state.currentStoriesType == StoriesType.channels)
                     IconButton(
-                      onPressed: () =>
-                          {dispatch(HomeListActionCreator.onJumpAddChannel())},
+                      onPressed: () => {dispatch(HomeListActionCreator.onJumpAddChannel())},
                       icon: Icon(Feather.plus),
                     ),
                 ],
