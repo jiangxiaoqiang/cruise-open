@@ -52,10 +52,8 @@ class LoginPage extends HookWidget {
                 },
                 selectorConfig: SelectorConfig(
                   selectorType: PhoneInputSelectorType.DIALOG,
-                  backgroundColor: Colors.black,
                 ),
                 ignoreBlank: false,
-                autoValidateMode: AutovalidateMode.disabled,
                 selectorTextStyle: TextStyle(color: Colors.black),
                 initialValue: number,
                 textFieldController: controller,

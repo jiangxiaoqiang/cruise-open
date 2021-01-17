@@ -1,4 +1,5 @@
 import 'package:Cruise/src/widgets/CruiseApp.dart';
+import 'package:Cruise/src/widgets/CruiseApp.dart';
 import 'package:flutter/material.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
