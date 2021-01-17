@@ -1,8 +1,5 @@
 import 'dart:convert';
 import 'package:intl/intl.dart';
-import 'package:Cruise/src/common/Repo.dart';
-
-
 
 class CruiseUser {
   CruiseUser({
