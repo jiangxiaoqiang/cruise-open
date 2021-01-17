@@ -28,13 +28,6 @@ class CruiseApp extends HookWidget {
     return MaterialApp(
         title: 'Cruise',
         theme: currentTheme,
-        localizationsDelegates: [
-
-        ],
-        supportedLocales: [
-          const Locale('en', ''), // English, no country code
-          const Locale.fromSubtags(languageCode: 'zh'), // Chinese *See Advanced Locales below*
-        ],
         //home: HomeNew(),
         home: routes.buildPage('home', null),
         onGenerateRoute: (RouteSettings settings) {
