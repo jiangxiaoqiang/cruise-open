@@ -1,4 +1,3 @@
-import 'package:Cruise/l10n/flutter_gen/gen_l10n/cruise_localizations.dart';
 import 'package:Cruise/src/page/home/page.dart';
 import 'package:Cruise/src/page/user/login/page.dart';
 import 'package:fish_redux/fish_redux.dart';
@@ -7,7 +6,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:Cruise/src/common/theme.dart';
 import 'package:Cruise/src/common/view_manager.dart';
 import 'package:fish_redux/src/redux_component/page.dart' as fishPage;
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 class CruiseApp extends HookWidget {
   CruiseApp({@required this.theme, @required this.view});
@@ -18,8 +16,6 @@ class CruiseApp extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    CruiseLocalizations cruiseLocalizations = CruiseLocalizations.of(context);
-    var home = null; //cruiseLocalizations.cruiseNavigatorHome;
     final currentTheme = ThemeManager.fromThemeName("lightTheme");
 
     final AbstractRoutes routes = PageRoutes(
@@ -33,9 +29,7 @@ class CruiseApp extends HookWidget {
         title: 'Cruise',
         theme: currentTheme,
         localizationsDelegates: [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
+
         ],
         supportedLocales: [
           const Locale('en', ''), // English, no country code

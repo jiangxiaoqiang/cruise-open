@@ -52,7 +52,7 @@ class HomeNew extends HookWidget {
       bottomNavigationBar: BottomNavigationBar( // 底部导航
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('首页')),
-          BottomNavigationBarItem(icon: Icon(Icons.follow_the_signs), title: Text('关注')),
+          BottomNavigationBarItem(icon: Icon(Icons.rss_feed), title: Text('关注')),
           BottomNavigationBarItem(icon: Icon(Icons.rss_feed), title: Text('频道')),
           BottomNavigationBarItem(icon: Icon(Icons.school),title: Text('我的')),
         ],
