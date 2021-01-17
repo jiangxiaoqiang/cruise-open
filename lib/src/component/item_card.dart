@@ -45,52 +45,6 @@ class ItemCard extends StatelessWidget {
               ),
               Row(
                 children: [
-                  if (item.type != StoryType.comment) ...[
-                    Padding(
-                      padding: const EdgeInsets.only(right: 16.0),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Feather.arrow_up,
-                            size: 16,
-                            color: item.isVoted()
-                                ? Theme.of(context).primaryColor
-                                : Theme.of(context).iconTheme.color,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: Text(
-                              item.score.toString(),
-                              textAlign: TextAlign.center,
-                              style:
-                                  Theme.of(context).textTheme.caption.copyWith(
-                                        color: Theme.of(context).primaryColor,
-                                      ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 16.0),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Feather.message_square,
-                            size: 16,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: Text(
-                              item.descendants.toString(),
-                              textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.caption,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
                   Padding(
                     padding: const EdgeInsets.only(right: 16.0),
                     child: Row(
