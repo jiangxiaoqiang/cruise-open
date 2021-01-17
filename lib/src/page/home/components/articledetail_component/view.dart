@@ -14,14 +14,12 @@ import 'package:flutter_html/style.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 import '../../../channel_page.dart';
 import 'state.dart';
 
-Widget buildView(
-    ArticleDetailState state, Dispatch dispatch, ViewService viewService) {
+Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewService) {
   Item item = state.article;
-
-  //Item item = getStatisticArticle();
   BuildContext context = viewService.context;
   Offset _initialSwipeOffset;
   Offset _finalSwipeOffset;
@@ -44,8 +42,7 @@ Widget buildView(
   }
 
   void touchUpvote(String action, UpvoteStatus upvoteStatus) async {
-    HttpResult result = await ArticleAction.upvote(
-        articleId: item.id.toString(), action: action);
+    HttpResult result = await ArticleAction.upvote(articleId: item.id.toString(), action: action);
 
     if (result.result == Result.error) {
       Fluttertoast.showToast(
@@ -57,12 +54,11 @@ Widget buildView(
           textColor: Colors.white,
           fontSize: 16.0);
     } else {
-      item.isUpvote = upvoteStatus.statusCode == "upvote" ? 1 : 0;
       if (upvoteStatus.statusCode == "upvote") {
-        item.upvoteCount = item.upvoteCount + 1;
+        dispatch(ArticleDetailActionCreator.onVote(UpvoteStatus.UPVOTE));
       }
       if (upvoteStatus.statusCode == "unupvote" && item.upvoteCount > 0) {
-        item.upvoteCount = item.upvoteCount - 1;
+        dispatch(ArticleDetailActionCreator.onVote(UpvoteStatus.UNUPVOTE));
       }
       Fluttertoast.showToast(
           msg: upvoteStatus.statusCode == "upvote" ? "点赞成功" : "取消点赞成功",
@@ -76,8 +72,7 @@ Widget buildView(
   }
 
   void touchFav(String action, FavStatus favStatus) async {
-    HttpResult result =
-        await ArticleAction.fav(articleId: item.id.toString(), action: action);
+    HttpResult result = await ArticleAction.fav(articleId: item.id.toString(), action: action);
 
     if (result.result == Result.error) {
       Fluttertoast.showToast(
@@ -89,12 +84,11 @@ Widget buildView(
           textColor: Colors.white,
           fontSize: 16.0);
     } else {
-      item.isFav = favStatus.statusCode == "fav" ? 1 : 0;
       if (favStatus.statusCode == "fav") {
-        item.favCount = item.favCount + 1;
+        dispatch(ArticleDetailActionCreator.onFav(FavStatus.FAV));
       }
       if (favStatus.statusCode == "unfav" && item.favCount > 0) {
-        item.favCount = item.favCount - 1;
+        dispatch(ArticleDetailActionCreator.onFav(FavStatus.UNFAV));
       }
       Fluttertoast.showToast(
           msg: favStatus.statusCode == "fav" ? "添加收藏成功" : "取消收藏成功",
@@ -150,21 +144,16 @@ Widget buildView(
                   padding: const EdgeInsets.only(bottom: 8.0),
                   child: InkWell(
                       onTap: () async {
-                        Channel channel = await Repo.fetchChannelItem(
-                            int.parse(item.subSourceId));
+                        Channel channel = await Repo.fetchChannelItem(int.parse(item.subSourceId));
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => ChannelPage(item: channel)),
+                          MaterialPageRoute(builder: (context) => ChannelPage(item: channel)),
                           //ProfilePage(username: item.author))
                         );
                       },
                       child: Text(
                         item.domain,
-                        style: Theme.of(context)
-                            .textTheme
-                            .caption
-                            .copyWith(color: Theme.of(context).primaryColor),
+                        style: Theme.of(context).textTheme.caption.copyWith(color: Theme.of(context).primaryColor),
                       )),
                 ),
               InkWell(
@@ -209,10 +198,8 @@ Widget buildView(
                           children: [
                             if (item.isFav == 1)
                               IconButton(
-                                icon: Icon(Icons.bookmark,
-                                    color: Theme.of(context).primaryColor),
-                                onPressed: () =>
-                                    touchFav("unfav", FavStatus.UNFAV),
+                                icon: Icon(Icons.bookmark, color: Theme.of(context).primaryColor),
+                                onPressed: () => touchFav("unfav", FavStatus.UNFAV),
                               ),
                             if (item.isFav != 1)
                               IconButton(
@@ -224,10 +211,7 @@ Widget buildView(
                               child: Text(
                                 "${item.favCount}",
                                 textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .caption
-                                    .copyWith(
+                                style: Theme.of(context).textTheme.caption.copyWith(
                                       color: Theme.of(context).primaryColor,
                                     ),
                               ),
@@ -241,26 +225,20 @@ Widget buildView(
                           children: [
                             if (item.isUpvote == 1)
                               IconButton(
-                                icon: Icon(Icons.thumb_up,
-                                    color: Theme.of(context).primaryColor),
-                                onPressed: () => touchUpvote(
-                                    "unupvote", UpvoteStatus.UNUPVOTE),
+                                icon: Icon(Icons.thumb_up, color: Theme.of(context).primaryColor),
+                                onPressed: () => touchUpvote("unupvote", UpvoteStatus.UNUPVOTE),
                               ),
                             if (item.isUpvote != 1)
                               IconButton(
                                 icon: Icon(Icons.thumb_up),
-                                onPressed: () =>
-                                    touchUpvote("upvote", UpvoteStatus.UPVOTE),
+                                onPressed: () => touchUpvote("upvote", UpvoteStatus.UPVOTE),
                               ),
                             Padding(
                               padding: const EdgeInsets.only(left: 8.0),
                               child: Text(
                                 "${item.upvoteCount}",
                                 textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .caption
-                                    .copyWith(
+                                style: Theme.of(context).textTheme.caption.copyWith(
                                       color: Theme.of(context).primaryColor,
                                     ),
                               ),
@@ -274,8 +252,7 @@ Widget buildView(
                     icon: Icon(
                       Feather.share_2,
                     ),
-                    onPressed: () => handleShare(
-                        id: item.id, title: item.title, postUrl: item.link),
+                    onPressed: () => handleShare(id: item.id, title: item.title, postUrl: item.link),
                   ),
                 ],
               ),

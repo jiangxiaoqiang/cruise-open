@@ -1,7 +1,4 @@
 import 'package:Cruise/src/common/view_manager.dart';
-import 'package:Cruise/src/component/compact_tile.dart';
-import 'package:Cruise/src/component/item_card.dart';
-import 'package:Cruise/src/component/item_tile.dart';
 import 'package:Cruise/src/common/helpers.dart';
 import 'package:Cruise/src/models/Item.dart';
 import 'package:Cruise/src/page/home/components/articlelist_component/action.dart';
