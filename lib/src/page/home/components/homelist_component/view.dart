@@ -39,6 +39,7 @@ Widget buildView(HomeListState state, Dispatch dispatch, ViewService viewService
                 ),
                 pinned: true,
                 expandedHeight: 10.0,
+                brightness: Brightness.light, // or use Brightness.dark
                 floating: true,
                 snap: true,
                 forceElevated: innerBoxIsScrolled,
