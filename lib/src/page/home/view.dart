@@ -5,12 +5,11 @@ import 'package:Cruise/src/page/home/action.dart';
 import 'package:Cruise/src/page/home/home_model.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'state.dart';
 
 Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
   var context = viewService.context;
-
   void _onItemTapped(int index) {
     var homeModel = new HomeModel();
     if (index == MenuType.my.value) {
@@ -36,7 +35,7 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
     body: viewService.buildComponent("homelist"),
     bottomNavigationBar: BottomNavigationBar(
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text("首页")),
+          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text(AppLocalizations.of(context).cruiseNavigatorHome)),
           BottomNavigationBarItem(icon: Icon(Icons.subscriptions), title: Text('关注')),
           BottomNavigationBarItem(icon: Icon(Icons.rss_feed), title: Text('频道')),
           BottomNavigationBarItem(icon: Icon(Icons.school), title: Text('我的')),

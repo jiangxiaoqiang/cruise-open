@@ -23,6 +23,7 @@ jobs:
       run: cd ./ios && bundle install && bundle update fastlane
     - name: Install tools
       run: |
+       flutter precache
        flutter pub get
        cd ./ios && pod install
     #- run: flutter pub get
