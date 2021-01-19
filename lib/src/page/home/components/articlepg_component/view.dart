@@ -10,7 +10,6 @@ import 'state.dart';
 Widget buildView(
     ArticlePgState state, Dispatch dispatch, ViewService viewService) {
   Item item = state.article;
-  //Item item = getStatisticArticle();
   var showToTopBtn = state.showToTopBtn;
   PageStorageBucket pageStorageBucket = state.pageStorageBucket;
   Map<String, ScrollController> scrollControllers = state.scrollControllers;
@@ -37,6 +36,7 @@ Widget buildView(
       child: Scaffold(
         appBar: AppBar(
           title: Text('Cruise'),
+          brightness: Brightness.light, // or use Brightness.dark
           actions: [
             if (item.parent != null)
               IconButton(
