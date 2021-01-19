@@ -1,6 +1,7 @@
 import 'package:Cruise/src/models/Item.dart';
 import 'package:Cruise/src/models/request/article/article_request.dart';
 import 'package:fish_redux/fish_redux.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -27,7 +28,7 @@ RefreshController _refreshController = RefreshController(initialRefresh: false);
 
 Widget buildView(ChannelListDefaultState state, Dispatch dispatch, ViewService viewService) {
   ArticleRequest articleRequest = state.articleRequest;
-  articleRequest.storiesType = StoriesType.topStories;
+  articleRequest.storiesType = StoriesType.channels;
   StoriesType storiesType = StoriesType.channels;
 
   Widget navChannelPage() {
@@ -73,6 +74,7 @@ Widget buildView(ChannelListDefaultState state, Dispatch dispatch, ViewService v
                   },
                   enablePullUp: true,
                   enablePullDown: true,
+                  header: WaterDropMaterialHeader(),
                   controller: _refreshController,
                   onLoading: _loadingMoreChannel,
                   footer: CustomFooter(
@@ -95,7 +97,8 @@ Widget buildView(ChannelListDefaultState state, Dispatch dispatch, ViewService v
                       );
                     },
                   ),
-                  child: CustomScrollView(
+                  child: CupertinoScrollbar(
+                      child: CustomScrollView(
                     key: PageStorageKey(storiesType),
                     slivers: <Widget>[
                       SliverOverlapInjector(
@@ -109,7 +112,7 @@ Widget buildView(ChannelListDefaultState state, Dispatch dispatch, ViewService v
                           sliver: navChannelPage(),
                         )
                     ],
-                  )));
+                  ))));
         },
       ),
     ),

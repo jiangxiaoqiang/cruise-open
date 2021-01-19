@@ -24,6 +24,7 @@ Widget buildView(
   return Scaffold(
     appBar: AppBar(
       title: Text('Cruise'),
+      brightness: Brightness.light, // or use Brightness.dark
       actions: [
         if (item.parent != null)
           IconButton(

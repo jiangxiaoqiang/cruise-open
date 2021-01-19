@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:Cruise/src/models/Channel.dart';
+import 'package:Cruise/src/page/home/components/homelistdefault_component/action.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'action.dart';
@@ -9,6 +12,7 @@ Reducer<ChannelListDefaultState> buildReducer() {
     <Object, Reducer<ChannelListDefaultState>>{
       ChannelListDefaultAction.loading_channels: _onLoadingChannels,
       ChannelListDefaultAction.loading_more_channels_update: _onLoadingMoreChannelsUpdate,
+      ChannelListDefaultAction.set_channel_ids: _onSetChannelIds,
     },
   );
 }
@@ -24,5 +28,17 @@ ChannelListDefaultState _onLoadingMoreChannelsUpdate(ChannelListDefaultState sta
   final ChannelListDefaultState newState = state.clone();
   List<Channel> channels = (action.payload as List<Channel>);
   newState.channelListState.channels.addAll(channels);
+  return newState;
+}
+
+
+ChannelListDefaultState _onSetChannelIds(ChannelListDefaultState state, Action action){
+  final ChannelListDefaultState newState = state.clone();
+  ArticlePayload payload = (action.payload as ArticlePayload);
+  newState.channelListState.channelIds = payload.articleIds;
+  newState.articleRequest = payload.articleRequest;
+  if (payload.articleRequest.pageNum == 1 && payload.articleIds.isNotEmpty) {
+    newState.articleRequest.offset = payload.articleIds.reduce(max);
+  }
   return newState;
 }

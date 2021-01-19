@@ -87,7 +87,7 @@ Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService view
                             if (mode == LoadStatus.idle) {
                               body = Text("上拉加载更多");
                             } else if (mode == LoadStatus.loading) {
-                              body =  CupertinoActivityIndicator();
+                              body = CupertinoActivityIndicator();
                             } else if (mode == LoadStatus.failed) {
                               body = Text("加载失败!点击重试!");
                             } else if (mode == LoadStatus.canLoading) {
@@ -101,7 +101,8 @@ Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService view
                             );
                           },
                         ),
-                        child: CustomScrollView(
+                        child: CupertinoScrollbar(
+                            child: CustomScrollView(
                           slivers: <Widget>[
                             SliverOverlapInjector(
                               handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
@@ -114,7 +115,7 @@ Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService view
                                 sliver: viewService.buildComponent("articlelist"),
                               )
                           ],
-                        ))));
+                        )))));
           },
         )),
   );

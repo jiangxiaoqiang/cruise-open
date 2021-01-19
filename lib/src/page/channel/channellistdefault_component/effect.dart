@@ -18,7 +18,7 @@ Future _onInit(Action action, Context<ChannelListDefaultState> ctx) async {
   ArticleRequest articleRequest = new ArticleRequest(pageSize: 15, pageNum: 1, storiesType: StoriesType.channels);
   List<int> ids = await Repo.getElementIds(articleRequest);
   if (ids != null) {
-    ctx.dispatch(ChannelListDefaultActionCreator.onLoadingChannels(ids));
+    ctx.dispatch(ChannelListDefaultActionCreator.onSetChannelIds(ids, articleRequest));
   }
 }
 
