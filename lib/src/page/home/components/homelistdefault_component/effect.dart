@@ -17,7 +17,7 @@ Effect<HomeListDefaultState> buildEffect() {
 Future _onInit(Action action, Context<HomeListDefaultState> ctx) async {
   ArticleRequest articleRequest = new ArticleRequest(
       pageSize: 15, pageNum: 1, storiesType: StoriesType.topStories);
-  List<int> ids = await Repo.getArticleIds(articleRequest);
+  List<int> ids = await Repo.getElementIds(articleRequest);
   if (ids != null) {
     ctx.dispatch(
         HomeListDefaultActionCreator.onSetArticleIds(ids, articleRequest));
@@ -33,7 +33,7 @@ Future _onLoadingMoreArticles(
       homeListDefaultState.articleRequest.offset > 0) {
     articleRequest.offset = homeListDefaultState.articleRequest.offset;
   }
-  List<int> ids = await Repo.getArticleIds(articleRequest);
+  List<int> ids = await Repo.getElementIds(articleRequest);
   List<Item> articles = [];
   if (ids != null) {
     for (int id in ids) {
@@ -50,7 +50,7 @@ Future _onLoadingMoreArticles(
 Future _onFetchNewestArticles(
     Action action, Context<HomeListDefaultState> ctx) async {
   ArticleRequest articleRequest = (action.payload as ArticleRequest);
-  List<int> ids = await Repo.getArticleIds(articleRequest);
+  List<int> ids = await Repo.getElementIds(articleRequest);
   List<Item> articles = [];
   if (ids != null) {
     for (int id in ids) {
@@ -68,7 +68,7 @@ Future _onFetchArticleIds(
     Action action, Context<HomeListDefaultState> ctx) async {
   ArticleRequest articleRequest = (action.payload as ArticleRequest);
   articleRequest.pageNum = articleRequest.pageNum + 1;
-  List<int> ids = await Repo.getArticleIds(articleRequest);
+  List<int> ids = await Repo.getElementIds(articleRequest);
   if (ids != null) {
     ctx.dispatch(
         HomeListDefaultActionCreator.onSetArticleIds(ids, articleRequest));

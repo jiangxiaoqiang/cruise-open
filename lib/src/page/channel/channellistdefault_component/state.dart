@@ -2,8 +2,6 @@ import 'package:Cruise/src/models/Item.dart';
 import 'package:Cruise/src/models/request/article/article_request.dart';
 import 'package:Cruise/src/page/channel/channellist_component/state.dart';
 import 'package:Cruise/src/page/home/components/homelist_component/state.dart';
-import 'package:Cruise/src/page/home/components/homelistdefault_component/state.dart';
-import 'package:Cruise/src/page/user/settings/cruisesetting/state.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 class ChannelListDefaultState implements Cloneable<ChannelListDefaultState> {
