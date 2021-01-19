@@ -15,7 +15,6 @@ class CruiseApp extends HookWidget {
   final ThemeData theme;
   final ViewType view;
 
-
   @override
   Widget build(BuildContext context) {
     final currentTheme = ThemeManager.fromThemeName("lightTheme");

@@ -4,11 +4,13 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+
 import 'action.dart';
 import 'state.dart';
 
 const APPBAR_SCROLL_OFFSET = 100;
 double appBarAlpha = 0;
+bool isDispatched = false;
 
 void _onScroll(offset) {
   double alpha = offset / APPBAR_SCROLL_OFFSET;
@@ -23,12 +25,32 @@ void _onScroll(offset) {
 
 RefreshController _refreshController = RefreshController(initialRefresh: false);
 
-Widget buildView(
-    ChannelListDefaultState state, Dispatch dispatch, ViewService viewService) {
+Widget buildView(ChannelListDefaultState state, Dispatch dispatch, ViewService viewService) {
+  ArticleRequest articleRequest = state.articleRequest;
+  articleRequest.storiesType = StoriesType.topStories;
   StoriesType storiesType = StoriesType.channels;
 
   Widget navChannelPage() {
-      return viewService.buildComponent("channellist");
+    return viewService.buildComponent("channellist");
+  }
+
+  void _loadingMoreChannel() {
+    dispatch(ChannelListDefaultActionCreator.onLoadingMoreChannels(articleRequest));
+    _refreshController.loadComplete();
+  }
+
+  void _autoPreloadMoreChannels(ScrollNotification notification) {
+    if (notification is ScrollUpdateNotification) {
+      ScrollMetrics metrics = notification.metrics;
+      double buttonDistance = metrics.extentAfter;
+      if (buttonDistance < 800 && !isDispatched) {
+        isDispatched = true;
+        _loadingMoreChannel();
+      }
+      if (buttonDistance > 800) {
+        isDispatched = false;
+      }
+    }
   }
 
   return Scaffold(
@@ -39,10 +61,10 @@ Widget buildView(
         builder: (context) {
           return NotificationListener(
               onNotification: (scrollNotification) {
-                if (scrollNotification is ScrollUpdateNotification &&
-                    scrollNotification.depth == 0) {
+                if (scrollNotification is ScrollUpdateNotification && scrollNotification.depth == 0) {
                   _onScroll(scrollNotification.metrics.pixels);
                 }
+                _autoPreloadMoreChannels(scrollNotification);
                 return true;
               },
               child: SmartRefresher(
@@ -52,10 +74,7 @@ Widget buildView(
                   enablePullUp: true,
                   enablePullDown: true,
                   controller: _refreshController,
-                  onLoading: () {
-                    //dispatch(ChannelListDefaultActionCreator.onLoadingChannels(articleRequest));
-                    _refreshController.loadComplete();
-                  },
+                  onLoading: _loadingMoreChannel,
                   footer: CustomFooter(
                     builder: (BuildContext context, LoadStatus mode) {
                       Widget body;
