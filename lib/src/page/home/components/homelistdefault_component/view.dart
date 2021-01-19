@@ -30,7 +30,7 @@ Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService view
   ArticleRequest articleRequest = state.articleRequest;
   articleRequest.storiesType = StoriesType.topStories;
 
-  void loadingMoreArticle() {
+  void _loadingMoreArticle() {
     dispatch(HomeListDefaultActionCreator.onLoadingMoreArticles(articleRequest));
     _refreshController.loadComplete();
   }
@@ -41,12 +41,18 @@ Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService view
       double buttonDistance = metrics.extentAfter;
       if (buttonDistance < 800 && !isDispatched) {
         isDispatched = true;
-        loadingMoreArticle();
+        _loadingMoreArticle();
       }
       if (buttonDistance > 800) {
         isDispatched = false;
       }
     }
+  }
+
+  void _onRefresh() async {
+    dispatch(HomeListDefaultActionCreator.onFetchNewestArticles(articleRequest));
+    await Future.delayed(Duration(milliseconds: 1000));
+    _refreshController.refreshCompleted();
   }
 
   return Scaffold(
@@ -69,23 +75,19 @@ Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService view
                 },
                 child: CupertinoScrollbar(
                     child: SmartRefresher(
-                        onRefresh: () {
-                          dispatch(HomeListDefaultActionCreator.onFetchNewestArticles(articleRequest));
-                          _refreshController.refreshCompleted();
-                        },
+                        onRefresh: _onRefresh,
                         enablePullUp: true,
                         enablePullDown: true,
+                        header: WaterDropMaterialHeader(),
                         controller: _refreshController,
-                        onLoading: () {
-                          loadingMoreArticle();
-                        },
+                        onLoading: _loadingMoreArticle,
                         footer: CustomFooter(
                           builder: (BuildContext context, LoadStatus mode) {
                             Widget body;
                             if (mode == LoadStatus.idle) {
                               body = Text("上拉加载更多");
                             } else if (mode == LoadStatus.loading) {
-                              //body =  CupertinoActivityIndicator();
+                              body =  CupertinoActivityIndicator();
                             } else if (mode == LoadStatus.failed) {
                               body = Text("加载失败!点击重试!");
                             } else if (mode == LoadStatus.canLoading) {
@@ -106,8 +108,7 @@ Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService view
                                 context,
                               ),
                             ),
-                            if (state.articleListState.articleIds != null &&
-                                state.articleListState.articleIds.length > 0)
+                            if (state.articleListState.articleIds != null && state.articleListState.articleIds.length > 0)
                               SliverPadding(
                                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                                 sliver: viewService.buildComponent("articlelist"),
