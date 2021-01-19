@@ -1,13 +1,21 @@
 import 'package:Cruise/src/models/Channel.dart';
 import 'package:Cruise/src/models/request/article/article_request.dart';
+import 'package:Cruise/src/page/home/components/homelistdefault_component/action.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 //TODO replace with your own action
-enum ChannelListDefaultAction { action, loading_channels, loading_more_channels, loading_more_channels_update }
+enum ChannelListDefaultAction { action, loading_channels, loading_more_channels, loading_more_channels_update, set_channel_ids }
 
 class ChannelListDefaultActionCreator {
   static Action onAction() {
     return const Action(ChannelListDefaultAction.action);
+  }
+
+  static Action onSetChannelIds(List<int> channelIds,ArticleRequest articleRequest) {
+    ArticlePayload articlePayload = new ArticlePayload();
+    articlePayload.articleRequest = articleRequest;
+    articlePayload.articleIds = channelIds;
+    return Action(ChannelListDefaultAction.set_channel_ids, payload: articlePayload);
   }
 
   static Action onLoadingChannels(List<int> ids) {
