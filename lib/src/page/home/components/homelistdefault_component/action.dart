@@ -11,18 +11,20 @@ enum HomeListDefaultAction {
   fetch_newest_articles_update,
   set_articleIds,
   update_article_loading_status,
+  resume_scroll_top
 }
 
 class HomeListDefaultActionCreator {
-
   static Action onUpdateArticleLoadingStatus(ArticleLoadingStatus loadingStatus) {
-    return Action(HomeListDefaultAction.update_article_loading_status,
-        payload: loadingStatus);
+    return Action(HomeListDefaultAction.update_article_loading_status, payload: loadingStatus);
+  }
+
+  static Action onResumeScrollTop() {
+    return Action(HomeListDefaultAction.resume_scroll_top);
   }
 
   static Action onLoadingMoreArticles(ArticleRequest articleRequest) {
-    return Action(HomeListDefaultAction.loading_more_articles,
-        payload: articleRequest);
+    return Action(HomeListDefaultAction.loading_more_articles, payload: articleRequest);
   }
 
   static Action onFetchNewestArticles(ArticleRequest articleRequest) {
@@ -34,15 +36,14 @@ class HomeListDefaultActionCreator {
   }
 
   static Action onLoadingMoreArticlesUpdate(List<Item> articles) {
-    return Action(HomeListDefaultAction.loading_more_articles_update,
-        payload: articles);
+    return Action(HomeListDefaultAction.loading_more_articles_update, payload: articles);
   }
 
   static Action onGetArticleIds(ArticleRequest articleRequest) {
-    return Action(HomeListDefaultAction.fetch_articleIds,payload: articleRequest);
+    return Action(HomeListDefaultAction.fetch_articleIds, payload: articleRequest);
   }
 
-  static Action onSetArticleIds(List<int> articleIds,ArticleRequest articleRequest) {
+  static Action onSetArticleIds(List<int> articleIds, ArticleRequest articleRequest) {
     ArticlePayload articlePayload = new ArticlePayload();
     articlePayload.articleRequest = articleRequest;
     articlePayload.articleIds = articleIds;
@@ -50,7 +51,7 @@ class HomeListDefaultActionCreator {
   }
 }
 
-class ArticlePayload{
+class ArticlePayload {
   ArticleRequest articleRequest;
   List<int> articleIds;
 }
