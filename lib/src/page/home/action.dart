@@ -3,7 +3,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'home_model.dart';
 
 //TODO replace with your own action
-enum HomeAction { action, switchNav, switchNavSuccess }
+enum HomeAction { action, switchNav, switchNavSuccess, scroll_top }
 
 class HomeActionCreator {
   static Action onAction() {
@@ -16,5 +16,9 @@ class HomeActionCreator {
 
   static Action onSwitchNavSuccess(HomeModel homeModel) {
     return Action(HomeAction.switchNavSuccess, payload: homeModel);
+  }
+
+  static Action onScrollTop() {
+    return Action(HomeAction.scroll_top);
   }
 }

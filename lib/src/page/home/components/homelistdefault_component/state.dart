@@ -9,12 +9,14 @@ class HomeListDefaultState implements Cloneable<HomeListDefaultState> {
   StoriesType currentStoriesType = StoriesType.topStories;
   ArticleListState articleListState = ArticleListState();
   ArticleLoadingStatus articleLoadingStatus = ArticleLoadingStatus.complete;
+  bool isScrollTop = false;
 
   @override
   HomeListDefaultState clone() {
     return HomeListDefaultState()
       ..currentStoriesType = this.currentStoriesType
       ..articleListState = this.articleListState
+      ..isScrollTop = this.isScrollTop
       ..articleRequest = this.articleRequest;
   }
 }

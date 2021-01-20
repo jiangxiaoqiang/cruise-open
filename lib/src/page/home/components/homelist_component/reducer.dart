@@ -12,11 +12,6 @@ Reducer<HomeListState> buildReducer() {
   );
 }
 
-HomeListState _onAction(HomeListState state, Action action) {
-  final HomeListState newState = state.clone();
-  return newState;
-}
-
 HomeListState _onChangeStoriesType(HomeListState state, Action action) {
   final HomeListState newState = state.clone();
   StoriesType storiesType = action.payload as StoriesType;
