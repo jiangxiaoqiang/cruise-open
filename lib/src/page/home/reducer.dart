@@ -6,10 +6,14 @@ import 'state.dart';
 
 Reducer<HomeState> buildReducer() {
   return asReducer(
-    <Object, Reducer<HomeState>>{
-      HomeAction.switchNavSuccess: _onSwitchNavSuccess
-    },
+    <Object, Reducer<HomeState>>{HomeAction.switchNavSuccess: _onSwitchNavSuccess, HomeAction.scroll_top: _onScrollTop},
   );
+}
+
+HomeState _onScrollTop(HomeState state, Action action) {
+  final HomeState newState = state.clone();
+  newState.homeListState.homeListDefaultState.isScrollTop = true;
+  return newState;
 }
 
 HomeState _onSwitchNavSuccess(HomeState state, Action action) {

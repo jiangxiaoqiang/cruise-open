@@ -1,4 +1,3 @@
-import 'package:Cruise/src/models/Item.dart';
 import 'package:Cruise/src/models/request/article/article_request.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,6 +12,7 @@ const APPBAR_SCROLL_OFFSET = 100;
 double appBarAlpha = 0;
 bool isDispatched = false;
 RefreshController _refreshController = RefreshController(initialRefresh: false);
+ScrollController scrollController = ScrollController();
 
 /// 自动隐藏Appbar
 void _onScroll(offset) {
@@ -28,7 +28,11 @@ void _onScroll(offset) {
 
 Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService viewService) {
   ArticleRequest articleRequest = state.articleRequest;
-  articleRequest.storiesType = StoriesType.topStories;
+  articleRequest.storiesType = state.currentStoriesType;
+  if (state.isScrollTop) {
+    dispatch(HomeListDefaultActionCreator.onResumeScrollTop());
+    scrollController.animateTo(.0, duration: Duration(milliseconds: 200), curve: Curves.ease);
+  }
 
   void _loadingMoreArticle() {
     dispatch(HomeListDefaultActionCreator.onLoadingMoreArticles(articleRequest));
@@ -103,6 +107,7 @@ Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService view
                         ),
                         child: CupertinoScrollbar(
                             child: CustomScrollView(
+                          controller: scrollController,
                           slivers: <Widget>[
                             SliverOverlapInjector(
                               handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
