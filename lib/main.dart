@@ -1,11 +1,9 @@
-import 'package:Cruise/src/widgets/CruiseApp.dart';
-import 'package:Cruise/src/widgets/CruiseApp.dart';
-import 'package:flutter/material.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:Cruise/src/common/history.dart';
 import 'package:Cruise/src/common/theme.dart';
 import 'package:Cruise/src/common/view_manager.dart';
+import 'package:Cruise/src/widgets/CruiseApp.dart';
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class CustomEn extends timeago.EnMessages {
@@ -30,16 +28,10 @@ void main() async {
   final theme = ThemeManager.fromThemeName(themeName);
   String viewName = pref.getString('view');
   final view = ViewManager.fromViewName(viewName);
-
-  //registerWxApi(appId: "your app id", doOnAndroid: true, doOnIOS: true,universalLink:"https://example.com");
-  await SentryFlutter.init(
-    (options) => options.dsn = _exampleDsn,
-    appRunner: () => {
-      runApp(CruiseApp(
-          theme: theme,
-          view: view,
-        ),
-      )
-    },
+  runApp(
+    CruiseApp(
+      theme: theme,
+      view: view,
+    ),
   );
 }
