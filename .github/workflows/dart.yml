@@ -18,7 +18,7 @@ jobs:
       with:
         flutter-version: '1.22.5'
     - name: Select Xcode version
-      run: sudo xcode-select -s '/Applications/Xcode_12.1.app/Contents/Developer'
+      run: sudo xcode-select -s '/Applications/Xcode_12.3.app/Contents/Developer'
     - name: Bundle install
       run: cd ./ios && bundle install && bundle update fastlane
     - name: Install tools
