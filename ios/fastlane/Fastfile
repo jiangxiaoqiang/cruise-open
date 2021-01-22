@@ -11,6 +11,7 @@ platform :ios do
 
   lane :beta do
     xcversion(version: "12.3")
+    xcode-select -s /Applications/Xcode_12.3.app
     if is_ci
       create_keychain(
         name: ENV['MATCH_KEYCHAIN_NAME'],
