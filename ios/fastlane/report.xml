@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="fastlane.lanes">
+    
+    
+    
+      
+      <testcase classname="fastlane.lanes" name="0: update_fastlane" time="0.097455">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="1: default_platform" time="0.000161">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="2: xcode_select" time="0.000225">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="3: is_ci" time="0.000149">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="4: is_ci" time="0.000142">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="5: match" time="32682.255498">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="6: build_app" time="55.86102">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="7: pgyer" time="155.773822">
+        
+      </testcase>
+    
+  </testsuite>
+</testsuites>
