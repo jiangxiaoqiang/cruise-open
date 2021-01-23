@@ -10,8 +10,7 @@ platform :ios do
   end
 
   lane :beta do
-    xcversion(version: "12.3")
-    xcode_select("/Applications/Xcode_12.3.app")
+    xcode_select("/Applications/Xcode_12.app")
     if is_ci
       create_keychain(
         name: ENV['MATCH_KEYCHAIN_NAME'],
