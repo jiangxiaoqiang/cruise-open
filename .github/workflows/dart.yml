@@ -43,7 +43,7 @@ jobs:
         PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
     - name: Deploy to TestFlight/PGY
       run: |
-        cd ./ios && security unlock-keychain ${HOME}/Library/Keychains/login.keychain && bundle exec fastlane beta
+        cd ./ios && security unlock-keychain ${HOME}/Library/Keychains/login.keychain && flutter clean && bundle exec fastlane beta
       env:
         APPLE_ID: ${{ secrets.APPLE_ID }}
         GIT_URL: ${{ secrets.GIT_URL }}
