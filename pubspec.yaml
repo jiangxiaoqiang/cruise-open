@@ -1,5 +1,5 @@
 name: Cruise
-description: A article read Flutter application.
+description: A RSS article read Flutter application.
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
