@@ -23,7 +23,7 @@ jobs:
       run: |
        flutter precache
        flutter pub get
-       cd ./ios && pod repo update && pod install
+       cd ./ios && pod install
     #- run: flutter pub get
     #- run: flutter build apk
     #- run: flutter build ios --release --no-codesign
