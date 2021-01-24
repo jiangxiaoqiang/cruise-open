@@ -45,6 +45,7 @@ jobs:
       run: |
         cd ./ios && security unlock-keychain ${HOME}/Library/Keychains/login.keychain && flutter clean && bundle exec fastlane beta
       env:
+        FLUTTER_ROOT: ${{ secrets.FLUTTER_ROOT }}
         APPLE_ID: ${{ secrets.APPLE_ID }}
         GIT_URL: ${{ secrets.GIT_URL }}
         PGY_USER_KEY: ${{ secrets.PGY_USER_KEY }}
