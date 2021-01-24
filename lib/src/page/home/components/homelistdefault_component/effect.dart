@@ -2,6 +2,7 @@ import 'package:Cruise/src/common/Repo.dart';
 import 'package:Cruise/src/models/Item.dart';
 import 'package:Cruise/src/models/request/article/article_request.dart';
 import 'package:fish_redux/fish_redux.dart';
+
 import 'action.dart';
 import 'state.dart';
 
@@ -11,26 +12,29 @@ Effect<HomeListDefaultState> buildEffect() {
     HomeListDefaultAction.loading_more_articles: _onLoadingMoreArticles,
     HomeListDefaultAction.fetch_newest_articles: _onFetchNewestArticles,
     Lifecycle.initState: _onInit,
+    Lifecycle.build: _onBuild,
   });
 }
 
+void _onBuild(Action action, Context<HomeListDefaultState> ctx) {
+  HomeListDefaultState homeListDefaultState = ctx.state;
+  String name = action.payload as String;
+}
+
 Future _onInit(Action action, Context<HomeListDefaultState> ctx) async {
-  ArticleRequest articleRequest = new ArticleRequest(
-      pageSize: 15, pageNum: 1, storiesType: StoriesType.topStories);
+  HomeListDefaultState homeListDefaultState = ctx.state;
+  ArticleRequest articleRequest = homeListDefaultState.articleRequest;
   List<int> ids = await Repo.getElementIds(articleRequest);
   if (ids != null) {
-    ctx.dispatch(
-        HomeListDefaultActionCreator.onSetArticleIds(ids, articleRequest));
+    ctx.dispatch(HomeListDefaultActionCreator.onSetArticleIds(ids, articleRequest));
   }
 }
 
-Future _onLoadingMoreArticles(
-    Action action, Context<HomeListDefaultState> ctx) async {
+Future _onLoadingMoreArticles(Action action, Context<HomeListDefaultState> ctx) async {
   ArticleRequest articleRequest = (action.payload as ArticleRequest);
   articleRequest.pageNum = articleRequest.pageNum + 1;
   HomeListDefaultState homeListDefaultState = ctx.state;
-  if (homeListDefaultState.articleRequest.offset != null &&
-      homeListDefaultState.articleRequest.offset > 0) {
+  if (homeListDefaultState.articleRequest.offset != null && homeListDefaultState.articleRequest.offset > 0) {
     articleRequest.offset = homeListDefaultState.articleRequest.offset;
   }
   List<int> ids = await Repo.getElementIds(articleRequest);
@@ -42,13 +46,11 @@ Future _onLoadingMoreArticles(
         articles.add(article);
       }
     }
-    ctx.dispatch(
-        HomeListDefaultActionCreator.onLoadingMoreArticlesUpdate(articles));
+    ctx.dispatch(HomeListDefaultActionCreator.onLoadingMoreArticlesUpdate(articles));
   }
 }
 
-Future _onFetchNewestArticles(
-    Action action, Context<HomeListDefaultState> ctx) async {
+Future _onFetchNewestArticles(Action action, Context<HomeListDefaultState> ctx) async {
   ArticleRequest articleRequest = (action.payload as ArticleRequest);
   List<int> ids = await Repo.getElementIds(articleRequest);
   List<Item> articles = [];
@@ -59,18 +61,15 @@ Future _onFetchNewestArticles(
         articles.add(article);
       }
     }
-    ctx.dispatch(
-        HomeListDefaultActionCreator.onFetchNewestArticlesUpdate(articles));
+    ctx.dispatch(HomeListDefaultActionCreator.onFetchNewestArticlesUpdate(articles));
   }
 }
 
-Future _onFetchArticleIds(
-    Action action, Context<HomeListDefaultState> ctx) async {
+Future _onFetchArticleIds(Action action, Context<HomeListDefaultState> ctx) async {
   ArticleRequest articleRequest = (action.payload as ArticleRequest);
   articleRequest.pageNum = articleRequest.pageNum + 1;
   List<int> ids = await Repo.getElementIds(articleRequest);
   if (ids != null) {
-    ctx.dispatch(
-        HomeListDefaultActionCreator.onSetArticleIds(ids, articleRequest));
+    ctx.dispatch(HomeListDefaultActionCreator.onSetArticleIds(ids, articleRequest));
   }
 }

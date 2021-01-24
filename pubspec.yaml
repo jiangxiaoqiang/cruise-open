@@ -13,9 +13,10 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  intl: ^0.16.1
+  intl: 0.16.1
   rally_assets: ^2.0.0
   meta: ^1.1.8
+  flutter_svg: 0.18.0
   logger: ^0.9.4
   scoped_model: ^1.1.0
   shrine_images: ^1.1.2
