@@ -18,12 +18,12 @@ jobs:
     - name: Select Xcode version
       run: sudo xcode-select -s '/Applications/Xcode_11.7.app/Contents/Developer'
     - name: Bundle install
-      run: cd ./ios && flutter clean  && gem install cocoapods -v 1.10.0 && bundle install && bundle update fastlane
+      run: cd ./ios && gem install cocoapods -v 1.10.0 && bundle install && gem install fastlane -v 2.170.0
     - name: Install tools
       run: |
        flutter precache
        flutter pub get
-       cd ./ios && pod repo update && pod install
+       cd ./ios && pod install
     #- run: flutter pub get
     #- run: flutter build apk
     #- run: flutter build ios --release --no-codesign
@@ -43,7 +43,7 @@ jobs:
         PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
     - name: Deploy to TestFlight/PGY
       run: |
-        cd ./ios && security unlock-keychain ${HOME}/Library/Keychains/login.keychain && flutter clean && bundle exec fastlane beta
+        cd ./ios && security unlock-keychain ${HOME}/Library/Keychains/login.keychain && bundle exec fastlane beta
       env:
         FLUTTER_ROOT: ${{ secrets.FLUTTER_ROOT }}
         APPLE_ID: ${{ secrets.APPLE_ID }}
