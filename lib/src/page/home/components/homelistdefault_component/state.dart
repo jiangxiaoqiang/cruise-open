@@ -7,6 +7,7 @@ import 'package:fish_redux/fish_redux.dart';
 class HomeListDefaultState implements Cloneable<HomeListDefaultState> {
   ArticleRequest articleRequest = new ArticleRequest(pageSize: 10, pageNum: 1, storiesType: StoriesType.topStories);
   StoriesType currentStoriesType = StoriesType.topStories;
+  StoriesType lastStoriesType = StoriesType.topStories;
   ArticleListState articleListState = ArticleListState();
   ArticleLoadingStatus articleLoadingStatus = ArticleLoadingStatus.complete;
   bool isScrollTop = false;
@@ -17,6 +18,7 @@ class HomeListDefaultState implements Cloneable<HomeListDefaultState> {
       ..currentStoriesType = this.currentStoriesType
       ..articleListState = this.articleListState
       ..isScrollTop = this.isScrollTop
+      ..lastStoriesType = this.lastStoriesType
       ..articleRequest = this.articleRequest;
   }
 }
