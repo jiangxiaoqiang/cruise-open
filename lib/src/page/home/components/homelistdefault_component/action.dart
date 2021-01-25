@@ -11,12 +11,17 @@ enum HomeListDefaultAction {
   fetch_newest_articles_update,
   set_articleIds,
   update_article_loading_status,
-  resume_scroll_top
+  resume_scroll_top,
+  update_latest_story_type,
 }
 
 class HomeListDefaultActionCreator {
   static Action onUpdateArticleLoadingStatus(ArticleLoadingStatus loadingStatus) {
     return Action(HomeListDefaultAction.update_article_loading_status, payload: loadingStatus);
+  }
+
+  static Action onUpdateLastStroiesType(StoriesType storiesType) {
+    return Action(HomeListDefaultAction.update_latest_story_type, payload: storiesType);
   }
 
   static Action onResumeScrollTop() {

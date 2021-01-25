@@ -14,8 +14,16 @@ Reducer<HomeListDefaultState> buildReducer() {
       HomeListDefaultAction.set_articleIds: _onSetArticleIds,
       HomeListDefaultAction.update_article_loading_status: _onUpdateArticleLoadingStatus,
       HomeListDefaultAction.resume_scroll_top: _onResumeScrollTop,
+      HomeListDefaultAction.update_latest_story_type: _onUpdateLastStoriesType,
     },
   );
+}
+
+HomeListDefaultState _onUpdateLastStoriesType(HomeListDefaultState state, Action action) {
+  final HomeListDefaultState newState = state.clone();
+  StoriesType storiesType = action.payload as StoriesType;
+  newState.lastStoriesType = storiesType;
+  return newState;
 }
 
 HomeListDefaultState _onResumeScrollTop(HomeListDefaultState state, Action action) {

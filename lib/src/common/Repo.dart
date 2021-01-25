@@ -1,13 +1,14 @@
 import 'dart:async';
 import 'dart:convert';
+
+import 'package:Cruise/src/common/CruiseUser.dart';
 import 'package:Cruise/src/common/global.dart' as global;
 import 'package:Cruise/src/common/log/CruiseLogHandler.dart';
 import 'package:Cruise/src/common/net/rest/rest_clinet.dart';
 import 'package:Cruise/src/models/Channel.dart';
+import 'package:Cruise/src/models/Item.dart';
 import 'package:Cruise/src/models/request/article/article_request.dart';
 import 'package:http/http.dart' as http;
-import 'package:Cruise/src/models/Item.dart';
-import 'package:Cruise/src/common/CruiseUser.dart';
 
 class Repo {
   static final _itemsCache = <int, Item>{};
@@ -16,7 +17,7 @@ class Repo {
   static const baseUrl = global.baseUrl;
 
   static Future<List<int>> getElementIds(ArticleRequest request) async {
-      return await _getIds(request);
+    return await _getIds(request);
   }
 
   static Future<List<String>> getCommentsIds({Item item}) async {
@@ -28,8 +29,7 @@ class Repo {
     return comments;
   }
 
-  static Stream<Item> lazyFetchComments(
-      {Item item, int depth = 0, bool assignDepth = true}) async* {
+  static Stream<Item> lazyFetchComments({Item item, int depth = 0, bool assignDepth = true}) async* {
     if (item.kids.isEmpty) return;
     for (int kidId in item.kids) {
       Item kid = await fetchArticleItem(kidId);
@@ -69,6 +69,9 @@ class Repo {
     final response = await RestClient.postHttp("$typeQuery", jsonMap);
     if (response.statusCode == 200 && response.data["statusCode"] == "200") {
       Map result = response.data["result"];
+      if (result == null) {
+        return new List();
+      }
       var articles = result["list"];
       List<String> genreIdsList = new List<String>.from(articles);
       List<int> intIds = genreIdsList.map(int.parse).toList();

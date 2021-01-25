@@ -19,9 +19,20 @@ Effect<HomeListDefaultState> buildEffect() {
 void _onBuild(Action action, Context<HomeListDefaultState> ctx) {
   HomeListDefaultState homeListDefaultState = ctx.state;
   String name = action.payload as String;
+  ArticleRequest articleRequest = homeListDefaultState.articleRequest;
+  if (homeListDefaultState.lastStoriesType != articleRequest.storiesType) {
+    // switch the article navigator tab
+    // initial the new type of article
+    ctx.dispatch(HomeListDefaultActionCreator.onUpdateLastStroiesType(articleRequest.storiesType));
+    initArticles(action, ctx);
+  }
 }
 
 Future _onInit(Action action, Context<HomeListDefaultState> ctx) async {
+  initArticles(action, ctx);
+}
+
+Future initArticles(Action action, Context<HomeListDefaultState> ctx) async {
   HomeListDefaultState homeListDefaultState = ctx.state;
   ArticleRequest articleRequest = homeListDefaultState.articleRequest;
   List<int> ids = await Repo.getElementIds(articleRequest);
