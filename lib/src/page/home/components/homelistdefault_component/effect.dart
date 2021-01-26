@@ -38,8 +38,9 @@ Future initArticles(Action action, Context<HomeListDefaultState> ctx) async {
   articleRequest.pageNum = 1;
   articleRequest.offset = null;
   List<int> ids = await Repo.getElementIds(articleRequest);
+  List<Item> articles = await fetchArticleByIds(ids);
   if (ids != null) {
-    ctx.dispatch(HomeListDefaultActionCreator.onSetArticleIds(ids, articleRequest));
+    ctx.dispatch(HomeListDefaultActionCreator.onSetArticleIds(ids, articles, articleRequest));
   }
 }
 
@@ -51,6 +52,14 @@ Future _onLoadingMoreArticles(Action action, Context<HomeListDefaultState> ctx) 
     articleRequest.offset = homeListDefaultState.articleRequest.offset;
   }
   List<int> ids = await Repo.getElementIds(articleRequest);
+  List<Item> articles = await fetchArticleByIds(ids);
+  if (articles != null) {
+    ctx.dispatch(HomeListDefaultActionCreator.onLoadingMoreArticlesUpdate(articles));
+  }
+}
+
+/// get article by ids
+Future<List<Item>> fetchArticleByIds(List<int> ids) async {
   List<Item> articles = [];
   if (ids != null) {
     for (int id in ids) {
@@ -59,21 +68,15 @@ Future _onLoadingMoreArticles(Action action, Context<HomeListDefaultState> ctx) 
         articles.add(article);
       }
     }
-    ctx.dispatch(HomeListDefaultActionCreator.onLoadingMoreArticlesUpdate(articles));
   }
+  return articles;
 }
 
 Future _onFetchNewestArticles(Action action, Context<HomeListDefaultState> ctx) async {
   ArticleRequest articleRequest = (action.payload as ArticleRequest);
   List<int> ids = await Repo.getElementIds(articleRequest);
-  List<Item> articles = [];
-  if (ids != null) {
-    for (int id in ids) {
-      Item article = await Repo.fetchArticleItem(id);
-      if (article != null) {
-        articles.add(article);
-      }
-    }
+  List<Item> articles = await fetchArticleByIds(ids);
+  if (articles != null) {
     ctx.dispatch(HomeListDefaultActionCreator.onFetchNewestArticlesUpdate(articles));
   }
 }
@@ -82,7 +85,8 @@ Future _onFetchArticleIds(Action action, Context<HomeListDefaultState> ctx) asyn
   ArticleRequest articleRequest = (action.payload as ArticleRequest);
   articleRequest.pageNum = articleRequest.pageNum + 1;
   List<int> ids = await Repo.getElementIds(articleRequest);
+  List<Item> articles = await fetchArticleByIds(ids);
   if (ids != null) {
-    ctx.dispatch(HomeListDefaultActionCreator.onSetArticleIds(ids, articleRequest));
+    ctx.dispatch(HomeListDefaultActionCreator.onSetArticleIds(ids, articles, articleRequest));
   }
 }

@@ -1,5 +1,4 @@
 import 'package:Cruise/src/models/Item.dart';
-import 'package:Cruise/src/models/request/article/article_request.dart';
 import 'package:Cruise/src/page/home/components/articlepg_component/state.dart';
 import 'package:Cruise/src/page/home/components/homelistdefault_component/state.dart';
 import 'package:fish_redux/fish_redux.dart';
@@ -20,8 +19,7 @@ class ArticleListState implements Cloneable<ArticleListState> {
   }
 }
 
-class ArticleListConnector
-    extends ConnOp<HomeListDefaultState, ArticleListState> {
+class ArticleListConnector extends ConnOp<HomeListDefaultState, ArticleListState> {
   @override
   ArticleListState get(HomeListDefaultState state) {
     ArticleListState articleListState = state.articleListState.clone();
