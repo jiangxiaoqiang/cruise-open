@@ -48,10 +48,11 @@ class HomeListDefaultActionCreator {
     return Action(HomeListDefaultAction.fetch_articleIds, payload: articleRequest);
   }
 
-  static Action onSetArticleIds(List<int> articleIds, ArticleRequest articleRequest) {
+  static Action onSetArticleIds(List<int> articleIds, List<Item> articles, ArticleRequest articleRequest) {
     ArticlePayload articlePayload = new ArticlePayload();
     articlePayload.articleRequest = articleRequest;
     articlePayload.articleIds = articleIds;
+    articlePayload.articles = articles;
     return Action(HomeListDefaultAction.set_articleIds, payload: articlePayload);
   }
 }
@@ -59,4 +60,5 @@ class HomeListDefaultActionCreator {
 class ArticlePayload {
   ArticleRequest articleRequest;
   List<int> articleIds;
+  List<Item> articles;
 }

@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:Cruise/src/models/Item.dart';
+import 'package:Cruise/src/page/home/components/articlelist_component/state.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'action.dart';
@@ -56,9 +57,15 @@ HomeListDefaultState _onFetchNewestArticlesUpdate(HomeListDefaultState state, Ac
 HomeListDefaultState _onSetArticleIds(HomeListDefaultState state, Action action) {
   final HomeListDefaultState newState = state.clone();
   ArticlePayload payload = (action.payload as ArticlePayload);
-  newState.articleListState.articleIds = payload.articleIds;
+
+  ArticleListState articleListState = state.articleListState.clone();
+  articleListState.articleIds = payload.articleIds;
+  articleListState.articles = payload.articles;
+
   newState.articleRequest = payload.articleRequest;
   newState.currentStoriesType = state.currentStoriesType;
+  newState.articleListState = articleListState;
+
   if (payload.articleRequest.pageNum == 1 && payload.articleIds.isNotEmpty) {
     newState.articleRequest.offset = payload.articleIds.reduce(max);
   }
