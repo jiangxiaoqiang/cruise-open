@@ -29,12 +29,14 @@ void _onBuild(Action action, Context<HomeListDefaultState> ctx) {
 }
 
 Future _onInit(Action action, Context<HomeListDefaultState> ctx) async {
-  initArticles(action, ctx);
+  //initArticles(action, ctx);
 }
 
 Future initArticles(Action action, Context<HomeListDefaultState> ctx) async {
   HomeListDefaultState homeListDefaultState = ctx.state;
   ArticleRequest articleRequest = homeListDefaultState.articleRequest;
+  articleRequest.pageNum = 1;
+  articleRequest.offset = null;
   List<int> ids = await Repo.getElementIds(articleRequest);
   if (ids != null) {
     ctx.dispatch(HomeListDefaultActionCreator.onSetArticleIds(ids, articleRequest));
