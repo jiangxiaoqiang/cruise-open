@@ -29,7 +29,7 @@ void _onBuild(Action action, Context<HomeListDefaultState> ctx) {
 }
 
 Future _onInit(Action action, Context<HomeListDefaultState> ctx) async {
-  //initArticles(action, ctx);
+  initArticles(action, ctx);
 }
 
 Future initArticles(Action action, Context<HomeListDefaultState> ctx) async {
