@@ -1,3 +1,4 @@
+import 'package:Cruise/src/common/search.dart';
 import 'package:Cruise/src/home/home_new.dart';
 import 'package:Cruise/src/models/Item.dart';
 import 'package:fish_redux/fish_redux.dart';
@@ -45,6 +46,9 @@ Widget buildView(HomeListState state, Dispatch dispatch, ViewService viewService
                 forceElevated: innerBoxIsScrolled,
                 actions: [
                   if (state.currentStoriesType == StoriesType.channels)
+                    IconButton(icon: Icon(Icons.search), onPressed: (){
+                      showSearch(context: context,delegate: CustomSearchDelegate());
+                    }),
                     IconButton(
                       onPressed: () => {dispatch(HomeListActionCreator.onJumpAddChannel())},
                       icon: Icon(Feather.plus),
