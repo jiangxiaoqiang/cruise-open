@@ -32,6 +32,8 @@ class CustomSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
+
+
     return ListView.builder(
       itemCount: Random().nextInt(10),
       itemBuilder: (context, index) {
