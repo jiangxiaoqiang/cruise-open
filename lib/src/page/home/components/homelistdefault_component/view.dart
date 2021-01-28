@@ -2,7 +2,6 @@ import 'package:Cruise/src/models/request/article/article_request.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'action.dart';
@@ -13,18 +12,6 @@ double appBarAlpha = 0;
 bool isDispatched = false;
 RefreshController _refreshController = RefreshController(initialRefresh: false);
 ScrollController scrollController = ScrollController();
-
-/// 自动隐藏Appbar
-void _onScroll(offset) {
-  double alpha = offset / APPBAR_SCROLL_OFFSET;
-  if (alpha < 0) {
-    alpha = 0;
-  } else if (alpha > 1) {
-    alpha = 1;
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
-  }
-  appBarAlpha = alpha;
-}
 
 Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService viewService) {
   ArticleRequest articleRequest = state.articleRequest;
@@ -68,7 +55,6 @@ Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService view
             return NotificationListener(
                 onNotification: (scrollNotification) {
                   if (scrollNotification is! ScrollNotification) {
-                    // 如果不是滚动事件，直接返回
                     return false;
                   }
                   autoPreloadMoreArticles(scrollNotification);
