@@ -72,9 +72,6 @@ Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService view
                     return false;
                   }
                   autoPreloadMoreArticles(scrollNotification);
-                  if (scrollNotification is ScrollUpdateNotification && scrollNotification.depth == 0) {
-                    //_onScroll(scrollNotification.metrics.pixels);
-                  }
                   return true;
                 },
                 child: CupertinoScrollbar(
@@ -105,8 +102,7 @@ Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService view
                             );
                           },
                         ),
-                        child: CupertinoScrollbar(
-                            child: CustomScrollView(
+                        child: CustomScrollView(
                           controller: scrollController,
                           slivers: <Widget>[
                             SliverOverlapInjector(
@@ -120,7 +116,7 @@ Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService view
                                 sliver: viewService.buildComponent("articlelist"),
                               )
                           ],
-                        )))));
+                        ))));
           },
         )),
   );
