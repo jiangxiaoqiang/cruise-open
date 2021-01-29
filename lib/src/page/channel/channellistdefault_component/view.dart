@@ -68,51 +68,51 @@ Widget buildView(ChannelListDefaultState state, Dispatch dispatch, ViewService v
                 _autoPreloadMoreChannels(scrollNotification);
                 return true;
               },
-              child: SmartRefresher(
-                  onRefresh: () {
-                    _refreshController.refreshCompleted();
-                  },
-                  enablePullUp: true,
-                  enablePullDown: true,
-                  header: WaterDropMaterialHeader(),
-                  controller: _refreshController,
-                  onLoading: _loadingMoreChannel,
-                  footer: CustomFooter(
-                    builder: (BuildContext context, LoadStatus mode) {
-                      Widget body;
-                      if (mode == LoadStatus.idle) {
-                        body = Text("pull up load");
-                      } else if (mode == LoadStatus.loading) {
-                        //body =  CupertinoActivityIndicator();
-                      } else if (mode == LoadStatus.failed) {
-                        body = Text("Load Failed!Click retry!");
-                      } else if (mode == LoadStatus.canLoading) {
-                        body = Text("release to load more");
-                      } else {
-                        body = Text("No more Data");
-                      }
-                      return Container(
-                        height: 55.0,
-                        child: Center(child: body),
-                      );
-                    },
-                  ),
-                  child: CupertinoScrollbar(
-                      child: CustomScrollView(
-                    key: PageStorageKey(storiesType),
-                    slivers: <Widget>[
-                      SliverOverlapInjector(
-                        handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-                          context,
-                        ),
+              child: CupertinoScrollbar(
+                  child: SmartRefresher(
+                      onRefresh: () {
+                        _refreshController.refreshCompleted();
+                      },
+                      enablePullUp: true,
+                      enablePullDown: true,
+                      header: WaterDropMaterialHeader(),
+                      controller: _refreshController,
+                      onLoading: _loadingMoreChannel,
+                      footer: CustomFooter(
+                        builder: (BuildContext context, LoadStatus mode) {
+                          Widget body;
+                          if (mode == LoadStatus.idle) {
+                            body = Text("pull up load");
+                          } else if (mode == LoadStatus.loading) {
+                            //body =  CupertinoActivityIndicator();
+                          } else if (mode == LoadStatus.failed) {
+                            body = Text("Load Failed!Click retry!");
+                          } else if (mode == LoadStatus.canLoading) {
+                            body = Text("release to load more");
+                          } else {
+                            body = Text("No more Data");
+                          }
+                          return Container(
+                            height: 55.0,
+                            child: Center(child: body),
+                          );
+                        },
                       ),
-                      if (state.channelListState.channelIds != null && state.channelListState.channelIds.length > 0)
-                        SliverPadding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          sliver: navChannelPage(),
-                        )
-                    ],
-                  ))));
+                      child: CustomScrollView(
+                        key: PageStorageKey(storiesType),
+                        slivers: <Widget>[
+                          SliverOverlapInjector(
+                            handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                              context,
+                            ),
+                          ),
+                          if (state.channelListState.channelIds != null && state.channelListState.channelIds.length > 0)
+                            SliverPadding(
+                              padding: const EdgeInsets.symmetric(vertical: 8.0),
+                              sliver: navChannelPage(),
+                            )
+                        ],
+                      ))));
         },
       ),
     ),
