@@ -12,6 +12,7 @@ class CruiseSettingComponent extends Component<CruiseSettingState> {
             dependencies: Dependencies<CruiseSettingState>(
                 adapter: null,
                 slots: <String, Dependent<CruiseSettingState>>{
+
                 }),);
 
 }
