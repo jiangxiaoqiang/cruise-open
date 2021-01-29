@@ -1,15 +1,18 @@
 import 'package:Cruise/src/common/auth.dart';
 import 'package:Cruise/src/common/view_manager.dart';
+import 'package:Cruise/src/models/Item.dart';
+import 'package:Cruise/src/page/home/components/homelist_component/action.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+
 import '../../../login.dart';
+import '../../Fav.dart';
 import '../custom_setting.dart';
 import 'state.dart';
 
 Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewService) {
-
-  BuildContext context= viewService.context;
+  BuildContext context = viewService.context;
 
   return Scaffold(
     body: SafeArea(
@@ -74,11 +77,19 @@ Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewSe
             leading: Icon(Feather.bookmark),
             title: Text("收藏"),
             onTap: () async {
-             /* Widget page = Fav(currentStoriesType: StoriesType.favStories);
+              Widget page = Fav(currentStoriesType: StoriesType.favStories);
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => page),
-              );*/
+              );
+            },
+          ),
+          ListTile(
+            leading: Icon(Feather.archive),
+            title: Text("发现"),
+            onTap: () async {
+              dispatch(HomeListActionCreator.onChangeStoriesType(StoriesType.topStories));
+              return viewService.buildComponent("homelistdefault");
             },
           ),
           ListTile(
