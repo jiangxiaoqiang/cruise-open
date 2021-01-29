@@ -1,3 +1,4 @@
+import 'package:Cruise/src/models/Item.dart';
 import 'package:Cruise/src/models/request/article/article_request.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
@@ -40,8 +41,9 @@ Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService view
     }
   }
 
-  void _onRefresh() async {
-    dispatch(HomeListDefaultActionCreator.onFetchNewestArticles(articleRequest));
+  void _onRefreshLoadingNewestArticle() async {
+    var fetchNewestReq = new ArticleRequest(offset: null, pageSize: 10, pageNum: 1, storiesType: state.currentStoriesType);
+    dispatch(HomeListDefaultActionCreator.onFetchNewestArticles(fetchNewestReq));
     await Future.delayed(Duration(milliseconds: 1000));
     _refreshController.refreshCompleted();
   }
@@ -62,7 +64,7 @@ Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService view
                 },
                 child: CupertinoScrollbar(
                     child: SmartRefresher(
-                        onRefresh: _onRefresh,
+                        onRefresh: _onRefreshLoadingNewestArticle,
                         enablePullUp: true,
                         enablePullDown: true,
                         header: WaterDropMaterialHeader(),
