@@ -69,6 +69,8 @@ Widget buildView(HomeListState state, Dispatch dispatch, ViewService viewService
             return switchNavTab(StoriesType.favStories, "homelistdefault");
           } else if (currentStoriesType == StoriesType.profile) {
             return switchNavTab(StoriesType.profile, "cruisesetting");
+          }else if(currentStoriesType == StoriesType.originalStories){
+            return switchNavTab(StoriesType.originalStories, "homelistdefault");
           }
         }).toList(),
       ),

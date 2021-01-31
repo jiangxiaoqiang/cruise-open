@@ -147,6 +147,9 @@ class Repo {
       case StoriesType.favStories:
         return "/post/user/fav/article";
         break;
+      case StoriesType.originalStories:
+        return "/post/article/originalstories";
+        break;
       default:
         return "/post/article/newstories";
     }
