@@ -1,7 +1,9 @@
+import 'package:Cruise/src/models/Channel.dart';
 import 'package:Cruise/src/models/request/channel/channel_request.dart';
 import 'package:flutter/material.dart';
 
 import 'channel_action.dart';
+import 'net/rest/http_result.dart';
 
 class CustomSearchDelegate extends SearchDelegate {
   @override
@@ -35,15 +37,16 @@ class CustomSearchDelegate extends SearchDelegate {
   Widget buildResults(BuildContext context) {
     var channelRequest = new ChannelRequest();
     channelRequest.name = query;
+    channelRequest.pageNum = 1;
+    channelRequest.pageSize = 10;
 
     return FutureBuilder(
         future: ChannelAction.searchChannel(channelRequest),
         builder: (context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
-            final post = snapshot.data;
+            List<Channel> post = snapshot.data;
             return ListTile(
-              title: Text(post['title'], maxLines: 1),
-              subtitle: Text(post['body'], maxLines: 3),
+              title: Text(post[0].subName, maxLines: 1),
             );
           }
           return Center(child: CircularProgressIndicator());

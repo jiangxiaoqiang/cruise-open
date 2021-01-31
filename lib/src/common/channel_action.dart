@@ -1,5 +1,6 @@
 import 'package:Cruise/src/common/global.dart' as global;
 import 'package:Cruise/src/common/net/rest/rest_clinet.dart';
+import 'package:Cruise/src/models/Channel.dart';
 import 'package:Cruise/src/models/api/sub_status.dart';
 import 'package:Cruise/src/models/request/channel/channel_request.dart';
 
@@ -28,13 +29,24 @@ class ChannelAction {
     }
   }
 
-  static Future<HttpResult> searchChannel(ChannelRequest request) async {
+  static Future<List<Channel>> searchChannel(ChannelRequest request) async {
     Map jsonMap = request.toMap();
     final response = await RestClient.postHttp("/post/sub/source/page", jsonMap);
     if (RestClient.respSuccess(response)) {
-      return HttpResult(message: "Channel search success", result: Result.ok);
-    } else {
-      return HttpResult(message: "Channel search failed.", result: Result.error);
+      var channelResult = response.data["result"];
+      if (channelResult == null) {
+        return null;
+      }
+      var channelListResult = channelResult["list"];
+      List<Channel> channels = [];
+      channelListResult.forEach((element) {
+        Channel parsedChannel = Channel.fromMap(element);
+        if (parsedChannel != null) {
+          channels.add(parsedChannel);
+        }
+      });
+      return channels;
     }
+    return null;
   }
 }
