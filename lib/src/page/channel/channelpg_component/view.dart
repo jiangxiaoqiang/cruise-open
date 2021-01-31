@@ -1,5 +1,4 @@
 import 'package:Cruise/src/common/Repo.dart';
-import 'package:Cruise/src/component/channel_information.dart';
 import 'package:Cruise/src/models/Channel.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
