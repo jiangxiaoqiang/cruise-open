@@ -3,7 +3,6 @@ import 'package:Cruise/src/models/request/channel/channel_request.dart';
 import 'package:flutter/material.dart';
 
 import 'channel_action.dart';
-import 'net/rest/http_result.dart';
 
 class CustomSearchDelegate extends SearchDelegate {
   @override
@@ -45,9 +44,11 @@ class CustomSearchDelegate extends SearchDelegate {
         builder: (context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
             List<Channel> post = snapshot.data;
-            return ListTile(
-              title: Text(post[0].subName, maxLines: 1),
-            );
+            if (post != null) {
+              return ListTile(
+                title: Text(post[0].subName, maxLines: 1),
+              );
+            }
           }
           return Center(child: CircularProgressIndicator());
         });

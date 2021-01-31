@@ -1,6 +1,7 @@
 import 'package:Cruise/src/common/search.dart';
 import 'package:Cruise/src/home/home_new.dart';
 import 'package:Cruise/src/models/Item.dart';
+import 'package:Cruise/src/page/channel/add_channel.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -40,17 +41,27 @@ Widget buildView(HomeListState state, Dispatch dispatch, ViewService viewService
                 ),
                 pinned: true,
                 expandedHeight: 10.0,
-                brightness: Brightness.light, // or use Brightness.dark
+                brightness: Brightness.light,
+                // or use Brightness.dark
                 floating: true,
                 snap: true,
                 forceElevated: innerBoxIsScrolled,
                 actions: [
                   if (state.currentStoriesType == StoriesType.channels)
-                    IconButton(icon: Icon(Icons.search), onPressed: (){
-                        showSearch(context: context,delegate: CustomSearchDelegate());
-                    }),
                     IconButton(
-                      onPressed: () => {dispatch(HomeListActionCreator.onJumpAddChannel())},
+                        icon: Icon(Icons.search),
+                        onPressed: () {
+                          showSearch(context: context, delegate: CustomSearchDelegate());
+                        }),
+                  if (state.currentStoriesType == StoriesType.channels)
+                    IconButton(
+                      onPressed: () {
+                        Widget page = AddChannel();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => page),
+                        );
+                      },
                       icon: Icon(Feather.plus),
                     ),
                 ],
@@ -69,7 +80,7 @@ Widget buildView(HomeListState state, Dispatch dispatch, ViewService viewService
             return switchNavTab(StoriesType.favStories, "homelistdefault");
           } else if (currentStoriesType == StoriesType.profile) {
             return switchNavTab(StoriesType.profile, "cruisesetting");
-          }else if(currentStoriesType == StoriesType.originalStories){
+          } else if (currentStoriesType == StoriesType.originalStories) {
             return switchNavTab(StoriesType.originalStories, "homelistdefault");
           }
         }).toList(),
