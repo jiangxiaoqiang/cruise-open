@@ -18,6 +18,7 @@ enum StoriesType {
   showStories,
   jobStories,
   favStories,
+  originalStories
 }
 
 enum ArticleLoadingStatus {
