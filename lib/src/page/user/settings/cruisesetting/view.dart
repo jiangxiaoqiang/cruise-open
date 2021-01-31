@@ -88,8 +88,8 @@ Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewSe
             leading: Icon(Feather.archive),
             title: Text("发现"),
             onTap: () async {
-              dispatch(HomeListActionCreator.onChangeStoriesType(StoriesType.topStories));
-              return viewService.buildComponent("homelistdefault");
+              dispatch(HomeListActionCreator.onChangeStoriesType(StoriesType.originalStories));
+              return null;
             },
           ),
           ListTile(
