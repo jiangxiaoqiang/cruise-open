@@ -72,8 +72,8 @@ class Channel {
     title: json["title"] == null ? "" : json["title"],
     subName: json["subName"] == null?"":json["subName"],
     subUrl: json["subUrl"] == null?"":json["subUrl"],
-    //isFav: json["isFav"] == null?"":json["isFav"],
-    //intro: json["intro"] == null?"":json["intro"],
+    isFav: json["isFav"] == null?"":json["isFav"],
+    intro: json["intro"] == null?"":json["intro"],
   );
 
   Map<String, dynamic> toMap() => {
