@@ -47,7 +47,7 @@ Widget buildView(HomeListState state, Dispatch dispatch, ViewService viewService
                 actions: [
                   if (state.currentStoriesType == StoriesType.channels)
                     IconButton(icon: Icon(Icons.search), onPressed: (){
-                      showSearch(context: context,delegate: CustomSearchDelegate());
+                        showSearch(context: context,delegate: CustomSearchDelegate());
                     }),
                     IconButton(
                       onPressed: () => {dispatch(HomeListActionCreator.onJumpAddChannel())},
