@@ -2,6 +2,7 @@ import 'package:Cruise/src/common/auth.dart';
 import 'package:Cruise/src/common/view_manager.dart';
 import 'package:Cruise/src/models/Item.dart';
 import 'package:Cruise/src/page/home/components/homelist_component/action.dart';
+import 'package:Cruise/src/page/user/discover/page.dart';
 import 'package:Cruise/src/page/user/fav/page.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
@@ -89,8 +90,12 @@ Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewSe
             leading: Icon(Feather.archive),
             title: Text("发现"),
             onTap: () async {
-              dispatch(HomeListActionCreator.onChangeStoriesType(StoriesType.originalStories));
-              return null;
+              var data = {'name': "originalstories"};
+              Widget page = DiscoverPage().buildPage(data);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => page),
+              );
             },
           ),
           ListTile(
