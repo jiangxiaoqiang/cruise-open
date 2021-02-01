@@ -19,5 +19,6 @@ FavArticleState _onAction(FavArticleState state, Action action) {
 
 FavArticleState _onChangeStoryType(FavArticleState state, Action action) {
   final FavArticleState newState = state.clone();
+
   return newState;
 }
