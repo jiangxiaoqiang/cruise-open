@@ -1,6 +1,7 @@
 import 'package:Cruise/src/models/Item.dart';
 import 'package:Cruise/src/page/channel/channellistdefault_component/state.dart';
 import 'package:Cruise/src/page/home/components/homelistdefault_component/state.dart';
+import 'package:Cruise/src/page/user/discover/state.dart';
 import 'package:Cruise/src/page/user/fav/state.dart';
 import 'package:Cruise/src/page/user/settings/cruisesetting/state.dart';
 import 'package:fish_redux/fish_redux.dart';
@@ -48,6 +49,20 @@ class FavArticleConnector extends ConnOp<FavArticleState, HomeListState> {
 
   @override
   void set(FavArticleState state, HomeListState subState) {
+    state.homeListState = subState;
+  }
+}
+
+class DiscoverConnector extends ConnOp<DiscoverState, HomeListState> {
+  @override
+  HomeListState get(DiscoverState state) {
+    HomeListState substate = state.homeListState.clone();
+    substate.currentStoriesType = state.currentStoriesType;
+    return substate;
+  }
+
+  @override
+  void set(DiscoverState state, HomeListState subState) {
     state.homeListState = subState;
   }
 }
