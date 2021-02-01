@@ -10,14 +10,12 @@ import 'view.dart';
 class HomeListDefaultComponent extends Component<HomeListDefaultState> {
   HomeListDefaultComponent()
       : super(
-            reducer: buildReducer(),
-            view: buildView,
-            effect: buildEffect(),
-            dependencies: Dependencies<HomeListDefaultState>(
-                adapter: null,
-                slots: <String, Dependent<HomeListDefaultState>>{
-                  'articlelist': ArticleListConnector() +
-                      ArticleListComponent()
-                }),);
-
+          reducer: buildReducer(),
+          view: buildView,
+          effect: buildEffect(),
+          dependencies: Dependencies<HomeListDefaultState>(
+              adapter: null, slots: <String, Dependent<HomeListDefaultState>>{
+                'articlelist': ArticleListConnector() + ArticleListComponent()
+              }),
+        );
 }
