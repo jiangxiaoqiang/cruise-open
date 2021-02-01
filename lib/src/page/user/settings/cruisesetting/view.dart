@@ -2,12 +2,12 @@ import 'package:Cruise/src/common/auth.dart';
 import 'package:Cruise/src/common/view_manager.dart';
 import 'package:Cruise/src/models/Item.dart';
 import 'package:Cruise/src/page/home/components/homelist_component/action.dart';
+import 'package:Cruise/src/page/user/fav/page.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
 import '../../../login.dart';
-import '../../Fav.dart';
 import '../custom_setting.dart';
 import 'state.dart';
 
@@ -77,7 +77,8 @@ Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewSe
             leading: Icon(Feather.bookmark),
             title: Text("收藏"),
             onTap: () async {
-              Widget page = Fav(currentStoriesType: StoriesType.favStories);
+              var data = {'name': "fav"};
+              Widget page = FavArticlePage().buildPage(data);
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => page),
