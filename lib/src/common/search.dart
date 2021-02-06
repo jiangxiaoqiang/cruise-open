@@ -1,6 +1,12 @@
+import 'package:Cruise/src/common/view_manager.dart';
+import 'package:Cruise/src/component/channel_compact_tile.dart';
+import 'package:Cruise/src/component/channel_item_card.dart';
+import 'package:Cruise/src/component/channel_item_tile.dart';
 import 'package:Cruise/src/models/Channel.dart';
 import 'package:Cruise/src/models/request/channel/channel_request.dart';
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 import 'channel_action.dart';
 
@@ -32,6 +38,30 @@ class CustomSearchDelegate extends SearchDelegate {
     );
   }
 
+  _getChannelViewType(ViewType type, Channel item) {
+    switch (type) {
+      case ViewType.compactTile:
+        return ChannelCompactTile(item: item);
+        break;
+      case ViewType.itemCard:
+        return ChannelItemCard(item: item);
+        break;
+      case ViewType.itemTile:
+        return ChannelItemTile(item: item);
+        break;
+      default:
+        return ChannelItemCard(item: item);
+        break;
+    }
+  }
+
+  Widget buildChannel(Channel channel) {
+    //dispatch(ChannelListActionCreator.onSetDetailChannel(channel));
+    //return viewService.buildComponent("articlepg");
+  }
+
+  final currentView = ViewManager.fromViewName("itemCard");
+
   @override
   Widget buildResults(BuildContext context) {
     var channelRequest = new ChannelRequest();
@@ -45,8 +75,26 @@ class CustomSearchDelegate extends SearchDelegate {
           if (snapshot.hasData) {
             List<Channel> post = snapshot.data;
             if (post != null) {
-              return ListTile(
-                title: Text(post[0].subName, maxLines: 1),
+              return CustomScrollView(
+                slivers: [
+                  SliverList(
+                      delegate: SliverChildBuilderDelegate((context, index) {
+                    return Slidable(
+                      actionPane: SlidableScrollActionPane(),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: OpenContainer(
+                            tappable: true,
+                            closedElevation: 0,
+                            closedColor: Theme.of(context).scaffoldBackgroundColor,
+                            openColor: Theme.of(context).scaffoldBackgroundColor,
+                            transitionDuration: Duration(milliseconds: 500),
+                            closedBuilder: (BuildContext c, VoidCallback action) => _getChannelViewType(currentView, post[index]),
+                            openBuilder: (BuildContext c, VoidCallback action) => buildChannel(post[index])),
+                      ),
+                    );
+                  }, childCount: post.length))
+                ],
               );
             }
           }

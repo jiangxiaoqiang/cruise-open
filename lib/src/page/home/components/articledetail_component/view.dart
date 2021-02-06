@@ -148,7 +148,6 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => ChannelPage(item: channel)),
-                          //ProfilePage(username: item.author))
                         );
                       },
                       child: Text(
