@@ -9,10 +9,10 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+
 import 'state.dart';
 
-Widget buildView(
-    ChannelListState state, Dispatch dispatch, ViewService viewService) {
+Widget buildView(ChannelListState state, Dispatch dispatch, ViewService viewService) {
   _getChannelViewType(ViewType type, Channel item) {
     switch (type) {
       case ViewType.compactTile:
@@ -37,7 +37,8 @@ Widget buildView(
     return viewService.buildComponent("articlepg");
   }
 
-  return SliverList(delegate: SliverChildBuilderDelegate((context, index) {
+  return SliverList(
+      delegate: SliverChildBuilderDelegate((context, index) {
     return Slidable(
       key: Key(state.channels[index].id.toString()),
       closeOnScroll: true,
@@ -69,11 +70,9 @@ Widget buildView(
             closedColor: Theme.of(context).scaffoldBackgroundColor,
             openColor: Theme.of(context).scaffoldBackgroundColor,
             transitionDuration: Duration(milliseconds: 500),
-            closedBuilder: (BuildContext c, VoidCallback action) =>
-                _getChannelViewType(currentView, state.channels[index]),
-            openBuilder: (BuildContext c, VoidCallback action) =>
-                buildChannel(state.channels[index])),
+            closedBuilder: (BuildContext c, VoidCallback action) => _getChannelViewType(currentView, state.channels[index]),
+            openBuilder: (BuildContext c, VoidCallback action) => buildChannel(state.channels[index])),
       ),
     );
-  },childCount: state.channels.length));
+  }, childCount: state.channels.length));
 }
