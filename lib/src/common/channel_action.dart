@@ -5,6 +5,7 @@ import 'package:Cruise/src/common/global.dart' as global;
 import 'package:Cruise/src/common/net/rest/rest_clinet.dart';
 import 'package:Cruise/src/models/Channel.dart';
 import 'package:Cruise/src/models/api/sub_status.dart';
+import 'package:Cruise/src/models/channel_suggestion.dart';
 import 'package:Cruise/src/models/request/channel/channel_request.dart';
 import 'package:dio/dio.dart';
 
@@ -38,6 +39,34 @@ class ChannelAction {
     Map jsonMap = request.toMap();
     final response = await RestClient.postHttp("/post/sub/source/page", jsonMap);
     return convertTheResult(response);
+  }
+
+  static Future<List<ChannelSuggestion>> fetchSuggestion(ChannelRequest request) async {
+    Map jsonMap = request.toMap();
+    final response = await RestClient.postHttp("/post/sub/source/suggestion", jsonMap);
+    return convertSuggestionResult(response);
+  }
+
+  static List<ChannelSuggestion> convertSuggestionResult(Response response) {
+    if (RestClient.respSuccess(response)) {
+      var channelResult = response.data["result"];
+      if (channelResult == null) {
+        return null;
+      }
+      List<ChannelSuggestion> channelSuggestion = [];
+      channelResult.forEach((element) {
+        try {
+          ChannelSuggestion parsedChannel = ChannelSuggestion.fromMap(element);
+          if (parsedChannel != null) {
+            channelSuggestion.add(parsedChannel);
+          }
+        } on Exception catch (e) {
+          CruiseLogHandler.logError(CruiseApiError('Channel suggestion parsed failed.'), JsonEncoder().convert(response));
+        }
+      });
+      return channelSuggestion;
+    }
+    return null;
   }
 
   static List<Channel> convertTheResult(Response response) {
