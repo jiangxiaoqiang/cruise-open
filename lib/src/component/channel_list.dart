@@ -19,86 +19,13 @@ class ChannelList extends HookWidget {
   }) : super(key: key);
 
   final List<int> ids;
-
-  _getChannelViewType(ViewType type, Channel item) {
-    switch (type) {
-      case ViewType.compactTile:
-        return ChannelCompactTile(item: item);
-        break;
-      case ViewType.itemCard:
-        return ChannelItemCard(item: item);
-        break;
-      case ViewType.itemTile:
-        return ChannelItemTile(item: item);
-        break;
-      default:
-        return ChannelItemCard(item: item);
-        break;
-    }
-  }
-
-
+  
   @override
   Widget build(BuildContext context) {
 
     return SliverList(
       delegate: SliverChildBuilderDelegate(
             (context, index) {
-         /* return Consumer(
-                (context, read) {
-              return read(storyChannelProvider(ids[index])).when(
-                loading: () => LoadingItem(count: 1),
-                error: (err, trace) => Text("Error: $err"),
-                data: (item) {
-                  if(item == null){
-                    return Text("");
-                  }
-                  return Slidable(
-                    key: Key(item.id.toString()),
-                    closeOnScroll: true,
-                    actionPane: SlidableScrollActionPane(),
-                    actions: <Widget>[
-                      IconSlideAction(
-                        color: Colors.deepOrangeAccent,
-                        icon: Feather.arrow_up_circle,
-                        onTap: () => {},
-                      ),
-                    ],
-                    dismissal: SlidableDismissal(
-                      closeOnCanceled: true,
-                      dismissThresholds: {
-                        SlideActionType.primary: 0.2,
-                        SlideActionType.secondary: 0.2,
-                      },
-                      child: SlidableDrawerDismissal(),
-                      onWillDismiss: (actionType) {
-                        //handleUpvote(context, item: item);
-                        return false;
-                      },
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: OpenContainer(
-                        tappable: true,
-                        closedElevation: 0,
-                        closedColor:
-                        Theme.of(context).scaffoldBackgroundColor,
-                        openColor:
-                        Theme.of(context).scaffoldBackgroundColor,
-                        transitionDuration: Duration(milliseconds: 500),
-                        closedBuilder:
-                            (BuildContext c, VoidCallback action) =>
-                            _getChannelViewType(currentView, item),
-                        openBuilder:
-                            (BuildContext c, VoidCallback action) =>
-                            ChannelPage(item: item),
-                      ),
-                    ),
-                  );
-                },
-              );
-            },
-          );*/
         },
         childCount: ids.length,
       ),
