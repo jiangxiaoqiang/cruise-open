@@ -1,3 +1,4 @@
+import 'package:Cruise/src/common/utils/common_utils.dart';
 import 'package:Cruise/src/common/view_manager.dart';
 import 'package:Cruise/src/component/channel_compact_tile.dart';
 import 'package:Cruise/src/component/channel_item_card.dart';
@@ -13,22 +14,6 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'state.dart';
 
 Widget buildView(ChannelListState state, Dispatch dispatch, ViewService viewService) {
-  _getChannelViewType(ViewType type, Channel item) {
-    switch (type) {
-      case ViewType.compactTile:
-        return ChannelCompactTile(item: item);
-        break;
-      case ViewType.itemCard:
-        return ChannelItemCard(item: item);
-        break;
-      case ViewType.itemTile:
-        return ChannelItemTile(item: item);
-        break;
-      default:
-        return ChannelItemCard(item: item);
-        break;
-    }
-  }
 
   final currentView = ViewManager.fromViewName("itemCard");
 
@@ -70,7 +55,7 @@ Widget buildView(ChannelListState state, Dispatch dispatch, ViewService viewServ
             closedColor: Theme.of(context).scaffoldBackgroundColor,
             openColor: Theme.of(context).scaffoldBackgroundColor,
             transitionDuration: Duration(milliseconds: 500),
-            closedBuilder: (BuildContext c, VoidCallback action) => _getChannelViewType(currentView, state.channels[index]),
+            closedBuilder: (BuildContext c, VoidCallback action) =>CommonUtils.getChannelViewType(currentView, state.channels[index]),
             openBuilder: (BuildContext c, VoidCallback action) => buildChannel(state.channels[index])),
       ),
     );
