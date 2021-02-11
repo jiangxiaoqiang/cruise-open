@@ -106,7 +106,6 @@ class CustomSearchDelegate extends SearchDelegate {
           } else {
             return Text("no suggestions");
           }
-          return Center(child: CircularProgressIndicator());
         });
   }
 
