@@ -1,9 +1,8 @@
 import 'package:Cruise/src/common/auth.dart';
 import 'package:Cruise/src/common/view_manager.dart';
-import 'package:Cruise/src/models/Item.dart';
-import 'package:Cruise/src/page/home/components/homelist_component/action.dart';
 import 'package:Cruise/src/page/user/discover/page.dart';
 import 'package:Cruise/src/page/user/fav/page.dart';
+import 'package:Cruise/src/page/user/feedback/page.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -102,11 +101,12 @@ Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewSe
             leading: Icon(Feather.mail),
             title: Text("问题反馈"),
             onTap: () async {
-              /*Widget page = FeedbackPage();
+              var data = {'name': "feedback"};
+              Widget feedback = FeedbackPage().buildPage(data);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => page),
-              );*/
+                MaterialPageRoute(builder: (context) => feedback),
+              );
             },
           ),
           ListTile(
