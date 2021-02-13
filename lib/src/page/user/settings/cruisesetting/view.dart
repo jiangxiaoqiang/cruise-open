@@ -13,8 +13,10 @@ import 'state.dart';
 
 Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewService) {
   BuildContext context = viewService.context;
+  double screenWidth = MediaQuery.of(context).size.width;
 
   return Scaffold(
+    backgroundColor: const Color(0xFFEFEFEF),
     body: SafeArea(
       child: ListView(
         children: [
@@ -53,84 +55,122 @@ Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewSe
               },
             ),
           ),
-          ListTile(
-            leading: Icon(Feather.user),
-            title: Text("我的"),
-            onTap: () async {
-              Widget page;
-              bool isLoggedIn = await Auth.isLoggedIn();
-              if (!isLoggedIn) {
-                page = LoginPage();
-                //page = BottomNavigationDemo(type: BottomNavigationDemoType.withLabels);
-              } else {
-                var username = await Auth.currentUser();
+          Padding(
+              padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                      color: Colors.white,
+                      child: ListTile(
+                        leading: Icon(Feather.user),
+                        title: Text("我的"),
+                        onTap: () async {
+                          Widget page;
+                          bool isLoggedIn = await Auth.isLoggedIn();
+                          if (!isLoggedIn) {
+                            page = LoginPage();
+                            //page = BottomNavigationDemo(type: BottomNavigationDemoType.withLabels);
+                          } else {
+                            var username = await Auth.currentUser();
 
-                //page = ProfilePage(username: "dolphin", isMe: true);
-              }
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => page),
-              );
-            },
-          ),
-          ListTile(
-            leading: Icon(Feather.bookmark),
-            title: Text("收藏"),
-            onTap: () async {
-              var data = {'name': "fav"};
-              Widget page = FavArticlePage().buildPage(data);
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => page),
-              );
-            },
-          ),
-          ListTile(
-            leading: Icon(Feather.archive),
-            title: Text("发现"),
-            onTap: () async {
-              var data = {'name': "originalstories"};
-              Widget page = DiscoverPage().buildPage(data);
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => page),
-              );
-            },
-          ),
-          ListTile(
-            leading: Icon(Feather.mail),
-            title: Text("问题反馈"),
-            onTap: () async {
-              var data = {'name': "feedback"};
-              Widget feedback = FeedbackPage().buildPage(data);
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => feedback),
-              );
-            },
-          ),
-          ListTile(
-            leading: Icon(Feather.award),
-            title: Text("关于Cruise"),
-            onTap: () async {
-              /*Widget page = About();
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => page),
-              );*/
-            },
-          ),
-          ListTile(
-            leading: Icon(Feather.settings),
-            title: Text("设置"),
-            onTap: () async {
-              Widget page = CustomSetting();
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => page),
-              );
-            },
-          )
+                            //page = ProfilePage(username: "dolphin", isMe: true);
+                          }
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => page),
+                          );
+                        },
+                      )))),
+          Padding(
+              padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+              child: ClipRRect(
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Container(
+                          color: Colors.white,
+                          child: ListTile(
+                            leading: Icon(Feather.bookmark),
+                            title: Text("收藏"),
+                            onTap: () async {
+                              var data = {'name': "fav"};
+                              Widget page = FavArticlePage().buildPage(data);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => page),
+                              );
+                            },
+                          ))))),
+          Padding(
+              padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                      color: Colors.white,
+                      child: ListTile(
+                        leading: Icon(Feather.archive),
+                        title: Text("发现"),
+                        onTap: () async {
+                          var data = {'name': "originalstories"};
+                          Widget page = DiscoverPage().buildPage(data);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => page),
+                          );
+                        },
+                      )))),
+          Padding(
+              padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                      color: Colors.white,
+                      child: ListTile(
+                        leading: Icon(Feather.mail),
+                        title: Text("问题反馈"),
+                        onTap: () async {
+                          var data = {'name': "feedback"};
+                          Widget feedback = FeedbackPage().buildPage(data);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => feedback),
+                          );
+                        },
+                      )))),
+          Padding(
+              padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                      color: Colors.white,
+                      child: ListTile(
+                        leading: Icon(Feather.award),
+                        title: Text("关于Cruise"),
+                        onTap: () async {
+                          /*Widget page = About();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => page),
+                          );*/
+                        },
+                      )))),
+          Padding(
+              padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                      color: Colors.white,
+                      //margin: const EdgeInsets.only(left: 20.0, right: 20.0),
+                      child: ListTile(
+                        leading: Icon(Feather.settings),
+                        title: Text("设置"),
+                        onTap: () async {
+                          Widget page = CustomSetting();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => page),
+                          );
+                        },
+                      ))))
         ],
       ),
     ),
