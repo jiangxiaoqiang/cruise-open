@@ -3,6 +3,7 @@ import 'package:Cruise/src/common/view_manager.dart';
 import 'package:Cruise/src/page/user/discover/page.dart';
 import 'package:Cruise/src/page/user/fav/page.dart';
 import 'package:Cruise/src/page/user/feedback/page.dart';
+import 'package:Cruise/src/page/user/settings/about/page.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -146,11 +147,12 @@ Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewSe
                         leading: Icon(Feather.award),
                         title: Text("关于Cruise"),
                         onTap: () async {
-                          /*Widget page = About();
+                          var data = {'name': "aboutPage"};
+                          Widget aboutPage = AboutPage().buildPage(data);
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => page),
-                          );*/
+                            MaterialPageRoute(builder: (context) => aboutPage),
+                          );
                         },
                       )))),
           Padding(
