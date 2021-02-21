@@ -1,5 +1,4 @@
 import 'package:Cruise/src/common/net/rest/http_result.dart';
-import 'package:Cruise/src/home/home_new.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:Cruise/src/common/auth.dart';
@@ -79,7 +78,7 @@ class SetPwdPage extends HookWidget {
                               );
                             } else {
                               Widget page;
-                              page = HomeNew();
+                              //page = HomeNew();
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) => page),

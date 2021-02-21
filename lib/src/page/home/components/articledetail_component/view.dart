@@ -110,8 +110,6 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
     }
   }
 
-  final _scrollController = new ScrollController();
-
   return GestureDetector(
       onHorizontalDragStart: _onHorizontalDragStart,
       onHorizontalDragUpdate: _onHorizontalDragUpdate,
@@ -180,20 +178,15 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
                 ),
               ),
               if (item.content != "")
-                Scrollbar(
-                    controller: _scrollController,
-                    isAlwaysShown: true,
-                    child: SingleChildScrollView(
-                        controller: _scrollController,
-                        child: Html(
-                          data: item.content,
-                          style: {
-                            "body": Style(
-                              fontSize: FontSize(19.0),
-                            ),
-                          },
-                          onLinkTap: (url) => launchUrl(url),
-                        ))),
+                Html(
+                  data: item.content,
+                  style: {
+                    "body": Style(
+                      fontSize: FontSize(19.0),
+                    ),
+                  },
+                  onLinkTap: (url) => launchUrl(url),
+                ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
