@@ -1,4 +1,3 @@
-import 'package:Cruise/src/models/Item.dart';
 import 'package:Cruise/src/models/request/article/article_request.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
@@ -54,6 +53,11 @@ Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService view
         bottom: false,
         child: Builder(
           builder: (context) {
+            if (state.articleListState.articleIds == null || state.articleListState.articleIds.length == 0) {
+              // when the article not fetched, show loading animation
+              return Center(child: CircularProgressIndicator());
+            }
+
             return NotificationListener(
                 onNotification: (scrollNotification) {
                   if (scrollNotification is! ScrollNotification) {
