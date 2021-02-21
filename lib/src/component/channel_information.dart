@@ -11,8 +11,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:Cruise/src/page/profile.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
-
 class ChannelInformation extends HookWidget {
   const ChannelInformation({
     Key key,
