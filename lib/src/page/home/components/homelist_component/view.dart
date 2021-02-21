@@ -1,5 +1,4 @@
 import 'package:Cruise/src/common/search.dart';
-import 'package:Cruise/src/home/home_new.dart';
 import 'package:Cruise/src/models/Item.dart';
 import 'package:Cruise/src/page/channel/add_channel.dart';
 import 'package:fish_redux/fish_redux.dart';
@@ -8,10 +7,6 @@ import 'package:flutter_icons/flutter_icons.dart';
 
 import 'action.dart';
 import 'state.dart';
-
-final List tabs = [
-  IconTab(name: "Top", icon: Feather.trending_up),
-];
 
 Widget buildView(HomeListState state, Dispatch dispatch, ViewService viewService) {
   StoriesType currentStoriesType = state.currentStoriesType;
@@ -24,7 +19,7 @@ Widget buildView(HomeListState state, Dispatch dispatch, ViewService viewService
   }
 
   return DefaultTabController(
-    length: tabs.length,
+    length: 1,
     child: NestedScrollView(
       headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
         return <Widget>[

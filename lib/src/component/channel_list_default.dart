@@ -1,4 +1,3 @@
-import 'package:Cruise/src/home/home_new.dart';
 import 'package:Cruise/src/models/Item.dart';
 import 'package:Cruise/src/models/request/article/article_request.dart';
 import 'package:Cruise/src/page/channels_page.dart';
@@ -17,7 +16,7 @@ class ChannelListDefault extends HookWidget{
   final StoriesType storiesType;
 
   final List tabs = [
-    IconTab(name: "Channels", icon: Feather.award),
+    //IconTab(name: "Channels", icon: Feather.award),
     //IconTab(name: "Show", icon: Feather.eye),
   ];
 
