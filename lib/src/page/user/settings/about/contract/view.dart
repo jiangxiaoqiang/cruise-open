@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'state.dart';
 
 Widget buildView(ContractState state, Dispatch dispatch, ViewService viewService) {
-  return Scaffold(body: SafeArea(child: Text('''修订日期：2020 年 08 月 07 日
+  return Scaffold(
+      body: SafeArea(
+          child: Container(child: SingleChildScrollView(child: Padding(padding: EdgeInsets.fromLTRB(10, 10, 10, 0), child: Text('''修订日期：2020 年 08 月 07 日
   Tell 是一个以消解烦恼为主题的意见交换平台，由深圳谨启科技有限公司拥有和运营。当您使用 Tell 提供的服务时，即表示您（及「用户」）对本协议的任何条款均无异议并完全接受。
   本用户协议旨在协助您了解应如何使用 Tell 服务，以及在使用这些服务时应当遵守的规范。
 
@@ -72,5 +74,5 @@ Widget buildView(ContractState state, Dispatch dispatch, ViewService viewService
 
   用户协议的修订
   根据有关法律、法规及规范性文件的修订，或者因 Tell 发展需要，Tell 有权对本协议作出修改或变更，一旦本协议的内容发生变动，Tell 将会直接在 Tell 网站上公布修改之后的协议内容，并标明最后修订日期，该公布行为视为 Tell 已经通知用户修改内容。
-  若变更导致减降用户在本协议下所享有的权利，我们会在相关服务的显著位置进行提示，或通过电子邮件、手机短信等形式向用户发送通知。''')));
+  若变更导致减降用户在本协议下所享有的权利，我们会在相关服务的显著位置进行提示，或通过电子邮件、手机短信等形式向用户发送通知。'''))))));
 }

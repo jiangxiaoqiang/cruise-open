@@ -8,6 +8,7 @@ import 'package:Cruise/src/models/api/fav_status.dart';
 import 'package:Cruise/src/models/api/upvote_status.dart';
 import 'package:Cruise/src/page/home/components/articledetail_component/action.dart';
 import 'package:fish_redux/fish_redux.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/style.dart';
@@ -109,6 +110,8 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
     }
   }
 
+  final _scrollController = new ScrollController();
+
   return GestureDetector(
       onHorizontalDragStart: _onHorizontalDragStart,
       onHorizontalDragUpdate: _onHorizontalDragUpdate,
@@ -177,15 +180,20 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
                 ),
               ),
               if (item.content != "")
-                Html(
-                  data: item.content,
-                  style: {
-                    "body": Style(
-                      fontSize: FontSize(19.0),
-                    ),
-                  },
-                  onLinkTap: (url) => launchUrl(url),
-                ),
+                Scrollbar(
+                    controller: _scrollController,
+                    isAlwaysShown: true,
+                    child: SingleChildScrollView(
+                        controller: _scrollController,
+                        child: Html(
+                          data: item.content,
+                          style: {
+                            "body": Style(
+                              fontSize: FontSize(19.0),
+                            ),
+                          },
+                          onLinkTap: (url) => launchUrl(url),
+                        ))),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
