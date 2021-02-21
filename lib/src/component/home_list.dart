@@ -1,5 +1,4 @@
 import 'package:Cruise/src/component/channel_list_default.dart';
-import 'package:Cruise/src/home/home_new.dart';
 import 'package:Cruise/src/models/Item.dart';
 import 'package:Cruise/src/models/request/article/article_request.dart';
 import 'package:Cruise/src/page/channel/add_channel.dart';
@@ -20,7 +19,7 @@ class HomeList extends HookWidget {
   final StoriesType currentStoriesType;
 
   final List tabs = [
-    IconTab(name: "Top", icon: Feather.trending_up),
+    //IconTab(name: "Top", icon: Feather.trending_up),
   ];
 
   @override

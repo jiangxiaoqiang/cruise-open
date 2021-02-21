@@ -1,4 +1,3 @@
-import 'package:Cruise/src/home/home_new.dart';
 import 'package:Cruise/src/models/Item.dart';
 import 'package:Cruise/src/models/request/article/article_request.dart';
 import 'package:Cruise/src/page/stories_page.dart';
@@ -21,9 +20,9 @@ class HomeListDefault extends HookWidget{
   final StoriesType type;
 
   final List tabs = [
-    IconTab(name: "Top", icon: Feather.trending_up),
-    IconTab(name: "Sub", icon: Feather.star),
-    IconTab(name: "Channels", icon: Feather.award),
+    //IconTab(name: "Top", icon: Feather.trending_up),
+    //IconTab(name: "Sub", icon: Feather.star),
+    //IconTab(name: "Channels", icon: Feather.award),
   ];
 
   double appBarAlpha = 0;
