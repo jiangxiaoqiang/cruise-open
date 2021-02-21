@@ -6,7 +6,11 @@ import 'state.dart';
 Widget buildView(ContractState state, Dispatch dispatch, ViewService viewService) {
   return Scaffold(
       body: SafeArea(
-          child: Container(child: SingleChildScrollView(child: Padding(padding: EdgeInsets.fromLTRB(10, 10, 10, 0), child: Text('''修订日期：2020 年 08 月 07 日
+          child: Container(
+              child: SingleChildScrollView(
+                  child: Padding(
+                      padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                      child: Text('''修订日期：2020 年 08 月 07 日
   Tell 是一个以消解烦恼为主题的意见交换平台，由深圳谨启科技有限公司拥有和运营。当您使用 Tell 提供的服务时，即表示您（及「用户」）对本协议的任何条款均无异议并完全接受。
   本用户协议旨在协助您了解应如何使用 Tell 服务，以及在使用这些服务时应当遵守的规范。
 

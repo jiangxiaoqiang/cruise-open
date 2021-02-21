@@ -1,3 +1,5 @@
+import 'package:Cruise/src/page/user/settings/about/privicy/page.dart';
+import 'package:Cruise/src/page/user/settings/about/version/page.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -25,12 +27,26 @@ Widget buildView(aboutState state, Dispatch dispatch, ViewService viewService) {
           ListTile(
             title: Text("隐私政策"),
             leading: Icon(Feather.moon),
-            onTap: () => showDialog(),
+            onTap: () {
+              var data = {'name': "privacyPage"};
+              Widget privacyPage = PrivacyPage().buildPage(data);
+              Navigator.push(
+                viewService.context,
+                MaterialPageRoute(builder: (context) => privacyPage),
+              );
+            },
           ),
           ListTile(
             title: Text("版本信息"),
             leading: Icon(Feather.moon),
-            onTap: () => showDialog(),
+            onTap: () {
+              var data = {'name': "versionPage"};
+              Widget versionPage = VersionPage().buildPage(data);
+              Navigator.push(
+                viewService.context,
+                MaterialPageRoute(builder: (context) => versionPage),
+              );
+            },
           ),
         ],
       ),
