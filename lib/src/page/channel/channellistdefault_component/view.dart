@@ -60,6 +60,10 @@ Widget buildView(ChannelListDefaultState state, Dispatch dispatch, ViewService v
       bottom: false,
       child: Builder(
         builder: (context) {
+          if (state.channelListState.channelIds == null || state.channelListState.channelIds.length == 0) {
+            // when the article not fetched, show loading animation
+            return Center(child: CircularProgressIndicator());
+          }
           return NotificationListener(
               onNotification: (scrollNotification) {
                 if (scrollNotification is ScrollUpdateNotification && scrollNotification.depth == 0) {
