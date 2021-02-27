@@ -1,5 +1,7 @@
 import 'package:Cruise/src/common/net/rest/rest_clinet.dart';
 import 'package:Cruise/src/common/global.dart' as global;
+import 'package:Cruise/src/models/Item.dart';
+import 'Repo.dart';
 import 'net/rest/http_result.dart';
 
 class ArticleAction {
@@ -25,5 +27,19 @@ class ArticleAction {
           message: "Sub failed.",
           result: Result.error);
     }
+  }
+
+  /// get article by ids
+  static Future<List<Item>> fetchArticleByIds(List<int> ids) async {
+    List<Item> articles = [];
+    if (ids != null) {
+      for (int id in ids) {
+        Item article = await Repo.fetchArticleItem(id);
+        if (article != null) {
+          articles.add(article);
+        }
+      }
+    }
+    return articles;
   }
 }

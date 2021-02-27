@@ -15,15 +15,9 @@ Effect<ArticleListState> buildEffect() {
 }
 
 void _onA(Action action, Context<ArticleListState> ctx) async {
-  ArticleListState articleListState = ctx.state;
-  List<int> ids = articleListState.articleIds;
-
 }
 
 void _didUpdateWidget(Action action, Context<ArticleListState> ctx) async {
-  ArticleListState articleListState = ctx.state;
-  List<int> ids = articleListState.articleIds;
-
 }
 
 Future _onInit(Action action, Context<ArticleListState> ctx) async {

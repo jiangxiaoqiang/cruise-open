@@ -38,17 +38,3 @@ class HomeListDefaultConnector extends ConnOp<HomeListState, HomeListDefaultStat
     state.homeListDefaultState = subState;
   }
 }
-
-class HomeListDefaultChannelDetailConnector extends ConnOp<ChannelDetailState, HomeListDefaultState> {
-  @override
-  HomeListDefaultState get(ChannelDetailState state) {
-    HomeListDefaultState substate = state.homeListDefaultState.clone();
-    substate.currentStoriesType = state.currentStoriesType;
-    return substate;
-  }
-
-  @override
-  void set(ChannelDetailState state, HomeListDefaultState subState) {
-    state.homeListDefaultState = subState;
-  }
-}

@@ -8,12 +8,14 @@ class ArticleListState implements Cloneable<ArticleListState> {
   List<int> articleIds;
   List<Item> articles = new List();
   Item article;
+  int channelId;
   ArticlePgState articlePgState = ArticlePgState();
 
   @override
   ArticleListState clone() {
     return ArticleListState()
       ..articles = this.articles
+      ..channelId = channelId
       ..articleIds = this.articleIds
       ..articlePgState = this.articlePgState
       ..article = this.article;

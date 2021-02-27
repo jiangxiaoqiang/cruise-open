@@ -2,6 +2,7 @@ import 'package:Cruise/src/common/channel_action.dart';
 import 'package:Cruise/src/common/net/rest/http_result.dart';
 import 'package:Cruise/src/models/Channel.dart';
 import 'package:Cruise/src/models/api/sub_status.dart';
+import 'package:Cruise/src/page/channel/channeldetail_component/action.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,9 @@ Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewSe
   Channel item = state.channel;
   int isFav = state.isFav;
   BuildContext context = viewService.context;
-  ScrollController scrollController = ScrollController();
+  if (item != null) {
+    dispatch(ChannelDetailActionCreator.onSetChannelId(item.id));
+  }
 
   void launchUrl(url) async {
     if (await canLaunch(url)) {
