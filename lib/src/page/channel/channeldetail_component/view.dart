@@ -3,6 +3,7 @@ import 'package:Cruise/src/common/net/rest/http_result.dart';
 import 'package:Cruise/src/models/Channel.dart';
 import 'package:Cruise/src/models/api/sub_status.dart';
 import 'package:fish_redux/fish_redux.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/style.dart';
@@ -17,6 +18,7 @@ Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewSe
   Channel item = state.channel;
   int isFav = state.isFav;
   BuildContext context = viewService.context;
+  ScrollController scrollController = ScrollController();
 
   void launchUrl(url) async {
     if (await canLaunch(url)) {
@@ -47,10 +49,7 @@ Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewSe
   }
 
   void touchSub(String channelId, SubStatus subStatus) async {
-    HttpResult result = await ChannelAction.sub(
-        channelId: channelId,
-        subStatus: subStatus
-    );
+    HttpResult result = await ChannelAction.sub(channelId: channelId, subStatus: subStatus);
 
     if (result.result == Result.error) {
       Fluttertoast.showToast(
@@ -60,20 +59,18 @@ Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewSe
           timeInSecForIosWeb: 1,
           backgroundColor: Colors.red,
           textColor: Colors.white,
-          fontSize: 16.0
-      );
+          fontSize: 16.0);
     } else {
-      isFav = subStatus.statusCode=="sub"?1:0;
+      isFav = subStatus.statusCode == "sub" ? 1 : 0;
       item.isFav = isFav;
       Fluttertoast.showToast(
-          msg: subStatus.statusCode=="sub"?"订阅成功":"取消订阅成功",
+          msg: subStatus.statusCode == "sub" ? "订阅成功" : "取消订阅成功",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 1,
           backgroundColor: Colors.red,
           textColor: Colors.white,
-          fontSize: 16.0
-      );
+          fontSize: 16.0);
     }
   }
 
@@ -82,19 +79,15 @@ Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewSe
       onHorizontalDragUpdate: _onHorizontalDragUpdate,
       onHorizontalDragEnd: _onHorizontalDragEnd,
       child: Container(
-        constraints: BoxConstraints(
-          minHeight: MediaQuery.of(context).size.height*0.9,
-        ),
-        color: Theme
-            .of(context)
-            .scaffoldBackgroundColor,
-        child:Padding(
-          padding: const EdgeInsets.all(
-            16.0,
+          constraints: BoxConstraints(
+            minHeight: MediaQuery.of(context).size.height * 0.9,
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
+          color: Theme.of(context).scaffoldBackgroundColor,
+          child: Padding(
+            padding: const EdgeInsets.all(
+              16.0,
+            ),
+            child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, mainAxisSize: MainAxisSize.min, children: [
               InkWell(
                 onTap: () => {},
                 child: Padding(
@@ -102,58 +95,49 @@ Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewSe
                   child: Container(
                     child: Text(
                       item.subName == "" ? "Comment" : item.subName,
-                      style: Theme
-                          .of(context)
-                          .textTheme
-                          .headline5
-                          .copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: Theme.of(context).textTheme.headline5.copyWith(
+                            fontWeight: FontWeight.w600,
+                          ),
                     ),
                   ),
                 ),
               ),
-              if(item.isFav == 1)
+              if (item.isFav == 1)
                 Padding(
-                  padding: const EdgeInsets.only(top: 8,bottom: 8.0,right: 1),
+                  padding: const EdgeInsets.only(top: 8, bottom: 8.0, right: 1),
                   child: ButtonTheme(
                       minWidth: 50,
                       height: 30.0,
                       child: RaisedButton.icon(
                         color: Theme.of(context).primaryColor,
-                        icon: Icon(Feather.check_circle,
+                        icon: Icon(
+                          Feather.check_circle,
                           size: 16,
                           color: Theme.of(context).canvasColor,
                         ),
-                        shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(5.0)),
-                        onPressed: () => touchSub(item.id.toString(),SubStatus.UNSUB),
+                        shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(5.0)),
+                        onPressed: () => touchSub(item.id.toString(), SubStatus.UNSUB),
                         label: Text("已订阅"),
-                      )
-                  ),
+                      )),
                 ),
-              if(item.isFav != 1)
+              if (item.isFav != 1)
                 Padding(
-                  padding: const EdgeInsets.only(top: 8,bottom: 8.0,right: 1),
+                  padding: const EdgeInsets.only(top: 8, bottom: 8.0, right: 1),
                   child: ButtonTheme(
                       minWidth: 50,
                       height: 30.0,
                       child: RaisedButton(
                         color: Theme.of(context).primaryColor,
-                        shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(5.0)),
-                        onPressed: () => touchSub(item.id.toString(),SubStatus.SUB),
+                        shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(5.0)),
+                        onPressed: () => touchSub(item.id.toString(), SubStatus.SUB),
                         child: Text("订阅"),
-                      )
-                  ),
+                      )),
                 ),
               InkWell(
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            ProfilePage(username: item.author)),
+                    MaterialPageRoute(builder: (context) => ProfilePage(username: item.author)),
                   );
                 },
                 child: RichText(
@@ -161,15 +145,9 @@ Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewSe
                     children: <TextSpan>[
                       TextSpan(
                         text: item.author,
-                        style: Theme
-                            .of(context)
-                            .textTheme
-                            .caption
-                            .copyWith(
-                          color: Theme
-                              .of(context)
-                              .primaryColor,
-                        ),
+                        style: Theme.of(context).textTheme.caption.copyWith(
+                              color: Theme.of(context).primaryColor,
+                            ),
                       ),
                     ],
                   ),
@@ -189,8 +167,15 @@ Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewSe
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0),
                 ),
-            ],
-          ),
-        ),
-      ));
+              SizedBox(
+                height: 500.0,
+                child: CustomScrollView(slivers: <Widget>[
+                  SliverPadding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    sliver: viewService.buildComponent("articlelist"),
+                  )
+                ]),
+              ),
+            ]),
+          )));
 }

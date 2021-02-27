@@ -1,4 +1,5 @@
 import 'package:Cruise/src/models/Item.dart';
+import 'package:Cruise/src/page/channel/channeldetail_component/state.dart';
 import 'package:Cruise/src/page/home/components/articlepg_component/state.dart';
 import 'package:Cruise/src/page/home/components/homelistdefault_component/state.dart';
 import 'package:fish_redux/fish_redux.dart';
@@ -28,6 +29,19 @@ class ArticleListConnector extends ConnOp<HomeListDefaultState, ArticleListState
 
   @override
   void set(HomeListDefaultState state, ArticleListState subState) {
+    state.articleListState = subState;
+  }
+}
+
+class ArticleListChannelDetailConnector extends ConnOp<ChannelDetailState, ArticleListState> {
+  @override
+  ArticleListState get(ChannelDetailState state) {
+    ArticleListState articleListState = state.articleListState.clone();
+    return articleListState;
+  }
+
+  @override
+  void set(ChannelDetailState state, ArticleListState subState) {
     state.articleListState = subState;
   }
 }
