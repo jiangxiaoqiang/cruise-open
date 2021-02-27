@@ -10,6 +10,8 @@ import 'package:Cruise/src/models/Item.dart';
 import 'package:Cruise/src/models/request/article/article_request.dart';
 import 'package:http/http.dart' as http;
 
+import 'log/cruise_api_error.dart';
+
 class Repo {
   static final _itemsCache = <int, Item>{};
   static final _itemsChannelCache = <int, Channel>{};
@@ -90,10 +92,11 @@ class Repo {
         Map articleResult = response.data["result"];
         String articleJson = JsonEncoder().convert(articleResult);
         Item parseItem = Item.fromJson(articleJson);
-        return _itemsCache[id] = parseItem;
+        _itemsCache[id] = parseItem;
       } else {
         CruiseLogHandler.logError(CruiseApiError('Item $id failed to fetch.'), JsonEncoder().convert(response));
       }
+      return _itemsCache[id];
     }
   }
 
@@ -106,11 +109,12 @@ class Repo {
         Map channelResult = response.data["result"];
         String jsonContent = JsonEncoder().convert(channelResult);
         Channel parseItem = Channel.fromJson(jsonContent);
-        return _itemsChannelCache[id] = parseItem;
+        _itemsChannelCache[id] = parseItem;
       } else {
         CruiseLogHandler.logError(CruiseApiError('Item $id failed to fetch.'), JsonEncoder().convert(response));
       }
     }
+    return _itemsChannelCache[id];
   }
 
   static Future<CruiseUser> fetchUser(String id) async {
@@ -121,11 +125,12 @@ class Repo {
       final response = await http.get(url);
       if (response.statusCode == 200) {
         if (response.body == "null") return null;
-        return _usersCache[id] = CruiseUser.fromJson(response.body);
+        _usersCache[id] = CruiseUser.fromJson(response.body);
       } else {
         CruiseLogHandler.logError(CruiseApiError('User $id failed to fetch.'), JsonEncoder().convert(response));
       }
     }
+    return _usersCache[id];
   }
 
   static String _getStoryTypeQuery(StoriesType type) {
@@ -154,10 +159,4 @@ class Repo {
         return "/post/article/newstories";
     }
   }
-}
-
-class CruiseApiError extends Error {
-  final String message;
-
-  CruiseApiError(this.message);
 }

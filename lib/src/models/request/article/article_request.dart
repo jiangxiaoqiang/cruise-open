@@ -8,6 +8,7 @@ class ArticleRequest{
     this.pageSize,
     this.pageNum,
     this.offset,
+    this.channelId
   });
 
   int latestTime;
@@ -15,12 +16,14 @@ class ArticleRequest{
   int pageSize=100;
   int pageNum = 1;
   int offset;
+  int channelId;
 
   Map<String, dynamic> toMap() {
     return {
       'pageSize': pageSize,
       'pageNum': pageNum,
-      'offset': offset
+      'offset': offset,
+      'channelId': channelId
     };
   }
 }

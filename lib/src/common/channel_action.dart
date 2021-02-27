@@ -10,6 +10,7 @@ import 'package:Cruise/src/models/request/channel/channel_request.dart';
 import 'package:dio/dio.dart';
 
 import 'log/CruiseLogHandler.dart';
+import 'log/cruise_api_error.dart';
 import 'net/rest/http_result.dart';
 
 class ChannelAction {
