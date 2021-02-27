@@ -1,5 +1,6 @@
 import 'package:Cruise/src/models/Channel.dart';
 import 'package:Cruise/src/models/Item.dart';
+import 'package:Cruise/src/models/request/article/article_request.dart';
 import 'package:Cruise/src/page/channel/channelpg_component/state.dart';
 import 'package:Cruise/src/page/home/components/articlelist_component/state.dart';
 import 'package:Cruise/src/page/home/components/homelistdefault_component/state.dart';
@@ -8,16 +9,16 @@ import 'package:fish_redux/fish_redux.dart';
 class ChannelDetailState implements Cloneable<ChannelDetailState> {
   Channel channel;
   int isFav;
-  HomeListDefaultState homeListDefaultState = HomeListDefaultState();
   StoriesType currentStoriesType;
   ArticleListState articleListState = ArticleListState();
+  ArticleRequest articleRequest;
 
   @override
   ChannelDetailState clone() {
     return ChannelDetailState()
       ..channel = this.channel
-      ..homeListDefaultState = this.homeListDefaultState
       ..currentStoriesType = this.currentStoriesType
+      ..articleRequest = articleRequest
       ..articleListState = this.articleListState
       ..isFav = this.isFav;
   }

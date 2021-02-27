@@ -1,5 +1,6 @@
-import 'package:Cruise/src/common/Repo.dart';
 import 'package:logger/logger.dart';
+
+import 'cruise_api_error.dart';
 
 class CruiseLogHandler {
   static Logger logger = Logger(
