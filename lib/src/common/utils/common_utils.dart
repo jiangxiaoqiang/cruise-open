@@ -5,6 +5,7 @@ import 'package:Cruise/src/component/channel_item_card.dart';
 import 'package:Cruise/src/component/channel_item_tile.dart';
 import 'package:Cruise/src/models/Channel.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../view_manager.dart';
 
@@ -27,7 +28,13 @@ class CommonUtils{
     }
   }
 
-
+  static void launchUrl(url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
 }
 

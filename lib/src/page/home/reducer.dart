@@ -1,4 +1,4 @@
-import 'package:Cruise/src/page/home/home_model.dart';
+import 'package:Cruise/src/models/home_model.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'action.dart';
