@@ -26,11 +26,11 @@ class CruiseApp extends HookWidget {
     return MaterialApp(
         title: 'Cruise',
         theme: currentTheme,
-        checkerboardOffscreenLayers: true,
+        checkerboardOffscreenLayers: false,
         // saveLayer 方法使用情况的检查,使用了saveLayer的图像会显示为棋盘格式并随着页面刷新而闪烁
-        checkerboardRasterCacheImages: true,
+        checkerboardRasterCacheImages: false,
         // 检查缓存图像,做了缓存的静态图像图片在刷新页面使不会改变棋盘格的颜色；如果棋盘格颜色变了，说明被重新缓存，这是我们要避免的
-        showPerformanceOverlay: true,
+        showPerformanceOverlay: false,
         localizationsDelegates: [
           // ... app-specific localization delegate[s] here
           // TODO: uncomment the line below after codegen
@@ -46,7 +46,6 @@ class CruiseApp extends HookWidget {
           const Locale.fromSubtags(languageCode: 'zh'), // Chinese *See Advanced Locales below*
           // ... other locales the app supports
         ],
-        //home: HomeNew(),
         home: routes.buildPage('home', null),
         onGenerateRoute: (RouteSettings settings) {
           return MaterialPageRoute<Object>(builder: (BuildContext context) {
