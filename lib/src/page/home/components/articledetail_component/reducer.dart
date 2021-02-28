@@ -2,25 +2,18 @@ import 'package:Cruise/src/models/Item.dart';
 import 'package:Cruise/src/models/api/fav_status.dart';
 import 'package:Cruise/src/models/api/upvote_status.dart';
 import 'package:fish_redux/fish_redux.dart';
-
 import 'action.dart';
 import 'state.dart';
 
 Reducer<ArticleDetailState> buildReducer() {
   return asReducer(
     <Object, Reducer<ArticleDetailState>>{
-      ArticleDetailAction.action: _onAction,
-      ArticleDetailAction.clear_detail_artcle: _onClearDetailArticle,
+      ArticleDetailAction.clear_detail_article: _onClearDetailArticle,
       ArticleDetailAction.set_article: _onSetArticle,
       ArticleDetailAction.vote: _onVote,
       ArticleDetailAction.fav: _onFav,
     },
   );
-}
-
-ArticleDetailState _onAction(ArticleDetailState state, Action action) {
-  final ArticleDetailState newState = state.clone();
-  return newState;
 }
 
 ArticleDetailState _onFav(ArticleDetailState state, Action action) {

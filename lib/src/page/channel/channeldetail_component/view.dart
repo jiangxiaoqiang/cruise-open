@@ -82,16 +82,19 @@ Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewSe
       onHorizontalDragUpdate: _onHorizontalDragUpdate,
       onHorizontalDragEnd: _onHorizontalDragEnd,
       child: Container(
-          constraints: BoxConstraints(
-            minHeight: MediaQuery.of(context).size.height * 0.9,
+        constraints: BoxConstraints(
+          minHeight: MediaQuery.of(context).size.height * 0.9,
+        ),
+        color: Theme.of(context).scaffoldBackgroundColor,
+        child: Padding(
+          padding: const EdgeInsets.all(
+            16.0,
           ),
-          color: Theme.of(context).scaffoldBackgroundColor,
-          child: Padding(
-            padding: const EdgeInsets.all(
-              16.0,
-            ),
-            child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, mainAxisSize: MainAxisSize.min, children: [
-              InkWell(
+          child: SizedBox(
+            height: 500.0,
+            child: CustomScrollView(slivers: <Widget>[
+              SliverToBoxAdapter(
+                  child: InkWell(
                 onTap: () => {},
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 8.0),
@@ -104,9 +107,10 @@ Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewSe
                     ),
                   ),
                 ),
-              ),
+              )),
               if (item.isFav == 1)
-                Padding(
+                SliverToBoxAdapter(
+                    child: Padding(
                   padding: const EdgeInsets.only(top: 8, bottom: 8.0, right: 1),
                   child: ButtonTheme(
                       minWidth: 50,
@@ -122,9 +126,10 @@ Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewSe
                         onPressed: () => touchSub(item.id.toString(), SubStatus.UNSUB),
                         label: Text("已订阅"),
                       )),
-                ),
+                )),
               if (item.isFav != 1)
-                Padding(
+                SliverToBoxAdapter(
+                    child: Padding(
                   padding: const EdgeInsets.only(top: 8, bottom: 8.0, right: 1),
                   child: ButtonTheme(
                       minWidth: 50,
@@ -135,8 +140,9 @@ Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewSe
                         onPressed: () => touchSub(item.id.toString(), SubStatus.SUB),
                         child: Text("订阅"),
                       )),
-                ),
-              InkWell(
+                )),
+              SliverToBoxAdapter(
+                  child: InkWell(
                 onTap: () {
                   Navigator.push(
                     context,
@@ -155,9 +161,10 @@ Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewSe
                     ],
                   ),
                 ),
-              ),
+              )),
               if (item.content != "")
-                Html(
+                SliverToBoxAdapter(
+                    child: Html(
                   data: item.content,
                   style: {
                     "body": Style(
@@ -165,20 +172,13 @@ Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewSe
                     ),
                   },
                   onLinkTap: (url) => launchUrl(url),
-                ),
-              if (item.parts.isNotEmpty)
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                ),
-              SizedBox(
-                height: 500.0,
-                child: CustomScrollView(slivers: <Widget>[
-                  SliverPadding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    sliver: viewService.buildComponent("articlelist"),
-                  )
-                ]),
-              ),
+                )),
+              SliverPadding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                sliver: viewService.buildComponent("articlelist"),
+              )
             ]),
-          )));
+          ),
+        ),
+      ));
 }
