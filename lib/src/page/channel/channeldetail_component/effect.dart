@@ -26,23 +26,3 @@ Future _onInit(Action action, Context<ChannelDetailState> ctx) async {
     }
   }
 }
-
-Future _onLoadingMoreChannels(Action action, Context<ChannelDetailState> ctx) async {
-  ArticleRequest articleRequest = (action.payload as ArticleRequest);
-  articleRequest.pageNum = articleRequest.pageNum + 1;
-  ChannelDetailState homeListDefaultState = ctx.state;
-  if (homeListDefaultState.articleRequest.offset != null && homeListDefaultState.articleRequest.offset > 0) {
-    articleRequest.offset = homeListDefaultState.articleRequest.offset;
-  }
-  List<int> ids = await Repo.getElementIds(articleRequest);
-  List<Channel> channels = [];
-  if (ids != null) {
-    for (int id in ids) {
-      Channel channel = await Repo.fetchChannelItem(id);
-      if (channel != null) {
-        channels.add(channel);
-      }
-    }
-    //ctx.dispatch(ChannelListDefaultActionCreator.onLoadingMoreChannelsUpdate(channels));
-  }
-}
