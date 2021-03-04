@@ -14,11 +14,9 @@ Effect<ArticleListState> buildEffect() {
   });
 }
 
-void _onA(Action action, Context<ArticleListState> ctx) async {
-}
+void _onA(Action action, Context<ArticleListState> ctx) async {}
 
-void _didUpdateWidget(Action action, Context<ArticleListState> ctx) async {
-}
+void _didUpdateWidget(Action action, Context<ArticleListState> ctx) async {}
 
 Future _onInit(Action action, Context<ArticleListState> ctx) async {
   fetchArticles(action, ctx);
@@ -27,6 +25,9 @@ Future _onInit(Action action, Context<ArticleListState> ctx) async {
 Future fetchArticles(Action action, Context<ArticleListState> ctx) async {
   ArticleListState articleListState = ctx.state;
   List<int> ids = articleListState.articleIds;
+  if (ids == null || ids.length == 0) {
+    return;
+  }
   List<Item> articles = new List();
   for (int id in ids) {
     Item article = await Repo.fetchArticleItem(id);
