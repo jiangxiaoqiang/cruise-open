@@ -176,10 +176,11 @@ Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewSe
                   },
                   onLinkTap: (url) => CommonUtils.launchUrl(url),
                 )),
-              SliverPadding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                sliver: viewService.buildComponent("articlelist"),
-              )
+              if (state.articleListState.articles != null && state.articleListState.articles.length > 0)
+                SliverPadding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  sliver: viewService.buildComponent("articlelist"),
+                )
             ]),
           ),
         ),
