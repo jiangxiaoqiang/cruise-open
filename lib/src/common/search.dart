@@ -3,13 +3,21 @@ import 'package:Cruise/src/common/view_manager.dart';
 import 'package:Cruise/src/models/Channel.dart';
 import 'package:Cruise/src/models/channel_suggestion.dart';
 import 'package:Cruise/src/models/request/channel/channel_request.dart';
+import 'package:Cruise/src/page/channel/channelpg_component/page.dart';
 import 'package:animations/animations.dart';
+import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 import 'channel_action.dart';
 
 class CustomSearchDelegate extends SearchDelegate {
+  ViewService viewService;
+
+  CustomSearchDelegate(ViewService viewService) {
+    this.viewService = viewService;
+  }
+
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
@@ -37,14 +45,17 @@ class CustomSearchDelegate extends SearchDelegate {
     );
   }
 
-  Widget buildChannel(Channel channel) {
-    //dispatch(ChannelListActionCreator.onSetDetailChannel(channel));
-    //return viewService.buildComponent("articlepg");
+  Widget buildChannel(Channel channel, BuildContext context) {
+    if (viewService != null) {
+      var data = {'name': "originalstories", "channel": channel};
+      return ChannelpgPage().buildPage(data);
+    }
+    return Container();
   }
 
   final currentView = ViewManager.fromViewName("itemCard");
 
-  Widget buildResultsComponent(List<Channel> channels) {
+  Widget buildResultsComponent(List<Channel> channels, BuildContext context) {
     return CustomScrollView(
       slivers: [
         SliverList(
@@ -60,7 +71,7 @@ class CustomSearchDelegate extends SearchDelegate {
                   openColor: Theme.of(context).scaffoldBackgroundColor,
                   transitionDuration: Duration(milliseconds: 500),
                   closedBuilder: (BuildContext c, VoidCallback action) => CommonUtils.getChannelViewType(currentView, channels[index]),
-                  openBuilder: (BuildContext c, VoidCallback action) => buildChannel(channels[index])),
+                  openBuilder: (BuildContext c, VoidCallback action) => buildChannel(channels[index], context)),
             ),
           );
         }, childCount: channels.length))
@@ -81,7 +92,7 @@ class CustomSearchDelegate extends SearchDelegate {
           if (snapshot.hasData) {
             List<Channel> channels = snapshot.data;
             if (channels != null) {
-              return buildResultsComponent(channels);
+              return buildResultsComponent(channels, context);
             }
           } else {
             return Text("no data");
