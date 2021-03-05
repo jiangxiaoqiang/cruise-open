@@ -38,3 +38,4 @@ class ArticlePgConnector extends ConnOp<ArticleListState, ArticlePgState> {
     state.articlePgState = subState;
   }
 }
+

@@ -46,7 +46,7 @@ Widget buildView(HomeListState state, Dispatch dispatch, ViewService viewService
                     IconButton(
                         icon: Icon(Icons.search),
                         onPressed: () {
-                          showSearch(context: context, delegate: CustomSearchDelegate());
+                          showSearch(context: context, delegate: CustomSearchDelegate(viewService));
                         }),
                   if (state.currentStoriesType == StoriesType.channels)
                     IconButton(
