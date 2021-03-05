@@ -7,6 +7,7 @@ import 'package:Cruise/src/models/Channel.dart';
 import 'package:Cruise/src/models/Item.dart';
 import 'package:Cruise/src/models/api/fav_status.dart';
 import 'package:Cruise/src/models/api/upvote_status.dart';
+import 'package:Cruise/src/page/channel/channelpg_component/page.dart';
 import 'package:Cruise/src/page/home/components/articledetail_component/action.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,7 +16,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/style.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import '../../../channel_page.dart';
+
 import 'state.dart';
 
 Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewService) {
@@ -101,6 +102,16 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
     }
   }
 
+  void navToChannelDetail() async {
+    Channel channel = await Repo.fetchChannelItem(int.parse(item.subSourceId));
+    var data = {'name': "originalstories", "channel": channel};
+    Widget page = ChannelpgPage().buildPage(data);
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => page),
+    );
+  }
+
   return GestureDetector(
       onHorizontalDragStart: _onHorizontalDragStart,
       onHorizontalDragUpdate: _onHorizontalDragUpdate,
@@ -136,11 +147,7 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
                   padding: const EdgeInsets.only(bottom: 8.0),
                   child: InkWell(
                       onTap: () async {
-                        Channel channel = await Repo.fetchChannelItem(int.parse(item.subSourceId));
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => ChannelPage(item: channel)),
-                        );
+                        navToChannelDetail();
                       },
                       child: Text(
                         item.domain,
