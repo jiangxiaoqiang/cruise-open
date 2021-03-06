@@ -11,10 +11,6 @@ class ArticleAction {
     final response = await RestClient.putHttp("/post/article/" + action + "/" + articleId,null);
     if (response.statusCode == 200 && response.data["statusCode"] == "200") {
       return HttpResult(message: "SMS send success", result: Result.ok);
-    } else {
-      return HttpResult(
-          message: "Sub failed.",
-          result: Result.error);
     }
   }
 
@@ -22,10 +18,6 @@ class ArticleAction {
     final response = await RestClient.putHttp("/post/article/" + action + "/" + articleId,null);
     if (response.statusCode == 200 && response.data["statusCode"] == "200") {
       return HttpResult(message: "SMS send success", result: Result.ok);
-    } else {
-      return HttpResult(
-          message: "Sub failed.",
-          result: Result.error);
     }
   }
 

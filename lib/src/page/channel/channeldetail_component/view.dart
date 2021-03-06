@@ -1,35 +1,31 @@
 import 'package:Cruise/src/common/channel_action.dart';
 import 'package:Cruise/src/common/net/rest/http_result.dart';
+import 'package:Cruise/src/common/utils/common_utils.dart';
 import 'package:Cruise/src/models/Channel.dart';
 import 'package:Cruise/src/models/api/sub_status.dart';
-import 'package:Cruise/src/page/channel/channeldetail_component/action.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/style.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../profile.dart';
 import 'state.dart';
+
+class AllowMultipleHorizontalDragGestureRecognizer extends HorizontalDragGestureRecognizer {
+  @override
+  void rejectGesture(int pointer) {
+    acceptGesture(pointer);
+  }
+}
 
 Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewService) {
   Channel item = state.channel;
   int isFav = state.isFav;
   BuildContext context = viewService.context;
-  if (item != null) {
-    dispatch(ChannelDetailActionCreator.onSetChannelId(item.id));
-  }
-
-  void launchUrl(url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
 
   Offset _initialSwipeOffset;
   Offset _finalSwipeOffset;
@@ -77,21 +73,31 @@ Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewSe
     }
   }
 
-  return GestureDetector(
-      onHorizontalDragStart: _onHorizontalDragStart,
-      onHorizontalDragUpdate: _onHorizontalDragUpdate,
-      onHorizontalDragEnd: _onHorizontalDragEnd,
+  return RawGestureDetector(
+      gestures: {
+        AllowMultipleHorizontalDragGestureRecognizer: GestureRecognizerFactoryWithHandlers<AllowMultipleHorizontalDragGestureRecognizer>(
+          () => AllowMultipleHorizontalDragGestureRecognizer(),
+          (AllowMultipleHorizontalDragGestureRecognizer instance) {
+            instance.onStart = _onHorizontalDragStart;
+            instance.onUpdate = _onHorizontalDragUpdate;
+            instance.onEnd = _onHorizontalDragEnd;
+          },
+        )
+      },
       child: Container(
-          constraints: BoxConstraints(
-            minHeight: MediaQuery.of(context).size.height * 0.9,
+        constraints: BoxConstraints(
+          minHeight: MediaQuery.of(context).size.height * 0.9,
+        ),
+        color: Theme.of(context).scaffoldBackgroundColor,
+        child: Padding(
+          padding: const EdgeInsets.all(
+            16.0,
           ),
-          color: Theme.of(context).scaffoldBackgroundColor,
-          child: Padding(
-            padding: const EdgeInsets.all(
-              16.0,
-            ),
-            child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, mainAxisSize: MainAxisSize.min, children: [
-              InkWell(
+          child: SizedBox(
+            height: 500.0,
+            child: CustomScrollView(slivers: <Widget>[
+              SliverToBoxAdapter(
+                  child: InkWell(
                 onTap: () => {},
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 8.0),
@@ -104,9 +110,10 @@ Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewSe
                     ),
                   ),
                 ),
-              ),
+              )),
               if (item.isFav == 1)
-                Padding(
+                SliverToBoxAdapter(
+                    child: Padding(
                   padding: const EdgeInsets.only(top: 8, bottom: 8.0, right: 1),
                   child: ButtonTheme(
                       minWidth: 50,
@@ -122,9 +129,10 @@ Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewSe
                         onPressed: () => touchSub(item.id.toString(), SubStatus.UNSUB),
                         label: Text("已订阅"),
                       )),
-                ),
+                )),
               if (item.isFav != 1)
-                Padding(
+                SliverToBoxAdapter(
+                    child: Padding(
                   padding: const EdgeInsets.only(top: 8, bottom: 8.0, right: 1),
                   child: ButtonTheme(
                       minWidth: 50,
@@ -135,8 +143,9 @@ Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewSe
                         onPressed: () => touchSub(item.id.toString(), SubStatus.SUB),
                         child: Text("订阅"),
                       )),
-                ),
-              InkWell(
+                )),
+              SliverToBoxAdapter(
+                  child: InkWell(
                 onTap: () {
                   Navigator.push(
                     context,
@@ -155,30 +164,25 @@ Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewSe
                     ],
                   ),
                 ),
-              ),
+              )),
               if (item.content != "")
-                Html(
+                SliverToBoxAdapter(
+                    child: Html(
                   data: item.content,
                   style: {
                     "body": Style(
                       fontSize: FontSize(19.0),
                     ),
                   },
-                  onLinkTap: (url) => launchUrl(url),
-                ),
-              if (item.parts.isNotEmpty)
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                ),
-              SizedBox(
-                height: 500.0,
-                child: CustomScrollView(slivers: <Widget>[
-                  SliverPadding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    sliver: viewService.buildComponent("articlelist"),
-                  )
-                ]),
-              ),
+                  onLinkTap: (url) => CommonUtils.launchUrl(url),
+                )),
+              if (state.articleListState.articles != null && state.articleListState.articles.length > 0)
+                SliverPadding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  sliver: viewService.buildComponent("articlelist"),
+                )
             ]),
-          )));
+          ),
+        ),
+      ));
 }
