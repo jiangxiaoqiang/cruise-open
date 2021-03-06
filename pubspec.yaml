@@ -17,7 +17,6 @@ dependencies:
   meta: ^1.1.8
   flutter_svg: 0.19.0
   logger: 0.9.4
-  marquee: ^1.7.0
   scoped_model: ^1.1.0
   shrine_images: ^1.1.2
   flare_dart: 2.3.4
@@ -51,10 +50,7 @@ dependencies:
   intl_phone_number_input: ^0.5.0
   dio: 3.0.10
   fish_redux: 0.3.4
-  hive_flutter:
-    git:
-      url: https://github.com/hivedb/hive.git
-      path: hive_flutter
+  hive_flutter: 0.3.1
 
 dev_dependencies:
   flutter_test:
