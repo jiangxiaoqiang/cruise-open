@@ -28,8 +28,8 @@ class HomeListState implements Cloneable<HomeListState> {
 class HomeListConnector extends ConnOp<HomeState, HomeListState> {
   @override
   HomeListState get(HomeState state) {
-    HomeListState substate = state.homeListState.clone();
-    return substate;
+    HomeListState subState = state.homeListState.clone();
+    return subState;
   }
 
   @override
@@ -42,9 +42,9 @@ class HomeListConnector extends ConnOp<HomeState, HomeListState> {
 class FavArticleConnector extends ConnOp<FavArticleState, HomeListState> {
   @override
   HomeListState get(FavArticleState state) {
-    HomeListState substate = state.homeListState.clone();
-    substate.currentStoriesType = state.currentStoriesType;
-    return substate;
+    HomeListState subState = state.homeListState.clone();
+    subState.currentStoriesType = state.currentStoriesType;
+    return subState;
   }
 
   @override
