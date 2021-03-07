@@ -5,7 +5,6 @@ import 'package:fish_redux/fish_redux.dart';
 class FavArticleState implements Cloneable<FavArticleState> {
 
   HomeListState homeListState = HomeListState();
-
   StoriesType currentStoriesType = StoriesType.favStories;
 
   @override
