@@ -1,7 +1,6 @@
 import 'dart:convert';
-import 'dart:wasm';
 
-import 'package:Cruise/src/common/history.dart';
+
 import 'package:timeago/timeago.dart' as timeago;
 
 class ChannelSuggestion {
