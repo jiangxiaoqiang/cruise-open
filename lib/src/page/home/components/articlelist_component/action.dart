@@ -14,10 +14,6 @@ class ArticleListActionCreator {
     return const Action(ArticleListAction.action);
   }
 
-  static Action onGetArticles(List<int> articleIds) {
-    return Action(ArticleListAction.get_articles, payload: articleIds);
-  }
-
   static Action onSetArticles(List<Item> articles) {
     return Action(ArticleListAction.set_articles, payload: articles);
   }

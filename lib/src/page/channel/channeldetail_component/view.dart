@@ -181,6 +181,8 @@ Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewSe
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   sliver: viewService.buildComponent("articlelist"),
                 )
+              else
+                Center(child: CircularProgressIndicator())
             ]),
           ),
         ),
