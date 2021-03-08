@@ -67,7 +67,7 @@ class FeedbackPage extends HookWidget {
                         shape: new RoundedRectangleBorder(
                             borderRadius: new BorderRadius.circular(30.0)),
                         onPressed: () async {
-                          if (_formKey.currentState.validate()) {
+                          if (_formKey.currentState!.validate()) {
                             submitting.value = true;
                             AuthResult result = await Auth.sms(
                               phone: phone.value,

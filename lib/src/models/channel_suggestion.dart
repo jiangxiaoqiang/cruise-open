@@ -5,8 +5,8 @@ import 'package:timeago/timeago.dart' as timeago;
 
 class ChannelSuggestion {
   ChannelSuggestion({
-    this.name,
-    this.priority,
+    required this.name,
+    required this.priority,
   });
 
   String name;

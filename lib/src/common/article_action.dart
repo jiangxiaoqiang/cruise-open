@@ -7,18 +7,20 @@ import 'net/rest/http_result.dart';
 class ArticleAction {
   static const baseUrl = global.baseUrl;
 
-  static Future<HttpResult> fav({String articleId,String action}) async {
+  static Future<HttpResult?> fav({required String articleId,required String action}) async {
     final response = await RestClient.putHttp("/post/article/" + action + "/" + articleId,null);
     if (response.statusCode == 200 && response.data["statusCode"] == "200") {
       return HttpResult(message: "SMS send success", result: Result.ok);
     }
+    return null;
   }
 
-  static Future<HttpResult> upvote({String articleId,String action}) async {
+  static Future<HttpResult?> upvote({required String articleId,required String action}) async {
     final response = await RestClient.putHttp("/post/article/" + action + "/" + articleId,null);
     if (response.statusCode == 200 && response.data["statusCode"] == "200") {
       return HttpResult(message: "SMS send success", result: Result.ok);
     }
+    return null;
   }
 
   /// get article by ids
@@ -26,7 +28,7 @@ class ArticleAction {
     List<Item> articles = [];
     if (ids != null) {
       for (int id in ids) {
-        Item article = await Repo.fetchArticleItem(id);
+        Item article = (await Repo.fetchArticleItem(id))!;
         if (article != null) {
           articles.add(article);
         }

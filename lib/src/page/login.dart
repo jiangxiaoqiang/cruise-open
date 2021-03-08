@@ -85,7 +85,7 @@ class LoginPage extends HookWidget {
                     ),
                     prefixIcon: Icon(Icons.remove_red_eye)),
                 validator: (value) {
-                  if (value.isEmpty) {
+                  if (value!.isEmpty) {
                     return "密码不能为空";
                   }
                   return null;
@@ -110,7 +110,7 @@ class LoginPage extends HookWidget {
                             shape: new RoundedRectangleBorder(
                                 borderRadius: new BorderRadius.circular(30.0)),
                             onPressed: () async {
-                              if (_formKey.currentState.validate() && phoneValid.value) {
+                              if (_formKey.currentState!.validate() && phoneValid.value) {
                                 submitting.value = true;
                                 AuthResult result = await Auth.login(
                                   username: username.value,

@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 const APPBAR_SCROLL_OFFSET = 100;
@@ -13,8 +12,8 @@ const APPBAR_SCROLL_OFFSET = 100;
 class HomeListDefault extends HookWidget{
 
    HomeListDefault({
-    Key key,
-    @required this.type,
+    required Key key,
+    required this.type,
   }) : super(key: key);
 
   final StoriesType type;
@@ -44,7 +43,7 @@ class HomeListDefault extends HookWidget{
   @override
   Widget build(BuildContext context) {
 
-    ArticleRequest articleRequest = new ArticleRequest();
+    ArticleRequest articleRequest = new ArticleRequest(pageNum: 1);
     articleRequest.storiesType = type;
     var counter = useState<ArticleRequest>();
     counter.value = articleRequest;
@@ -92,7 +91,7 @@ class HomeListDefault extends HookWidget{
                     }
                     return Container(
                       height: 55.0,
-                      child: Center(child: body),
+                      child: Center(child: null),
                     );
                   },
                 ),

@@ -9,8 +9,8 @@ import 'package:flutter_icons/flutter_icons.dart';
 class ChannelListDefault extends HookWidget{
 
   ChannelListDefault({
-    Key key,
-    @required this.storiesType,
+    required Key key,
+    required this.storiesType,
   }) : super(key: key);
 
   final StoriesType storiesType;
@@ -23,7 +23,7 @@ class ChannelListDefault extends HookWidget{
   @override
   Widget build(BuildContext context) {
 
-    ArticleRequest articleRequest = new ArticleRequest();
+    ArticleRequest articleRequest = new ArticleRequest(pageNum: 1);
     articleRequest.storiesType = storiesType;
     var counter = useState<ArticleRequest>(articleRequest);
 

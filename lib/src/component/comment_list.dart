@@ -1,18 +1,17 @@
+import 'package:Cruise/src/common/Repo.dart';
+import 'package:Cruise/src/common/helpers.dart';
+import 'package:Cruise/src/component/comment_tile.dart';
+import 'package:Cruise/src/component/loading_item.dart';
+import 'package:Cruise/src/models/Item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:Cruise/src/component/comment_tile.dart';
-import 'package:Cruise/src/component/loading_item.dart';
-import 'package:Cruise/src/common/helpers.dart';
-import 'package:Cruise/src/models/Item.dart';
-import 'package:Cruise/src/common/Repo.dart';
-
 
 class CommentList extends HookWidget {
   const CommentList({
-    Key key,
-    @required this.item,
+    Key? key,
+    required this.item,
   }) : super(key: key);
 
   final Item item;
@@ -23,21 +22,6 @@ class CommentList extends HookWidget {
 
     final collapsed = useState(Set());
     final comments = useState([]);
-
-    Stream<Item> stream;
-
-    useEffect(() {
-      stream = Repo.lazyFetchComments(item: item);
-      final sub = stream.listen((Item comment) {
-        Set result = Set.from(collapsed.value);
-        if (collapsed.value.contains(comment.parent)) {
-          result.add(comment.id);
-        }
-        comments.value = [...comments.value, comment];
-        collapsed.value = result;
-      });
-      return sub.cancel;
-    }, [stream]);
 
     return SliverPadding(
       padding: const EdgeInsets.all(8.0),

@@ -40,7 +40,7 @@ Widget buildView(ChannelListDefaultState state, Dispatch dispatch, ViewService v
     _refreshController.loadComplete();
   }
 
-  void _autoPreloadMoreChannels(ScrollNotification notification) {
+  void _autoPreloadMoreChannels(ScrollNotification? notification) {
     if (notification is ScrollUpdateNotification) {
       ScrollMetrics metrics = notification.metrics;
       double buttonDistance = metrics.extentAfter;
@@ -69,7 +69,8 @@ Widget buildView(ChannelListDefaultState state, Dispatch dispatch, ViewService v
                 if (scrollNotification is ScrollUpdateNotification && scrollNotification.depth == 0) {
                   _onScroll(scrollNotification.metrics.pixels);
                 }
-                _autoPreloadMoreChannels(scrollNotification);
+
+                _autoPreloadMoreChannels(scrollNotification as ScrollNotification);
                 return true;
               },
               child: CupertinoScrollbar(
@@ -84,7 +85,7 @@ Widget buildView(ChannelListDefaultState state, Dispatch dispatch, ViewService v
                       onLoading: _loadingMoreChannel,
                       footer: CustomFooter(
                         builder: (BuildContext context, LoadStatus mode) {
-                          Widget body;
+                          Widget? body;
                           if (mode == LoadStatus.idle) {
                             body = Text("pull up load");
                           } else if (mode == LoadStatus.loading) {

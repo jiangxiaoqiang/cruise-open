@@ -1,18 +1,18 @@
+import 'package:Cruise/src/common/Repo.dart';
 import 'package:Cruise/src/common/article_action.dart';
+import 'package:Cruise/src/common/helpers.dart';
 import 'package:Cruise/src/common/net/rest/http_result.dart';
 import 'package:Cruise/src/models/Channel.dart';
+import 'package:Cruise/src/models/Item.dart';
 import 'package:Cruise/src/models/api/fav_status.dart';
 import 'package:Cruise/src/models/api/upvote_status.dart';
 import 'package:Cruise/src/page/channel_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/style.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:Cruise/src/common/helpers.dart';
-import 'package:Cruise/src/models/Item.dart';
-import 'package:Cruise/src/common/Repo.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /*final partsProvider = FutureProvider.family((ref, int id) async {
@@ -20,7 +20,7 @@ import 'package:url_launcher/url_launcher.dart';
 });*/
 
 class StoryInformation extends HookWidget {
-  const StoryInformation({Key key, @required this.item}) : super(key: key);
+  const StoryInformation({ Key? key, required this.item}) : super(key: key);
 
   final Item item;
 
@@ -34,10 +34,8 @@ class StoryInformation extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
-    Offset _initialSwipeOffset;
-    Offset _finalSwipeOffset;
+    Offset? _initialSwipeOffset;
+    Offset? _finalSwipeOffset;
 
     void _onHorizontalDragStart(DragStartDetails details) {
       _initialSwipeOffset = details.globalPosition;
@@ -48,17 +46,14 @@ class StoryInformation extends HookWidget {
     }
 
     void _onHorizontalDragEnd(DragEndDetails details) {
-      if (_initialSwipeOffset != null) {
-        final offsetDifference = _initialSwipeOffset.dx - _finalSwipeOffset.dx;
-        if (offsetDifference < 0) {
-          Navigator.pop(context);
-        }
+      final offsetDifference = _initialSwipeOffset!.dx - _finalSwipeOffset!.dx;
+      if (offsetDifference < 0) {
+        Navigator.pop(context);
       }
     }
 
     void touchUpvote(String action, UpvoteStatus upvoteStatus) async {
-      HttpResult result = await ArticleAction.upvote(
-          articleId: item.id.toString(), action: action);
+      HttpResult result = (await ArticleAction.upvote(articleId: item.id.toString(), action: action))!;
 
       if (result.result == Result.error) {
         Fluttertoast.showToast(
@@ -74,8 +69,7 @@ class StoryInformation extends HookWidget {
         if (upvoteStatus.statusCode == "upvote") {
           item.upvoteCount = item.upvoteCount + 1;
         }
-        if (upvoteStatus.statusCode == "unupvote" &&
-            item.upvoteCount > 0) {
+        if (upvoteStatus.statusCode == "unupvote" && item.upvoteCount > 0) {
           item.upvoteCount = item.upvoteCount - 1;
         }
         Fluttertoast.showToast(
@@ -90,8 +84,7 @@ class StoryInformation extends HookWidget {
     }
 
     void touchFav(String action, FavStatus favStatus) async {
-      HttpResult result = await ArticleAction.fav(
-          articleId: item.id.toString(), action: action);
+      HttpResult result = (await ArticleAction.fav(articleId: item.id.toString(), action: action))!;
 
       if (result.result == Result.error) {
         Fluttertoast.showToast(
@@ -144,7 +137,7 @@ class StoryInformation extends HookWidget {
                     child: Container(
                       child: Text(
                         item.title == "" ? "Comment" : item.title,
-                        style: Theme.of(context).textTheme.headline5.copyWith(
+                        style: Theme.of(context).textTheme.headline5!.copyWith(
                               fontWeight: FontWeight.w600,
                             ),
                       ),
@@ -156,22 +149,16 @@ class StoryInformation extends HookWidget {
                     padding: const EdgeInsets.only(bottom: 8.0),
                     child: InkWell(
                         onTap: () async {
-                          Channel channel = await Repo.fetchChannelItem(
-                              int.parse(item.subSourceId));
+                          Channel channel = (await Repo.fetchChannelItem(int.parse(item.subSourceId)))!;
                           Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    ChannelPage(item: channel)),
+                            MaterialPageRoute(builder: (context) => ChannelPage(item: channel)),
                             //ProfilePage(username: item.author))
                           );
                         },
                         child: Text(
                           item.domain,
-                          style: Theme.of(context)
-                              .textTheme
-                              .caption
-                              .copyWith(color: Theme.of(context).primaryColor),
+                          style: Theme.of(context).textTheme.caption!.copyWith(color: Theme.of(context).primaryColor),
                         )),
                   ),
                 InkWell(
@@ -220,26 +207,20 @@ class StoryInformation extends HookWidget {
                             children: [
                               if (item.isFav == 1)
                                 IconButton(
-                                  icon: Icon(Icons.bookmark,
-                                      color: Theme.of(context).primaryColor),
-                                  onPressed: () =>
-                                      touchFav("unfav", FavStatus.UNFAV),
+                                  icon: Icon(Icons.bookmark, color: Theme.of(context).primaryColor),
+                                  onPressed: () => touchFav("unfav", FavStatus.UNFAV),
                                 ),
                               if (item.isFav != 1)
                                 IconButton(
                                   icon: Icon(Icons.bookmark),
-                                  onPressed: () =>
-                                      touchFav("fav", FavStatus.FAV),
+                                  onPressed: () => touchFav("fav", FavStatus.FAV),
                                 ),
                               Padding(
                                 padding: const EdgeInsets.only(left: 0.0),
                                 child: Text(
                                   "${item.favCount}",
                                   textAlign: TextAlign.center,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .caption
-                                      .copyWith(
+                                  style: Theme.of(context).textTheme.caption!.copyWith(
                                         color: Theme.of(context).primaryColor,
                                       ),
                                 ),
@@ -253,26 +234,20 @@ class StoryInformation extends HookWidget {
                             children: [
                               if (item.isUpvote == 1)
                                 IconButton(
-                                  icon: Icon(Icons.thumb_up,
-                                      color: Theme.of(context).primaryColor),
-                                  onPressed: () => touchUpvote(
-                                      "unupvote", UpvoteStatus.UNUPVOTE),
+                                  icon: Icon(Icons.thumb_up, color: Theme.of(context).primaryColor),
+                                  onPressed: () => touchUpvote("unupvote", UpvoteStatus.UNUPVOTE),
                                 ),
                               if (item.isUpvote != 1)
                                 IconButton(
                                   icon: Icon(Icons.thumb_up),
-                                  onPressed: () => touchUpvote(
-                                      "upvote", UpvoteStatus.UPVOTE),
+                                  onPressed: () => touchUpvote("upvote", UpvoteStatus.UPVOTE),
                                 ),
                               Padding(
                                 padding: const EdgeInsets.only(left: 8.0),
                                 child: Text(
                                   "${item.upvoteCount}",
                                   textAlign: TextAlign.center,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .caption
-                                      .copyWith(
+                                  style: Theme.of(context).textTheme.caption!.copyWith(
                                         color: Theme.of(context).primaryColor,
                                       ),
                                 ),
@@ -286,8 +261,7 @@ class StoryInformation extends HookWidget {
                       icon: Icon(
                         Feather.share_2,
                       ),
-                      onPressed: () => handleShare(
-                          id: item.id, title: item.title, postUrl: item.link),
+                      onPressed: () => handleShare(id: item.id, title: item.title, postUrl: item.link),
                     ),
                   ],
                 ),

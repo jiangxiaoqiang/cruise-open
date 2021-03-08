@@ -35,10 +35,10 @@ ChannelListDefaultState _onLoadingMoreChannelsUpdate(ChannelListDefaultState sta
 ChannelListDefaultState _onSetChannelIds(ChannelListDefaultState state, Action action){
   final ChannelListDefaultState newState = state.clone();
   ArticlePayload payload = (action.payload as ArticlePayload);
-  newState.channelListState.channelIds = payload.articleIds;
-  newState.articleRequest = payload.articleRequest;
-  if (payload.articleRequest.pageNum == 1 && payload.articleIds.isNotEmpty) {
-    newState.articleRequest.offset = payload.articleIds.reduce(max);
+  newState.channelListState.channelIds = payload.articleIds!;
+  newState.articleRequest = payload.articleRequest!;
+  if (payload.articleRequest!.pageNum == 1 && payload.articleIds!.isNotEmpty) {
+    newState.articleRequest.offset = payload.articleIds!.reduce(max);
   }
   return newState;
 }

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-// ignore: top_level_function_literal_block
-
 class ThemeManager extends StateNotifier<ThemeData> {
   ThemeManager() : super(darkTheme);
 
@@ -17,7 +15,6 @@ class ThemeManager extends StateNotifier<ThemeData> {
     if (themeName == "lightTheme") return lightTheme;
     if (themeName == "darkTheme") return darkTheme;
     if (themeName == "trueBlackTheme") return trueBlackTheme;
-
     return darkTheme; // Default
   }
 
@@ -25,8 +22,7 @@ class ThemeManager extends StateNotifier<ThemeData> {
     if (theme == lightTheme) return "lightTheme";
     if (theme == darkTheme) return "darkTheme";
     if (theme == trueBlackTheme) return "trueBlackTheme";
-
-    return null;
+    return "lightTheme";
   }
 }
 
@@ -51,7 +47,7 @@ ThemeData lightTheme = ThemeData.light().copyWith(
         iconTheme: ThemeData().iconTheme.copyWith(color: Colors.black),
       ),
   textTheme: ThemeData().textTheme.copyWith(
-        caption: ThemeData().textTheme.caption.copyWith(
+        caption: ThemeData().textTheme.caption!.copyWith(
               color: Colors.grey,
             ),
       ),

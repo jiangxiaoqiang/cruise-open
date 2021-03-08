@@ -58,7 +58,7 @@ class HomeListDefaultActionCreator {
 }
 
 class ArticlePayload {
-  ArticleRequest articleRequest;
-  List<int> articleIds;
-  List<Item> articles;
+  ArticleRequest? articleRequest;
+  List<int>? articleIds;
+  List<Item>? articles;
 }

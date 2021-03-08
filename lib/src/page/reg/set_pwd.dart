@@ -4,7 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:Cruise/src/common/auth.dart';
 
 class SetPwdPage extends HookWidget {
-  const SetPwdPage({@required this.phone});
+  const SetPwdPage({required this.phone});
 
   final String phone;
 
@@ -37,7 +37,7 @@ class SetPwdPage extends HookWidget {
                   ),
                 ),
                 validator: (value) {
-                  if (value.isEmpty) {
+                  if (value!.isEmpty) {
                     return "密码不能为空";
                   }
                   if (value.length < 8) {
@@ -63,7 +63,7 @@ class SetPwdPage extends HookWidget {
                             shape: new RoundedRectangleBorder(
                                 borderRadius: new BorderRadius.circular(30.0)),
                         onPressed: () async {
-                          if (_formKey.currentState.validate()) {
+                          if (_formKey.currentState!.validate()) {
                             submitting.value = true;
                             AuthResult result = await Auth.setPwd(
                               phone: phone,
@@ -79,10 +79,10 @@ class SetPwdPage extends HookWidget {
                             } else {
                               Widget page;
                               //page = HomeNew();
-                              Navigator.push(
+                             /* Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) => page),
-                              );
+                              );*/
                             }
                             submitting.value = false;
                           }

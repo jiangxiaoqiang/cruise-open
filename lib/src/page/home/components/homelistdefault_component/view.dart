@@ -53,7 +53,7 @@ Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService view
         bottom: false,
         child: Builder(
           builder: (context) {
-            if (state.articleListState.articleIds == null || state.articleListState.articleIds.length == 0) {
+            if (state.articleListState.articleIds == null || state.articleListState.articleIds!.length == 0) {
               // when the article not fetched, show loading animation
               return Center(child: CircularProgressIndicator());
             }
@@ -102,7 +102,8 @@ Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService view
                                 context,
                               ),
                             ),
-                            if (state.articleListState.articleIds != null && state.articleListState.articleIds.length > 0)
+                            if (state.articleListState.articleIds != null && state.articleListState.articleIds
+                                !.length > 0)
                               SliverPadding(
                                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                                 sliver: viewService.buildComponent("articlelist"),

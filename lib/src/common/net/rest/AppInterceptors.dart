@@ -31,7 +31,7 @@ class AppInterceptors extends InterceptorsWrapper {
   }
   @override
   Future onError(DioError err) {
-    print("ERROR[${err?.response?.statusCode}] => PATH: ${err?.request?.path}");
+    // print("ERROR[${err?.response?.statusCode}] => PATH: ${err?.request?.path}");
     return super.onError(err);
   }
 

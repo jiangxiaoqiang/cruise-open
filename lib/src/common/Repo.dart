@@ -18,11 +18,11 @@ class Repo {
   static final _usersCache = <String, CruiseUser>{};
   static const baseUrl = global.baseUrl;
 
-  static Future<List<int>> getElementIds(ArticleRequest request) async {
+  static Future<List<int>?> getElementIds(ArticleRequest request) async {
     return await _getIds(request);
   }
 
-  static Future<List<String>> getCommentsIds({Item item}) async {
+  static Future<List<String>> getCommentsIds({required Item item}) async {
     Stream<Item> stream = lazyFetchComments(item: item, assignDepth: false);
     List<String> comments = [];
     await for (Item comment in stream) {
@@ -31,10 +31,10 @@ class Repo {
     return comments;
   }
 
-  static Stream<Item> lazyFetchComments({Item item, int depth = 0, bool assignDepth = true}) async* {
+  static Stream<Item> lazyFetchComments({required Item item, int depth = 0, bool assignDepth = true}) async* {
     if (item.kids.isEmpty) return;
     for (int kidId in item.kids) {
-      Item kid = await fetchArticleItem(kidId);
+      Item kid = (await fetchArticleItem(kidId))!;
       if (kid == null) continue;
       if (assignDepth) kid.depth = depth;
       yield kid;
@@ -45,13 +45,13 @@ class Repo {
     }
   }
 
-  static Future<List<Item>> prefetchComments({Item item}) async {
+  static Future<List<Item>> prefetchComments({required Item item}) async {
     List<Item> result = [];
     if (item.parent != null) result.add(item);
     if (item.kids.isEmpty) return Future.value(result);
 
     await Future.wait(item.kids.map((kidId) async {
-      Item kid = await fetchArticleItem(kidId);
+      Item kid = (await fetchArticleItem(kidId))!;
       if (kid != null) {
         await prefetchComments(item: kid);
       }
@@ -59,31 +59,29 @@ class Repo {
     return Future.value(result);
   }
 
-  static Future<List<Item>> fetchByIds(List<int> ids) async {
+  static Future<List<Item?>> fetchByIds(List<int> ids) async {
     return Future.wait(ids.map((itemId) {
       return fetchArticleItem(itemId);
     }));
   }
 
-  static Future<List<int>> _getIds(ArticleRequest articleRequest) async {
-    final typeQuery = _getStoryTypeQuery(articleRequest.storiesType);
+  static Future<List<int>?> _getIds(ArticleRequest articleRequest) async {
+    final typeQuery = _getStoryTypeQuery(articleRequest.storiesType!);
     Map jsonMap = articleRequest.toMap();
     final response = await RestClient.postHttp("$typeQuery", jsonMap);
     if (response.statusCode == 200 && response.data["statusCode"] == "200") {
       Map result = response.data["result"];
       if (result == null) {
-        return new List();
+        return List.empty();
       }
       var articles = result["list"];
       List<String> genreIdsList = new List<String>.from(articles);
       List<int> intIds = genreIdsList.map(int.parse).toList();
       return intIds;
-    } else {
-      CruiseLogHandler.logError(CruiseApiError('Stories failed to fetch.'), JsonEncoder().convert(response));
     }
   }
 
-  static Future<Item> fetchArticleItem(int id) async {
+  static Future<Item?> fetchArticleItem(int id) async {
     if (_itemsCache.containsKey(id)) {
       return _itemsCache[id];
     } else {
@@ -100,7 +98,7 @@ class Repo {
     }
   }
 
-  static Future<Channel> fetchChannelItem(int id) async {
+  static Future<Channel?> fetchChannelItem(int id) async {
     if (_itemsChannelCache.containsKey(id)) {
       return _itemsChannelCache[id];
     } else {
@@ -117,7 +115,7 @@ class Repo {
     return _itemsChannelCache[id];
   }
 
-  static Future<CruiseUser> fetchUser(String id) async {
+  static Future<CruiseUser?> fetchUser(String id) async {
     if (_usersCache.containsKey(id)) {
       return _usersCache[id];
     } else {

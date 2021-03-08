@@ -7,7 +7,7 @@ class LoginState implements Cloneable<LoginState> {
   static const LoginResult_NetWorkFail = 3; //例子网络错误，暂不实现
   static const LoginResult_LoginSuccess = 4;
   int loginResult = 0; //登陆的结果
-  String userName;
+  String? userName;
   int age = 0;
 
   //需要重写clone方法，因为reducer生成新的state时会调用
