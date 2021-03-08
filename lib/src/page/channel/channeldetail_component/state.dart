@@ -7,11 +7,11 @@ import 'package:Cruise/src/page/home/components/homelistdefault_component/state.
 import 'package:fish_redux/fish_redux.dart';
 
 class ChannelDetailState implements Cloneable<ChannelDetailState> {
-  Channel channel;
-  int isFav;
-  StoriesType currentStoriesType;
+  Channel? channel;
+  int? isFav;
+  StoriesType? currentStoriesType;
   ArticleListState articleListState = ArticleListState();
-  ArticleRequest articleRequest;
+  ArticleRequest? articleRequest;
 
   @override
   ChannelDetailState clone() {
@@ -28,7 +28,7 @@ class ChannelDetailConnector extends ConnOp<ChannelPgState, ChannelDetailState> 
   @override
   ChannelDetailState get(ChannelPgState state) {
     ChannelDetailState substate = state.channelDetailState.clone();
-    substate.channel = state.channel;
+    substate.channel = state.channel!;
     return substate;
   }
 

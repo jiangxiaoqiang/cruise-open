@@ -1,12 +1,12 @@
+import 'package:Cruise/src/models/Item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:Cruise/src/models/Item.dart';
 
 class ItemTile extends StatelessWidget {
   const ItemTile({
-    Key key,
-    @required this.item,
+    Key? key,
+    required this.item,
   }) : super(key: key);
 
   final Item item;
@@ -52,16 +52,14 @@ class ItemTile extends StatelessWidget {
                         Icon(
                           Feather.arrow_up,
                           size: 16,
-                          color: item.isVoted()
-                              ? Theme.of(context).primaryColor
-                              : Theme.of(context).iconTheme.color,
+                          color: item.isVoted() ? Theme.of(context).primaryColor : Theme.of(context).iconTheme.color,
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 8.0),
                           child: Text(
                             item.score.toString(),
                             textAlign: TextAlign.center,
-                            style: Theme.of(context).textTheme.caption.copyWith(
+                            style: Theme.of(context).textTheme.caption!.copyWith(
                                   color: Theme.of(context).primaryColor,
                                 ),
                           ),

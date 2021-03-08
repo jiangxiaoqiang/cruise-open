@@ -14,7 +14,7 @@ extension ResponseStatusExtension on MenuType{
     MenuType.follow: 1,
   };
 
-  int get value => menuValue[this];
+  int? get value => menuValue[this];
 }
 
 

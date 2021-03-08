@@ -12,7 +12,7 @@ Widget buildView(ArticlePgState state, Dispatch dispatch, ViewService viewServic
   var showToTopBtn = state.showToTopBtn;
   PageStorageBucket pageStorageBucket = state.pageStorageBucket;
   Map<String, ScrollController> scrollControllers = state.scrollControllers;
-  ScrollController scrollController = scrollControllers[item.id];
+  ScrollController scrollController = scrollControllers[item.id]!;
 
   if (scrollController != null) {
     scrollController.addListener(() => {
@@ -38,7 +38,7 @@ Widget buildView(ArticlePgState state, Dispatch dispatch, ViewService viewServic
               IconButton(
                 icon: Icon(Feather.corner_left_up),
                 onPressed: () async {
-                  Item parent = await Repo.fetchArticleItem(item.parent);
+                  Item parent = (await Repo.fetchArticleItem(item.parent))!;
                 },
               ),
           ],

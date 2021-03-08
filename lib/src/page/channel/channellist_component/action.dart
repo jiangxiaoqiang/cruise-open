@@ -9,8 +9,6 @@ class ChannelListActionCreator {
     return const Action(ChannelListAction.action);
   }
 
-  static Action onGetChannels(List<int> ids) {}
-
   static Action onSetChannels(List<Channel> channels) {
     return Action(ChannelListAction.set_channels, payload: channels);
   }

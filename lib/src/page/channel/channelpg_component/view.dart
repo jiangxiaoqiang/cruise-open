@@ -10,7 +10,7 @@ import 'state.dart';
 
 Widget buildView(
     ChannelPgState state, Dispatch dispatch, ViewService viewService) {
-  Channel item = state.channel;
+  Channel item = state.channel!;
   BuildContext context = viewService.context;
 
   Widget navChannelDetail(Channel channel) {
@@ -29,7 +29,7 @@ Widget buildView(
           IconButton(
             icon: Icon(Feather.corner_left_up),
             onPressed: () async {
-              Channel parent = await Repo.fetchChannelItem(item.parent);
+              Channel parent = (await Repo.fetchChannelItem(item.parent))!;
               Navigator.push(
                 context,
                 MaterialPageRoute(

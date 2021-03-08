@@ -23,21 +23,22 @@ LoginState _onLoginSuccess(LoginState state, Action action) {
   //需要创建一个新的state，大部分情况是用clone创建。
   final LoginState newState = state.clone();
   //状态赋值
-  newState.loginResult=LoginState.LoginResult_LoginSuccess;
+  newState.loginResult = LoginState.LoginResult_LoginSuccess;
   //action.payload是action的参数，类型也是dynamic，这里不强转也不会报错，只是写的时候IDE不会
   //自动联想。所以我建议还是写上比较清晰
-  newState.userName=(action.payload as LoginModel).session;
-  newState.age=(action.payload as LoginModel).session;
+  newState.userName = (action.payload as LoginModel).session.toString();
+  var ageObj = (action.payload as LoginModel).session;
+  newState.age = int.parse(ageObj.toString());
   return newState;
 }
 
 class LoginModel {
-  Object session;
+  Object? session;
 }
 
 LoginState _onEmailFail(LoginState state, Action action) {
   final LoginState newState = state.clone();
   //改变state状态为email不合法
-  newState.loginResult=LoginState.LoginResult_EmailFail;
+  newState.loginResult = LoginState.LoginResult_EmailFail;
   return newState;
 }

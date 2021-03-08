@@ -41,7 +41,7 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
     body: viewService.buildComponent("homelist"),
     bottomNavigationBar: BottomNavigationBar(
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text(AppLocalizations.of(context).cruiseNavigatorHome)),
+          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text(AppLocalizations.of(context)!.cruiseNavigatorHome)),
           BottomNavigationBarItem(icon: Icon(Icons.subscriptions), title: Text('关注')),
           BottomNavigationBarItem(icon: Icon(Icons.rss_feed), title: Text('频道')),
           BottomNavigationBarItem(icon: Icon(Icons.school), title: Text('我的')),

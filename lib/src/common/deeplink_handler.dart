@@ -8,13 +8,13 @@ import 'package:Cruise/src/common/Repo.dart';
 import 'package:uni_links/uni_links.dart';
 
 class DeeplinkHandler {
-  static StreamSubscription _sub;
+  static StreamSubscription ?_sub;
 
   static void cancel() {
-    if (_sub != null) _sub.cancel();
+    if (_sub != null) _sub!.cancel();
   }
 
-  static Future<StreamSubscription> init(BuildContext context) async {
+  static Future<StreamSubscription?> init(BuildContext context) async {
     // Platform messages are asynchronous, so we initialize in an async method.
     /// An implementation using a [Uri] link
     // Attach a listener to the links stream
@@ -43,21 +43,21 @@ class DeeplinkHandler {
 }
 
 void launchDeeplink(BuildContext context, Uri uri) async {
-  String id = uri.queryParametersAll["id"] == null
+  String? id = uri.queryParametersAll["id"] == null
       ? null
-      : uri.queryParametersAll["id"][0];
+      : uri.queryParametersAll["id"]![0];
   if (id == null) return;
-  Item item = await Repo.fetchArticleItem(int.parse(id));
+  Item item = (await Repo.fetchArticleItem(int.parse(id)))!;
 
   // TODO: A better UI for handling different types of Story, especially Comment.
   if (item.type == StoryType.story ||
       item.type == StoryType.job ||
       item.type == StoryType.poll ||
       item.type == StoryType.comment) {
-    Navigator.push(
+   /* Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => StoryPage(item: item)),
-    );
+    );*/
   } else {
     print("Type ${item.type} not handled");
   }

@@ -22,7 +22,6 @@ class ViewManager extends StateNotifier<ViewType> {
     if (viewName == "itemCard") return ViewType.itemCard;
     if (viewName == "compactTile") return ViewType.compactTile;
     if (viewName == "itemTile") return ViewType.itemTile;
-
     return ViewType.itemCard; // Default
   }
 
@@ -30,7 +29,6 @@ class ViewManager extends StateNotifier<ViewType> {
     if (type == ViewType.itemCard) return "itemCard";
     if (type == ViewType.compactTile) return "compactTile";
     if (type == ViewType.itemTile) return "itemTile";
-
-    return null;
+    return "itemCard";
   }
 }

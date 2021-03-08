@@ -22,8 +22,8 @@ import 'state.dart';
 Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewService) {
   Item item = state.article;
   BuildContext context = viewService.context;
-  Offset _initialSwipeOffset;
-  Offset _finalSwipeOffset;
+  Offset? _initialSwipeOffset;
+  Offset? _finalSwipeOffset;
 
   void _onHorizontalDragStart(DragStartDetails details) {
     _initialSwipeOffset = details.globalPosition;
@@ -35,7 +35,7 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
 
   void _onHorizontalDragEnd(DragEndDetails details) {
     if (_initialSwipeOffset != null) {
-      final offsetDifference = _initialSwipeOffset.dx - _finalSwipeOffset.dx;
+      final offsetDifference = _initialSwipeOffset!.dx - _finalSwipeOffset!.dx;
       if (offsetDifference < 0) {
         Navigator.pop(context);
       }
@@ -43,7 +43,7 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
   }
 
   void touchUpvote(String action, UpvoteStatus upvoteStatus) async {
-    HttpResult result = await ArticleAction.upvote(articleId: item.id.toString(), action: action);
+    HttpResult result = (await ArticleAction.upvote(articleId: item.id.toString(), action: action))!;
 
     if (result.result == Result.error) {
       Fluttertoast.showToast(
@@ -73,7 +73,7 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
   }
 
   void touchFav(String action, FavStatus favStatus) async {
-    HttpResult result = await ArticleAction.fav(articleId: item.id.toString(), action: action);
+    HttpResult result = (await ArticleAction.fav(articleId: item.id.toString(), action: action))!;
 
     if (result.result == Result.error) {
       Fluttertoast.showToast(
@@ -103,7 +103,7 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
   }
 
   void navToChannelDetail() async {
-    Channel channel = await Repo.fetchChannelItem(int.parse(item.subSourceId));
+    Channel channel = (await Repo.fetchChannelItem(int.parse(item.subSourceId)))!;
     var data = {'name': "originalstories", "channel": channel};
     Widget page = ChannelpgPage().buildPage(data);
     Navigator.push(
@@ -135,7 +135,7 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
                   child: Container(
                     child: Text(
                       item.title == "" ? "Comment" : item.title,
-                      style: Theme.of(context).textTheme.headline5.copyWith(
+                      style: Theme.of(context).textTheme.headline5!.copyWith(
                             fontWeight: FontWeight.w600,
                           ),
                     ),
@@ -151,7 +151,7 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
                       },
                       child: Text(
                         item.domain,
-                        style: Theme.of(context).textTheme.caption.copyWith(color: Theme.of(context).primaryColor),
+                        style: Theme.of(context).textTheme.caption!.copyWith(color: Theme.of(context).primaryColor),
                       )),
                 ),
               InkWell(
@@ -209,7 +209,7 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
                               child: Text(
                                 "${item.favCount}",
                                 textAlign: TextAlign.center,
-                                style: Theme.of(context).textTheme.caption.copyWith(
+                                style: Theme.of(context).textTheme.caption!.copyWith(
                                       color: Theme.of(context).primaryColor,
                                     ),
                               ),
@@ -236,7 +236,7 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
                               child: Text(
                                 "${item.upvoteCount}",
                                 textAlign: TextAlign.center,
-                                style: Theme.of(context).textTheme.caption.copyWith(
+                                style: Theme.of(context).textTheme.caption!.copyWith(
                                       color: Theme.of(context).primaryColor,
                                     ),
                               ),

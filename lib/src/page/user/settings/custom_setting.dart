@@ -9,7 +9,7 @@ enum Fruits {
 
 class CustomSetting extends HookWidget {
   CustomSetting({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -27,12 +27,12 @@ class CustomSetting extends HookWidget {
                     title: const Text("简体中文"),
                     leading: Checkbox(
                       value: currentSelected.contains(Fruits.Apple),
-                      onChanged: (bool fruitValue) {
-                        Fruits s = fruitValue ? Fruits.Apple : Fruits.Apple;
+                      onChanged: (bool? fruitValue) {
+                       /* Fruits s = fruitValue ? Fruits.Apple : Fruits.Apple;
                         print(s);
                         if(s == Fruits.Apple && currentSelected.contains(Fruits.Apple)) {
                           currentSelected.remove(Fruits.Apple);
-                        }else currentSelected.add(Fruits.Apple);
+                        }else currentSelected.add(Fruits.Apple);*/
                       },
                     ),
                   ),
@@ -40,14 +40,14 @@ class CustomSetting extends HookWidget {
                     title: const Text("繁体中文"),
                     leading: Checkbox(
                       value: currentSelected.contains(Fruits.Apple),
-                      onChanged: (bool fruitValue) {},
+                      onChanged: (bool? fruitValue) {},
                     ),
                   ),
                   ListTile(
                     title: const Text("英文"),
                     leading: Checkbox(
                       value: currentSelected.contains(Fruits.Apple),
-                      onChanged: (bool fruitValue) {},
+                      onChanged: (bool? fruitValue) {},
                     ),
                   )
                 ]))));

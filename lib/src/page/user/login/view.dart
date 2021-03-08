@@ -47,7 +47,7 @@ Widget buildView(LoginState state, Dispatch dispatch, ViewService viewService) {
 }
 
 //登陆按钮
-Widget _loginBtn(Dispatch dispatch, ViewService viewService, {Key key}) {
+Widget _loginBtn(Dispatch dispatch, ViewService viewService, {required Key key}) {
   return RaisedButton(
   onPressed: () {
     //获取数据

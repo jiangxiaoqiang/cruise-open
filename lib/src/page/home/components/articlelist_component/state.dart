@@ -5,10 +5,10 @@ import 'package:Cruise/src/page/home/components/homelistdefault_component/state.
 import 'package:fish_redux/fish_redux.dart';
 
 class ArticleListState implements Cloneable<ArticleListState> {
-  List<int> articleIds;
-  List<Item> articles = new List();
-  Item article;
-  int channelId;
+  List<int>? articleIds;
+  List<Item> articles = List.empty();
+  Item? article;
+  int? channelId;
   ArticlePgState articlePgState = ArticlePgState();
 
   @override

@@ -29,26 +29,26 @@ enum ArticleLoadingStatus {
 class Item {
   Item({
     this.depth = 0,
-    this.author,
-    this.deleted,
-    this.content,
-    this.dead,
-    this.poll,
-    this.parent,
-    this.parts,
-    this.descendants,
-    this.id,
-    this.kids,
-    this.score,
-    this.pubTime,
-    this.title,
-    this.type,
-    this.link,
-    this.isFav,
-    this.favCount,
-    this.subSourceId,
-    this.isUpvote,
-    this.upvoteCount
+    required this.author,
+    required this.deleted,
+    required this.content,
+    required this.dead,
+    required this.poll,
+    required this.parent,
+    required this.parts,
+    required this.descendants,
+    required this.id,
+    required this.kids,
+    required this.score,
+    required this.pubTime,
+    required this.title,
+    required this.type,
+    required this.link,
+    required this.isFav,
+    required this.favCount,
+    required this.subSourceId,
+    required this.isUpvote,
+    required this.upvoteCount
   });
 
   int depth;
@@ -79,7 +79,7 @@ class Item {
 
   bool isVoted() => HistoryManager.isVoted(id);
 
-  String get domain => Uri.parse(link)?.host;
+  String get domain => Uri.parse(link).host;
   String get ago =>
       timeago.format(DateTime.fromMillisecondsSinceEpoch(pubTime));
 
@@ -101,7 +101,7 @@ class Item {
     score: json["score"] == null ? 0 : json["score"],
     pubTime: json["pubTime"] == null ? 0 : json["pubTime"],
     title: json["title"] == null ? "" : json["title"],
-    type: json["type"] == null ? null : castType(json["type"]),
+    type: json["type"] == null ? StoryType.job : castType(json["type"]),
     link: json["link"] == null ? "" : json["link"],
     isFav: json["isFav"] == null ? "" : json["isFav"],
     favCount: json["favCount"] == null ? "" : json["favCount"],
@@ -151,7 +151,7 @@ class Item {
         return StoryType.pollopt;
         break;
       default:
-        return null;
+        return StoryType.job;
         break;
     }
   }

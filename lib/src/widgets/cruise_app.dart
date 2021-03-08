@@ -10,7 +10,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 class CruiseApp extends HookWidget {
-  CruiseApp({@required this.theme, @required this.view});
+  CruiseApp({required this.theme, required this.view});
 
   final ThemeData theme;
   final ViewType view;

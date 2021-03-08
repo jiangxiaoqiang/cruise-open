@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:Cruise/src/common/Repo.dart';
 import 'package:Cruise/src/common/global.dart' as global;
 import 'package:Cruise/src/common/net/rest/rest_clinet.dart';
 import 'package:Cruise/src/models/Channel.dart';
@@ -16,7 +15,7 @@ import 'net/rest/http_result.dart';
 class ChannelAction {
   static const baseUrl = global.baseUrl;
 
-  static Future<HttpResult> sub({String channelId, SubStatus subStatus}) async {
+  static Future<HttpResult> sub({required String channelId, required SubStatus subStatus}) async {
     String url = "/post/sub/source/" + subStatus.statusCode + "/" + channelId;
     final response = await RestClient.putHttp(url, null);
     if (RestClient.respSuccess(response)) {
@@ -26,7 +25,7 @@ class ChannelAction {
     }
   }
 
-  static Future<HttpResult> addChannel({String url}) async {
+  static Future<HttpResult> addChannel({required String url}) async {
     Map body = {"subUrl": url};
     final response = await RestClient.postHttp("/post/sub/source/add", body);
     if (RestClient.respSuccess(response)) {
@@ -52,7 +51,7 @@ class ChannelAction {
     if (RestClient.respSuccess(response)) {
       var channelResult = response.data["result"];
       if (channelResult == null) {
-        return null;
+        return List.empty();
       }
       List<ChannelSuggestion> channelSuggestion = [];
       channelResult.forEach((element) {
@@ -67,29 +66,27 @@ class ChannelAction {
       });
       return channelSuggestion;
     }
-    return null;
+    return List.empty();
   }
 
   static List<Channel> convertTheResult(Response response) {
     if (RestClient.respSuccess(response)) {
       var channelResult = response.data["result"];
       if (channelResult == null) {
-        return null;
+        return List.empty();
       }
       var channelListResult = channelResult["list"];
       List<Channel> channels = [];
       channelListResult.forEach((element) {
         try {
           Channel parsedChannel = Channel.fromMap(element);
-          if (parsedChannel != null) {
-            channels.add(parsedChannel);
-          }
+          channels.add(parsedChannel);
         } on Exception catch (e) {
           CruiseLogHandler.logError(CruiseApiError('Channel parsed failed.'), JsonEncoder().convert(response));
         }
       });
       return channels;
     }
-    return null;
+    return List.empty();
   }
 }

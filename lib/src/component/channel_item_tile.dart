@@ -4,8 +4,8 @@ import 'package:flutter_icons/flutter_icons.dart';
 
 class ChannelItemTile extends StatelessWidget {
   const ChannelItemTile({
-    Key key,
-    @required this.item,
+    Key? key,
+    required this.item,
   }) : super(key: key);
 
   final Channel item;

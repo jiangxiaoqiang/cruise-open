@@ -11,8 +11,8 @@ class AuthResult {
   Result result;
 
   AuthResult({
-    this.message,
-    this.result,
+    required this.message,
+    required this.result,
   });
 }
 
@@ -31,7 +31,7 @@ class Auth {
     return await storage.read(key: "username");
   }
 
-  static Future<AuthResult> vote({String itemId}) async {
+  static Future<AuthResult> vote({required String itemId}) async {
     Map body = {
       "id": itemId
     };
@@ -52,7 +52,7 @@ class Auth {
     return true;
   }
 
-  static Future<AuthResult> sms({String phone}) async {
+  static Future<AuthResult> sms({required String phone}) async {
     Map body = {
       "phone": phone
     };
@@ -68,7 +68,7 @@ class Auth {
     }
   }
 
-  static Future<AuthResult> setPwd({String phone, String password}) async {
+  static Future<AuthResult> setPwd({required String phone, required String password}) async {
     Map body = {
       "phone": phone,
       "password": password,
@@ -87,7 +87,7 @@ class Auth {
     }
   }
 
-  static Future<AuthResult> verifyPhone({String phone, String verifyCode}) async {
+  static Future<AuthResult> verifyPhone({required String phone, required String verifyCode}) async {
     Map body = {
       "phone": phone,
       "verifyCode": verifyCode,
@@ -106,7 +106,7 @@ class Auth {
     }
   }
 
-  static Future<AuthResult> login({String username, String password}) async {
+  static Future<AuthResult> login({required String username, required String password}) async {
     Map body = {
       "phone": username,
       "password": password,

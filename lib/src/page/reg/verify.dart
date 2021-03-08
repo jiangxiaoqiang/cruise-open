@@ -5,7 +5,7 @@ import 'package:Cruise/src/common/auth.dart';
 
 class VerifyPage extends HookWidget {
 
-  const VerifyPage({@required this.phone});
+  const VerifyPage({required this.phone});
 
   final String phone;
 
@@ -38,7 +38,7 @@ class VerifyPage extends HookWidget {
                   ),
                 ),
                 validator: (value) {
-                  if (value.isEmpty) {
+                  if (value!.isEmpty) {
                     return "验证码不能为空";
                   }
                   return null;
@@ -61,7 +61,7 @@ class VerifyPage extends HookWidget {
                             shape: new RoundedRectangleBorder(
                                 borderRadius: new BorderRadius.circular(30.0)),
                         onPressed: () async {
-                          if (_formKey.currentState.validate()) {
+                          if (_formKey.currentState!.validate()) {
                             submitting.value = true;
                             AuthResult result = await Auth.verifyPhone(
                               phone: phone,

@@ -6,7 +6,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
 class About extends HookWidget {
-
   @override
   Widget build(BuildContext context) {
     final _formKey = useMemoized(() => GlobalKey<FormState>());
@@ -15,18 +14,19 @@ class About extends HookWidget {
     final currentTheme = ThemeManager.fromThemeName("lightTheme");
 
     return Scaffold(
-      appBar: AppBar(title: Text("关于Cruise"),
+      appBar: AppBar(
+        title: Text("关于Cruise"),
         actions: [
-        FlatButton(
-        textColor: Colors.black,
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => LoginPage()));
-        },
-        child: Text("关于Cruise"),
-        shape: CircleBorder(side: BorderSide(color: Colors.transparent)),
-      ),],),
+          FlatButton(
+            textColor: Colors.black,
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+            },
+            child: Text("关于Cruise"),
+            shape: CircleBorder(side: BorderSide(color: Colors.transparent)),
+          ),
+        ],
+      ),
       body: Form(
         key: _formKey,
         child: ListView(
@@ -34,23 +34,17 @@ class About extends HookWidget {
             ListTile(
               title: Text("软件许可协议"),
               leading: Icon(Feather.moon),
-              onTap: () => showDialog(
-
-              ),
+              onTap: () => {},
             ),
             ListTile(
               title: Text("隐私政策"),
               leading: Icon(Feather.moon),
-              onTap: () => showDialog(
-
-              ),
+              onTap: () => {},
             ),
             ListTile(
               title: Text("版本信息"),
               leading: Icon(Feather.moon),
-              onTap: () => showDialog(
-
-              ),
+              onTap: () => {},
             ),
           ],
         ),

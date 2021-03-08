@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 class ChannelCompactTile extends StatelessWidget {
   const ChannelCompactTile({
-    Key key,
-    @required this.item,
+     Key? key,
+    required this.item,
   }) : super(key: key);
 
   final Channel item;
