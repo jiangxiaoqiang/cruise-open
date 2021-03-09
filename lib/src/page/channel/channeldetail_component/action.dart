@@ -13,7 +13,7 @@ class ChannelDetailActionCreator {
     return Action(ChannelDetailAction.set_channel_id, payload: channelId);
   }
 
-  static Action onFetchChannelArticleUpdate(List<Item> articles) {
+  static Action onFetchChannelArticleUpdate(List<Item>? articles) {
     return Action(ChannelDetailAction.fetch_channel_article_update, payload: articles);
   }
 }

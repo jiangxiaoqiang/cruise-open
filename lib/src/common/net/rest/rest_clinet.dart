@@ -20,7 +20,7 @@ class RestClient {
     return response;
   }
 
-  static Future<Response> putHttp(String path, Object data) async {
+  static Future<Response> putHttp(String path, Object? data) async {
     final url = "$baseUrl" + path;
     Dio dio = createDio();
     Response response = await dio.put(url, data: data);

@@ -14,8 +14,8 @@ import 'channel_item_card.dart';
 
 class ChannelList extends HookWidget {
   const ChannelList({
-    Key key,
-    @required this.ids,
+    required Key key,
+    required this.ids,
   }) : super(key: key);
 
   final List<int> ids;

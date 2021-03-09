@@ -3,8 +3,8 @@ class HttpResult {
   Result result;
 
   HttpResult({
-    this.message,
-    this.result,
+    required this.message,
+    required this.result,
   });
 }
 

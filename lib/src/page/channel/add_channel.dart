@@ -14,7 +14,7 @@ class AddChannel extends HookWidget {
     double screenWidth = MediaQuery.of(context).size.width;
 
     void handleAddChannel() async {
-      if (_formKey.currentState.validate()) {
+      if (_formKey.currentState!.validate()) {
         submitting.value = true;
         HttpResult result = await ChannelAction.addChannel(
           url: url.value,
@@ -70,7 +70,7 @@ class AddChannel extends HookWidget {
                   ),
                 ),
                 validator: (value) {
-                  if (value.isEmpty) {
+                  if (value!.isEmpty) {
                     return "RSS地址不能为空";
                   }
                   return null;

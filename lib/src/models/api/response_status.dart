@@ -8,5 +8,5 @@ extension ResponseStatusExtension on ResponseStatus{
     ResponseStatus.NOT_LOGIN: "904",
   };
 
-  String get statusCode => statusCodes[this];
+  String? get statusCode => statusCodes[this];
 }

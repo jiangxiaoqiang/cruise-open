@@ -4,7 +4,7 @@ import 'package:fish_redux/fish_redux.dart';
 
 class CruiseSettingState implements Cloneable<CruiseSettingState> {
 
-  FavArticleState favArticleState;
+  FavArticleState? favArticleState;
 
   @override
   CruiseSettingState clone() {

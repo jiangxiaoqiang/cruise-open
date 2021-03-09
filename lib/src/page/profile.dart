@@ -7,7 +7,7 @@ import 'package:Cruise/src/component/story_list.dart';
 import 'package:Cruise/src/common/CruiseUser.dart';
 
 class ProfilePage extends HookWidget {
-  ProfilePage({this.username, this.isMe = false});
+  ProfilePage({required this.username, this.isMe = false});
 
   final String username;
   final bool isMe;
@@ -37,7 +37,7 @@ class ProfilePage extends HookWidget {
                           child: Text(
                             "Cancel",
                             style: TextStyle(
-                              color: Theme.of(context).textTheme.caption.color,
+                              color: Theme.of(context).textTheme.caption!.color,
                             ),
                           ),
                         ),
@@ -81,7 +81,7 @@ class ProfilePage extends HookWidget {
                                 text: "${user.karma}",
                                 style: Theme.of(context)
                                     .textTheme
-                                    .caption
+                                    .caption!
                                     .copyWith(
                                       color: Theme.of(context).primaryColor,
                                     ),

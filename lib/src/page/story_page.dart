@@ -1,21 +1,13 @@
-import 'dart:async';
-
-import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:Cruise/src/common/Repo.dart';
 import 'package:Cruise/src/component/comment_list.dart';
 import 'package:Cruise/src/component/story_information.dart';
 import 'package:Cruise/src/models/Item.dart';
-import 'package:Cruise/src/common/Repo.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 
 class StoryPage extends HookWidget {
-  StoryPage(
-      {Key key,
-      @required this.item,
-      @required this.pageStorageBucket,
-      @required this.scrollControllers,
-      this.scrollController})
-      : super(key: key);
+  StoryPage({Key? key, required this.item, required this.pageStorageBucket, required this.scrollControllers, required this.scrollController}) : super(key: key);
 
   final Item item;
   final PageStorageBucket pageStorageBucket;
@@ -27,13 +19,10 @@ class StoryPage extends HookWidget {
   Widget build(BuildContext context) {
     var article = useState<Item>(item);
     var showToTopBtn = useState(false);
-    scrollController = scrollControllers[item.id];
+    scrollController = scrollControllers[item.id]!;
 
     scrollController.addListener(() => {
-          if (scrollController.offset < 1000)
-            {showToTopBtn.value = false}
-          else if (scrollController.offset >= 1000)
-            {showToTopBtn.value = true}
+          if (scrollController.offset < 1000) {showToTopBtn.value = false} else if (scrollController.offset >= 1000) {showToTopBtn.value = true}
         });
 
     return PageStorage(
@@ -46,18 +35,16 @@ class StoryPage extends HookWidget {
                 IconButton(
                   icon: Icon(Feather.corner_left_up),
                   onPressed: () async {
-                    Item parent = await Repo.fetchArticleItem(item.parent);
+                    Item parent = (await Repo.fetchArticleItem(item.parent!))!;
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => StoryPage(item: parent)),
+                      MaterialPageRoute(builder: (context) => StoryPage(item: parent, pageStorageBucket: pageStorageBucket, scrollController: scrollController, scrollControllers: scrollControllers,)),
                     );
                   },
                 ),
             ],
           ),
           body: NotificationListener<ScrollNotification>(
-            onNotification: (ScrollNotification sn) {},
             child: CustomScrollView(
               key: PageStorageKey(item.id),
               controller: scrollController,
@@ -76,9 +63,7 @@ class StoryPage extends HookWidget {
                   child: Icon(Icons.arrow_upward),
                   onPressed: () {
                     if (scrollController.hasClients) {
-                      scrollController.animateTo(.0,
-                          duration: Duration(milliseconds: 200),
-                          curve: Curves.ease);
+                      scrollController.animateTo(.0, duration: Duration(milliseconds: 200), curve: Curves.ease);
                     }
                   }),
         ));

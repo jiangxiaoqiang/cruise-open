@@ -33,8 +33,8 @@ Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewSe
                             onTap: () async {
                               Widget page;
                               bool isLoggedIn = await Auth.isLoggedIn();
+                              page = LoginPage();
                               if (!isLoggedIn) {
-                                page = LoginPage();
                                 //page = BottomNavigationDemo(type: BottomNavigationDemoType.withLabels);
                               } else {
                                 var username = await Auth.currentUser();

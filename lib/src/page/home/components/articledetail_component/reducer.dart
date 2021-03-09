@@ -47,7 +47,6 @@ ArticleDetailState _onVote(ArticleDetailState state, Action action) {
 
 ArticleDetailState _onClearDetailArticle(ArticleDetailState state, Action action) {
   final ArticleDetailState newState = state.clone();
-  newState.article = null;
   return newState;
 }
 

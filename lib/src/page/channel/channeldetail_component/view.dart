@@ -24,11 +24,11 @@ class AllowMultipleHorizontalDragGestureRecognizer extends HorizontalDragGesture
 
 Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewService) {
   Channel item = state.channel;
-  int isFav = state.isFav;
+  int isFav = state.isFav!;
   BuildContext context = viewService.context;
 
-  Offset _initialSwipeOffset;
-  Offset _finalSwipeOffset;
+  Offset? _initialSwipeOffset;
+  Offset? _finalSwipeOffset;
 
   void _onHorizontalDragStart(DragStartDetails details) {
     _initialSwipeOffset = details.globalPosition;
@@ -40,7 +40,7 @@ Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewSe
 
   void _onHorizontalDragEnd(DragEndDetails details) {
     if (_initialSwipeOffset != null) {
-      final offsetDifference = _initialSwipeOffset.dx - _finalSwipeOffset.dx;
+      final offsetDifference = _initialSwipeOffset!.dx - _finalSwipeOffset!.dx;
       if (offsetDifference < 0) {
         Navigator.pop(context);
       }
@@ -104,7 +104,7 @@ Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewSe
                   child: Container(
                     child: Text(
                       item.subName == "" ? "Comment" : item.subName,
-                      style: Theme.of(context).textTheme.headline5.copyWith(
+                      style: Theme.of(context).textTheme.headline5!.copyWith(
                             fontWeight: FontWeight.w600,
                           ),
                     ),
@@ -157,7 +157,7 @@ Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewSe
                     children: <TextSpan>[
                       TextSpan(
                         text: item.author,
-                        style: Theme.of(context).textTheme.caption.copyWith(
+                        style: Theme.of(context).textTheme.caption!.copyWith(
                               color: Theme.of(context).primaryColor,
                             ),
                       ),

@@ -10,5 +10,5 @@ extension ResponseStatusExtension on FavStatus{
     FavStatus.UNFAV: "unfav",
   };
 
-  String get statusCode => statusCodes[this];
+  String? get statusCode => statusCodes[this];
 }

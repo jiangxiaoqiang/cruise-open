@@ -12,8 +12,8 @@ import 'home_list_default.dart';
 
 class HomeList extends HookWidget {
   HomeList({
-    Key key,
-    @required this.currentStoriesType,
+    Key? key,
+    required this.currentStoriesType,
   }) : super(key: key);
 
   final StoriesType currentStoriesType;
@@ -24,7 +24,7 @@ class HomeList extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    ArticleRequest articleRequest = new ArticleRequest();
+    ArticleRequest articleRequest = new ArticleRequest(pageNum: 1);
     articleRequest.storiesType = StoriesType.topStories;
     var counter = useState<ArticleRequest>(articleRequest);
     counter.value = articleRequest;
@@ -67,26 +67,7 @@ class HomeList extends HookWidget {
         },
         body: TabBarView(
           children: [
-            currentStoriesType
-          ].map((type) {
-            if (currentStoriesType == StoriesType.topStories) {
-              return HomeListDefault(
-                type: currentStoriesType,
-              );
-            } else if (currentStoriesType == StoriesType.channels) {
-              return ChannelListDefault(
-                storiesType: currentStoriesType,
-              );
-            } else if (currentStoriesType == StoriesType.subStories) {
-              return HomeListDefault(type: currentStoriesType);
-            }else if(currentStoriesType == StoriesType.favStories) {
-              return HomeListDefault(
-                type: currentStoriesType,
-              );
-            }else if (currentStoriesType == StoriesType.profile) {
-              return CruiseSettingsPage();
-            }
-          }).toList(),
+           ],
         ),
       ),
     );

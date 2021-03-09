@@ -3,11 +3,11 @@ import 'package:intl/intl.dart';
 
 class CruiseUser {
   CruiseUser({
-    this.about,
-    this.created,
-    this.delay,
-    this.id,
-    this.karma,
+    required this.about,
+    required this.created,
+    required this.delay,
+    required this.id,
+    required this.karma,
     this.submitted,
   });
 
@@ -16,7 +16,7 @@ class CruiseUser {
   int delay;
   String id;
   int karma;
-  List<int> submitted;
+  List<int> ?submitted;
 
   factory CruiseUser.fromJson(String str) => CruiseUser.fromMap(json.decode(str));
 
@@ -48,6 +48,6 @@ class CruiseUser {
     "karma": karma == null ? null : karma,
     "submitted": submitted == null
         ? null
-        : List<dynamic>.from(submitted.map((x) => x)),
+        : List<dynamic>.from(submitted!.map((x) => x)),
   };
 }

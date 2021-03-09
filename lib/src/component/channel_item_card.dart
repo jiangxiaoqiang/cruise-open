@@ -10,8 +10,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 class ChannelItemCard extends HookWidget {
   const ChannelItemCard({
-    Key key,
-    @required this.item,
+     Key? key,
+    required this.item,
   }) : super(key: key);
 
   final Channel item;

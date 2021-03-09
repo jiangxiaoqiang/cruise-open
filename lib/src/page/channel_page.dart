@@ -7,8 +7,8 @@ import 'package:Cruise/src/common/Repo.dart';
 
 class ChannelPage extends HookWidget {
   const ChannelPage({
-    Key key,
-    @required this.item,
+    Key? key,
+    required this.item,
   }) : super(key: key);
 
   final Channel item;
@@ -23,7 +23,7 @@ class ChannelPage extends HookWidget {
             IconButton(
               icon: Icon(Feather.corner_left_up),
               onPressed: () async {
-                Channel parent = await Repo.fetchChannelItem(item.parent);
+                Channel parent = (await Repo.fetchChannelItem(item.parent))!;
                 Navigator.push(
                   context,
                   MaterialPageRoute(

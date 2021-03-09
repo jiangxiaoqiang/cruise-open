@@ -5,20 +5,20 @@ import 'package:timeago/timeago.dart' as timeago;
 class response {
   response({
     this.depth = 0,
-    this.result,
-    this.deleted,
-    this.text,
-    this.dead,
-    this.poll,
-    this.parent,
-    this.parts,
-    this.descendants,
-    this.id,
-    this.kids,
-    this.score,
-    this.time,
-    this.title,
-    this.url,
+    required this.result,
+    required this.deleted,
+    required this.text,
+    required this.dead,
+    required this.poll,
+    required this.parent,
+    required this.parts,
+    required this.descendants,
+    required this.id,
+    required this.kids,
+    required this.score,
+    required this.time,
+    required this.title,
+    required this.url,
   });
 
   int depth;
@@ -43,7 +43,7 @@ class response {
 
   bool isVoted() => HistoryManager.isVoted(id);
 
-  String get domain => Uri.parse(url)?.host;
+  String? get domain => Uri.parse(url)?.host;
   String get ago =>
       timeago.format(DateTime.fromMillisecondsSinceEpoch(time * 1000));
 

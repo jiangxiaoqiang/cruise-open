@@ -4,7 +4,7 @@ import 'package:shimmer/shimmer.dart';
 
 class LoadingItem extends HookWidget {
   const LoadingItem({
-    Key key,
+    Key? key,
     this.count = 10,
   }) : super(key: key);
 

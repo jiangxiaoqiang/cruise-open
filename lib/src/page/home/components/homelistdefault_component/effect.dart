@@ -23,7 +23,7 @@ void _onBuild(Action action, Context<HomeListDefaultState> ctx) {
   if (homeListDefaultState.lastStoriesType != articleRequest.storiesType) {
     // switch the article navigator tab
     // initial the new type of article
-    ctx.dispatch(HomeListDefaultActionCreator.onUpdateLastStroiesType(articleRequest.storiesType));
+    ctx.dispatch(HomeListDefaultActionCreator.onUpdateLastStroiesType(articleRequest.storiesType!));
     initArticles(action, ctx);
   }
 }
@@ -37,7 +37,7 @@ Future initArticles(Action action, Context<HomeListDefaultState> ctx) async {
   ArticleRequest articleRequest = homeListDefaultState.articleRequest;
   articleRequest.pageNum = 1;
   articleRequest.offset = null;
-  List<int> ids = await Repo.getElementIds(articleRequest);
+  List<int> ids = (await Repo.getElementIds(articleRequest))!;
   List<Item> articles = await ArticleAction.fetchArticleByIds(ids);
   if (ids != null) {
     ctx.dispatch(HomeListDefaultActionCreator.onSetArticleIds(ids, articles, articleRequest));
@@ -48,10 +48,10 @@ Future _onLoadingMoreArticles(Action action, Context<HomeListDefaultState> ctx) 
   ArticleRequest articleRequest = (action.payload as ArticleRequest);
   articleRequest.pageNum = articleRequest.pageNum + 1;
   HomeListDefaultState homeListDefaultState = ctx.state;
-  if (homeListDefaultState.articleRequest.offset != null && homeListDefaultState.articleRequest.offset > 0) {
+  if (homeListDefaultState.articleRequest.offset != null && homeListDefaultState.articleRequest.offset! > 0) {
     articleRequest.offset = homeListDefaultState.articleRequest.offset;
   }
-  List<int> ids = await Repo.getElementIds(articleRequest);
+  List<int> ids = (await Repo.getElementIds(articleRequest))!;
   List<Item> articles = await ArticleAction.fetchArticleByIds(ids);
   if (articles != null) {
     ctx.dispatch(HomeListDefaultActionCreator.onLoadingMoreArticlesUpdate(articles));
@@ -60,7 +60,7 @@ Future _onLoadingMoreArticles(Action action, Context<HomeListDefaultState> ctx) 
 
 Future _onFetchNewestArticles(Action action, Context<HomeListDefaultState> ctx) async {
   ArticleRequest articleRequest = (action.payload as ArticleRequest);
-  List<int> ids = await Repo.getElementIds(articleRequest);
+  List<int> ids = (await Repo.getElementIds(articleRequest))!;
   List<Item> articles = await ArticleAction.fetchArticleByIds(ids);
   if (articles != null) {
     ctx.dispatch(HomeListDefaultActionCreator.onFetchNewestArticlesUpdate(articles));
@@ -70,7 +70,7 @@ Future _onFetchNewestArticles(Action action, Context<HomeListDefaultState> ctx) 
 Future _onFetchArticleIds(Action action, Context<HomeListDefaultState> ctx) async {
   ArticleRequest articleRequest = (action.payload as ArticleRequest);
   articleRequest.pageNum = articleRequest.pageNum + 1;
-  List<int> ids = await Repo.getElementIds(articleRequest);
+  List<int> ids = (await Repo.getElementIds(articleRequest))!;
   List<Item> articles = await ArticleAction.fetchArticleByIds(ids);
   if (ids != null) {
     ctx.dispatch(HomeListDefaultActionCreator.onSetArticleIds(ids, articles, articleRequest));

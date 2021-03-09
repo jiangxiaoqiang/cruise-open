@@ -34,6 +34,6 @@ void onLogin(Action action, Context<LoginState> ctx) {
 
     } else {
     }*/
-    ctx.dispatch(LoginActionCreator.onLoginSuccess(null));
+    //ctx.dispatch(LoginActionCreator.onLoginSuccess());
   }
 }

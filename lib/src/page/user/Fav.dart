@@ -6,8 +6,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 class Fav extends HookWidget {
 
   Fav({
-    Key key,
-    @required this.currentStoriesType,
+    Key? key,
+    required this.currentStoriesType,
   }) : super(key: key);
 
   final StoriesType currentStoriesType;
