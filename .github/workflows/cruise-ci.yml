@@ -24,7 +24,7 @@ jobs:
       # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-10.15-Readme.md
       #
       - name: Select Xcode version
-        run: sudo xcode-select -s '/Applications/Xcode_11.7.app/Contents/Developer'
+        run: sudo xcode-select -s '/Applications/Xcode_12.4.app/Contents/Developer'
       - name: Bundle install
         run: |
           cd ./ios
