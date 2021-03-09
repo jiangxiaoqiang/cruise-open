@@ -26,31 +26,31 @@ class Repo {
     Stream<Item> stream = lazyFetchComments(item: item, assignDepth: false);
     List<String> comments = [];
     await for (Item comment in stream) {
-      comments.add(comment.id);
+      comments.add(comment.id!);
     }
     return comments;
   }
 
   static Stream<Item> lazyFetchComments({required Item item, int depth = 0, bool assignDepth = true}) async* {
-    if (item.kids.isEmpty) return;
-    for (int kidId in item.kids) {
+    if (item.kids!.isEmpty) return;
+    for (int kidId in item.kids!) {
       Item kid = (await fetchArticleItem(kidId))!;
       if (kid == null) continue;
       if (assignDepth) kid.depth = depth;
       yield kid;
-      Stream stream = lazyFetchComments(item: kid, depth: kid.depth + 1);
+      /*Stream stream = lazyFetchComments(item: kid, depth: kid.depth + 1);
       await for (Item grandkid in stream) {
         yield grandkid;
-      }
+      }*/
     }
   }
 
   static Future<List<Item>> prefetchComments({required Item item}) async {
     List<Item> result = [];
     if (item.parent != null) result.add(item);
-    if (item.kids.isEmpty) return Future.value(result);
+    if (item.kids!.isEmpty) return Future.value(result);
 
-    await Future.wait(item.kids.map((kidId) async {
+    await Future.wait(item.kids!.map((kidId) async {
       Item kid = (await fetchArticleItem(kidId))!;
       if (kid != null) {
         await prefetchComments(item: kid);

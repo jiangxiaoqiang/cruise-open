@@ -38,7 +38,7 @@ Widget buildView(ArticlePgState state, Dispatch dispatch, ViewService viewServic
               IconButton(
                 icon: Icon(Feather.corner_left_up),
                 onPressed: () async {
-                  Item parent = (await Repo.fetchArticleItem(item.parent))!;
+                  Item parent = (await Repo.fetchArticleItem(item.parent!))!;
                 },
               ),
           ],

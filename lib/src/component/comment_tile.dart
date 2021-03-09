@@ -151,7 +151,7 @@ class CommentTile extends HookWidget {
                     ),
                   ),
                   Spacer(),
-                  if (isCollapsed && comment.kids.isNotEmpty)
+                  if (isCollapsed && comment.kids!.isNotEmpty)
                     Container(
                       decoration: BoxDecoration(
                         color: Theme.of(context).accentColor,
@@ -162,7 +162,7 @@ class CommentTile extends HookWidget {
                           horizontal: 6,
                         ),
                         child: Text(
-                          "+${comment.kids.length}",
+                          "+${comment.kids!.length}",
                           style: Theme.of(context).textTheme.caption!.copyWith(
                                 color: Colors.black,
                                 fontWeight: FontWeight.w600,
