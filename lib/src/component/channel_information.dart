@@ -167,7 +167,7 @@ class ChannelInformation extends HookWidget {
                     },
                     onLinkTap: (url) => launchUrl(url),
                   ),
-                if (item.parts.isNotEmpty)
+                if (item.parts!.isNotEmpty)
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0),
                   ),

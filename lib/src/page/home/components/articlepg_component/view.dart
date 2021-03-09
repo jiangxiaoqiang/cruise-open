@@ -12,13 +12,10 @@ Widget buildView(ArticlePgState state, Dispatch dispatch, ViewService viewServic
   var showToTopBtn = state.showToTopBtn;
   PageStorageBucket pageStorageBucket = state.pageStorageBucket;
   Map<String, ScrollController> scrollControllers = state.scrollControllers;
-  ScrollController scrollController = scrollControllers[item.id]!;
-
-  if (scrollController != null) {
-    scrollController.addListener(() => {
-          if (scrollController.offset < 1000) {showToTopBtn = false} else if (scrollController.offset >= 1000) {showToTopBtn = true}
-        });
-  }
+  ScrollController scrollController = scrollControllers.length == 0 ? ScrollController() : scrollControllers[item.id]!;
+  scrollController.addListener(() => {
+        if (scrollController.offset < 1000) {showToTopBtn = false} else if (scrollController.offset >= 1000) {showToTopBtn = true}
+      });
 
   Widget navDetail(Item article) {
     if (state.articleDetailState.article == null) {
