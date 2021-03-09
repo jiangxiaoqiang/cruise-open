@@ -15,9 +15,9 @@ Effect<ChannelListState> buildEffect() {
 Future _onInit(Action action, Context<ChannelListState> ctx) async {
   ChannelListState articleListState = ctx.state;
   List<int> ids = articleListState.channelIds;
-  List<Channel> channels = new List();
+  List<Channel> channels = List.empty();
   for (int id in ids) {
-    Channel article = await Repo.fetchChannelItem(id);
+    Channel article = (await Repo.fetchChannelItem(id))!;
     if (article != null) {
       channels.add(article);
     }

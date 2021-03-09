@@ -59,15 +59,15 @@ HomeListDefaultState _onSetArticleIds(HomeListDefaultState state, Action action)
   ArticlePayload payload = (action.payload as ArticlePayload);
 
   ArticleListState articleListState = state.articleListState.clone();
-  articleListState.articleIds = payload.articleIds;
-  articleListState.articles = payload.articles;
+  articleListState.articleIds = payload.articleIds!;
+  articleListState.articles = payload.articles!;
 
-  newState.articleRequest = payload.articleRequest;
+  newState.articleRequest = payload.articleRequest!;
   newState.currentStoriesType = state.currentStoriesType;
   newState.articleListState = articleListState;
 
-  if (payload.articleRequest.pageNum == 1 && payload.articleIds.isNotEmpty) {
-    newState.articleRequest.offset = payload.articleIds.reduce(max);
+  if (payload.articleRequest!.pageNum == 1 && payload.articleIds!.isNotEmpty) {
+    newState.articleRequest.offset = payload.articleIds!.reduce(max);
   }
   return newState;
 }

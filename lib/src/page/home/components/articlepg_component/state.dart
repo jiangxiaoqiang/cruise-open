@@ -5,7 +5,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
 
 class ArticlePgState implements Cloneable<ArticlePgState> {
-  Item article;
+  Item article = Item();
   PageStorageBucket pageStorageBucket = PageStorageBucket();
   Map<String, ScrollController> scrollControllers = new Map();
   bool showToTopBtn = false;
@@ -27,8 +27,8 @@ class ArticlePgConnector extends ConnOp<ArticleListState, ArticlePgState> {
   @override
   ArticlePgState get(ArticleListState state) {
     ArticlePgState articlePageState = state.articlePgState.clone();
-    if(state.article != null){
-      articlePageState.article =state.article;
+    if (state.article != null) {
+      articlePageState.article = state.article!;
     }
     return articlePageState;
   }
@@ -38,4 +38,3 @@ class ArticlePgConnector extends ConnOp<ArticleListState, ArticlePgState> {
     state.articlePgState = subState;
   }
 }
-

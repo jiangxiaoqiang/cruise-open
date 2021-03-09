@@ -12,14 +12,14 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 
 class StoryList extends HookWidget {
   StoryList({
-    Key key,
-    @required this.articles,
-    @required this.storiesType,
+     Key? key,
+    required this.articles,
+     this.storiesType,
   }) : super(key: key);
 
   final List<Item> articles;
 
-  final StoriesType storiesType;
+  final StoriesType? storiesType;
 
   _getViewType(ViewType type, Item item) {
     switch (type) {
@@ -52,7 +52,7 @@ class StoryList extends HookWidget {
 
     return SliverList(
       delegate: SliverChildBuilderDelegate((context, index) {
-        if (articles != null) {
+        /*if (articles != null) {
           articles.forEach((element) {
             return Slidable(
               key: Key(element.id.toString()),
@@ -97,7 +97,7 @@ class StoryList extends HookWidget {
               ),
             );
           });
-        }
+        }*/
         return null;
       }),
     );

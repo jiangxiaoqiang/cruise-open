@@ -16,14 +16,15 @@ final storyChannelProvider = FutureProvider.family((ref, id) async {
 
 class ChannelsPage extends HookWidget {
   const ChannelsPage({
-    Key key,
-    @required this.articleRequest,
+    Key? key,
+     this.articleRequest,
   }) : super(key: key);
 
-  final ArticleRequest articleRequest;
+  final ArticleRequest? articleRequest;
 
   @override
   Widget build(BuildContext context) {
+    return Container();
     /*return Consumer(
             (context, read) {
           return read(storiesTypeProvider(articleRequest)).when(

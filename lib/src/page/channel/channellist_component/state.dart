@@ -4,9 +4,9 @@ import 'package:Cruise/src/page/channel/channelpg_component/state.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 class ChannelListState implements Cloneable<ChannelListState> {
-  Channel channel;
-  List<int> channelIds = new List();
-  List<Channel> channels = new List();
+  Channel? channel;
+  List<int> channelIds = List.empty();
+  List<Channel> channels = List.empty();
   ChannelPgState channelPgState = ChannelPgState();
 
   @override

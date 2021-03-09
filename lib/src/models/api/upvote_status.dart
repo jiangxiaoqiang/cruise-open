@@ -10,5 +10,5 @@ extension ResponseStatusExtension on UpvoteStatus{
     UpvoteStatus.UNUPVOTE: "unupvote",
   };
 
-  String get statusCode => statusCodes[this];
+  String? get statusCode => statusCodes[this];
 }

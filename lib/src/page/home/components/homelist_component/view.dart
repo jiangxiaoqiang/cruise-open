@@ -18,6 +18,23 @@ Widget buildView(HomeListState state, Dispatch dispatch, ViewService viewService
     return viewService.buildComponent(tabName);
   }
 
+  Widget nav(StoriesType currentStoriesType){
+    if (currentStoriesType == StoriesType.topStories) {
+      return switchNavTab(StoriesType.topStories, "homelistdefault");
+    } else if (currentStoriesType == StoriesType.channels) {
+      return switchNavTab(StoriesType.channels, "channellistdefault");
+    } else if (currentStoriesType == StoriesType.subStories) {
+      return switchNavTab(StoriesType.subStories, "homelistdefault");
+    } else if (currentStoriesType == StoriesType.favStories) {
+      return switchNavTab(StoriesType.favStories, "homelistdefault");
+    } else if (currentStoriesType == StoriesType.profile) {
+      return switchNavTab(StoriesType.profile, "cruisesetting");
+    } else if (currentStoriesType == StoriesType.originalStories) {
+      return switchNavTab(StoriesType.originalStories, "homelistdefault");
+    }
+    return Container();
+  }
+
   return DefaultTabController(
     length: 1,
     child: NestedScrollView(
@@ -65,19 +82,7 @@ Widget buildView(HomeListState state, Dispatch dispatch, ViewService viewService
       },
       body: TabBarView(
         children: [currentStoriesType].map((type) {
-          if (currentStoriesType == StoriesType.topStories) {
-            return switchNavTab(StoriesType.topStories, "homelistdefault");
-          } else if (currentStoriesType == StoriesType.channels) {
-            return switchNavTab(StoriesType.channels, "channellistdefault");
-          } else if (currentStoriesType == StoriesType.subStories) {
-            return switchNavTab(StoriesType.subStories, "homelistdefault");
-          } else if (currentStoriesType == StoriesType.favStories) {
-            return switchNavTab(StoriesType.favStories, "homelistdefault");
-          } else if (currentStoriesType == StoriesType.profile) {
-            return switchNavTab(StoriesType.profile, "cruisesetting");
-          } else if (currentStoriesType == StoriesType.originalStories) {
-            return switchNavTab(StoriesType.originalStories, "homelistdefault");
-          }
+         return nav(type);
         }).toList(),
       ),
     ),

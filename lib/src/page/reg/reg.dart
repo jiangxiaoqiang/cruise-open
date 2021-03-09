@@ -47,7 +47,7 @@ class RegPage extends HookWidget {
                   ),
                 ),
                 validator: (value) {
-                  if (value.isEmpty) {
+                  if (value!.isEmpty) {
                     return "手机号码不能为空";
                   }
                   return null;
@@ -70,7 +70,7 @@ class RegPage extends HookWidget {
                         shape: new RoundedRectangleBorder(
                             borderRadius: new BorderRadius.circular(30.0)),
                         onPressed: () async {
-                          if (_formKey.currentState.validate()) {
+                          if (_formKey.currentState!.validate()) {
                             submitting.value = true;
                             AuthResult result = await Auth.sms(
                               phone: phone.value,

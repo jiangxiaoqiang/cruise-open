@@ -39,7 +39,7 @@ class CruiseSettingsPage extends HookWidget {
                           value: lightTheme,
                           groupValue: currentTheme,
                           onChanged: (value) {
-                            themeManager.setTheme(value);
+                            themeManager.setTheme(value as ThemeData);
                             Navigator.pop(context);
                           },
                         ),
@@ -48,7 +48,7 @@ class CruiseSettingsPage extends HookWidget {
                           value: darkTheme,
                           groupValue: currentTheme,
                           onChanged: (value) {
-                            themeManager.setTheme(value);
+                            themeManager.setTheme(value as ThemeData);
                             Navigator.pop(context);
                           },
                         ),
@@ -57,7 +57,7 @@ class CruiseSettingsPage extends HookWidget {
                           value: trueBlackTheme,
                           groupValue: currentTheme,
                           onChanged: (value) {
-                            themeManager.setTheme(value);
+                            themeManager.setTheme(value as ThemeData);
                             Navigator.pop(context);
                           },
                         ),
@@ -81,7 +81,7 @@ class CruiseSettingsPage extends HookWidget {
                         value: ViewType.itemCard,
                         groupValue: currentView,
                         onChanged: (value) {
-                          viewManager.setView(value);
+                          viewManager.setView(value as ViewType);
                           Navigator.pop(context);
                         },
                       ),
@@ -90,7 +90,7 @@ class CruiseSettingsPage extends HookWidget {
                         value: ViewType.compactTile,
                         groupValue: currentView,
                         onChanged: (value) {
-                          viewManager.setView(value);
+                          viewManager.setView(value as ViewType);
                           Navigator.pop(context);
                         },
                       ),
@@ -99,7 +99,7 @@ class CruiseSettingsPage extends HookWidget {
                         value: ViewType.itemTile,
                         groupValue: currentView,
                         onChanged: (value) {
-                          viewManager.setView(value);
+                          viewManager.setView(value as ViewType);
                           Navigator.pop(context);
                         },
                       ),

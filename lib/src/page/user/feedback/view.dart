@@ -9,7 +9,7 @@ import 'state.dart';
 Widget buildView(FeedbackState state, Dispatch dispatch, ViewService viewService) {
   double screenWidth = MediaQuery.of(viewService.context).size.width;
   var submitting = false;
-  String feedbackContent;
+  String? feedbackContent;
 
   void handleSubmitFeedback(String feedback) async {
     submitting = true;
@@ -67,7 +67,7 @@ Widget buildView(FeedbackState state, Dispatch dispatch, ViewService viewService
                 ),
               ),
               validator: (value) {
-                if (value.isEmpty) {
+                if (value!.isEmpty) {
                   return "反馈内容不能为空";
                 }
                 return null;
@@ -90,7 +90,7 @@ Widget buildView(FeedbackState state, Dispatch dispatch, ViewService viewService
                           color: Theme.of(context).primaryColor,
                           shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
                           onPressed: () async {
-                            handleSubmitFeedback(feedbackContent);
+                            handleSubmitFeedback(feedbackContent!);
                           },
                           child: submitting
                               ? SizedBox(

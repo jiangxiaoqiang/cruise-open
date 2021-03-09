@@ -12,7 +12,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'channel_action.dart';
 
 class CustomSearchDelegate extends SearchDelegate {
-  ViewService viewService;
+  ViewService? viewService;
 
   CustomSearchDelegate(ViewService viewService) {
     this.viewService = viewService;
@@ -81,10 +81,7 @@ class CustomSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    var channelRequest = new ChannelRequest();
-    channelRequest.name = query;
-    channelRequest.pageNum = 1;
-    channelRequest.pageSize = 10;
+    var channelRequest = new ChannelRequest(pageNum: 1,pageSize: 10,name: query);
 
     return FutureBuilder(
         future: ChannelAction.searchChannel(channelRequest),
@@ -103,10 +100,7 @@ class CustomSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    var channelRequest = new ChannelRequest();
-    channelRequest.name = query;
-    channelRequest.pageNum = 1;
-    channelRequest.pageSize = 10;
+    var channelRequest = new ChannelRequest(pageNum: 1,pageSize: 10,name: query);
 
     return FutureBuilder(
         future: ChannelAction.fetchSuggestion(channelRequest),

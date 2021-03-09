@@ -18,13 +18,13 @@ final storyProvider = FutureProvider.family((ref, id) async {
 
 class ArticlesPage extends HookWidget {
   ArticlesPage({
-    Key key,
-    @required this.articleRequest,
-    @required this.ids,
+    Key? key,
+     this.articleRequest,
+     this.ids,
   }) : super(key: key);
 
-  final ArticleRequest articleRequest;
-  List<int> ids;
+  final ArticleRequest? articleRequest;
+  List<int>? ids;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class ArticlesPage extends HookWidget {
 
     return StoryList(
       //articles: articles,
-      storiesType: articleRequest.storiesType,
+      storiesType: articleRequest!.storiesType, articles: [],
     );
   }
 }

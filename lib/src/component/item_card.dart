@@ -5,8 +5,8 @@ import 'package:Cruise/src/models/Item.dart';
 
 class ItemCard extends StatelessWidget {
   const ItemCard({
-    Key key,
-    @required this.item,
+     Key? key,
+    required this.item,
   }) : super(key: key);
 
   final Item item;

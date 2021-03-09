@@ -6,23 +6,23 @@ import 'package:timeago/timeago.dart' as timeago;
 class Channel {
   Channel({
     this.depth = 0,
-    this.author,
-    this.deleted,
-    this.content,
-    this.dead,
-    this.poll,
-    this.parent,
+    this.author = "Unknown",
+    this.deleted = false,
+    this.content = "",
+    this.dead = false,
+    this.poll = 0,
+    this.parent = 0,
     this.parts,
     this.descendants,
-    this.id,
+    this.id = "0",
     this.kids,
-    this.score,
-    this.pubTime,
-    this.title,
-    this.subName,
-    this.subUrl,
-    this.isFav,
-    this.intro,
+    this.score = 0,
+    this.pubTime = 0,
+    this.title = "Unknown",
+    this.subName = "Unknown",
+    this.subUrl = "",
+    this.isFav = 0,
+    this.intro = "",
   });
 
   int depth;
@@ -32,10 +32,10 @@ class Channel {
   bool dead;
   int poll;
   int parent;
-  List<int> parts;
-  int descendants;
+  List<int>? parts;
+  int? descendants;
   String id;
-  List<int> kids;
+  List<int>? kids;
   int score;
   int pubTime;
   String title;
@@ -80,9 +80,9 @@ class Channel {
         "dead": dead == null ? null : dead,
         "poll": poll == null ? null : poll,
         "parent": parent == null ? null : parent,
-        "parts": parts == null ? null : List<dynamic>.from(parts.map((x) => x)),
+        "parts": parts == null ? null : List<dynamic>.from(parts!.map((x) => x)),
         "descendants": descendants == null ? null : descendants,
-        "kids": kids == null ? null : List<dynamic>.from(kids.map((x) => x)),
+        "kids": kids == null ? null : List<dynamic>.from(kids!.map((x) => x)),
         "score": score == null ? null : score,
         "pubTime": pubTime == null ? null : pubTime,
         "title": title == null ? null : title,
