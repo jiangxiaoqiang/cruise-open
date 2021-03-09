@@ -35,7 +35,7 @@ class StoryPage extends HookWidget {
                 IconButton(
                   icon: Icon(Feather.corner_left_up),
                   onPressed: () async {
-                    Item parent = (await Repo.fetchArticleItem(item.parent))!;
+                    Item parent = (await Repo.fetchArticleItem(item.parent!))!;
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => StoryPage(item: parent, pageStorageBucket: pageStorageBucket, scrollController: scrollController, scrollControllers: scrollControllers,)),

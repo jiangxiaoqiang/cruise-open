@@ -15,10 +15,6 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-/*final partsProvider = FutureProvider.family((ref, int id) async {
-  return await Repo.fetchArticleItem(id);
-});*/
-
 class StoryInformation extends HookWidget {
   const StoryInformation({ Key? key, required this.item}) : super(key: key);
 
@@ -192,7 +188,7 @@ class StoryInformation extends HookWidget {
                     },
                     onLinkTap: (url) => launchUrl(url),
                   ),
-                if (item.parts.isNotEmpty)
+                if (item.parts!.isNotEmpty)
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0),
                   ),
