@@ -8,9 +8,8 @@ import '../../channel_page.dart';
 import 'action.dart';
 import 'state.dart';
 
-Widget buildView(
-    ChannelPgState state, Dispatch dispatch, ViewService viewService) {
-  Channel item = state.channel!;
+Widget buildView(ChannelPgState state, Dispatch dispatch, ViewService viewService) {
+  Channel item = state.channel;
   BuildContext context = viewService.context;
 
   Widget navChannelDetail(Channel channel) {
@@ -32,8 +31,7 @@ Widget buildView(
               Channel parent = (await Repo.fetchChannelItem(item.parent))!;
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) => ChannelPage(item: parent)),
+                MaterialPageRoute(builder: (context) => ChannelPage(item: parent)),
               );
             },
           ),

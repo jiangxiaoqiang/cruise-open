@@ -3,7 +3,7 @@ import 'package:Cruise/src/page/home/components/articlepg_component/state.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 class ArticleDetailState implements Cloneable<ArticleDetailState> {
-  late Item article;
+  Item article = Item();
 
   @override
   ArticleDetailState clone() {

@@ -23,7 +23,7 @@ class AllowMultipleHorizontalDragGestureRecognizer extends HorizontalDragGesture
 }
 
 Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewService) {
-  Channel item = state.channel!;
+  Channel item = state.channel;
   int isFav = state.isFav!;
   BuildContext context = viewService.context;
 

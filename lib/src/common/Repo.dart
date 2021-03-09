@@ -26,7 +26,7 @@ class Repo {
     Stream<Item> stream = lazyFetchComments(item: item, assignDepth: false);
     List<String> comments = [];
     await for (Item comment in stream) {
-      comments.add(comment.id!);
+      comments.add(comment.id);
     }
     return comments;
   }
