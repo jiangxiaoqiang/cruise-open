@@ -30,7 +30,7 @@ jobs:
           cd ./ios
           gem install cocoapods -v 1.10.0
           bundle install
-          gem install fastlane -v 2.172.0
+          gem install fastlane -v 2.177.0
       - name: Install tools
         run: |
           flutter precache
