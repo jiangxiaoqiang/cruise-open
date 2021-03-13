@@ -28,7 +28,7 @@ jobs:
       - name: Bundle install
         run: |
           cd ./ios
-          brew install rvm
+          curl -sSL https://get.rvm.io | bash -s stable --ruby
           rvm install 2.7.2
           rvm use --default 2.7.2
           gem install cocoapods -v 1.10.1
