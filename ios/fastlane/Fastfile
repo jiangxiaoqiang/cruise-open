@@ -32,6 +32,8 @@ platform :ios do
     )
 
     Dir.chdir "../.." do
+        sh("gem","uninstall","cocoapods")
+        sh("gem","install","cocoapods","-v 1.10.1")
         sh("flutter", "packages", "get")
         sh("flutter", "clean")
         sh("flutter", "build", "ios", "--release", "--no-sound-null-safety")
