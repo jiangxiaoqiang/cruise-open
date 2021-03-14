@@ -35,7 +35,6 @@ platform :ios do
         # sh("gem","uninstall","cocoapods")
         # sh("gem","install","cocoapods","-v 1.10.1")
         sh("brew","install","cocoapods")
-        sh("brew","link","--overwrite","cocoapods")
         sh("flutter", "packages", "get")
         sh("flutter", "clean")
         sh("flutter", "build", "ios", "--release", "--no-sound-null-safety")
