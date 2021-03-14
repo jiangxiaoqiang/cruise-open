@@ -11,7 +11,6 @@ platform :ios do
   end
 
   lane :beta do
-    sh("flutter", "build","ios","--release --no-sound-null-safety")
     if is_ci
       create_keychain(
         name: ENV['MATCH_KEYCHAIN_NAME'],
@@ -31,6 +30,12 @@ platform :ios do
       keychain_name: ENV['MATCH_KEYCHAIN_NAME'],
       keychain_password: ENV["MATCH_KEYCHAIN_PASSWORD"]
     )
+
+    Dir.chdir "../.." do
+        sh("flutter", "packages", "get")
+        sh("flutter", "clean")
+        sh("flutter", "build", "ios", "--release", "--no-sound-null-safety")
+    end
 
     build_app(
         workspace: "Runner.xcworkspace",
