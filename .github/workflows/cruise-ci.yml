@@ -68,7 +68,6 @@ jobs:
       - name: Deploy to TestFlight/PGY
         run: |
           cd ./ios
-          flutter build ios --release --no-sound-null-safety
           bundle exec fastlane beta
         env:
           FLUTTER_ROOT: ${{ secrets.FLUTTER_ROOT }}
