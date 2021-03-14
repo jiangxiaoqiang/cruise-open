@@ -30,3 +30,4 @@ ios/vendor/cache/
 ios/Gemfile.lock
 ios/Runner.app.dSYM.zip
 *.log
+*.ipa

@@ -39,7 +39,7 @@ jobs:
           rvm --version
           rvm install 2.7.2
           rvm use --default 2.7.2
-          gem install cocoapods -v 1.10.1
+          gem install cocoapods -v 1.10.0
           gem install fastlane -v 2.177.0
           bundle install
       - name: Install tools
@@ -50,7 +50,7 @@ jobs:
           pod install
       #- run: flutter pub get
       #- run: flutter build apk
-      #- run: flutter build ios --release --no-codesign
+      - run: flutter build ios --release --no-sound-null-safety
       - name: Setup SSH Keys and known_hosts for fastlane match
         run: |
           SSH_PATH="$HOME/.ssh"
