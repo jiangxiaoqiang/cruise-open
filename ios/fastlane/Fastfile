@@ -31,19 +31,11 @@ platform :ios do
       keychain_password: ENV["MATCH_KEYCHAIN_PASSWORD"]
     )
 
-    Dir.chdir "../.." do
-        # sh("gem","uninstall","cocoapods")
-        # sh("gem","install","cocoapods","-v 1.10.1")
-        sh("brew","install","cocoapods")
-        sh("flutter", "packages", "get")
-        sh("flutter", "clean")
-        sh("flutter", "build", "ios", "--release", "--no-sound-null-safety")
-    end
-
     build_app(
         workspace: "Runner.xcworkspace",
         scheme: "Runner",
-        export_method: "ad-hoc"
+        export_method: "ad-hoc",
+        skip_archive: true
     )
 
     pgyer(
