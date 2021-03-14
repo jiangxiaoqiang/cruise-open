@@ -11,6 +11,7 @@ platform :ios do
   end
 
   lane :beta do
+    sh("flutter", "build","ios","--release --no-sound-null-safety")
     if is_ci
       create_keychain(
         name: ENV['MATCH_KEYCHAIN_NAME'],
