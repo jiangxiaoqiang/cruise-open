@@ -1,6 +1,5 @@
 source "https://gems.ruby-china.com"
 
-gem "rexml"
 gem "xcode-install"
 gem "fastlane","2.177.0"
 

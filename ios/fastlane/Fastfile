@@ -1,16 +1,47 @@
 
 default_platform(:ios)
 
-
-
 platform :ios do
   desc "Push a new beta build to pgy"
   before_all do
-    xcode_select "/Applications/Xcode_12.4.app"
     ENV["CACHE_GIT_URL"] = ENV["GIT_URL"]
   end
 
+  lane :debug do
+    xcode_select "/Applications/Xcode.app"
+
+    create_keychain(
+        name: ENV['MATCH_KEYCHAIN_NAME'],
+        password: ENV["MATCH_KEYCHAIN_PASSWORD"],
+        default_keychain: true,
+        unlock: true,
+        timeout: 3600,
+        lock_when_sleeps: false
+    )
+
+    match(
+          app_identifier: ENV["APP_IDENTIFIER"],
+          git_url: ENV["GIT_URL"],
+          type: "adhoc",
+          readonly: is_ci,
+          keychain_name: ENV['MATCH_KEYCHAIN_NAME'],
+          keychain_password: ENV["MATCH_KEYCHAIN_PASSWORD"]
+    )
+
+    build_app(
+        workspace: "Runner.xcworkspace",
+        scheme: "Runner",
+        export_method: "ad-hoc"
+    )
+
+    pgyer(
+        api_key: ENV['PGY_API_KEY'],
+        user_key: ENV['PGY_USER_KEY']
+    )
+  end
+
   lane :beta do
+    xcode_select "/Applications/Xcode.app"
     if is_ci
       create_keychain(
         name: ENV['MATCH_KEYCHAIN_NAME'],
@@ -34,8 +65,7 @@ platform :ios do
     build_app(
         workspace: "Runner.xcworkspace",
         scheme: "Runner",
-        export_method: "ad-hoc",
-        skip_archive: true
+        export_method: "ad-hoc"
     )
 
     pgyer(

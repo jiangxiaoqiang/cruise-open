@@ -16,11 +16,16 @@ or alternatively using `brew install fastlane`
 
 # Available Actions
 ## iOS
+### ios debug
+```
+fastlane ios debug
+```
+Push a new beta build to pgy
 ### ios beta
 ```
 fastlane ios beta
 ```
-Push a new beta build to pgy
+
 
 ----
 
