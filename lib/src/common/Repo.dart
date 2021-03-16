@@ -18,7 +18,7 @@ class Repo {
   static final _usersCache = <String, CruiseUser>{};
   static const baseUrl = global.baseUrl;
 
-  static Future<List<int>?> getElementIds(ArticleRequest request) async {
+  static Future<List<int>> getElementIds(ArticleRequest request) async {
     return await _getIds(request);
   }
 
@@ -65,20 +65,18 @@ class Repo {
     }));
   }
 
-  static Future<List<int>?> _getIds(ArticleRequest articleRequest) async {
+  static Future<List<int>> _getIds(ArticleRequest articleRequest) async {
     final typeQuery = _getStoryTypeQuery(articleRequest.storiesType!);
     Map jsonMap = articleRequest.toMap();
     final response = await RestClient.postHttp("$typeQuery", jsonMap);
     if (response.statusCode == 200 && response.data["statusCode"] == "200") {
       Map result = response.data["result"];
-      if (result == null) {
-        return List.empty();
-      }
       var articles = result["list"];
       List<String> genreIdsList = new List<String>.from(articles);
       List<int> intIds = genreIdsList.map(int.parse).toList();
       return intIds;
     }
+    return List.empty();
   }
 
   static Future<Item?> fetchArticleItem(int id) async {

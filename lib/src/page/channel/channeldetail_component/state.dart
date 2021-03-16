@@ -7,7 +7,7 @@ import 'package:fish_redux/fish_redux.dart';
 
 class ChannelDetailState implements Cloneable<ChannelDetailState> {
   Channel channel = Channel();
-  int? isFav;
+  int isFav = 0;
   StoriesType? currentStoriesType;
   ArticleListState articleListState = ArticleListState();
   ArticleRequest? articleRequest;

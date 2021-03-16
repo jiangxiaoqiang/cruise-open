@@ -16,7 +16,7 @@ Effect<ChannelListDefaultState> buildEffect() {
 
 Future _onInit(Action action, Context<ChannelListDefaultState> ctx) async {
   ArticleRequest articleRequest = new ArticleRequest(pageSize: 15, pageNum: 1, storiesType: StoriesType.channels);
-  List<int> ids = (await Repo.getElementIds(articleRequest))!;
+  List<int> ids = await Repo.getElementIds(articleRequest);
   if (ids != null) {
     ctx.dispatch(ChannelListDefaultActionCreator.onSetChannelIds(ids, articleRequest));
   }
@@ -29,7 +29,7 @@ Future _onLoadingMoreChannels(Action action, Context<ChannelListDefaultState> ct
   if (homeListDefaultState.articleRequest.offset != null && homeListDefaultState.articleRequest.offset! > 0) {
     articleRequest.offset = homeListDefaultState.articleRequest.offset;
   }
-  List<int> ids = (await Repo.getElementIds(articleRequest))!;
+  List<int> ids = await Repo.getElementIds(articleRequest);
   List<Channel> channels = [];
   if (ids != null) {
     for (int id in ids) {
