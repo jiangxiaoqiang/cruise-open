@@ -39,9 +39,7 @@ Future initArticles(Action action, Context<HomeListDefaultState> ctx) async {
   articleRequest.offset = null;
   List<int> ids = await Repo.getElementIds(articleRequest);
   List<Item> articles = await ArticleAction.fetchArticleByIds(ids);
-  if (ids != null) {
-    ctx.dispatch(HomeListDefaultActionCreator.onSetArticleIds(ids, articles, articleRequest));
-  }
+  ctx.dispatch(HomeListDefaultActionCreator.onSetArticleIds(ids, articles, articleRequest));
 }
 
 Future _onLoadingMoreArticles(Action action, Context<HomeListDefaultState> ctx) async {
@@ -53,18 +51,14 @@ Future _onLoadingMoreArticles(Action action, Context<HomeListDefaultState> ctx) 
   }
   List<int> ids = await Repo.getElementIds(articleRequest);
   List<Item> articles = await ArticleAction.fetchArticleByIds(ids);
-  if (articles != null) {
-    ctx.dispatch(HomeListDefaultActionCreator.onLoadingMoreArticlesUpdate(articles));
-  }
+  ctx.dispatch(HomeListDefaultActionCreator.onLoadingMoreArticlesUpdate(articles));
 }
 
 Future _onFetchNewestArticles(Action action, Context<HomeListDefaultState> ctx) async {
   ArticleRequest articleRequest = (action.payload as ArticleRequest);
   List<int> ids = await Repo.getElementIds(articleRequest);
   List<Item> articles = await ArticleAction.fetchArticleByIds(ids);
-  if (articles != null) {
-    ctx.dispatch(HomeListDefaultActionCreator.onFetchNewestArticlesUpdate(articles));
-  }
+  ctx.dispatch(HomeListDefaultActionCreator.onFetchNewestArticlesUpdate(articles));
 }
 
 Future _onFetchArticleIds(Action action, Context<HomeListDefaultState> ctx) async {
@@ -72,7 +66,5 @@ Future _onFetchArticleIds(Action action, Context<HomeListDefaultState> ctx) asyn
   articleRequest.pageNum = articleRequest.pageNum + 1;
   List<int> ids = await Repo.getElementIds(articleRequest);
   List<Item> articles = await ArticleAction.fetchArticleByIds(ids);
-  if (ids != null) {
-    ctx.dispatch(HomeListDefaultActionCreator.onSetArticleIds(ids, articles, articleRequest));
-  }
+  ctx.dispatch(HomeListDefaultActionCreator.onSetArticleIds(ids, articles, articleRequest));
 }

@@ -1,4 +1,6 @@
-source "https://rubygems.org/"
+domain = ENV['RUBY_GEMS_CHINA'] ? 'https://gems.ruby-china.com' : 'https://rubygems.org'
+
+source domain
 
 gem "xcode-install"
 gem "fastlane","2.177.0"
