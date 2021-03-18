@@ -1,12 +1,13 @@
-import 'package:Cruise/src/common/net/rest/AppInterceptors.dart';
+import 'package:Cruise/src/common/net/rest/app_interceptors.dart';
 import 'package:dio/dio.dart';
 
 import '../../global.dart';
 
 class RestClient {
+  static Dio dioInstance = Dio(BaseOptions(connectTimeout: 30000, receiveTimeout: 30000, baseUrl: "$baseUrl"));
+
   static Dio createDio() {
-    Dio dio = Dio(BaseOptions(connectTimeout: 30000, receiveTimeout: 30000, baseUrl: "$baseUrl"));
-    return addInterceptors(dio);
+    return addInterceptors(dioInstance);
   }
 
   static Dio addInterceptors(Dio dio) {

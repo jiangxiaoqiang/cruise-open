@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:Cruise/src/models/Item.dart';
 import 'package:Cruise/src/page/story_page.dart';
-import 'package:Cruise/src/common/Repo.dart';
+import 'package:Cruise/src/common/repo.dart';
 import 'package:uni_links/uni_links.dart';
 
 class DeeplinkHandler {

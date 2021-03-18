@@ -1,4 +1,4 @@
-import 'package:Cruise/src/common/Repo.dart';
+import 'package:Cruise/src/common/repo.dart';
 import 'package:Cruise/src/component/comment_list.dart';
 import 'package:Cruise/src/component/story_information.dart';
 import 'package:Cruise/src/models/Item.dart';

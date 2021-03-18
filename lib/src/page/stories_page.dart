@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:Cruise/src/component/loading_item.dart';
 import 'package:Cruise/src/component/story_list.dart';
-import 'package:Cruise/src/common/Repo.dart';
+import 'package:Cruise/src/common/repo.dart';
 
 /*final storiesTypeProvider = FutureProvider.family((ref, type) async {
   return await Repo.getArticles(type);

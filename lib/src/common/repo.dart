@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:Cruise/src/common/CruiseUser.dart';
+import 'package:Cruise/src/common/cruise_user.dart';
 import 'package:Cruise/src/common/global.dart' as global;
 import 'package:Cruise/src/common/log/CruiseLogHandler.dart';
 import 'package:Cruise/src/common/net/rest/rest_clinet.dart';
