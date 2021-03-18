@@ -73,4 +73,18 @@ platform :ios do
         user_key: ENV['PGY_USER_KEY']
     )
   end
+
+  desc "编译正式版"
+  lane :release do
+    gym(output_name: ENV['ipa_name'], # 导出的ipa名字
+    scheme: "Runner",
+    # export_method 可以根据打包类型进行相应设置。可选的值有：app-store、ad-hoc、development、enterprise
+    export_method: "app-store",
+    # 指定编译方式为Debug 还是 Release, 默认为Release,
+    configuration: "Release",              # Debug or Release
+    clean: true,                           #清空上次打包信息
+    include_bitcode: true,
+    workspace: "Runner.xcworkspace",
+    output_directory:"~/Downloads/ipa")# ipa导出目录
+  end
 end
