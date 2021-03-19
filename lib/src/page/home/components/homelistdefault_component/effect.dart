@@ -1,7 +1,7 @@
-import 'package:Cruise/src/common/repo.dart';
-import 'package:Cruise/src/common/article_action.dart';
-import 'package:Cruise/src/models/Item.dart';
-import 'package:Cruise/src/models/request/article/article_request.dart';
+import 'package:cruise/src/common/repo.dart';
+import 'package:cruise/src/common/article_action.dart';
+import 'package:cruise/src/models/Item.dart';
+import 'package:cruise/src/models/request/article/article_request.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'action.dart';

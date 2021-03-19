@@ -1,4 +1,4 @@
-import 'package:Cruise/src/page/home/components/articledetail_component/effect.dart';
+import 'package:cruise/src/page/home/components/articledetail_component/effect.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'reducer.dart';

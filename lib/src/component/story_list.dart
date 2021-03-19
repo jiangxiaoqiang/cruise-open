@@ -1,12 +1,12 @@
-import 'package:Cruise/src/page/story_page.dart';
+import 'package:cruise/src/page/story_page.dart';
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:Cruise/src/component/compact_tile.dart';
-import 'package:Cruise/src/component/item_card.dart';
-import 'package:Cruise/src/component/item_tile.dart';
-import 'package:Cruise/src/models/Item.dart';
-import 'package:Cruise/src/common/view_manager.dart';
+import 'package:cruise/src/component/compact_tile.dart';
+import 'package:cruise/src/component/item_card.dart';
+import 'package:cruise/src/component/item_tile.dart';
+import 'package:cruise/src/models/Item.dart';
+import 'package:cruise/src/common/view_manager.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 

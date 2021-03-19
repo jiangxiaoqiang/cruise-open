@@ -1,5 +1,5 @@
-import 'package:Cruise/src/page/user/settings/about/privicy/page.dart';
-import 'package:Cruise/src/page/user/settings/about/version/page.dart';
+import 'package:cruise/src/page/user/settings/about/privicy/page.dart';
+import 'package:cruise/src/page/user/settings/about/version/page.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';

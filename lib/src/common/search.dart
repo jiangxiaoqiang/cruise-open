@@ -1,9 +1,9 @@
-import 'package:Cruise/src/common/utils/common_utils.dart';
-import 'package:Cruise/src/common/view_manager.dart';
-import 'package:Cruise/src/models/Channel.dart';
-import 'package:Cruise/src/models/channel_suggestion.dart';
-import 'package:Cruise/src/models/request/channel/channel_request.dart';
-import 'package:Cruise/src/page/channel/channelpg_component/page.dart';
+import 'package:cruise/src/common/utils/common_utils.dart';
+import 'package:cruise/src/common/view_manager.dart';
+import 'package:cruise/src/models/Channel.dart';
+import 'package:cruise/src/models/channel_suggestion.dart';
+import 'package:cruise/src/models/request/channel/channel_request.dart';
+import 'package:cruise/src/page/channel/channelpg_component/page.dart';
 import 'package:animations/animations.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';

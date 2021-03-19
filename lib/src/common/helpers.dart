@@ -1,12 +1,12 @@
-import 'package:Cruise/src/common/view_manager.dart';
-import 'package:Cruise/src/component/compact_tile.dart';
-import 'package:Cruise/src/component/item_card.dart';
-import 'package:Cruise/src/component/item_tile.dart';
+import 'package:cruise/src/common/view_manager.dart';
+import 'package:cruise/src/component/compact_tile.dart';
+import 'package:cruise/src/component/item_card.dart';
+import 'package:cruise/src/component/item_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
-import 'package:Cruise/src/common/auth.dart';
-import 'package:Cruise/src/common/history.dart';
-import 'package:Cruise/src/models/Item.dart';
+import 'package:cruise/src/common/auth.dart';
+import 'package:cruise/src/common/history.dart';
+import 'package:cruise/src/models/Item.dart';
 import 'net/rest/http_result.dart';
 import './global.dart';
 

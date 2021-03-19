@@ -1,9 +1,9 @@
-import 'package:Cruise/src/component/channel_information.dart';
-import 'package:Cruise/src/models/Channel.dart';
+import 'package:cruise/src/component/channel_information.dart';
+import 'package:cruise/src/models/Channel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:Cruise/src/common/repo.dart';
+import 'package:cruise/src/common/repo.dart';
 
 class ChannelPage extends HookWidget {
   const ChannelPage({
@@ -17,7 +17,7 @@ class ChannelPage extends HookWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cruise'),
+        title: Text('cruise'),
         actions: [
           if (item.parent != null)
             IconButton(

@@ -1,10 +1,10 @@
-import 'package:Cruise/src/common/utils/common_utils.dart';
-import 'package:Cruise/src/common/view_manager.dart';
-import 'package:Cruise/src/component/channel_compact_tile.dart';
-import 'package:Cruise/src/component/channel_item_card.dart';
-import 'package:Cruise/src/component/channel_item_tile.dart';
-import 'package:Cruise/src/models/Channel.dart';
-import 'package:Cruise/src/page/channel/channellist_component/action.dart';
+import 'package:cruise/src/common/utils/common_utils.dart';
+import 'package:cruise/src/common/view_manager.dart';
+import 'package:cruise/src/component/channel_compact_tile.dart';
+import 'package:cruise/src/component/channel_item_card.dart';
+import 'package:cruise/src/component/channel_item_tile.dart';
+import 'package:cruise/src/models/Channel.dart';
+import 'package:cruise/src/page/channel/channellist_component/action.dart';
 import 'package:animations/animations.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';

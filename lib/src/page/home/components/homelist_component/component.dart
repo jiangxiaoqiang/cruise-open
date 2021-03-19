@@ -1,9 +1,9 @@
-import 'package:Cruise/src/page/channel/channellistdefault_component/component.dart';
-import 'package:Cruise/src/page/channel/channellistdefault_component/state.dart';
-import 'package:Cruise/src/page/home/components/homelistdefault_component/component.dart';
-import 'package:Cruise/src/page/home/components/homelistdefault_component/state.dart';
-import 'package:Cruise/src/page/user/settings/cruisesetting/component.dart';
-import 'package:Cruise/src/page/user/settings/cruisesetting/state.dart';
+import 'package:cruise/src/page/channel/channellistdefault_component/component.dart';
+import 'package:cruise/src/page/channel/channellistdefault_component/state.dart';
+import 'package:cruise/src/page/home/components/homelistdefault_component/component.dart';
+import 'package:cruise/src/page/home/components/homelistdefault_component/state.dart';
+import 'package:cruise/src/page/user/settings/cruisesetting/component.dart';
+import 'package:cruise/src/page/user/settings/cruisesetting/state.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'reducer.dart';
@@ -22,7 +22,7 @@ class HomeListComponent extends Component<HomeListState> {
                     HomeListDefaultConnector() + HomeListDefaultComponent(),
                 'channellistdefault': ChannelListDefaultConnector() +
                     ChannelListDefaultComponent(),
-                'cruisesetting': CruiseSettingConnector() +
+                'cruisesetting': cruiseSettingConnector() +
                     CruiseSettingComponent()
               }),
         );

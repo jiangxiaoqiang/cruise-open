@@ -1,9 +1,9 @@
-import 'package:Cruise/src/models/Item.dart';
-import 'package:Cruise/src/page/channel/channellistdefault_component/state.dart';
-import 'package:Cruise/src/page/home/components/homelistdefault_component/state.dart';
-import 'package:Cruise/src/page/user/discover/state.dart';
-import 'package:Cruise/src/page/user/fav/state.dart';
-import 'package:Cruise/src/page/user/settings/cruisesetting/state.dart';
+import 'package:cruise/src/page/user/settings/cruisesetting/state.dart';
+import 'package:cruise/src/models/Item.dart';
+import 'package:cruise/src/page/channel/channellistdefault_component/state.dart';
+import 'package:cruise/src/page/home/components/homelistdefault_component/state.dart';
+import 'package:cruise/src/page/user/discover/state.dart';
+import 'package:cruise/src/page/user/fav/state.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import '../../state.dart';

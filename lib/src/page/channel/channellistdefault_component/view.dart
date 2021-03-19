@@ -1,5 +1,5 @@
-import 'package:Cruise/src/models/Item.dart';
-import 'package:Cruise/src/models/request/article/article_request.dart';
+import 'package:cruise/src/models/Item.dart';
+import 'package:cruise/src/models/request/article/article_request.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

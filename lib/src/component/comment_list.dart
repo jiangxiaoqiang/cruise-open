@@ -1,8 +1,8 @@
-import 'package:Cruise/src/common/repo.dart';
-import 'package:Cruise/src/common/helpers.dart';
-import 'package:Cruise/src/component/comment_tile.dart';
-import 'package:Cruise/src/component/loading_item.dart';
-import 'package:Cruise/src/models/Item.dart';
+import 'package:cruise/src/common/repo.dart';
+import 'package:cruise/src/common/helpers.dart';
+import 'package:cruise/src/component/comment_tile.dart';
+import 'package:cruise/src/component/loading_item.dart';
+import 'package:cruise/src/models/Item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_icons/flutter_icons.dart';

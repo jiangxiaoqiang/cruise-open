@@ -1,6 +1,6 @@
-import 'package:Cruise/src/models/Item.dart';
-import 'package:Cruise/src/models/api/fav_status.dart';
-import 'package:Cruise/src/models/api/upvote_status.dart';
+import 'package:cruise/src/models/Item.dart';
+import 'package:cruise/src/models/api/fav_status.dart';
+import 'package:cruise/src/models/api/upvote_status.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'action.dart';

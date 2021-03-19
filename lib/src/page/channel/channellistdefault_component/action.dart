@@ -1,6 +1,6 @@
-import 'package:Cruise/src/models/Channel.dart';
-import 'package:Cruise/src/models/request/article/article_request.dart';
-import 'package:Cruise/src/page/home/components/homelistdefault_component/action.dart';
+import 'package:cruise/src/models/Channel.dart';
+import 'package:cruise/src/models/request/article/article_request.dart';
+import 'package:cruise/src/page/home/components/homelistdefault_component/action.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 //TODO replace with your own action

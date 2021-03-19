@@ -1,6 +1,6 @@
-import 'package:Cruise/src/common/net/rest/rest_clinet.dart';
-import 'package:Cruise/src/common/global.dart' as global;
-import 'package:Cruise/src/models/Item.dart';
+import 'package:cruise/src/common/net/rest/rest_clinet.dart';
+import 'package:cruise/src/common/global.dart' as global;
+import 'package:cruise/src/models/Item.dart';
 import 'repo.dart';
 import 'net/rest/http_result.dart';
 

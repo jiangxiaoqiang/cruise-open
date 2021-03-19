@@ -1,8 +1,6 @@
-import 'dart:convert';
-import 'package:Cruise/src/common/net/rest/rest_clinet.dart';
+import 'package:cruise/src/common/net/rest/rest_clinet.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:http/http.dart' as http;
-import 'package:Cruise/src/common/global.dart' as global;
+import 'package:cruise/src/common/global.dart' as global;
 import 'global.dart';
 import 'net/rest/http_result.dart';
 
@@ -22,11 +20,11 @@ class Auth {
 
   static Future<bool> isLoggedIn() async {
     final storage = new FlutterSecureStorage();
-    String username = await storage.read(key: "username");
+    String? username = await storage.read(key: "username");
     return false;
   }
 
-  static Future<String> currentUser() async {
+  static Future<String?> currentUser() async {
     final storage = new FlutterSecureStorage();
     return await storage.read(key: "username");
   }

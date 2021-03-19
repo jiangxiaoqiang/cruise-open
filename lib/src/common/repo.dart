@@ -1,13 +1,13 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:Cruise/src/common/cruise_user.dart';
-import 'package:Cruise/src/common/global.dart' as global;
-import 'package:Cruise/src/common/log/CruiseLogHandler.dart';
-import 'package:Cruise/src/common/net/rest/rest_clinet.dart';
-import 'package:Cruise/src/models/Channel.dart';
-import 'package:Cruise/src/models/Item.dart';
-import 'package:Cruise/src/models/request/article/article_request.dart';
+import 'package:cruise/src/common/cruise_user.dart';
+import 'package:cruise/src/common/global.dart' as global;
+import 'package:cruise/src/common/log/CruiseLogHandler.dart';
+import 'package:cruise/src/common/net/rest/rest_clinet.dart';
+import 'package:cruise/src/models/Channel.dart';
+import 'package:cruise/src/models/Item.dart';
+import 'package:cruise/src/models/request/article/article_request.dart';
 import 'package:http/http.dart' as http;
 
 import 'log/cruise_api_error.dart';

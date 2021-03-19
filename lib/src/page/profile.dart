@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:Cruise/src/common/auth.dart';
-import 'package:Cruise/src/component/story_list.dart';
-import 'package:Cruise/src/common/cruise_user.dart';
+import 'package:cruise/src/common/auth.dart';
+import 'package:cruise/src/component/story_list.dart';
+import 'package:cruise/src/common/cruise_user.dart';
 
 class ProfilePage extends HookWidget {
   ProfilePage({required this.username, this.isMe = false});

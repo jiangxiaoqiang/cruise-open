@@ -1,8 +1,8 @@
-import 'package:Cruise/src/common/channel_action.dart';
-import 'package:Cruise/src/common/net/rest/http_result.dart';
-import 'package:Cruise/src/common/utils/common_utils.dart';
-import 'package:Cruise/src/models/Channel.dart';
-import 'package:Cruise/src/models/api/sub_status.dart';
+import 'package:cruise/src/common/channel_action.dart';
+import 'package:cruise/src/common/net/rest/http_result.dart';
+import 'package:cruise/src/common/utils/common_utils.dart';
+import 'package:cruise/src/models/Channel.dart';
+import 'package:cruise/src/models/api/sub_status.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';

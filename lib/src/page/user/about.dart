@@ -1,6 +1,6 @@
-import 'package:Cruise/src/common/theme.dart';
-import 'package:Cruise/src/common/view_manager.dart';
-import 'package:Cruise/src/page/login.dart';
+import 'package:cruise/src/common/theme.dart';
+import 'package:cruise/src/common/view_manager.dart';
+import 'package:cruise/src/page/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -15,14 +15,14 @@ class About extends HookWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("关于Cruise"),
+        title: Text("关于cruise"),
         actions: [
           FlatButton(
             textColor: Colors.black,
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
             },
-            child: Text("关于Cruise"),
+            child: Text("关于cruise"),
             shape: CircleBorder(side: BorderSide(color: Colors.transparent)),
           ),
         ],

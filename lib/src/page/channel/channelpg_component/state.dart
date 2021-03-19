@@ -1,6 +1,6 @@
-import 'package:Cruise/src/models/Channel.dart';
-import 'package:Cruise/src/page/channel/channeldetail_component/state.dart';
-import 'package:Cruise/src/page/channel/channellist_component/state.dart';
+import 'package:cruise/src/models/Channel.dart';
+import 'package:cruise/src/page/channel/channeldetail_component/state.dart';
+import 'package:cruise/src/page/channel/channellist_component/state.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 class ChannelPgState implements Cloneable<ChannelPgState> {

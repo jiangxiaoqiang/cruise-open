@@ -2,9 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:Cruise/src/models/Item.dart';
-import 'package:Cruise/src/page/story_page.dart';
-import 'package:Cruise/src/common/repo.dart';
+import 'package:cruise/src/models/Item.dart';
+import 'package:cruise/src/common/repo.dart';
 import 'package:uni_links/uni_links.dart';
 
 class DeeplinkHandler {

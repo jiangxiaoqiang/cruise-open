@@ -1,6 +1,6 @@
-import 'package:Cruise/src/common/search.dart';
-import 'package:Cruise/src/models/Item.dart';
-import 'package:Cruise/src/page/channel/add_channel.dart';
+import 'package:cruise/src/common/search.dart';
+import 'package:cruise/src/models/Item.dart';
+import 'package:cruise/src/page/channel/add_channel.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -46,7 +46,7 @@ Widget buildView(HomeListState state, Dispatch dispatch, ViewService viewService
               ),
               sliver: SliverAppBar(
                 title: Text(
-                  'Cruise',
+                  'cruise',
                   style: TextStyle(
                     color: Theme.of(context).brightness == Brightness.light ? Colors.black : Colors.white,
                   ),

@@ -1,18 +1,18 @@
-import 'package:Cruise/src/common/auth.dart';
-import 'package:Cruise/src/common/theme.dart';
-import 'package:Cruise/src/common/view_manager.dart';
-import 'package:Cruise/src/models/Item.dart';
-import 'package:Cruise/src/page/login.dart';
-import 'package:Cruise/src/page/profile.dart';
-import 'package:Cruise/src/page/user/Fav.dart';
-import 'package:Cruise/src/page/user/about.dart';
-import 'package:Cruise/src/page/user/feedback_page.dart';
-import 'package:Cruise/src/page/user/settings/custom_setting.dart';
+import 'package:cruise/src/common/auth.dart';
+import 'package:cruise/src/common/theme.dart';
+import 'package:cruise/src/common/view_manager.dart';
+import 'package:cruise/src/models/Item.dart';
+import 'package:cruise/src/page/login.dart';
+import 'package:cruise/src/page/profile.dart';
+import 'package:cruise/src/page/user/Fav.dart';
+import 'package:cruise/src/page/user/about.dart';
+import 'package:cruise/src/page/user/feedback_page.dart';
+import 'package:cruise/src/page/user/settings/custom_setting.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
-class CruiseSettingsPage extends HookWidget {
+class cruiseSettingsPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final currentView = ViewManager.fromViewName("itemCard");
@@ -152,7 +152,7 @@ class CruiseSettingsPage extends HookWidget {
             ),
             ListTile(
               leading: Icon(Feather.award),
-              title: Text("关于Cruise"),
+              title: Text("关于cruise"),
               onTap: () async {
                 Widget page = About();
                 Navigator.push(

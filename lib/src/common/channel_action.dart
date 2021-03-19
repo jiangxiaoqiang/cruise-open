@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:Cruise/src/common/global.dart' as global;
-import 'package:Cruise/src/common/net/rest/rest_clinet.dart';
-import 'package:Cruise/src/models/Channel.dart';
-import 'package:Cruise/src/models/api/sub_status.dart';
-import 'package:Cruise/src/models/channel_suggestion.dart';
-import 'package:Cruise/src/models/request/channel/channel_request.dart';
+import 'package:cruise/src/common/global.dart' as global;
+import 'package:cruise/src/common/net/rest/rest_clinet.dart';
+import 'package:cruise/src/models/Channel.dart';
+import 'package:cruise/src/models/api/sub_status.dart';
+import 'package:cruise/src/models/channel_suggestion.dart';
+import 'package:cruise/src/models/request/channel/channel_request.dart';
 import 'package:dio/dio.dart';
 
 import 'log/CruiseLogHandler.dart';

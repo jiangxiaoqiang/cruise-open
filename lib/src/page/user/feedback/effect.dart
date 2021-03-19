@@ -1,5 +1,5 @@
-import 'package:Cruise/src/common/feedback_rest_action.dart';
-import 'package:Cruise/src/common/net/rest/http_result.dart';
+import 'package:cruise/src/common/feedback_rest_action.dart';
+import 'package:cruise/src/common/net/rest/http_result.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'action.dart';

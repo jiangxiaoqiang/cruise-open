@@ -1,4 +1,4 @@
-import 'package:Cruise/src/models/Item.dart';
+import 'package:cruise/src/models/Item.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'action.dart';

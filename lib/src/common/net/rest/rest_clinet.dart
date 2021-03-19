@@ -1,4 +1,4 @@
-import 'package:Cruise/src/common/net/rest/app_interceptors.dart';
+import 'package:cruise/src/common/net/rest/app_interceptors.dart';
 import 'package:dio/dio.dart';
 
 import '../../global.dart';

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:Cruise/src/common/history.dart';
+import 'package:cruise/src/common/history.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 enum StoryType {

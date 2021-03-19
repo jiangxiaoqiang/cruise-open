@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:Cruise/src/models/Item.dart';
+import 'package:cruise/src/models/Item.dart';
 
 class CompactTile extends StatelessWidget {
   const CompactTile({

@@ -1,6 +1,6 @@
-import 'package:Cruise/src/page/channel/channellist_component/component.dart';
-import 'package:Cruise/src/page/channel/channellist_component/state.dart';
-import 'package:Cruise/src/page/channel/channellistdefault_component/effect.dart';
+import 'package:cruise/src/page/channel/channellist_component/component.dart';
+import 'package:cruise/src/page/channel/channellist_component/state.dart';
+import 'package:cruise/src/page/channel/channellistdefault_component/effect.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'reducer.dart';

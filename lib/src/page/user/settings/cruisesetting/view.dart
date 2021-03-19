@@ -1,8 +1,8 @@
-import 'package:Cruise/src/common/auth.dart';
-import 'package:Cruise/src/page/user/discover/page.dart';
-import 'package:Cruise/src/page/user/fav/page.dart';
-import 'package:Cruise/src/page/user/feedback/page.dart';
-import 'package:Cruise/src/page/user/settings/about/page.dart';
+import 'package:cruise/src/common/auth.dart';
+import 'package:cruise/src/page/user/discover/page.dart';
+import 'package:cruise/src/page/user/fav/page.dart';
+import 'package:cruise/src/page/user/feedback/page.dart';
+import 'package:cruise/src/page/user/settings/about/page.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -110,7 +110,7 @@ Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewSe
                           color: Colors.white,
                           child: ListTile(
                             leading: Icon(Feather.award),
-                            title: Text("关于Cruise"),
+                            title: Text("关于cruise"),
                             onTap: () async {
                               var data = {'name': "aboutPage"};
                               Widget aboutPage = AboutPage().buildPage(data);

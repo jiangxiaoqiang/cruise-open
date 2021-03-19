@@ -1,7 +1,7 @@
-import 'package:Cruise/src/common/net/rest/http_result.dart';
+import 'package:cruise/src/common/net/rest/http_result.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:Cruise/src/common/auth.dart';
+import 'package:cruise/src/common/auth.dart';
 
 class SetPwdPage extends HookWidget {
   const SetPwdPage({required this.phone});

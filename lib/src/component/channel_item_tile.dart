@@ -1,4 +1,4 @@
-import 'package:Cruise/src/models/Channel.dart';
+import 'package:cruise/src/models/Channel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 

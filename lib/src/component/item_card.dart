@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:Cruise/src/models/Item.dart';
+import 'package:cruise/src/models/Item.dart';
 
 class ItemCard extends StatelessWidget {
   const ItemCard({

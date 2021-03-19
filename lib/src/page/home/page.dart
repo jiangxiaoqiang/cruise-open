@@ -1,4 +1,4 @@
-import 'package:Cruise/src/page/home/components/homelistdefault_component/component.dart';
+import 'package:cruise/src/page/home/components/homelistdefault_component/component.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'components/homelist_component/component.dart';

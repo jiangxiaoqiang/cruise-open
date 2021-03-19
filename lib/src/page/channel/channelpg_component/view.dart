@@ -1,5 +1,5 @@
-import 'package:Cruise/src/common/repo.dart';
-import 'package:Cruise/src/models/Channel.dart';
+import 'package:cruise/src/common/repo.dart';
+import 'package:cruise/src/models/Channel.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -21,7 +21,7 @@ Widget buildView(ChannelPgState state, Dispatch dispatch, ViewService viewServic
 
   return Scaffold(
     appBar: AppBar(
-      title: Text('Cruise'),
+      title: Text('cruise'),
       brightness: Brightness.light, // or use Brightness.dark
       actions: [
         if (item.parent != null)

@@ -1,6 +1,6 @@
-import 'package:Cruise/src/common/repo.dart';
-import 'package:Cruise/src/models/Item.dart';
-import 'package:Cruise/src/page/home/components/articlepg_component/action.dart';
+import 'package:cruise/src/common/repo.dart';
+import 'package:cruise/src/models/Item.dart';
+import 'package:cruise/src/page/home/components/articlepg_component/action.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -28,7 +28,7 @@ Widget buildView(ArticlePgState state, Dispatch dispatch, ViewService viewServic
       bucket: pageStorageBucket,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Cruise'),
+          title: Text('cruise'),
           brightness: Brightness.light, // or use Brightness.dark
           actions: [
             if (item.parent != null)

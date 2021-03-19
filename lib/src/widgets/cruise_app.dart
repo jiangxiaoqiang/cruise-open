@@ -1,7 +1,7 @@
-import 'package:Cruise/src/common/theme.dart';
-import 'package:Cruise/src/common/view_manager.dart';
-import 'package:Cruise/src/page/home/page.dart';
-import 'package:Cruise/src/page/user/login/page.dart';
+import 'package:cruise/src/common/theme.dart';
+import 'package:cruise/src/common/view_manager.dart';
+import 'package:cruise/src/page/home/page.dart';
+import 'package:cruise/src/page/user/login/page.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:fish_redux/src/redux_component/page.dart' as fishPage;
 import 'package:flutter/material.dart';

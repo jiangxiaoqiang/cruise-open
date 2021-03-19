@@ -1,9 +1,7 @@
-
-
-import 'package:Cruise/src/component/channel_compact_tile.dart';
-import 'package:Cruise/src/component/channel_item_card.dart';
-import 'package:Cruise/src/component/channel_item_tile.dart';
-import 'package:Cruise/src/models/Channel.dart';
+import 'package:cruise/src/component/channel_compact_tile.dart';
+import 'package:cruise/src/component/channel_item_card.dart';
+import 'package:cruise/src/component/channel_item_tile.dart';
+import 'package:cruise/src/models/Channel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:url_launcher/url_launcher.dart';
 

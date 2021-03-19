@@ -1,5 +1,5 @@
-import 'package:Cruise/src/common/repo.dart';
-import 'package:Cruise/src/models/Channel.dart';
+import 'package:cruise/src/common/repo.dart';
+import 'package:cruise/src/models/Channel.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'action.dart';

@@ -6,7 +6,7 @@ import 'state.dart';
 Reducer<CruiseSettingState> buildReducer() {
   return asReducer(
     <Object, Reducer<CruiseSettingState>>{
-      CruiseSettingAction.action: _onAction,
+      cruiseSettingAction.action: _onAction,
     },
   );
 }

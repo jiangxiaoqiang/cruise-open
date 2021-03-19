@@ -1,6 +1,6 @@
-import 'package:Cruise/src/models/Item.dart';
-import 'package:Cruise/src/models/request/article/article_request.dart';
-import 'package:Cruise/src/page/stories_page.dart';
+import 'package:cruise/src/models/Item.dart';
+import 'package:cruise/src/models/request/article/article_request.dart';
+import 'package:cruise/src/page/stories_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';

@@ -1,8 +1,7 @@
-import 'package:Cruise/src/common/channel_action.dart';
-import 'package:Cruise/src/common/deeplink_handler.dart';
-import 'package:Cruise/src/common/net/rest/http_result.dart';
-import 'package:Cruise/src/models/Channel.dart';
-import 'package:Cruise/src/models/api/sub_status.dart';
+import 'package:cruise/src/common/channel_action.dart';
+import 'package:cruise/src/common/net/rest/http_result.dart';
+import 'package:cruise/src/models/Channel.dart';
+import 'package:cruise/src/models/api/sub_status.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_icons/flutter_icons.dart';

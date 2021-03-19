@@ -1,5 +1,5 @@
 
-import 'package:Cruise/src/models/Item.dart';
+import 'package:cruise/src/models/Item.dart';
 
 class HomeModel{
   int? selectIndex;

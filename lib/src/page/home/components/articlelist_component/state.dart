@@ -1,7 +1,7 @@
-import 'package:Cruise/src/models/Item.dart';
-import 'package:Cruise/src/page/channel/channeldetail_component/state.dart';
-import 'package:Cruise/src/page/home/components/articlepg_component/state.dart';
-import 'package:Cruise/src/page/home/components/homelistdefault_component/state.dart';
+import 'package:cruise/src/models/Item.dart';
+import 'package:cruise/src/page/channel/channeldetail_component/state.dart';
+import 'package:cruise/src/page/home/components/articlepg_component/state.dart';
+import 'package:cruise/src/page/home/components/homelistdefault_component/state.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 class ArticleListState implements Cloneable<ArticleListState> {
