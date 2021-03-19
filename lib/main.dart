@@ -13,9 +13,9 @@ void main() async {
   timeago.setLocaleMessages('en', CustomEn());
   await HistoryManager.init();
   SharedPreferences pref = await SharedPreferences.getInstance();
-  String themeName = pref.getString('theme');
+  String? themeName = pref.getString('theme');
   final theme = ThemeManager.fromThemeName(themeName);
-  String viewName = pref.getString('view');
+  String? viewName = pref.getString('view');
   final view = ViewManager.fromViewName(viewName);
   runApp(
     CruiseApp(

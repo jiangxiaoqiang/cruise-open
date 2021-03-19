@@ -11,7 +11,7 @@ class ThemeManager extends StateNotifier<ThemeData> {
     state = theme;
   }
 
-  static ThemeData fromThemeName(String themeName) {
+  static ThemeData fromThemeName(String? themeName) {
     if (themeName == "lightTheme") return lightTheme;
     if (themeName == "darkTheme") return darkTheme;
     if (themeName == "trueBlackTheme") return trueBlackTheme;

@@ -21,12 +21,7 @@ class AppInterceptors extends InterceptorsWrapper {
 
   @override
   Future onResponse(Response response) async {
-    return super.onResponse(response);
-  }
-
-  @override
-  Future onError(DioError err) async {
-    if (err.response != null && err.response.data["statusCode"] == ResponseStatus.NOT_LOGIN.statusCode) {
+    if (response.data["statusCode"] == ResponseStatus.NOT_LOGIN.statusCode) {
       Dio dio = RestClient.createDio();
       dio.lock();
       AuthResult result = await Auth.login(
@@ -36,10 +31,16 @@ class AppInterceptors extends InterceptorsWrapper {
       if (result.result == Result.ok) {
         // resend a request to fetch data
         Dio req = RestClient.createDio();
-        req.request(err.request.path);
+        req.request(response.request.path);
       }
       dio.unlock();
     }
+    return super.onResponse(response);
+  }
+
+  @override
+  Future onError(DioError err) async {
+
     return super.onError(err);
   }
 }
