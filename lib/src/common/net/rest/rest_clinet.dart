@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import '../../global.dart';
 
 class RestClient {
-  static Dio dioInstance = Dio(BaseOptions(connectTimeout: 30000, receiveTimeout: 30000, baseUrl: "$baseUrl"));
+  static Dio dioInstance = Dio(BaseOptions(connectTimeout: 10000, receiveTimeout: 30000, baseUrl: "$baseUrl"));
 
   static Dio createDio() {
     return addInterceptors(dioInstance);
@@ -17,6 +17,13 @@ class RestClient {
   static Future<Response> postHttp(String path, Object data) async {
     final url = "$baseUrl" + path;
     Dio dio = createDio();
+    Response response = await dio.post(url, data: data);
+    return response;
+  }
+
+  static Future<Response> postHttpNewDio(String path, Object data) async {
+    final url = "$baseUrl" + path;
+    Dio dio = new Dio();
     Response response = await dio.post(url, data: data);
     return response;
   }

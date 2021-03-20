@@ -21,29 +21,38 @@ class AppInterceptors extends InterceptorsWrapper {
 
   @override
   Future onResponse(Response response) async {
+    autoLogin(response);
+    return super.onResponse(response);
+  }
+
+  @override
+  Future onError(DioError err) async {
+    //autoLogin(err.response);
+    return super.onError(err);
+  }
+
+  void autoLogin(Response response) async {
     if (response.data["statusCode"] == ResponseStatus.NOT_LOGIN.statusCode) {
       Dio dio = RestClient.createDio();
       dio.lock();
       String? userName = await storage.read(key: "username");
       String? password = await storage.read(key: "password");
       if (userName != null && password != null) {
-        AuthResult result = await Auth.login(
-          username: userName,
-          password: password,
-        );
-        if (result.result == Result.ok) {
-          // resend a request to fetch data
-          Dio req = RestClient.createDio();
-          req.request(response.request.path);
-        }
+        refreshAuthToken(userName, password, response);
       }
       dio.unlock();
     }
-    return super.onResponse(response);
   }
 
-  @override
-  Future onError(DioError err) async {
-    return super.onError(err);
+  void refreshAuthToken(String userName, String password, Response response) async {
+    AuthResult result = await Auth.login(
+      username: userName,
+      password: password,
+    );
+    if (result.result == Result.ok) {
+      // resend a request to fetch data
+      Dio req = RestClient.createDio();
+      req.request(response.request.path);
+    }
   }
 }

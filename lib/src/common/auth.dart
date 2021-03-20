@@ -110,7 +110,7 @@ class Auth {
       "password": password,
       "goto": 'news',
     };
-    final response = await RestClient.postHttp("/post/user/login",body);
+    final response = await RestClient.postHttpNewDio("/post/user/login",body);
     if (RestClient.respSuccess(response)) {
       Map result = response.data["result"];
       String token = result["token"];

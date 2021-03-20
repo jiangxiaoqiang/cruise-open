@@ -48,7 +48,7 @@ dependencies:
   pull_to_refresh: 1.6.4
   intl_phone_number_input: ^0.5.0
   dio: 3.0.10
-  fish_redux: 0.3.6
+  fish_redux: 0.3.7
   hive_flutter: 0.3.1
 
 dev_dependencies:
