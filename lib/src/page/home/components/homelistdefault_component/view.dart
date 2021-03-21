@@ -58,6 +58,10 @@ Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService view
               return Center(child: CircularProgressIndicator());
             }
 
+            if (state.articleListState.articleIds != null && state.articleListState.articleIds!.length == 1 && state.articleListState.articleIds![0] == -1) {
+              return Text("data");
+            }
+
             return NotificationListener(
                 onNotification: (scrollNotification) {
                   if (scrollNotification is! ScrollNotification) {
@@ -102,8 +106,7 @@ Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService view
                                 context,
                               ),
                             ),
-                            if (state.articleListState.articleIds != null && state.articleListState.articleIds
-                                !.length > 0)
+                            if (state.articleListState.articleIds != null && state.articleListState.articleIds!.length > 0)
                               SliverPadding(
                                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                                 sliver: viewService.buildComponent("articlelist"),

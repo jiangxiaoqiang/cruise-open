@@ -1,9 +1,6 @@
-import 'package:cruise/src/common/repo.dart';
 import 'package:cruise/src/models/Item.dart';
-import 'package:cruise/src/page/home/components/articlepg_component/action.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 
 import 'state.dart';
 
@@ -18,9 +15,6 @@ Widget buildView(ArticlePgState state, Dispatch dispatch, ViewService viewServic
       });
 
   Widget navDetail(Item article) {
-    if (state.articleDetailState.article == null) {
-      dispatch(ArticlePgActionCreator.onSetDetailArticle(article));
-    }
     return viewService.buildComponent("articledetail");
   }
 
@@ -30,15 +24,7 @@ Widget buildView(ArticlePgState state, Dispatch dispatch, ViewService viewServic
         appBar: AppBar(
           title: Text('cruise'),
           brightness: Brightness.light, // or use Brightness.dark
-          actions: [
-            if (item.parent != null)
-              IconButton(
-                icon: Icon(Feather.corner_left_up),
-                onPressed: () async {
-                  Item parent = (await Repo.fetchArticleItem(item.parent!))!;
-                },
-              ),
-          ],
+          actions: [],
         ),
         body: NotificationListener<ScrollNotification>(
           onNotification: (ScrollNotification sn) {

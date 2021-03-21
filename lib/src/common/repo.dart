@@ -71,6 +71,9 @@ class Repo {
     final response = await RestClient.postHttp("$typeQuery", jsonMap);
     if (response.statusCode == 200 && response.data["statusCode"] == "200") {
       Map result = response.data["result"];
+      if(result == null){
+        return List.empty();
+      }
       var articles = result["list"];
       List<String> genreIdsList = new List<String>.from(articles);
       List<int> intIds = genreIdsList.map(int.parse).toList();
