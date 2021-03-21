@@ -38,18 +38,18 @@ class AppInterceptors extends InterceptorsWrapper {
       String? userName = await storage.read(key: "username");
       String? password = await storage.read(key: "password");
       if (userName != null && password != null) {
-        refreshAuthToken(userName, password, response);
+        refreshAuthToken(dio, userName, password, response);
       }
-      dio.unlock();
     }
   }
 
-  void refreshAuthToken(String userName, String password, Response response) async {
+  void refreshAuthToken(Dio dio, String userName, String password, Response response) async {
     AuthResult result = await Auth.login(
       username: userName,
       password: password,
     );
     if (result.result == Result.ok) {
+      dio.unlock();
       // resend a request to fetch data
       Dio req = RestClient.createDio();
       req.request(response.request.path);

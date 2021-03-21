@@ -32,7 +32,7 @@ dependencies:
   http: ^0.12.0+2
   flutter_icons: ^1.0.0
   timeago: 3.0.2
-  animations: 1.1.2
+  animations: 2.0.0
   flutter_hooks: ^0.12.0
   share: ^0.6.4+3
   shimmer: 1.1.1
@@ -43,7 +43,7 @@ dependencies:
   shared_preferences: 2.0.5
   state_notifier: ^0.5.0
   flutter_secure_storage: 4.1.0
-  flutter_slidable: ^0.5.5
+  flutter_slidable: 0.5.7
   hive: ^1.4.1+1
   pull_to_refresh: 1.6.4
   intl_phone_number_input: ^0.5.0

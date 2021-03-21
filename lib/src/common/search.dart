@@ -1,10 +1,10 @@
+import 'package:animations/animations.dart';
 import 'package:cruise/src/common/utils/common_utils.dart';
 import 'package:cruise/src/common/view_manager.dart';
 import 'package:cruise/src/models/Channel.dart';
 import 'package:cruise/src/models/channel_suggestion.dart';
 import 'package:cruise/src/models/request/channel/channel_request.dart';
 import 'package:cruise/src/page/channel/channelpg_component/page.dart';
-import 'package:animations/animations.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -81,7 +81,7 @@ class CustomSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    var channelRequest = new ChannelRequest(pageNum: 1,pageSize: 10,name: query);
+    var channelRequest = new ChannelRequest(pageNum: 1, pageSize: 10, name: query);
 
     return FutureBuilder(
         future: ChannelAction.searchChannel(channelRequest),
@@ -92,7 +92,7 @@ class CustomSearchDelegate extends SearchDelegate {
               return buildResultsComponent(channels, context);
             }
           } else {
-            return Text("no data");
+            return Text("");
           }
           return Center(child: CircularProgressIndicator());
         });
@@ -100,7 +100,10 @@ class CustomSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    var channelRequest = new ChannelRequest(pageNum: 1,pageSize: 10,name: query);
+    var channelRequest = new ChannelRequest(pageNum: 1, pageSize: 10, name: query);
+    if (query.isEmpty) {
+      return Container();
+    }
 
     return FutureBuilder(
         future: ChannelAction.fetchSuggestion(channelRequest),
@@ -109,7 +112,7 @@ class CustomSearchDelegate extends SearchDelegate {
             List<ChannelSuggestion> suggestions = snapshot.data;
             return buildSuggestionComponent(suggestions);
           } else {
-            return Text("no suggestions");
+            return Text("");
           }
         });
   }
