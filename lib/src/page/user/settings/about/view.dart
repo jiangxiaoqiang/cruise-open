@@ -9,24 +9,30 @@ import 'state.dart';
 
 Widget buildView(aboutState state, Dispatch dispatch, ViewService viewService) {
   return Scaffold(
+    backgroundColor: const Color(0xFFEFEFEF),
     body: Form(
       child: ListView(
         children: [
-          ListTile(
-            title: Text("软件许可协议"),
-            leading: Icon(Feather.moon),
-            onTap: () {
-              var data = {'name': "contractPage"};
-              Widget contractPage = ContractPage().buildPage(data);
-              Navigator.push(
-                viewService.context,
-                MaterialPageRoute(builder: (context) => contractPage),
-              );
-            },
-          ),
+          Padding(
+              padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                      color: Colors.white,
+                      child: ListTile(
+                        leading: Icon(Feather.award),
+                        title: Text("关于cruise"),
+                        onTap: () {
+                          var data = {'name': "contractPage"};
+                          Widget contractPage = ContractPage().buildPage(data);
+                          Navigator.push(
+                            viewService.context,
+                            MaterialPageRoute(builder: (context) => contractPage),
+                          );
+                        },
+                      )))),
           ListTile(
             title: Text("隐私政策"),
-            leading: Icon(Feather.moon),
             onTap: () {
               var data = {'name': "privacyPage"};
               Widget privacyPage = PrivacyPage().buildPage(data);
@@ -38,7 +44,6 @@ Widget buildView(aboutState state, Dispatch dispatch, ViewService viewService) {
           ),
           ListTile(
             title: Text("版本信息"),
-            leading: Icon(Feather.moon),
             onTap: () {
               var data = {'name': "versionPage"};
               Widget versionPage = VersionPage().buildPage(data);
