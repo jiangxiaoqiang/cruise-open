@@ -50,6 +50,7 @@ Widget buildView(FeedbackState state, Dispatch dispatch, ViewService viewService
               bottom: 16.0,
               left: 16,
               right: 16,
+              top: 16
             ),
             child: TextFormField(
               maxLines: null,
