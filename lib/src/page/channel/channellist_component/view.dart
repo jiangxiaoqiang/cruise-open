@@ -1,8 +1,5 @@
 import 'package:cruise/src/common/utils/common_utils.dart';
 import 'package:cruise/src/common/view_manager.dart';
-import 'package:cruise/src/component/channel_compact_tile.dart';
-import 'package:cruise/src/component/channel_item_card.dart';
-import 'package:cruise/src/component/channel_item_tile.dart';
 import 'package:cruise/src/models/Channel.dart';
 import 'package:cruise/src/page/channel/channellist_component/action.dart';
 import 'package:animations/animations.dart';
@@ -29,11 +26,11 @@ Widget buildView(ChannelListState state, Dispatch dispatch, ViewService viewServ
       closeOnScroll: true,
       actionPane: SlidableScrollActionPane(),
       actions: <Widget>[
-        IconSlideAction(
+       /* IconSlideAction(
           color: Colors.deepOrangeAccent,
           icon: Feather.arrow_up_circle,
           onTap: () => {},
-        ),
+        ),*/
       ],
       dismissal: SlidableDismissal(
         closeOnCanceled: true,

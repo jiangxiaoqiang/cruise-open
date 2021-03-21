@@ -25,11 +25,11 @@ Widget buildView(ArticleListState state, Dispatch dispatch, ViewService viewServ
         closeOnScroll: true,
         actionPane: SlidableScrollActionPane(),
         actions: <Widget>[
-          IconSlideAction(
+          /*IconSlideAction(
             color: Colors.deepOrangeAccent,
             icon: Feather.arrow_up_circle,
             //onTap: () => handleUpvote(context, item: item),
-          ),
+          ),*/
         ],
         dismissal: SlidableDismissal(
           closeOnCanceled: true,

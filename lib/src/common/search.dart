@@ -88,9 +88,7 @@ class CustomSearchDelegate extends SearchDelegate {
         builder: (context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
             List<Channel> channels = snapshot.data;
-            if (channels != null) {
-              return buildResultsComponent(channels, context);
-            }
+            return buildResultsComponent(channels, context);
           } else {
             return Text("");
           }
