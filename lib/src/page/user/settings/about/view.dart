@@ -31,28 +31,42 @@ Widget buildView(aboutState state, Dispatch dispatch, ViewService viewService) {
                           );
                         },
                       )))),
-          ListTile(
-            title: Text("隐私政策"),
-            onTap: () {
-              var data = {'name': "privacyPage"};
-              Widget privacyPage = PrivacyPage().buildPage(data);
-              Navigator.push(
-                viewService.context,
-                MaterialPageRoute(builder: (context) => privacyPage),
-              );
-            },
-          ),
-          ListTile(
-            title: Text("版本信息"),
-            onTap: () {
-              var data = {'name': "versionPage"};
-              Widget versionPage = VersionPage().buildPage(data);
-              Navigator.push(
-                viewService.context,
-                MaterialPageRoute(builder: (context) => versionPage),
-              );
-            },
-          ),
+          Padding(
+              padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                      color: Colors.white,
+                      child: ListTile(
+                        leading: Icon(Feather.award),
+                        title: Text("隐私政策"),
+                        onTap: () {
+                          var data = {'name': "privacyPage"};
+                          Widget privacyPage = PrivacyPage().buildPage(data);
+                          Navigator.push(
+                            viewService.context,
+                            MaterialPageRoute(builder: (context) => privacyPage),
+                          );
+                        },
+                      )))),
+          Padding(
+              padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                      color: Colors.white,
+                      child: ListTile(
+                        leading: Icon(Feather.award),
+                        title: Text("版本信息"),
+                        onTap: () {
+                          var data = {'name': "versionPage"};
+                          Widget versionPage = VersionPage().buildPage(data);
+                          Navigator.push(
+                            viewService.context,
+                            MaterialPageRoute(builder: (context) => versionPage),
+                          );
+                        },
+                      )))),
         ],
       ),
     ),

@@ -120,7 +120,7 @@ Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewSe
                               );
                             },
                           )))),
-              Padding(
+              /*Padding(
                   padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
@@ -137,7 +137,7 @@ Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewSe
                                 MaterialPageRoute(builder: (context) => page),
                               );
                             },
-                          ))))
+                          ))))*/
             ],
           ),
         ),
