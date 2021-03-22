@@ -121,6 +121,10 @@ class CustomSearchDelegate extends SearchDelegate {
       itemBuilder: (context, index) {
         return ListTile(
           title: Text('${suggestions[index].name}'),
+          onTap: () async {
+            query = '${suggestions[index].name}';
+            showSuggestions(context);
+          },
         );
       },
     );

@@ -26,6 +26,11 @@ Push a new beta build to pgy
 fastlane ios beta
 ```
 
+### ios release
+```
+fastlane ios release
+```
+编译正式版
 
 ----
 
