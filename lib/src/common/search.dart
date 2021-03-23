@@ -82,7 +82,10 @@ class CustomSearchDelegate extends SearchDelegate {
   @override
   Widget buildResults(BuildContext context) {
     var channelRequest = new ChannelRequest(pageNum: 1, pageSize: 10, name: query);
+    return buildResultImpl(channelRequest);
+  }
 
+  Widget buildResultImpl(ChannelRequest channelRequest) {
     return FutureBuilder(
         future: ChannelAction.searchChannel(channelRequest),
         builder: (context, AsyncSnapshot snapshot) {
@@ -108,14 +111,14 @@ class CustomSearchDelegate extends SearchDelegate {
         builder: (context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
             List<ChannelSuggestion> suggestions = snapshot.data;
-            return buildSuggestionComponent(suggestions);
+            return buildSuggestionComponent(suggestions, context);
           } else {
             return Text("");
           }
         });
   }
 
-  Widget buildSuggestionComponent(List<ChannelSuggestion> suggestions) {
+  Widget buildSuggestionComponent(List<ChannelSuggestion> suggestions, BuildContext context) {
     return ListView.builder(
       itemCount: suggestions.length,
       itemBuilder: (context, index) {
@@ -123,7 +126,7 @@ class CustomSearchDelegate extends SearchDelegate {
           title: Text('${suggestions[index].name}'),
           onTap: () async {
             query = '${suggestions[index].name}';
-            showSuggestions(context);
+            buildResults(context);
           },
         );
       },

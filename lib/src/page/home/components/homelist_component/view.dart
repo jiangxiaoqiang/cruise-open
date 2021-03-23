@@ -46,7 +46,7 @@ Widget buildView(HomeListState state, Dispatch dispatch, ViewService viewService
               ),
               sliver: SliverAppBar(
                 title: Text(
-                  'cruise',
+                  '',
                   style: TextStyle(
                     color: Theme.of(context).brightness == Brightness.light ? Colors.black : Colors.white,
                   ),
