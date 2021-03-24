@@ -45,7 +45,7 @@ class HomeListDefault extends HookWidget{
 
     ArticleRequest articleRequest = new ArticleRequest(pageNum: 1);
     articleRequest.storiesType = type;
-    var counter = useState<ArticleRequest>();
+    var counter = useState<ArticleRequest>(articleRequest);
     counter.value = articleRequest;
 
     return Scaffold(

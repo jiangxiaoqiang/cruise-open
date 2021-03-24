@@ -47,7 +47,7 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
           BottomNavigationBarItem(icon: Icon(Icons.school), title: Text('我的')),
         ],
         currentIndex: state.selectIndex,
-        fixedColor: Colors.blue,
+        fixedColor: Theme.of(context).primaryColor,
         onTap: _onItemTapped,
         unselectedItemColor: Color(0xff666666),
         type: BottomNavigationBarType.fixed),
