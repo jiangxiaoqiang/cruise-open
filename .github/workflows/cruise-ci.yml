@@ -1,4 +1,4 @@
-name: Cruise-CI
+name: Cruise-IOS
 
 on:
   push:
