@@ -2,7 +2,7 @@ name: Cruise-Android
 
 on:
   push:
-    branches: [ android ]
+    branches: [ main ]
 
 jobs:
   build:
