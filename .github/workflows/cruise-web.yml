@@ -1,4 +1,4 @@
-name: Cruise-Linux
+name: Cruise-Web
 
 on:
   push:
