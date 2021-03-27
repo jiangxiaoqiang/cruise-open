@@ -15,6 +15,22 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: '2.0.1'
+      - name: Bundle install
+          run: |
+            cd ./android
+            curl -sSL https://rvm.io/mpapis.asc | gpg --import -
+            curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
+            echo 409B6B1796C275462A1703113804BB82D39DC0E3:6: | gpg --import-ownertrust
+            echo 7D2BAF1CF37B13E2069D6956105BD0E739499BDB:6: | gpg --import-ownertrust
+            curl -sSL https://get.rvm.io | bash -s -- --ignore-dotfiles
+            source $HOME/.rvm/scripts/rvm
+            source ~/.bash_profile
+            rvm --version
+            rvm install 2.7.2
+            rvm use --default 2.7.2
+            gem install cocoapods -v 1.10.0
+            gem install fastlane -v 2.177.0
+            bundle install
       - run: flutter pub get
       #- run: flutter build apk
       - run: flutter build apk --debug --split-per-abi --no-sound-null-safety
