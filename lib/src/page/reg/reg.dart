@@ -1,11 +1,13 @@
+import 'package:cruise/src/common/auth.dart';
+import 'package:cruise/src/common/global_style.dart';
+import 'package:cruise/src/common/net/rest/http_result.dart';
 import 'package:cruise/src/page/login.dart';
 import 'package:cruise/src/page/reg/verify.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:cruise/src/common/auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class RegPage extends HookWidget {
-
   @override
   Widget build(BuildContext context) {
     final _formKey = useMemoized(() => GlobalKey<FormState>());
@@ -16,24 +18,24 @@ class RegPage extends HookWidget {
     final submitting = useState(false);
 
     return Scaffold(
-      appBar: AppBar(title: Text(""),
+      appBar: AppBar(
+        title: Text(""),
         actions: [
-        FlatButton(
-        textColor: Colors.black,
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => LoginPage()));
-        },
-        child: Text("登录"),
-        shape: CircleBorder(side: BorderSide(color: Colors.transparent)),
-      ),],),
+          TextButton(
+            style: GlobalStyle.textButtonStyle,
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+            },
+            child: Text("登录"),
+          ),
+        ],
+      ),
       body: Form(
         key: _formKey,
         child: ListView(
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB( 20.0, 120, 20.0, 40),
+              padding: const EdgeInsets.fromLTRB(20.0, 120, 20.0, 40),
               child: TextFormField(
                 autocorrect: false,
                 onChanged: (value) {
@@ -65,35 +67,44 @@ class RegPage extends HookWidget {
                       return ButtonTheme(
                           minWidth: screenWidth * 0.9,
                           height: 50.0,
-                          child:RaisedButton(
-                        color: Theme.of(context).primaryColor,
-                        shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(30.0)),
-                        onPressed: () async {
-                          if (_formKey.currentState!.validate()) {
-                            submitting.value = true;
-                            AuthResult result = await Auth.sms(
-                              phone: phone.value,
-                            );
+                          child: ElevatedButton(
+                            style: GlobalStyle.getButtonStyle(context),
+                            onPressed: () async {
+                              if (_formKey.currentState!.validate()) {
+                                submitting.value = true;
+                                AuthResult result = await Auth.sms(
+                                  phone: phone.value,
+                                );
 
-                            Widget page;
-                            page = VerifyPage(phone: phone.value);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => page),
-                            );
-                          }
-                        },
-                        child: submitting.value
-                            ? SizedBox(
-                                height: 15,
-                                width: 15,
-                                child: CircularProgressIndicator(
-                                  backgroundColor: Colors.white,
-                                ),
-                              )
-                            : Text("下一步"),
-                      ));
+                                if (result.result == Result.error) {
+                                  Fluttertoast.showToast(
+                                      msg: result.message,
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.CENTER,
+                                      timeInSecForIosWeb: 1,
+                                      backgroundColor: Colors.red,
+                                      textColor: Colors.white,
+                                      fontSize: 16.0);
+                                } else {
+                                  Widget page;
+                                  page = VerifyPage(phone: phone.value);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => page),
+                                  );
+                                }
+                              }
+                            },
+                            child: submitting.value
+                                ? SizedBox(
+                                    height: 15,
+                                    width: 15,
+                                    child: CircularProgressIndicator(
+                                      backgroundColor: Colors.white,
+                                    ),
+                                  )
+                                : Text("下一步"),
+                          ));
                     },
                   ),
                 ),

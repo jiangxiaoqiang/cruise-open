@@ -43,6 +43,6 @@ class RestClient {
   }
 
   static bool respSuccess(Response response) {
-    return response.statusCode == 200 && response.data["statusCode"] == "200";
+    return response.statusCode == 200 && response.data["statusCode"] == "200" && response.data["resultCode"] == "200";
   }
 }

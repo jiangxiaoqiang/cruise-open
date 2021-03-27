@@ -61,7 +61,7 @@ class Auth {
       return AuthResult(message: "SMS send success", result: Result.ok);
     } else {
       return AuthResult(
-          message: "SMS send failed. Did you mistype your credentials?",
+          message: response.data["msg"],
           result: Result.error);
     }
   }

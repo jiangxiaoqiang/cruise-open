@@ -1,9 +1,10 @@
+import 'package:cruise/src/common/auth.dart';
+import 'package:cruise/src/common/global_style.dart';
 import 'package:cruise/src/common/net/rest/http_result.dart';
 import 'package:cruise/src/component/user_agreement.dart';
 import 'package:cruise/src/page/reg/reg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:cruise/src/common/auth.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class LoginPage extends HookWidget {
@@ -20,51 +21,50 @@ class LoginPage extends HookWidget {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      appBar: AppBar(title: Text(""),
+      appBar: AppBar(
+        title: Text(""),
         actions: [
-          FlatButton(
-            textColor: Colors.black,
+          TextButton(
+            style:GlobalStyle.textButtonStyle,
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => RegPage()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => RegPage()));
             },
-            child: Text("注册",style: TextStyle(fontSize: 16.0)),
-            shape: CircleBorder(side: BorderSide(color: Colors.transparent)),
+            child: Text("注册", style: TextStyle(fontSize: 16.0)),
           ),
-      ],),
+        ],
+      ),
       body: Form(
         key: _formKey,
         child: ListView(
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB( 20.0, 120, 20.0, 40),
-              child: SingleChildScrollView(
-                child: InternationalPhoneNumberInput(
-                onInputChanged: (PhoneNumber number) {
-                  username.value = number.phoneNumber;
-                },
-                locale: "zh",
-                hintText: "手机号码",
-                errorMessage:"无效的手机号码",
-                onInputValidated: (bool value) {
-                  phoneValid.value = value;
-                },
-                selectorConfig: SelectorConfig(
-                  selectorType: PhoneInputSelectorType.DIALOG,
-                ),
-                ignoreBlank: false,
-                selectorTextStyle: TextStyle(color: Colors.black),
-                initialValue: number,
-                textFieldController: controller,
-                inputBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30.0),
-                ),
-                inputDecoration: InputDecoration(
-                  //fillColor: Colors.black,
-                ),
-              ),
-            )),
+                padding: const EdgeInsets.fromLTRB(20.0, 120, 20.0, 40),
+                child: SingleChildScrollView(
+                  child: InternationalPhoneNumberInput(
+                    onInputChanged: (PhoneNumber number) {
+                      username.value = number.phoneNumber;
+                    },
+                    locale: "zh",
+                    hintText: "手机号码",
+                    errorMessage: "无效的手机号码",
+                    onInputValidated: (bool value) {
+                      phoneValid.value = value;
+                    },
+                    selectorConfig: SelectorConfig(
+                      selectorType: PhoneInputSelectorType.DIALOG,
+                    ),
+                    ignoreBlank: false,
+                    selectorTextStyle: TextStyle(color: Colors.black),
+                    initialValue: number,
+                    textFieldController: controller,
+                    inputBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+                    inputDecoration: InputDecoration(
+                        //fillColor: Colors.black,
+                        ),
+                  ),
+                )),
             Padding(
               padding: const EdgeInsets.only(
                 bottom: 16.0,
@@ -79,7 +79,7 @@ class LoginPage extends HookWidget {
                 obscureText: true,
                 decoration: InputDecoration(
                     labelText: '密码',
-                    contentPadding: EdgeInsets.all(10.0),//控制输入控件高度
+                    contentPadding: EdgeInsets.all(10.0), //控制输入控件高度
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
@@ -97,18 +97,15 @@ class LoginPage extends HookWidget {
               children: [
                 Spacer(),
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 20.0, vertical: 20.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
                   child: Builder(
                     builder: (context) {
                       return ButtonTheme(
                           minWidth: screenWidth * 0.85,
                           height: 50.0,
                           child: Center(
-                              child: RaisedButton(
-                            color: Theme.of(context).primaryColor,
-                            shape: new RoundedRectangleBorder(
-                                borderRadius: new BorderRadius.circular(30.0)),
+                              child: ElevatedButton(
+                            style: GlobalStyle.getButtonStyle(context),
                             onPressed: () async {
                               if (_formKey.currentState!.validate() && phoneValid.value) {
                                 submitting.value = true;
