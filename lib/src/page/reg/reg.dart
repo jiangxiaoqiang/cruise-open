@@ -14,7 +14,7 @@ class RegPage extends HookWidget {
     final _formKey = useMemoized(() => GlobalKey<FormState>());
 
     double screenWidth = MediaQuery.of(context).size.width;
-    final countryCode = useState("");
+    final countryCode = useState("+86");
     final phone = useState("");
     final submitting = useState(false);
 
@@ -54,24 +54,24 @@ class RegPage extends HookWidget {
                       height: 35,
                       width: 265,
                       child: TextFormField(
-                    autocorrect: false,
-                    onChanged: (value) {
-                      phone.value = value;
-                    },
-                    decoration: InputDecoration(
-                      labelText: '手机号',
-                      contentPadding: EdgeInsets.all(10.0),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "手机号码不能为空";
-                      }
-                      return null;
-                    },
-                  ))
+                        autocorrect: false,
+                        onChanged: (value) {
+                          phone.value = value;
+                        },
+                        decoration: InputDecoration(
+                          labelText: '手机号',
+                          contentPadding: EdgeInsets.all(10.0),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "手机号码不能为空";
+                          }
+                          return null;
+                        },
+                      ))
                 ],
               ),
             ),
@@ -91,8 +91,9 @@ class RegPage extends HookWidget {
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {
                                 submitting.value = true;
+                                String phoneNumber = countryCode.value + phone.value;
                                 AuthResult result = await Auth.sms(
-                                  phone: phone.value,
+                                  phone: phoneNumber,
                                 );
 
                                 if (result.result == Result.error) {
