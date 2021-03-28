@@ -10,5 +10,5 @@
   "cruiseNavigatorSubscribe": "Subscribe",
     "@cruiseNavigatorSubscribe": {
     "description": "The subscribe navigate text"
-  },
+  }
 }
