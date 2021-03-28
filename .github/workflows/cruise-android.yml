@@ -36,7 +36,6 @@ jobs:
           flutter precache
           flutter pub get
           cd ./android
-          pod install
       #- run: flutter build apk
       - run: flutter build apk --debug --split-per-abi --no-sound-null-safety
 
