@@ -32,11 +32,11 @@ jobs:
           gem install fastlane -v 2.177.0
           bundle install
       - name: Install tools
-          run: |
-            flutter precache
-            flutter pub get
-            cd ./android
-            pod install
+        run: |
+          flutter precache
+          flutter pub get
+          cd ./android
+          pod install
       #- run: flutter build apk
       - run: flutter build apk --debug --split-per-abi --no-sound-null-safety
 

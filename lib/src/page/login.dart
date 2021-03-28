@@ -6,12 +6,8 @@ import 'package:cruise/src/component/user_agreement.dart';
 import 'package:cruise/src/page/reg/reg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class LoginPage extends HookWidget {
-  final PhoneNumber number = PhoneNumber(isoCode: 'CN');
-  final TextEditingController controller = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     final _formKey = useMemoized(() => GlobalKey<FormState>());
@@ -21,11 +17,6 @@ class LoginPage extends HookWidget {
     final phoneValid = useState(false);
     final submitting = useState(false);
     double screenWidth = MediaQuery.of(context).size.width;
-
-    void _onCountryChange(CountryCode countryCode) {
-      //TODO : manipulate the selected country code here
-      print("New Country selected: " + countryCode.toString());
-    }
 
     return Scaffold(
         appBar: AppBar(
@@ -45,37 +36,39 @@ class LoginPage extends HookWidget {
           child: Center(
             child: Column(
               children: <Widget>[
-                Row(
-                  children: [
-                    CountryCodePicker(
-                      onChanged: (CountryCode country) {
-                        countryCode.value = country.toString();
-                      },
-                      initialSelection: 'CN',
-                      favorite: ['+86', 'ZH'],
-                      // flag can be styled with BoxDecoration's `borderRadius` and `shape` fields
-                      flagDecoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(7),
-                      ),
-                    ),
-                    SizedBox(
-                        height: 35,
-                        width: 265,
-                        child: TextFormField(
-                          autocorrect: false,
-                          onChanged: (value) {
-                            username.value = value;
+                Padding(
+                    padding: const EdgeInsets.only(top: 60),
+                    child: Row(
+                      children: [
+                        CountryCodePicker(
+                          onChanged: (CountryCode country) {
+                            countryCode.value = country.toString();
                           },
-                          obscureText: true,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return "Phone不能为空";
-                            }
-                            return null;
-                          },
-                        ))
-                  ],
-                ),
+                          initialSelection: 'CN',
+                          favorite: ['+86', 'ZH'],
+                          // flag can be styled with BoxDecoration's `borderRadius` and `shape` fields
+                          flagDecoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(7),
+                          ),
+                        ),
+                        SizedBox(
+                            height: 35,
+                            width: 265,
+                            child: TextFormField(
+                              autocorrect: false,
+                              onChanged: (value) {
+                                username.value = value;
+                              },
+                              obscureText: true,
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return "Phone不能为空";
+                                }
+                                return null;
+                              },
+                            ))
+                      ],
+                    )),
                 Padding(
                   padding: const EdgeInsets.only(
                     bottom: 16.0,

@@ -5,6 +5,10 @@
   },
   "cruiseNavigatorHome": "Home",
     "@cruiseNavigatorHome": {
-      "description": "The home navigate text"
-    }
+    "description": "The home navigate text"
+  },
+  "cruiseNavigatorSubscribe": "Subscribe",
+    "@cruiseNavigatorSubscribe": {
+    "description": "The subscribe navigate text"
+  },
 }
