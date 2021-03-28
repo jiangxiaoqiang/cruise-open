@@ -2,10 +2,14 @@ name: Cruise-Android
 
 on:
   push:
-    branches: [ android, main ]
+    branches: [ main, android ]
 
 jobs:
   build:
+    #
+    # more macOS version:
+    # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-10.15-Readme.md
+    #
     runs-on: macos-10.15
     steps:
       - uses: actions/checkout@v2
@@ -15,9 +19,16 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: '2.0.1'
+      #
+      # more xcode version path:
+      # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-10.15-Readme.md
+      #
+      - name: Select Xcode version
+        run: sudo xcode-select -s '/Applications/Xcode_12.4.app/Contents/Developer'
       - name: Bundle install
         run: |
           cd ./android
+          brew install gpg
           curl -sSL https://rvm.io/mpapis.asc | gpg --import -
           curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
           echo 409B6B1796C275462A1703113804BB82D39DC0E3:6: | gpg --import-ownertrust
@@ -36,9 +47,10 @@ jobs:
           flutter precache
           flutter pub get
           cd ./android
+          pod install
+      #- run: flutter pub get
       #- run: flutter build apk
-      - run: flutter build apk --debug --split-per-abi --no-sound-null-safety
-
+      - run: flutter build apk --release --no-sound-null-safety
       - name: Setup SSH Keys and known_hosts for fastlane match
         run: |
           SSH_PATH="$HOME/.ssh"
@@ -56,7 +68,7 @@ jobs:
       - name: Deploy to TestFlight/PGY
         run: |
           cd ./android
-          bundle exec fastlane android beta
+          bundle exec fastlane beta
         env:
           FLUTTER_ROOT: ${{ secrets.FLUTTER_ROOT }}
           APPLE_ID: ${{ secrets.APPLE_ID }}
