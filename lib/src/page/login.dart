@@ -39,16 +39,36 @@ class LoginPage extends HookWidget {
           child: Center(
             child: Column(
               children: <Widget>[
-                CountryCodePicker(
-                  onChanged: print,
-                  // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
-                  initialSelection: 'IT',
-                  favorite: ['+86', 'ZH'],
-                  //countryFilter: ['IT', 'FR'],
-                  // flag can be styled with BoxDecoration's `borderRadius` and `shape` fields
-                  flagDecoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(7),
-                  ),
+                Row(
+                  children: [
+                    CountryCodePicker(
+                      onChanged: print,
+                      // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
+                      initialSelection: 'CN',
+                      favorite: ['+86', 'ZH'],
+                      //countryFilter: ['IT', 'FR'],
+                      // flag can be styled with BoxDecoration's `borderRadius` and `shape` fields
+                      flagDecoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(7),
+                      ),
+                    ),
+                    SizedBox(
+                        height: 35,
+                        width: 265,
+                        child: TextFormField(
+                          autocorrect: false,
+                          onChanged: (value) {
+                            password.value = value;
+                          },
+                          obscureText: true,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "密码不能为空";
+                            }
+                            return null;
+                          },
+                        ))
+                  ],
                 ),
                 /*InternationalPhoneNumberInput(
                     onInputChanged: (PhoneNumber number) {
@@ -151,7 +171,7 @@ class LoginPage extends HookWidget {
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 200.0),
+                  padding: const EdgeInsets.symmetric(vertical: 60.0),
                   child: Center(child: UserAgreement()),
                 )
               ],
