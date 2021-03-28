@@ -6,10 +6,12 @@ class GlobalStyle {
   static ButtonStyle getButtonStyle(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
-      onPrimary: Theme.of(context).primaryColor,
+      onPrimary: Colors.black,
+      primary: Theme.of(context).primaryColor,
+      //shadowColor: Theme.of(context).primaryColor,
       minimumSize: Size(screenWidth - 40, 45),
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(30.0)),
+        borderRadius: BorderRadius.all(Radius.circular(10.0)),
       ),
     );
     return raisedButtonStyle;

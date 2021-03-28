@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: macos-10.15
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-java@v1
@@ -29,7 +29,7 @@ jobs:
           rvm install 2.7.2
           rvm use --default 2.7.2
           gem install cocoapods -v 1.10.0
-          sudo gem install -n /usr/local/bin fastlane -v 2.177.0
+          gem install fastlane -v 2.177.0
           bundle install
       - run: flutter pub get
       #- run: flutter build apk
