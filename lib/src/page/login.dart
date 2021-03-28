@@ -139,7 +139,7 @@ class LoginPage extends HookWidget {
                                 },
                                 child: submitting.value
                                     ? SizedBox(
-                                        height: 15,
+                                        height: 45,
                                         width: 15,
                                         child: CircularProgressIndicator(
                                           backgroundColor: Colors.white,
