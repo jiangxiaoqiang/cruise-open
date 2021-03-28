@@ -17,9 +17,15 @@ class LoginPage extends HookWidget {
     final _formKey = useMemoized(() => GlobalKey<FormState>());
     final username = useState("");
     final password = useState("");
+    final countryCode = useState("");
     final phoneValid = useState(false);
     final submitting = useState(false);
     double screenWidth = MediaQuery.of(context).size.width;
+
+    void _onCountryChange(CountryCode countryCode) {
+      //TODO : manipulate the selected country code here
+      print("New Country selected: " + countryCode.toString());
+    }
 
     return Scaffold(
         appBar: AppBar(
@@ -42,11 +48,11 @@ class LoginPage extends HookWidget {
                 Row(
                   children: [
                     CountryCodePicker(
-                      onChanged: print,
-                      // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
+                      onChanged: (CountryCode country) {
+                        countryCode.value = country.toString();
+                      },
                       initialSelection: 'CN',
                       favorite: ['+86', 'ZH'],
-                      //countryFilter: ['IT', 'FR'],
                       // flag can be styled with BoxDecoration's `borderRadius` and `shape` fields
                       flagDecoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(7),
@@ -58,42 +64,18 @@ class LoginPage extends HookWidget {
                         child: TextFormField(
                           autocorrect: false,
                           onChanged: (value) {
-                            password.value = value;
+                            username.value = value;
                           },
                           obscureText: true,
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return "密码不能为空";
+                              return "Phone不能为空";
                             }
                             return null;
                           },
                         ))
                   ],
                 ),
-                /*InternationalPhoneNumberInput(
-                    onInputChanged: (PhoneNumber number) {
-                      username.value = number.phoneNumber;
-                    },
-                    locale: "zh",
-                    hintText: "手机号码",
-                    errorMessage: "无效的手机号码",
-                    onInputValidated: (bool value) {
-                      phoneValid.value = value;
-                    },
-                    selectorConfig: SelectorConfig(
-                      selectorType: PhoneInputSelectorType.DIALOG,
-                    ),
-                    ignoreBlank: false,
-                    selectorTextStyle: TextStyle(color: Colors.black),
-                    initialValue: number,
-                    textFieldController: controller,
-                    inputBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    inputDecoration: InputDecoration(
-                        //fillColor: Colors.black,
-                        ),
-                  )*/
                 Padding(
                   padding: const EdgeInsets.only(
                     bottom: 16.0,
@@ -139,7 +121,7 @@ class LoginPage extends HookWidget {
                                   if (_formKey.currentState!.validate() && phoneValid.value) {
                                     submitting.value = true;
                                     AuthResult result = await Auth.login(
-                                      username: username.value,
+                                      username: countryCode.value + username.value,
                                       password: password.value,
                                     );
 

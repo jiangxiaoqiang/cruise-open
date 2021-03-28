@@ -1,3 +1,4 @@
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:cruise/src/common/auth.dart';
 import 'package:cruise/src/common/global_style.dart';
 import 'package:cruise/src/common/net/rest/http_result.dart';
@@ -13,7 +14,7 @@ class RegPage extends HookWidget {
     final _formKey = useMemoized(() => GlobalKey<FormState>());
 
     double screenWidth = MediaQuery.of(context).size.width;
-
+    final countryCode = useState("");
     final phone = useState("");
     final submitting = useState(false);
 
@@ -32,28 +33,46 @@ class RegPage extends HookWidget {
       ),
       body: Form(
         key: _formKey,
-        child: ListView(
+        child: Column(
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(20.0, 120, 20.0, 40),
-              child: TextFormField(
-                autocorrect: false,
-                onChanged: (value) {
-                  phone.value = value;
-                },
-                decoration: InputDecoration(
-                  labelText: '手机号',
-                  contentPadding: EdgeInsets.all(10.0),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30.0),
+              child: Row(
+                children: [
+                  CountryCodePicker(
+                    onChanged: (CountryCode country) {
+                      countryCode.value = country.toString();
+                    },
+                    initialSelection: 'CN',
+                    favorite: ['+86', 'ZH'],
+                    // flag can be styled with BoxDecoration's `borderRadius` and `shape` fields
+                    flagDecoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(7),
+                    ),
                   ),
-                ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "手机号码不能为空";
-                  }
-                  return null;
-                },
+                  SizedBox(
+                      height: 35,
+                      width: 265,
+                      child: TextFormField(
+                    autocorrect: false,
+                    onChanged: (value) {
+                      phone.value = value;
+                    },
+                    decoration: InputDecoration(
+                      labelText: '手机号',
+                      contentPadding: EdgeInsets.all(10.0),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "手机号码不能为空";
+                      }
+                      return null;
+                    },
+                  ))
+                ],
               ),
             ),
             Flex(
