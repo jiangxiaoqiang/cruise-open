@@ -46,8 +46,6 @@ jobs:
         run: |
           flutter precache
           flutter pub get
-          cd ./android
-          pod install
       #- run: flutter pub get
       #- run: flutter build apk
       - run: flutter build apk --release --no-sound-null-safety
