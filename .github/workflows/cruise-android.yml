@@ -40,7 +40,7 @@ jobs:
           rvm install 2.7.2
           rvm use --default 2.7.2
           gem install cocoapods -v 1.10.0
-          gem install fastlane -v 2.177.0
+          gem install fastlane -v 2.179.0
           bundle install
       - name: Install tools
         run: |
