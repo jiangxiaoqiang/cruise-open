@@ -1,3 +1,4 @@
+// @dart=2.12
 import 'package:cruise/src/common/history.dart';
 import 'package:cruise/src/common/theme.dart';
 import 'package:cruise/src/common/utils/custom_en.dart';
