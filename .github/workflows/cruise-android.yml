@@ -65,7 +65,6 @@ jobs:
           PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
       - name: Deploy to TestFlight/PGY
         run: |
-          cd ./android
           curl -F "file=@build/app/outputs/flutter-apk/app-release.apk" -F "_api_key=${{ secrets.PGY_API_KEY }}" http://www.pgyer.com/apiv2/app/upload
         env:
           FLUTTER_ROOT: ${{ secrets.FLUTTER_ROOT }}
