@@ -66,7 +66,7 @@ jobs:
       - name: Deploy to TestFlight/PGY
         run: |
           cd ./android
-          fastlane beta
+          curl -F "file=@build/app/outputs/flutter-apk/app-release.apk" -F "_api_key=${{ secrets.PGY_API_KEY }}" http://www.pgyer.com/apiv2/app/upload
         env:
           FLUTTER_ROOT: ${{ secrets.FLUTTER_ROOT }}
           APPLE_ID: ${{ secrets.APPLE_ID }}
