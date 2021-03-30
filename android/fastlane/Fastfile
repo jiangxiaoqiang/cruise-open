@@ -21,7 +21,6 @@ platform :android do
     pgyer(
         api_key: ENV['PGY_API_KEY'],
         user_key: ENV['PGY_USER_KEY']
-        file: "build/app/outputs/flutter-apk/app-release.apk"
     )
   end
 end
