@@ -9,13 +9,19 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class RegPage extends HookWidget {
+  RegPage({required this.phoneNumber});
+
+  /// if user entered part of the phone number in login page and found not registered
+  /// pass phone number make user switch to registered page did not need to input phone number again
+  final String phoneNumber;
+
   @override
   Widget build(BuildContext context) {
     final _formKey = useMemoized(() => GlobalKey<FormState>());
 
     double screenWidth = MediaQuery.of(context).size.width;
     final countryCode = useState("+86");
-    final phone = useState("");
+    final phone = useState(phoneNumber);
     final submitting = useState(false);
 
     return Scaffold(
@@ -53,7 +59,7 @@ class RegPage extends HookWidget {
                       ),
                       SizedBox(
                           height: 45,
-                          width: screenWidth-150,
+                          width: screenWidth - 150,
                           child: TextFormField(
                             autocorrect: false,
                             onChanged: (value) {

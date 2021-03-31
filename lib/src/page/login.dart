@@ -16,16 +16,18 @@ class LoginPage extends HookWidget {
     final countryCode = useState("");
     final phoneValid = useState(false);
     final submitting = useState(false);
+    final showPassword = useState(true);
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text(""),
           actions: [
             TextButton(
               style: GlobalStyle.textButtonStyle,
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => RegPage()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => RegPage(phoneNumber: username.value)));
               },
               child: Text("注册", style: TextStyle(fontSize: 16.0)),
             ),
@@ -59,7 +61,7 @@ class LoginPage extends HookWidget {
                               onChanged: (value) {
                                 username.value = value;
                               },
-                              obscureText: true,
+                              obscureText: false,
                               validator: (value) {
                                 if (value!.isEmpty) {
                                   return "Phone不能为空";
@@ -70,24 +72,25 @@ class LoginPage extends HookWidget {
                       ],
                     )),
                 Padding(
-                  padding: const EdgeInsets.only(
-                    bottom: 16.0,
-                    left: 16,
-                    right: 16,
-                  ),
+                  padding: const EdgeInsets.only(bottom: 16.0, left: 16, right: 16, top: 32),
                   child: TextFormField(
                     autocorrect: false,
                     onChanged: (value) {
                       password.value = value;
                     },
-                    obscureText: true,
+                    obscureText: showPassword.value,
                     decoration: InputDecoration(
                         labelText: '密码',
                         contentPadding: EdgeInsets.all(10.0), //控制输入控件高度
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30.0),
                         ),
-                        prefixIcon: Icon(Icons.remove_red_eye)),
+                        suffixIcon: IconButton(
+                          icon: Icon(Icons.remove_red_eye),
+                          onPressed: () {
+                            showPassword.value = !showPassword.value;
+                          },
+                        )),
                     validator: (value) {
                       if (value!.isEmpty) {
                         return "密码不能为空";
