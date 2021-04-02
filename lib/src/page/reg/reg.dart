@@ -62,6 +62,7 @@ class RegPage extends HookWidget {
                           width: screenWidth - 150,
                           child: TextFormField(
                             autocorrect: false,
+                            initialValue: phone.value,
                             onChanged: (value) {
                               phone.value = value;
                             },
@@ -108,10 +109,10 @@ class RegPage extends HookWidget {
                                           msg: result.message,
                                           toastLength: Toast.LENGTH_SHORT,
                                           gravity: ToastGravity.CENTER,
-                                          timeInSecForIosWeb: 1,
+                                          timeInSecForIosWeb: 2,
                                           backgroundColor: Colors.red,
-                                          textColor: Colors.white,
-                                          fontSize: 16.0);
+                                          textColor: Colors.black,
+                                          fontSize: 18.0);
                                     } else {
                                       Widget page;
                                       page = VerifyPage(phone: phone.value);
@@ -130,7 +131,7 @@ class RegPage extends HookWidget {
                                           backgroundColor: Colors.white,
                                         ),
                                       )
-                                    : Text("下一步"),
+                                    : Text("获取验证码"),
                               ));
                         },
                       ),

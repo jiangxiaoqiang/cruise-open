@@ -1,7 +1,7 @@
-import 'package:cruise/src/common/repo.dart';
 import 'package:cruise/src/common/article_action.dart';
 import 'package:cruise/src/common/helpers.dart';
 import 'package:cruise/src/common/net/rest/http_result.dart';
+import 'package:cruise/src/common/repo.dart';
 import 'package:cruise/src/common/utils/common_utils.dart';
 import 'package:cruise/src/models/Channel.dart';
 import 'package:cruise/src/models/Item.dart';
@@ -24,6 +24,7 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
   BuildContext context = viewService.context;
   Offset? _initialSwipeOffset;
   Offset? _finalSwipeOffset;
+  final ScrollController _scrollController = ScrollController();
 
   void _onHorizontalDragStart(DragStartDetails details) {
     _initialSwipeOffset = details.globalPosition;
@@ -116,146 +117,151 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
       onHorizontalDragStart: _onHorizontalDragStart,
       onHorizontalDragUpdate: _onHorizontalDragUpdate,
       onHorizontalDragEnd: _onHorizontalDragEnd,
-      child: Container(
-        constraints: BoxConstraints(
-          minHeight: MediaQuery.of(context).size.height * 0.9,
-        ),
-        color: Theme.of(context).scaffoldBackgroundColor,
-        child: Padding(
-          padding: const EdgeInsets.all(
-            16.0,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              InkWell(
-                onTap: () => CommonUtils.launchUrl(item.link),
+      child: CupertinoScrollbar(
+          isAlwaysShown: true,
+          controller: _scrollController,
+          child: SingleChildScrollView(
+              controller: _scrollController,
+              child: Container(
+                constraints: BoxConstraints(
+                  minHeight: MediaQuery.of(context).size.height * 0.9,
+                ),
+                color: Theme.of(context).scaffoldBackgroundColor,
                 child: Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
-                  child: Container(
-                    child: Text(
-                      item.title == "" ? "Comment" : item.title,
-                      style: Theme.of(context).textTheme.headline5!.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
-                    ),
+                  padding: const EdgeInsets.all(
+                    16.0,
                   ),
-                ),
-              ),
-              if (item.domain != "")
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
-                  child: InkWell(
-                      onTap: () async {
-                        navToChannelDetail();
-                      },
-                      child: Text(
-                        item.domain,
-                        style: Theme.of(context).textTheme.caption!.copyWith(color: Theme.of(context).primaryColor),
-                      )),
-                ),
-              InkWell(
-                onTap: () {},
-                child: RichText(
-                  text: TextSpan(
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: item.author,
-                        style: Theme.of(context).textTheme.caption,
-                      ),
-                      TextSpan(
-                        text: " ${String.fromCharCode(8226)} ",
-                        style: Theme.of(context).textTheme.caption,
-                      ),
-                      TextSpan(
-                        text: item.ago,
-                        style: Theme.of(context).textTheme.caption,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              if (item.content != "")
-                Html(
-                  data: item.content,
-                  style: {
-                    "body": Style(
-                      fontSize: FontSize(19.0),
-                    ),
-                  },
-                  onLinkTap: (url) => CommonUtils.launchUrl(url),
-                ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 16.0),
-                        child: Row(
-                          children: [
-                            if (item.isFav == 1)
-                              IconButton(
-                                icon: Icon(Icons.bookmark, color: Theme.of(context).primaryColor),
-                                onPressed: () => touchFav("unfav", FavStatus.UNFAV),
-                              ),
-                            if (item.isFav != 1)
-                              IconButton(
-                                icon: Icon(Icons.bookmark),
-                                onPressed: () => touchFav("fav", FavStatus.FAV),
-                              ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 0.0),
-                              child: Text(
-                                "${item.favCount}",
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context).textTheme.caption!.copyWith(
-                                      color: Theme.of(context).primaryColor,
-                                    ),
-                              ),
+                      InkWell(
+                        onTap: () => CommonUtils.launchUrl(item.link),
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 8.0),
+                          child: Container(
+                            child: Text(
+                              item.title == "" ? "Comment" : item.title,
+                              style: Theme.of(context).textTheme.headline5!.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                  ),
                             ),
-                          ],
+                          ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 0.0),
-                        child: Row(
-                          children: [
-                            if (item.isUpvote == 1)
-                              IconButton(
-                                icon: Icon(Icons.thumb_up, color: Theme.of(context).primaryColor),
-                                onPressed: () => touchUpvote("unupvote", UpvoteStatus.UNUPVOTE),
-                              ),
-                            if (item.isUpvote != 1)
-                              IconButton(
-                                icon: Icon(Icons.thumb_up),
-                                onPressed: () => touchUpvote("upvote", UpvoteStatus.UPVOTE),
-                              ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
+                      if (item.domain != "")
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 8.0),
+                          child: InkWell(
+                              onTap: () async {
+                                navToChannelDetail();
+                              },
                               child: Text(
-                                "${item.upvoteCount}",
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context).textTheme.caption!.copyWith(
-                                      color: Theme.of(context).primaryColor,
-                                    ),
-                              ),
-                            ),
-                          ],
+                                item.domain,
+                                style: Theme.of(context).textTheme.caption!.copyWith(color: Theme.of(context).primaryColor),
+                              )),
                         ),
+                      InkWell(
+                        onTap: () {},
+                        child: RichText(
+                          text: TextSpan(
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: item.author,
+                                style: Theme.of(context).textTheme.caption,
+                              ),
+                              TextSpan(
+                                text: " ${String.fromCharCode(8226)} ",
+                                style: Theme.of(context).textTheme.caption,
+                              ),
+                              TextSpan(
+                                text: item.ago,
+                                style: Theme.of(context).textTheme.caption,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      if (item.content != "")
+                        Html(
+                          data: item.content,
+                          style: {
+                            "body": Style(
+                              fontSize: FontSize(19.0),
+                            ),
+                          },
+                          onLinkTap: (url) => CommonUtils.launchUrl(url),
+                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 16.0),
+                                child: Row(
+                                  children: [
+                                    if (item.isFav == 1)
+                                      IconButton(
+                                        icon: Icon(Icons.bookmark, color: Theme.of(context).primaryColor),
+                                        onPressed: () => touchFav("unfav", FavStatus.UNFAV),
+                                      ),
+                                    if (item.isFav != 1)
+                                      IconButton(
+                                        icon: Icon(Icons.bookmark),
+                                        onPressed: () => touchFav("fav", FavStatus.FAV),
+                                      ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 0.0),
+                                      child: Text(
+                                        "${item.favCount}",
+                                        textAlign: TextAlign.center,
+                                        style: Theme.of(context).textTheme.caption!.copyWith(
+                                              color: Theme.of(context).primaryColor,
+                                            ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 0.0),
+                                child: Row(
+                                  children: [
+                                    if (item.isUpvote == 1)
+                                      IconButton(
+                                        icon: Icon(Icons.thumb_up, color: Theme.of(context).primaryColor),
+                                        onPressed: () => touchUpvote("unupvote", UpvoteStatus.UNUPVOTE),
+                                      ),
+                                    if (item.isUpvote != 1)
+                                      IconButton(
+                                        icon: Icon(Icons.thumb_up),
+                                        onPressed: () => touchUpvote("upvote", UpvoteStatus.UPVOTE),
+                                      ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 8.0),
+                                      child: Text(
+                                        "${item.upvoteCount}",
+                                        textAlign: TextAlign.center,
+                                        style: Theme.of(context).textTheme.caption!.copyWith(
+                                              color: Theme.of(context).primaryColor,
+                                            ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          IconButton(
+                            icon: Icon(
+                              Feather.share_2,
+                            ),
+                            onPressed: () => handleShare(id: item.id, title: item.title, postUrl: item.link),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                  IconButton(
-                    icon: Icon(
-                      Feather.share_2,
-                    ),
-                    onPressed: () => handleShare(id: item.id, title: item.title, postUrl: item.link),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ));
+                ),
+              ))));
 }
