@@ -3,6 +3,7 @@ import 'package:cruise/src/common/auth.dart';
 import 'package:cruise/src/common/global_style.dart';
 import 'package:cruise/src/common/net/rest/http_result.dart';
 import 'package:cruise/src/component/user_agreement.dart';
+import 'package:cruise/src/models/api/login_type.dart';
 import 'package:cruise/src/page/reg/reg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -64,7 +65,7 @@ class LoginPage extends HookWidget {
                               obscureText: false,
                               validator: (value) {
                                 if (value!.isEmpty) {
-                                  return "Phone不能为空";
+                                  return "电话号码不能为空";
                                 }
                                 return null;
                               },
@@ -119,6 +120,7 @@ class LoginPage extends HookWidget {
                                     AuthResult result = await Auth.login(
                                       username: countryCode.value + username.value,
                                       password: password.value,
+                                      loginType: LoginType.PHONE
                                     );
 
                                     if (result.result == Result.error) {

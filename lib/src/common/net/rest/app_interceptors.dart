@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cruise/src/common/auth.dart';
 import 'package:cruise/src/common/net/rest/rest_clinet.dart';
+import 'package:cruise/src/models/api/login_type.dart';
 import 'package:cruise/src/models/api/response_status.dart';
 import 'package:dio/dio.dart';
 
@@ -10,25 +11,24 @@ import 'http_result.dart';
 
 class AppInterceptors extends InterceptorsWrapper {
   @override
-  Future onRequest(RequestOptions options) async {
+  Future onRequest(RequestOptions options,RequestInterceptorHandler handler) async {
     if (!options.headers.containsKey("token")) {
       String? token = await storage.read(key: "token");
       options.headers["token"] = token;
       return options;
     }
-    return super.onRequest(options);
+    return super.onRequest(options,handler);
   }
 
   @override
-  Future onResponse(Response response) async {
+  Future onResponse(Response response,ResponseInterceptorHandler handler) async {
     autoLogin(response);
-    return super.onResponse(response);
+    return super.onResponse(response,handler);
   }
 
   @override
-  Future onError(DioError err) async {
-    //autoLogin(err.response);
-    return super.onError(err);
+  Future onError(DioError err,ErrorInterceptorHandler handler) async {
+    return super.onError(err,handler);
   }
 
   void autoLogin(Response response) async {
@@ -47,12 +47,13 @@ class AppInterceptors extends InterceptorsWrapper {
     AuthResult result = await Auth.login(
       username: userName,
       password: password,
+      loginType: LoginType.PHONE
     );
     if (result.result == Result.ok) {
       dio.unlock();
       // resend a request to fetch data
       Dio req = RestClient.createDio();
-      req.request(response.request.path);
+      req.request(response.requestOptions.path);
     }
   }
 }

@@ -5,14 +5,15 @@ void main() {
   test("测试网络请求", () async {
     // 假如这个请求需要一个 token
     final token = "54321";
+    Uri uri = Uri();
     final response = await http.get(
-      "https://api.myjson.com/bins/18mjgh",
+      uri,
       headers: {"token": token},
     );
     if (response.statusCode == 200) {
       // 验证请求 header 中的 token
-      expect(response.request.headers['token'], token);
-      print(response.request.headers['token']);
+      expect(response.headers['token'], token);
+      print(response.headers['token']);
       print(response.body);
       // 解析返回的 json
       //Person person = parsePersonJson(response.body);

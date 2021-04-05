@@ -35,7 +35,6 @@ class Repo {
     if (item.kids!.isEmpty) return;
     for (int kidId in item.kids!) {
       Item kid = (await fetchArticleItem(kidId))!;
-      if (kid == null) continue;
       if (assignDepth) kid.depth = depth;
       yield kid;
       /*Stream stream = lazyFetchComments(item: kid, depth: kid.depth + 1);
@@ -71,7 +70,7 @@ class Repo {
     final response = await RestClient.postHttp("$typeQuery", jsonMap);
     if (response.statusCode == 200 && response.data["statusCode"] == "200") {
       Map result = response.data["result"];
-      if(result == null){
+      if (result == null) {
         return List.empty();
       }
       var articles = result["list"];
@@ -121,7 +120,8 @@ class Repo {
       return _usersCache[id];
     } else {
       String url = "$baseUrl/user/$id.json";
-      final response = await http.get(url);
+      Uri uri = Uri.parse(url);
+      final response = await http.get(uri);
       if (response.statusCode == 200) {
         if (response.body == "null") return null;
         _usersCache[id] = CruiseUser.fromJson(response.body);
