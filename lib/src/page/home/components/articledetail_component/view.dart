@@ -113,155 +113,157 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
     );
   }
 
+  SingleChildScrollView buildListView(Item item, BuildContext context) {
+    return SingleChildScrollView(
+        controller: _scrollController,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            InkWell(
+              onTap: () => CommonUtils.launchUrl(item.link),
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Container(
+                  child: Text(
+                    item.title == "" ? "Comment" : item.title,
+                    style: Theme.of(context).textTheme.headline5!.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
+                  ),
+                ),
+              ),
+            ),
+            if (item.domain != "")
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: InkWell(
+                    onTap: () async {
+                      navToChannelDetail();
+                    },
+                    child: Text(
+                      item.domain,
+                      style: Theme.of(context).textTheme.caption!.copyWith(color: Theme.of(context).primaryColor),
+                    )),
+              ),
+            InkWell(
+              onTap: () {},
+              child: RichText(
+                text: TextSpan(
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: item.author,
+                      style: Theme.of(context).textTheme.caption,
+                    ),
+                    TextSpan(
+                      text: " ${String.fromCharCode(8226)} ",
+                      style: Theme.of(context).textTheme.caption,
+                    ),
+                    TextSpan(
+                      text: item.ago,
+                      style: Theme.of(context).textTheme.caption,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            if (item.content != "")
+              Html(
+                data: item.content,
+                style: {
+                  "body": Style(
+                    fontSize: FontSize(19.0),
+                  ),
+                },
+                onLinkTap: (url) => CommonUtils.launchUrl(url),
+              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 16.0),
+                      child: Row(
+                        children: [
+                          if (item.isFav == 1)
+                            IconButton(
+                              icon: Icon(Icons.bookmark, color: Theme.of(context).primaryColor),
+                              onPressed: () => touchFav("unfav", FavStatus.UNFAV),
+                            ),
+                          if (item.isFav != 1)
+                            IconButton(
+                              icon: Icon(Icons.bookmark),
+                              onPressed: () => touchFav("fav", FavStatus.FAV),
+                            ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 0.0),
+                            child: Text(
+                              "${item.favCount}",
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.caption!.copyWith(
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 0.0),
+                      child: Row(
+                        children: [
+                          if (item.isUpvote == 1)
+                            IconButton(
+                              icon: Icon(Icons.thumb_up, color: Theme.of(context).primaryColor),
+                              onPressed: () => touchUpvote("unupvote", UpvoteStatus.UNUPVOTE),
+                            ),
+                          if (item.isUpvote != 1)
+                            IconButton(
+                              icon: Icon(Icons.thumb_up),
+                              onPressed: () => touchUpvote("upvote", UpvoteStatus.UPVOTE),
+                            ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: Text(
+                              "${item.upvoteCount}",
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.caption!.copyWith(
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                IconButton(
+                  icon: Icon(
+                    Feather.share_2,
+                  ),
+                  onPressed: () => handleShare(id: item.id, title: item.title, postUrl: item.link),
+                ),
+              ],
+            ),
+          ],
+        ));
+  }
+
   return GestureDetector(
       onHorizontalDragStart: _onHorizontalDragStart,
       onHorizontalDragUpdate: _onHorizontalDragUpdate,
       onHorizontalDragEnd: _onHorizontalDragEnd,
-      child: CupertinoScrollbar(
-          isAlwaysShown: true,
-          controller: _scrollController,
-          child: SingleChildScrollView(
-              controller: _scrollController,
-              child: Container(
-                constraints: BoxConstraints(
-                  minHeight: MediaQuery.of(context).size.height * 0.9,
-                ),
-                color: Theme.of(context).scaffoldBackgroundColor,
-                child: Padding(
-                  padding: const EdgeInsets.all(
-                    16.0,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      InkWell(
-                        onTap: () => CommonUtils.launchUrl(item.link),
-                        child: Padding(
-                          padding: const EdgeInsets.only(bottom: 8.0),
-                          child: Container(
-                            child: Text(
-                              item.title == "" ? "Comment" : item.title,
-                              style: Theme.of(context).textTheme.headline5!.copyWith(
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      if (item.domain != "")
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 8.0),
-                          child: InkWell(
-                              onTap: () async {
-                                navToChannelDetail();
-                              },
-                              child: Text(
-                                item.domain,
-                                style: Theme.of(context).textTheme.caption!.copyWith(color: Theme.of(context).primaryColor),
-                              )),
-                        ),
-                      InkWell(
-                        onTap: () {},
-                        child: RichText(
-                          text: TextSpan(
-                            children: <TextSpan>[
-                              TextSpan(
-                                text: item.author,
-                                style: Theme.of(context).textTheme.caption,
-                              ),
-                              TextSpan(
-                                text: " ${String.fromCharCode(8226)} ",
-                                style: Theme.of(context).textTheme.caption,
-                              ),
-                              TextSpan(
-                                text: item.ago,
-                                style: Theme.of(context).textTheme.caption,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      if (item.content != "")
-                        Html(
-                          data: item.content,
-                          style: {
-                            "body": Style(
-                              fontSize: FontSize(19.0),
-                            ),
-                          },
-                          onLinkTap: (url) => CommonUtils.launchUrl(url),
-                        ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(right: 16.0),
-                                child: Row(
-                                  children: [
-                                    if (item.isFav == 1)
-                                      IconButton(
-                                        icon: Icon(Icons.bookmark, color: Theme.of(context).primaryColor),
-                                        onPressed: () => touchFav("unfav", FavStatus.UNFAV),
-                                      ),
-                                    if (item.isFav != 1)
-                                      IconButton(
-                                        icon: Icon(Icons.bookmark),
-                                        onPressed: () => touchFav("fav", FavStatus.FAV),
-                                      ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 0.0),
-                                      child: Text(
-                                        "${item.favCount}",
-                                        textAlign: TextAlign.center,
-                                        style: Theme.of(context).textTheme.caption!.copyWith(
-                                              color: Theme.of(context).primaryColor,
-                                            ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 0.0),
-                                child: Row(
-                                  children: [
-                                    if (item.isUpvote == 1)
-                                      IconButton(
-                                        icon: Icon(Icons.thumb_up, color: Theme.of(context).primaryColor),
-                                        onPressed: () => touchUpvote("unupvote", UpvoteStatus.UNUPVOTE),
-                                      ),
-                                    if (item.isUpvote != 1)
-                                      IconButton(
-                                        icon: Icon(Icons.thumb_up),
-                                        onPressed: () => touchUpvote("upvote", UpvoteStatus.UPVOTE),
-                                      ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 8.0),
-                                      child: Text(
-                                        "${item.upvoteCount}",
-                                        textAlign: TextAlign.center,
-                                        style: Theme.of(context).textTheme.caption!.copyWith(
-                                              color: Theme.of(context).primaryColor,
-                                            ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          IconButton(
-                            icon: Icon(
-                              Feather.share_2,
-                            ),
-                            onPressed: () => handleShare(id: item.id, title: item.title, postUrl: item.link),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ))));
+      child: Container(
+          constraints: BoxConstraints(
+            minHeight: MediaQuery.of(context).size.height * 0.9,
+          ),
+          color: Theme.of(context).scaffoldBackgroundColor,
+          child: CupertinoScrollbar(
+            isAlwaysShown: true,
+            controller: _scrollController,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: buildListView(item, context),
+            ),
+          )));
 }
