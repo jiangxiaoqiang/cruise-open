@@ -1,8 +1,8 @@
 import 'package:cruise/src/common/net/rest/rest_clinet.dart';
 import 'package:cruise/src/models/api/login_type.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:cruise/src/common/global.dart' as global;
-import 'global.dart';
+import 'package:cruise/src/common/config/global_config.dart' as global;
+import 'config/global_config.dart';
 import 'net/rest/http_result.dart';
 
 class AuthResult {
@@ -16,7 +16,7 @@ class AuthResult {
 }
 
 class Auth {
-  static const baseUrl = global.baseUrl;
+  final baseUrl = global.baseUrl;
   static RegExp validationRequired = RegExp(r"Validation required");
 
   static Future<bool> isLoggedIn() async {

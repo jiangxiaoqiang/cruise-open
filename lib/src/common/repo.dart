@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:cruise/src/common/config/global_config.dart' as global;
 import 'package:cruise/src/common/cruise_user.dart';
-import 'package:cruise/src/common/global.dart' as global;
-import 'package:cruise/src/common/log/CruiseLogHandler.dart';
+import 'package:cruise/src/common/log/cruise_log_handler.dart';
 import 'package:cruise/src/common/net/rest/rest_clinet.dart';
 import 'package:cruise/src/models/Channel.dart';
 import 'package:cruise/src/models/Item.dart';
@@ -16,7 +16,7 @@ class Repo {
   static final _itemsCache = <int, Item>{};
   static final _itemsChannelCache = <int, Channel>{};
   static final _usersCache = <String, CruiseUser>{};
-  static const baseUrl = global.baseUrl;
+  final baseUrl = global.baseUrl;
 
   static Future<List<int>> getElementIds(ArticleRequest request) async {
     return await _getIds(request);
@@ -119,7 +119,7 @@ class Repo {
     if (_usersCache.containsKey(id)) {
       return _usersCache[id];
     } else {
-      String url = "$baseUrl/user/$id.json";
+      String url = global.baseUrl + "/user/$id.json";
       Uri uri = Uri.parse(url);
       final response = await http.get(uri);
       if (response.statusCode == 200) {

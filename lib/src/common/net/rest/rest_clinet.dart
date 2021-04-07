@@ -1,7 +1,7 @@
 import 'package:cruise/src/common/net/rest/app_interceptors.dart';
 import 'package:dio/dio.dart';
 
-import '../../global.dart';
+import '../../config/global_config.dart';
 
 class RestClient {
   static Dio dioInstance = Dio(BaseOptions(connectTimeout: 10000, receiveTimeout: 30000, baseUrl: "$baseUrl"));

@@ -7,6 +7,10 @@ class CruiseLogHandler {
     printer: PrettyPrinter(),
   );
 
+  static Future<void> logErrorException(String message, Exception e) async {
+    logger.e(message, e);
+  }
+
   static Future<void> logError(CruiseApiError error, String message) async {
     logger.e(message);
   }

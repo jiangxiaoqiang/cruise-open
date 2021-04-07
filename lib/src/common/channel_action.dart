@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:cruise/src/common/global.dart' as global;
+import 'package:cruise/src/common/config/global_config.dart' as global;
 import 'package:cruise/src/common/net/rest/rest_clinet.dart';
 import 'package:cruise/src/models/Channel.dart';
 import 'package:cruise/src/models/api/sub_status.dart';
@@ -8,12 +8,12 @@ import 'package:cruise/src/models/channel_suggestion.dart';
 import 'package:cruise/src/models/request/channel/channel_request.dart';
 import 'package:dio/dio.dart';
 
-import 'log/CruiseLogHandler.dart';
+import 'log/cruise_log_handler.dart';
 import 'log/cruise_api_error.dart';
 import 'net/rest/http_result.dart';
 
 class ChannelAction {
-  static const baseUrl = global.baseUrl;
+  final baseUrl = global.baseUrl;
 
   static Future<HttpResult> sub({required String channelId, required SubStatus subStatus}) async {
     String url = "/post/sub/source/" + subStatus.statusCode + "/" + channelId;

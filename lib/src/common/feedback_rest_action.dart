@@ -1,10 +1,10 @@
-import 'package:cruise/src/common/global.dart' as global;
+import 'package:cruise/src/common/config/global_config.dart' as global;
 import 'package:cruise/src/common/net/rest/rest_clinet.dart';
 
 import 'net/rest/http_result.dart';
 
 class FeedbackRestAction {
-  static const baseUrl = global.baseUrl;
+  final baseUrl = global.baseUrl;
 
   static Future<HttpResult> submitFeedback(String feedback) async {
     String url = "/post/user/feedback/submit";

@@ -5,8 +5,8 @@ enum ResponseStatus {
 
 extension ResponseStatusExtension on ResponseStatus{
   static const statusCodes = {
-    ResponseStatus.NOT_LOGIN: "904",
+    ResponseStatus.NOT_LOGIN: "907",
   };
 
-  String? get statusCode => statusCodes[this];
+  String get statusCode => statusCodes[this]!;
 }

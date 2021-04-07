@@ -1,11 +1,11 @@
 import 'package:cruise/src/common/net/rest/rest_clinet.dart';
-import 'package:cruise/src/common/global.dart' as global;
+import 'package:cruise/src/common/config/global_config.dart' as global;
 import 'package:cruise/src/models/Item.dart';
 import 'repo.dart';
 import 'net/rest/http_result.dart';
 
 class ArticleAction {
-  static const baseUrl = global.baseUrl;
+  final baseUrl = global.baseUrl;
 
   static Future<HttpResult?> fav({required String articleId,required String action}) async {
     final response = await RestClient.putHttp("/post/article/" + action + "/" + articleId,null);

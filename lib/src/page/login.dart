@@ -14,7 +14,7 @@ class LoginPage extends HookWidget {
     final _formKey = useMemoized(() => GlobalKey<FormState>());
     final username = useState("");
     final password = useState("");
-    final countryCode = useState("");
+    final countryCode = useState("+86");
     final phoneValid = useState(false);
     final submitting = useState(false);
     final showPassword = useState(true);
@@ -61,12 +61,15 @@ class LoginPage extends HookWidget {
                               autocorrect: false,
                               onChanged: (value) {
                                 username.value = value;
+
                               },
+                              keyboardType: TextInputType.phone,
                               obscureText: false,
                               validator: (value) {
                                 if (value!.isEmpty) {
                                   return "电话号码不能为空";
                                 }
+                                phoneValid.value = true;
                                 return null;
                               },
                             ))
@@ -117,8 +120,9 @@ class LoginPage extends HookWidget {
                                 onPressed: () async {
                                   if (_formKey.currentState!.validate() && phoneValid.value) {
                                     submitting.value = true;
+                                    String userName = countryCode.value + username.value;
                                     AuthResult result = await Auth.login(
-                                      username: countryCode.value + username.value,
+                                      username: userName,
                                       password: password.value,
                                       loginType: LoginType.PHONE
                                     );

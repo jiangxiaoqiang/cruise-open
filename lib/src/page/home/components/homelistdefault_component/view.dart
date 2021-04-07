@@ -18,7 +18,9 @@ Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService view
   articleRequest.storiesType = state.currentStoriesType;
   if (state.isScrollTop) {
     dispatch(HomeListDefaultActionCreator.onResumeScrollTop());
-    scrollController.animateTo(.0, duration: Duration(milliseconds: 200), curve: Curves.ease);
+    if(scrollController.hasClients) {
+      scrollController.animateTo(.0, duration: Duration(milliseconds: 200), curve: Curves.ease);
+    }
   }
 
   void _loadingMoreArticle() {

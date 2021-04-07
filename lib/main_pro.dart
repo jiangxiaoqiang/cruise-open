@@ -10,7 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 void main() async {
-  GlobalConfig.init(ConfigType.DEV);
+  GlobalConfig.init(ConfigType.PRO);
   WidgetsFlutterBinding.ensureInitialized();
   timeago.setLocaleMessages('en', CustomEn());
   await HistoryManager.init();
