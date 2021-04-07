@@ -48,7 +48,7 @@ jobs:
           flutter pub get
       #- run: flutter pub get
       #- run: flutter build apk
-      - run: flutter build apk --release --no-sound-null-safety
+      - run: flutter build apk --release --flavor prod -t build/main_pro.dart --no-sound-null-safety
       - name: Setup SSH Keys and known_hosts for fastlane match
         run: |
           SSH_PATH="$HOME/.ssh"
