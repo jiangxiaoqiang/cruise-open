@@ -36,7 +36,7 @@ class AppInterceptors extends InterceptorsWrapper {
   }
 
   void autoLogin(Response response) async {
-    String code = ResponseStatus.NOT_LOGIN.statusCode;
+    String code = ResponseStatus.LOGIN_INVALID.statusCode;
     String statusCode = response.data["statusCode"];
     if (statusCode == code) {
       Dio dio = RestClient.createDio();
