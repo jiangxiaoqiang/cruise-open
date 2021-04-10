@@ -47,36 +47,59 @@ android {
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
+            android.applicationVariants.all { variant ->
+                variant.outputs.all { output ->
+                    def buildType = variant.buildType.name
+                    println("buildType=" + buildType)
+                    if (buildType != "debug") {
+                        def projectRootDir = "$rootDir"
+                        def outputFileDir = new File(projectRootDir + File.separator, "apk")
+                        println("outputFileDir=" + outputFileDir)
+                        def productFlavorsName = productFlavors.name.toString()
+                        def oldApkFlavorsName = productFlavorsName.replace("[", "").trim()
+                        def newApkFlavorsName = oldApkFlavorsName.replace("]", "").trim()
+                        println("newApkFlavorsName=" + newApkFlavorsName)
+                        def apkFlavorsNameDir = new File(outputFileDir, newApkFlavorsName)
+                        println("apkFlavorsNameDir=" + apkFlavorsNameDir)
+                        // variant.getPackageApplicationProvider().get().outputDirectory = apkFlavorsNameDir
+                        def appName
+                        if (productFlavorsName.contains("dev")) {
+                            appName = "cruise-dev"
+                        } else if (productFlavorsName.contains("test")) {
+                            appName = "cruise-beta"
+                        } else if (productFlavorsName.contains("prod")) {
+                            appName = "cruise-release"
+                        }else{
+                            appName = "cruise-beta"
+                        }
+                        def releaseApkName = "" + appName + "-" + defaultConfig.versionName + ".apk"
+                        output.outputFileName = releaseApkName
+                    }
+                }
+            }
         }
-
-        flavorDimensions 'app'
-
-        productFlavors {
-            dev {
-                dimension 'app'
-                resValue "string", "app_name", "Cruise-dev"
-                applicationIdSuffix '.dev'
-            }
-
-            stage {
-                dimension 'app'
-                resValue "string", "app_name", "Cruise-stage"
-                applicationIdSuffix '.stage'
-            }
-
-            prod {
-                dimension 'app'
-                resValue "string", "app_name", "Cruise"
-            }
-        }
-
     }
 
+    flavorDimensions 'cruise'
+    productFlavors {
+        dev {
+            dimension 'cruise'
+            resValue "string", "app_name", "Cruise-dev"
+            applicationIdSuffix '.dev'
+        }
 
+        stage {
+            dimension 'cruise'
+            resValue "string", "app_name", "Cruise-stage"
+            applicationIdSuffix '.stage'
+        }
 
+        prod {
+            dimension 'cruise'
+            resValue "string", "app_name", "Cruise"
+        }
+    }
 }
 
 flutter {
