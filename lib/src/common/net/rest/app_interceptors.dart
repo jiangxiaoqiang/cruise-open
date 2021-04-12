@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cruise/src/common/auth.dart';
+import 'package:cruise/src/common/log/cruise_log_handler.dart';
 import 'package:cruise/src/common/net/rest/rest_clinet.dart';
 import 'package:cruise/src/common/utils/navigation_service.dart';
 import 'package:cruise/src/models/api/login_type.dart';
@@ -48,11 +49,18 @@ class AppInterceptors extends InterceptorsWrapper {
   }
 
   void refreshAuthToken(Dio dio, String userName, String password, Response response) async {
-    AuthResult result = await Auth.login(username: userName, password: password, loginType: LoginType.PHONE);
-    if (result.result == Result.ok) {
-      // resend a request to fetch data
-      Dio req = RestClient.createDio();
-      req.request(response.requestOptions.path);
+    dio.lock();
+    try {
+      AuthResult result = await Auth.login(username: userName, password: password, loginType: LoginType.PHONE);
+      if (result.result == Result.ok) {
+        // resend a request to fetch data
+        Dio req = RestClient.createDio();
+        req.request(response.requestOptions.path);
+      }
+    } on Exception catch (e) {
+      CruiseLogHandler.logErrorException("登录失败", e);
+    } finally {
+      dio.unlock();
     }
   }
 }
