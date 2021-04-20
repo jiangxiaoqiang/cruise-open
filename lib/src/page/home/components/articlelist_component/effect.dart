@@ -23,7 +23,7 @@ Future _onInit(Action action, Context<ArticleListState> ctx) async {
 
 Future fetchArticles(Action action, Context<ArticleListState> ctx) async {
   ArticleListState articleListState = ctx.state;
-  List<int> ids = articleListState.articleIds!;
+  List<int> ids = articleListState.articleIds;
   if (ids.length == 0) {
     return;
   }

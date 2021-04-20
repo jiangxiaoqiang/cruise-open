@@ -5,7 +5,7 @@ import 'package:cruise/src/page/home/components/homelistdefault_component/state.
 import 'package:fish_redux/fish_redux.dart';
 
 class ArticleListState implements Cloneable<ArticleListState> {
-  List<int>? articleIds;
+  List<int> articleIds = List.empty();
   List<Item> articles = List.empty();
   Item? article;
   int? channelId;
