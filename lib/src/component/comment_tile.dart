@@ -174,7 +174,7 @@ class CommentTile extends HookWidget {
               ),
               Html(
                 data: comment.content,
-                onLinkTap: (url) => launchUrl(url),
+                //onLinkTap: (url) => launchUrl(url),
               ),
             ],
           ),

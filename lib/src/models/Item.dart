@@ -20,7 +20,7 @@ class Item {
       {this.depth = 0,
       this.author = "Unknown",
       this.deleted = false,
-      this.content,
+      this.content = '',
       this.dead,
       this.poll,
       this.parent,
@@ -42,7 +42,7 @@ class Item {
   int depth;
   String author;
   bool deleted;
-  String? content;
+  String content;
   bool? dead;
   int? poll;
   int? parent;

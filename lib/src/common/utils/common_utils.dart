@@ -33,7 +33,6 @@ class CommonUtils{
       throw 'Could not launch $url';
     }
   }
-
 }
 
 

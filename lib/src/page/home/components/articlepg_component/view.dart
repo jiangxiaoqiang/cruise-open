@@ -1,5 +1,6 @@
 import 'package:cruise/src/models/Item.dart';
 import 'package:fish_redux/fish_redux.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'state.dart';
@@ -30,14 +31,16 @@ Widget buildView(ArticlePgState state, Dispatch dispatch, ViewService viewServic
           onNotification: (ScrollNotification sn) {
             return true;
           },
-          child: CustomScrollView(
+          child: CupertinoScrollbar(
+            isAlwaysShown: true,
+            child:CustomScrollView(
             key: PageStorageKey(item.id),
             controller: scrollController,
             slivers: [
               SliverToBoxAdapter(child: navDetail(item)),
               //CommentList(item: item),
             ],
-          ),
+          )),
         ),
         floatingActionButton: !showToTopBtn
             ? null

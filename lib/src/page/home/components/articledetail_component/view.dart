@@ -24,7 +24,6 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
   BuildContext context = viewService.context;
   Offset? _initialSwipeOffset;
   Offset? _finalSwipeOffset;
-  final ScrollController _scrollController = ScrollController();
 
   void _onHorizontalDragStart(DragStartDetails details) {
     _initialSwipeOffset = details.globalPosition;
@@ -115,7 +114,6 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
 
   SingleChildScrollView buildListView(Item item, BuildContext context) {
     return SingleChildScrollView(
-        controller: _scrollController,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -174,7 +172,7 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
                     fontSize: FontSize(19.0),
                   ),
                 },
-                onLinkTap: (url) => CommonUtils.launchUrl(url),
+                //sonLinkTap: (url) => CommonUtils.launchUrl(url),
               ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -254,16 +252,13 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
       onHorizontalDragUpdate: _onHorizontalDragUpdate,
       onHorizontalDragEnd: _onHorizontalDragEnd,
       child: Container(
-          constraints: BoxConstraints(
-            minHeight: MediaQuery.of(context).size.height * 0.9,
-          ),
-          color: Theme.of(context).scaffoldBackgroundColor,
-          child: CupertinoScrollbar(
-            isAlwaysShown: true,
-            controller: _scrollController,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: buildListView(item, context),
-            ),
-          )));
+        constraints: BoxConstraints(
+          minHeight: MediaQuery.of(context).size.height * 0.9,
+        ),
+        color: Theme.of(context).scaffoldBackgroundColor,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: buildListView(item, context),
+        ),
+      ));
 }

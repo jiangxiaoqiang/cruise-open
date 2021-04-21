@@ -165,7 +165,7 @@ class ChannelInformation extends HookWidget {
                         fontSize: FontSize(19.0),
                       ),
                     },
-                    onLinkTap: (url) => launchUrl(url),
+                    //onLinkTap: (url) => launchUrl(url),
                   ),
                 if (item.parts!.isNotEmpty)
                   Padding(

@@ -174,7 +174,7 @@ Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewSe
                       fontSize: FontSize(19.0),
                     ),
                   },
-                  onLinkTap: (url) => CommonUtils.launchUrl(url),
+                  //onLinkTap: (url) => CommonUtils.launchUrl(url),
                 )),
               if (state.articleListState.articles.length > 0)
                 SliverPadding(
