@@ -87,10 +87,10 @@ class Item {
         title: json["title"] == null ? "" : json["title"],
         type: json["type"] == null ? StoryType.job : castType(json["type"]),
         link: json["link"] == null ? "" : json["link"],
-        isFav: json["isFav"] == null ? "" : json["isFav"],
-        favCount: json["favCount"] == null ? "" : json["favCount"],
-        isUpvote: json["isUpvote"] == null ? "" : json["isUpvote"],
-        upvoteCount: json["upvoteCount"] == null ? "" : json["upvoteCount"],
+        isFav: json["isFav"] == null ? 0 : json["isFav"],
+        favCount: json["favCount"] == null ? 0 : json["favCount"],
+        isUpvote: json["isUpvote"] == null ? 0 : json["isUpvote"],
+        upvoteCount: json["upvoteCount"] == null ? 0 : json["upvoteCount"],
         subSourceId: json["subSourceId"] == null ? "" : json["subSourceId"],
       );
 

@@ -37,8 +37,8 @@ Future initArticles(Action action, Context<HomeListDefaultState> ctx) async {
   ArticleRequest articleRequest = homeListDefaultState.articleRequest;
   articleRequest.pageNum = 1;
   articleRequest.offset = null;
-  List<int> ids = await Repo.getElementIds(articleRequest);
-  List<Item> articles = await ArticleAction.fetchArticleByIds(ids);
+  List<Item> articles = await Repo.getArticles(articleRequest);
+  List<int> ids = articles.map((e) => int.parse(e.id)).toList();
   ctx.dispatch(HomeListDefaultActionCreator.onSetArticleIds(ids, articles, articleRequest));
 }
 
@@ -49,22 +49,20 @@ Future _onLoadingMoreArticles(Action action, Context<HomeListDefaultState> ctx) 
   if (homeListDefaultState.articleRequest.offset != null && homeListDefaultState.articleRequest.offset! > 0) {
     articleRequest.offset = homeListDefaultState.articleRequest.offset;
   }
-  List<int> ids = await Repo.getElementIds(articleRequest);
-  List<Item> articles = await ArticleAction.fetchArticleByIds(ids);
+  List<Item> articles = await Repo.getArticles(articleRequest);
   ctx.dispatch(HomeListDefaultActionCreator.onLoadingMoreArticlesUpdate(articles));
 }
 
 Future _onFetchNewestArticles(Action action, Context<HomeListDefaultState> ctx) async {
   ArticleRequest articleRequest = (action.payload as ArticleRequest);
-  List<int> ids = await Repo.getElementIds(articleRequest);
-  List<Item> articles = await ArticleAction.fetchArticleByIds(ids);
+  List<Item> articles = await Repo.getArticles(articleRequest);
   ctx.dispatch(HomeListDefaultActionCreator.onFetchNewestArticlesUpdate(articles));
 }
 
 Future _onFetchArticleIds(Action action, Context<HomeListDefaultState> ctx) async {
   ArticleRequest articleRequest = (action.payload as ArticleRequest);
   articleRequest.pageNum = articleRequest.pageNum + 1;
-  List<int> ids = await Repo.getElementIds(articleRequest);
-  List<Item> articles = await ArticleAction.fetchArticleByIds(ids);
+  List<Item> articles = await Repo.getArticles(articleRequest);
+  List<int> ids = articles.map((e) => int.parse(e.id)).toList();
   ctx.dispatch(HomeListDefaultActionCreator.onSetArticleIds(ids, articles, articleRequest));
 }

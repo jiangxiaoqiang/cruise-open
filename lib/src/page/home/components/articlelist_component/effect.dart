@@ -9,11 +9,8 @@ Effect<ArticleListState> buildEffect() {
   return combineEffects(<Object, Effect<ArticleListState>>{
     Lifecycle.initState: _onInit,
     Lifecycle.build: _didUpdateWidget,
-    Lifecycle.didUpdateWidget: _onA,
   });
 }
-
-void _onA(Action action, Context<ArticleListState> ctx) async {}
 
 void _didUpdateWidget(Action action, Context<ArticleListState> ctx) async {}
 

@@ -31,13 +31,11 @@ Future _onLoadingMoreChannels(Action action, Context<ChannelListDefaultState> ct
   }
   List<int> ids = await Repo.getElementIds(articleRequest);
   List<Channel> channels = [];
-  if (ids != null) {
-    for (int id in ids) {
-      Channel channel = (await Repo.fetchChannelItem(id))!;
-      if (channel != null) {
-        channels.add(channel);
-      }
+  for (int id in ids) {
+    Channel channel = (await Repo.fetchChannelItem(id))!;
+    if (channel != null) {
+      channels.add(channel);
     }
-    ctx.dispatch(ChannelListDefaultActionCreator.onLoadingMoreChannelsUpdate(channels));
   }
+  ctx.dispatch(ChannelListDefaultActionCreator.onLoadingMoreChannelsUpdate(channels));
 }
