@@ -81,9 +81,13 @@ class Repo {
       List articles = result["list"];
       List<Item> items = List.empty(growable: true);
       articles.forEach((element) {
-        HashMap<String,Object> map = HashMap.from(element);
-        Item item = Item.fromMap(map);
-        items.add(item);
+        if(element != null) {
+          HashMap<String, Object> map = HashMap.from(element);
+          Item item = Item.fromMap(map);
+          items.add(item);
+        }else{
+          print("null article");
+        }
       });
       return items;
     }
