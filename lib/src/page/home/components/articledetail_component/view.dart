@@ -172,7 +172,7 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
                     fontSize: FontSize(19.0),
                   ),
                 },
-                //sonLinkTap: (url) => CommonUtils.launchUrl(url),
+                onLinkTap: (url) => CommonUtils.launchUrl(url),
               ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -26,13 +26,9 @@ class ArticleAction {
   /// get article by ids
   static Future<List<Item>> fetchArticleByIds(List<int> ids) async {
     List<Item> articles = [];
-    if (ids != null) {
-      for (int id in ids) {
-        Item article = (await Repo.fetchArticleItem(id))!;
-        if (article != null) {
-          articles.add(article);
-        }
-      }
+    for (int id in ids) {
+      Item article = (await Repo.fetchArticleItem(id))!;
+      articles.add(article);
     }
     return articles;
   }

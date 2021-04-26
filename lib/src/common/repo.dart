@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:collection';
 import 'dart:convert';
 
 import 'package:cruise/src/common/config/global_config.dart' as global;
@@ -20,6 +21,10 @@ class Repo {
 
   static Future<List<int>> getElementIds(ArticleRequest request) async {
     return await _getIds(request);
+  }
+
+  static Future<List<Item>> getArticles(ArticleRequest request) async {
+    return await _getArticles(request);
   }
 
   static Future<List<String>> getCommentsIds({required Item item}) async {
@@ -62,6 +67,31 @@ class Repo {
     return Future.wait(ids.map((itemId) {
       return fetchArticleItem(itemId);
     }));
+  }
+
+  static Future<List<Item>> _getArticles(ArticleRequest articleRequest) async {
+    final typeQuery = _getStoryTypeQuery(articleRequest.storiesType!);
+    Map jsonMap = articleRequest.toMap();
+    final response = await RestClient.postHttp("$typeQuery", jsonMap);
+    if (response.statusCode == 200 && response.data["statusCode"] == "200") {
+      Map result = response.data["result"];
+      if (result == null) {
+        return List.empty();
+      }
+      List articles = result["list"];
+      List<Item> items = List.empty(growable: true);
+      articles.forEach((element) {
+        if(element != null) {
+          HashMap<String, Object> map = HashMap.from(element);
+          Item item = Item.fromMap(map);
+          items.add(item);
+        }else{
+          print("null article");
+        }
+      });
+      return items;
+    }
+    return List.empty();
   }
 
   static Future<List<int>> _getIds(ArticleRequest articleRequest) async {
