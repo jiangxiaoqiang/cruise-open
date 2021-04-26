@@ -16,8 +16,10 @@ Future _onInit(Action action, Context<ChannelListState> ctx) async {
   List<int> ids = articleListState.channelIds;
   List<Channel> channels = List.empty(growable: true);
   for (int id in ids) {
-    Channel article = (await Repo.fetchChannelItem(id))!;
-    channels.add(article);
+    Channel? channel = (await Repo.fetchChannelItem(id));
+    if (channel != null) {
+      channels.add(channel);
+    }
   }
 
   if (channels.length > 0) {
