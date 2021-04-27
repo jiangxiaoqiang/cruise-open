@@ -24,7 +24,14 @@ class Repo {
   }
 
   static Future<List<Item>> getArticles(ArticleRequest request) async {
-    return await _getArticles(request);
+    List<Item> articles = await _getArticles(request);
+    // TODO: remove the check code
+    for (Item comment in articles) {
+      if (comment.title == null || comment.title == "") {
+        print("null article");
+      }
+    }
+    return articles;
   }
 
   static Future<List<String>> getCommentsIds({required Item item}) async {
@@ -81,11 +88,11 @@ class Repo {
       List articles = result["list"];
       List<Item> items = List.empty(growable: true);
       articles.forEach((element) {
-        if(element != null) {
+        if (element != null) {
           HashMap<String, Object> map = HashMap.from(element);
           Item item = Item.fromMap(map);
           items.add(item);
-        }else{
+        } else {
           print("null article");
         }
       });
@@ -135,9 +142,12 @@ class Repo {
       final response = await RestClient.getHttp("/post/sub/source/detail/$id");
       if (response.statusCode == 200 && response.data["statusCode"] == "200") {
         Map channelResult = response.data["result"];
-        String jsonContent = JsonEncoder().convert(channelResult);
-        Channel parseItem = Channel.fromJson(jsonContent);
-        _itemsChannelCache[id] = parseItem;
+        if (channelResult != null) {
+          // Pay attention: channelResult would be null sometimes
+          String jsonContent = JsonEncoder().convert(channelResult);
+          Channel parseItem = Channel.fromJson(jsonContent);
+          _itemsChannelCache[id] = parseItem;
+        }
       } else {
         CruiseLogHandler.logError(CruiseApiError('Item $id failed to fetch.'), JsonEncoder().convert(response));
       }

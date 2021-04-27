@@ -123,7 +123,7 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: Container(
                   child: Text(
-                    item.title == "" ? "Comment" : item.title,
+                    item.title,
                     style: Theme.of(context).textTheme.headline5!.copyWith(
                           fontWeight: FontWeight.w600,
                         ),

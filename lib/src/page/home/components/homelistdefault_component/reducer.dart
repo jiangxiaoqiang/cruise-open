@@ -59,7 +59,6 @@ HomeListDefaultState _onSetArticleIds(HomeListDefaultState state, Action action)
   ArticlePayload payload = (action.payload as ArticlePayload);
 
   ArticleListState articleListState = state.articleListState.clone();
-  articleListState.articleIds = payload.articleIds!;
   articleListState.articles = payload.articles!;
 
   newState.articleRequest = payload.articleRequest!;

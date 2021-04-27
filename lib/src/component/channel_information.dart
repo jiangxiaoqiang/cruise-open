@@ -98,7 +98,7 @@ class ChannelInformation extends HookWidget {
                     padding: const EdgeInsets.only(bottom: 8.0),
                     child: Container(
                       child: Text(
-                        item.subName == "" ? "Comment" : item.subName,
+                        item.subName,
                         style: Theme.of(context).textTheme.headline5!.copyWith(
                               fontWeight: FontWeight.w600,
                             ),
