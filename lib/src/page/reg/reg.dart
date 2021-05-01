@@ -115,7 +115,7 @@ class RegPage extends HookWidget {
                                           fontSize: 18.0);
                                     } else {
                                       Widget page;
-                                      page = VerifyPage(phone: phone.value);
+                                      page = VerifyPage(phone:phoneNumber);
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(builder: (context) => page),
