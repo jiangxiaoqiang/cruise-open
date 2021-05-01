@@ -194,6 +194,9 @@ class Repo {
       case StoriesType.originalStories:
         return "/post/article/originalstories";
         break;
+      case StoriesType.channelStories:
+        return "/post/article/channelstories";
+        break;
       default:
         return "/post/article/newstories";
     }

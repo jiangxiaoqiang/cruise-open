@@ -11,7 +11,17 @@ enum StoryType {
   pollopt,
 }
 
-enum StoriesType { topStories, subStories, channels, profile, showStories, jobStories, favStories, originalStories }
+enum StoriesType {
+  topStories,
+  subStories,
+  channels,
+  profile,
+  showStories,
+  jobStories,
+  favStories,
+  originalStories,
+  channelStories
+}
 
 enum ArticleLoadingStatus { loading, complete }
 

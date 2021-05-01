@@ -15,7 +15,7 @@ Effect<ChannelDetailState> buildEffect() {
 Future _onInit(Action action, Context<ChannelDetailState> ctx) async {
   ChannelDetailState channelDetailState = ctx.state;
   String channelId = channelDetailState.channel.id;
-  ArticleRequest articleRequest = new ArticleRequest(pageSize: 15, pageNum: 1, storiesType: StoriesType.originalStories, channelId: int.parse(channelId));
+  ArticleRequest articleRequest = new ArticleRequest(pageSize: 15, pageNum: 1, storiesType: StoriesType.channelStories, channelId: int.parse(channelId));
   List<Item> articles = await Repo.getArticles(articleRequest);
   ctx.dispatch(ChannelDetailActionCreator.onFetchChannelArticleUpdate(articles));
 }
