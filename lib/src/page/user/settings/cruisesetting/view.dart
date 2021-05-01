@@ -30,6 +30,7 @@ Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewSe
                           color: Colors.white,
                           child: ListTile(
                             leading: Icon(Feather.user),
+                            trailing: Icon(Icons.keyboard_arrow_right),
                             title: Text("登录"),
                             onTap: () async {
                               Widget page;

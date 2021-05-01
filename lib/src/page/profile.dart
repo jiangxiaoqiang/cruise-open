@@ -71,6 +71,7 @@ class ProfilePage extends HookWidget {
                         color: Colors.white,
                         child: ListTile(
                           title: Text("用户名"),
+                          subtitle: Text('+8615683761628'),
                           onTap: () async {
 
                           },
@@ -84,6 +85,7 @@ class ProfilePage extends HookWidget {
                             color: Colors.white,
                             child: ListTile(
                               title: Text("注册时间"),
+                              subtitle: Text('2020-02-03'),
                               onTap: () async {
 
                               },
