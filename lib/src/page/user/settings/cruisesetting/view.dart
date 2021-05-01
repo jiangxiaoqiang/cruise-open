@@ -39,16 +39,10 @@ Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewSe
                                 page = LoginPage();
                                 //page = BottomNavigationDemo(type: BottomNavigationDemoType.withLabels);
                               } else {
-                                //var username = await Auth.currentUser();
-                                CruiseUser usr = new CruiseUser(about: "about",
-                                    created: 1,
-                                    delay: 1,
-                                    id: "",
-                                    karma: 1);
+                                var user = await Auth.currentUser();
                                 page = ProfilePage(
-                                    username: "dolphin",
                                     isMe: true,
-                                    user: usr
+                                    user: user
                                 );
                               }
                               Navigator.push(

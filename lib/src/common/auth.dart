@@ -3,6 +3,7 @@ import 'package:cruise/src/models/api/login_type.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:cruise/src/common/config/global_config.dart' as global;
 import 'config/global_config.dart';
+import 'cruise_user.dart';
 import 'net/rest/http_result.dart';
 
 class AuthResult {
@@ -22,12 +23,19 @@ class Auth {
   static Future<bool> isLoggedIn() async {
     final storage = new FlutterSecureStorage();
     String? username = await storage.read(key: "username");
-    return false;
+    if(username == null){
+      return true;
+    }else{
+      return false;
+    }
   }
 
-  static Future<String?> currentUser() async {
+  static Future<CruiseUser> currentUser() async {
     final storage = new FlutterSecureStorage();
-    return await storage.read(key: "username");
+    String? userName = await storage.read(key: "username");
+    String? registerTime = await storage.read(key: "registerTime");
+    CruiseUser user = new CruiseUser(phone: userName,registerTime:registerTime );
+    return user;
   }
 
   static Future<AuthResult> vote({required String itemId}) async {
@@ -48,6 +56,7 @@ class Auth {
     final storage = new FlutterSecureStorage();
     await storage.delete(key: "username");
     await storage.delete(key: "password");
+    await storage.delete(key: "registerTime");
     return true;
   }
 
@@ -116,9 +125,11 @@ class Auth {
     if (RestClient.respSuccess(response)) {
       Map result = response.data["result"];
       String token = result["token"];
+      String registerTime = result["registerTime"];
       await storage.write(key: "username", value: username);
       await storage.write(key: "password", value: password);
       await storage.write(key: "token", value: token);
+      await storage.write(key: "registerTime", value: registerTime);
       return AuthResult(message: "Login success", result: Result.ok);
     } else {
       return AuthResult(
