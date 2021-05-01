@@ -1,26 +1,24 @@
+import 'package:cruise/src/common/auth.dart';
+import 'package:cruise/src/common/cruise_user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:cruise/src/common/auth.dart';
-import 'package:cruise/src/component/story_list.dart';
-import 'package:cruise/src/common/cruise_user.dart';
 
 class ProfilePage extends HookWidget {
-  ProfilePage({required this.username, this.isMe = false});
+  ProfilePage({required this.username, this.isMe = false, required this.user});
 
   final String username;
   final bool isMe;
-
-  get user => null;
+  final CruiseUser user;
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
+      backgroundColor: const Color(0xFFEFEFEF),
       appBar: AppBar(
         title: Text(
-          username,
+          "个人信息",
         ),
         actions: [
           if (isMe)
@@ -29,26 +27,26 @@ class ProfilePage extends HookWidget {
                   context: context,
                   builder: (context) {
                     return AlertDialog(
-                      title: Text("Log out"),
-                      content: Text("Are you sure you want to log out?"),
+                      title: Text("登出"),
+                      content: Text("确定过要登出么?"),
                       actions: [
-                        FlatButton(
+                        TextButton(
                           onPressed: () => Navigator.pop(context),
                           child: Text(
-                            "Cancel",
+                            "取消",
                             style: TextStyle(
                               color: Theme.of(context).textTheme.caption!.color,
                             ),
                           ),
                         ),
-                        FlatButton(
+                        TextButton(
                           onPressed: () async {
                             await Auth.logout();
                             Navigator.pop(context);
                             Navigator.pop(context);
                           },
                           child: Text(
-                            "Log out",
+                            "登出",
                             style: TextStyle(color: Colors.red[400]),
                           ),
                         ),
@@ -62,86 +60,35 @@ class ProfilePage extends HookWidget {
         ],
       ),
       body: SafeArea(
-        child: user.when(
-          loading: () => Center(child: CircularProgressIndicator()),
-          error: (err, stacktrace) => Center(child: Text("$err")),
-          data: (user) {
-            return CustomScrollView(
-              slivers: [
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Flex(
-                      direction: Axis.horizontal,
-                      children: [
-                        RichText(
-                          text: TextSpan(
-                            children: <TextSpan>[
-                              TextSpan(
-                                text: "${user.karma}",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .caption!
-                                    .copyWith(
-                                      color: Theme.of(context).primaryColor,
-                                    ),
-                              ),
-                              TextSpan(
-                                text: " ${String.fromCharCode(8226)} ",
-                                style: Theme.of(context).textTheme.caption,
-                              ),
-                              TextSpan(
-                                text: user.since,
-                                style: Theme.of(context).textTheme.caption,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                if (user.about != null) ...[
-                  SliverToBoxAdapter(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Text(
-                        "About",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SliverToBoxAdapter(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Html(
-                        data: user.about,
-                      ),
-                    ),
-                  ),
-                ],
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Text(
-                      "Submissions",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ),
-                SliverPadding(
-                  padding: const EdgeInsets.all(8.0),
-                  //sliver: StoryList(ids: user.submitted),
-                ),
-              ],
-            );
-          },
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+                child:Padding(
+                padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Container(
+                        color: Colors.white,
+                        child: ListTile(
+                          title: Text("用户名"),
+                          onTap: () async {
+
+                          },
+                        ))))),
+            SliverToBoxAdapter(
+                child:Padding(
+                    padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                            color: Colors.white,
+                            child: ListTile(
+                              title: Text("注册时间"),
+                              onTap: () async {
+
+                              },
+                            ))))),
+          ],
         ),
       ),
     );

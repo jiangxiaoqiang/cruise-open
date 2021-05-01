@@ -139,10 +139,10 @@ class ChannelInformation extends HookWidget {
                   ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(
+                    /*Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => ProfilePage(username: item.author)),
-                    );
+                    );*/
                   },
                   child: RichText(
                     text: TextSpan(

@@ -147,10 +147,10 @@ Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewSe
               SliverToBoxAdapter(
                   child: InkWell(
                 onTap: () {
-                  Navigator.push(
+                  /*Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => ProfilePage(username: item.author)),
-                  );
+                  );*/
                 },
                 child: RichText(
                   text: TextSpan(
