@@ -30,6 +30,7 @@ ios/vendor/cache/
 ios/Gemfile.lock
 ios/Runner.app.dSYM.zip
 ios/fastlane/report.xml
+cruise_open.iml
 
 *.log
 
