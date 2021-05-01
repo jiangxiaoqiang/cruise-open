@@ -46,18 +46,13 @@ Widget buildView(LoginState state, Dispatch dispatch, ViewService viewService) {
           )));
 }
 
-//登陆按钮
 Widget _loginBtn(Dispatch dispatch, ViewService viewService, {required Key key}) {
-  return RaisedButton(
+  return ElevatedButton(
   onPressed: () {
-    //获取数据
     var email = _emailController.text;
-
     var password = _passwordController.text;
-    //组装数据
     Map<String, dynamic> map = {"email": email, "password": password};
-    //发送包装好数据Action
     dispatch(LoginActionCreator.onLoginAction(map));
-  },
+  }, child: null,
   );
 }

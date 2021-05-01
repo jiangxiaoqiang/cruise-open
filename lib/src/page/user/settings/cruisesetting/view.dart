@@ -8,11 +8,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
 import '../../../login.dart';
-import '../custom_setting.dart';
 import 'state.dart';
 
 Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewService) {
   BuildContext context = viewService.context;
+
+  String loginText = "登录";
+
 
   return Scaffold(
       backgroundColor: const Color(0xFFEFEFEF),
@@ -29,7 +31,7 @@ Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewSe
                           color: Colors.white,
                           child: ListTile(
                             leading: Icon(Feather.user),
-                            title: Text("我的"),
+                            title: Text("登录"),
                             onTap: () async {
                               Widget page;
                               bool isLoggedIn = await Auth.isLoggedIn();
@@ -38,7 +40,7 @@ Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewSe
                                 //page = BottomNavigationDemo(type: BottomNavigationDemoType.withLabels);
                               } else {
                                 var username = await Auth.currentUser();
-
+                                  loginText = "al";
                                 //page = ProfilePage(username: "dolphin", isMe: true);
                               }
                               Navigator.push(
