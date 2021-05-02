@@ -1,8 +1,8 @@
 import 'package:cruise/src/common/channel_action.dart';
 import 'package:cruise/src/common/net/rest/http_result.dart';
+import 'package:cruise/src/common/style/global_style.dart';
 import 'package:cruise/src/models/Channel.dart';
 import 'package:cruise/src/models/api/sub_status.dart';
-import 'package:cruise/src/page/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -112,14 +112,13 @@ class ChannelInformation extends HookWidget {
                     child: ButtonTheme(
                         minWidth: 50,
                         height: 30.0,
-                        child: RaisedButton.icon(
-                          color: Theme.of(context).primaryColor,
+                        child: ElevatedButton.icon(
+                          style: GlobalStyle.getButtonStyle(context),
                           icon: Icon(
                             Feather.check_circle,
                             size: 16,
                             color: Theme.of(context).canvasColor,
                           ),
-                          shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(5.0)),
                           onPressed: () => touchSub(counter.value.id.toString(), SubStatus.UNSUB),
                           label: Text("已订阅"),
                         )),
@@ -130,9 +129,8 @@ class ChannelInformation extends HookWidget {
                     child: ButtonTheme(
                         minWidth: 50,
                         height: 30.0,
-                        child: RaisedButton(
-                          color: Theme.of(context).primaryColor,
-                          shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(5.0)),
+                        child: ElevatedButton(
+                          style: GlobalStyle.getButtonStyle(context),
                           onPressed: () => touchSub(counter.value.id.toString(), SubStatus.SUB),
                           child: Text("订阅"),
                         )),

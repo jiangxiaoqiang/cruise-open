@@ -112,6 +112,28 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
     );
   }
 
+  TextStyle getDomainStyle(Item article){
+    TextStyle domainTextStyle;
+    if(article.editorPick == 1) {
+       domainTextStyle = Theme
+          .of(context)
+          .textTheme
+          .caption!
+          .copyWith(color: Theme
+          .of(context)
+          .primaryColor);
+    }else{
+      domainTextStyle = Theme
+          .of(context)
+          .textTheme
+          .caption!
+          .copyWith(color: Theme
+          .of(context)
+          .shadowColor);
+    }
+    return domainTextStyle;
+  }
+
   SingleChildScrollView buildListView(Item item, BuildContext context) {
     return SingleChildScrollView(
         child: Column(
@@ -140,7 +162,7 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
                     },
                     child: Text(
                       item.domain,
-                      style: Theme.of(context).textTheme.caption!.copyWith(color: Theme.of(context).primaryColor),
+                      style: getDomainStyle(item),
                     )),
               ),
             InkWell(

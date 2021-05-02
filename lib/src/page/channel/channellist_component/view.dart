@@ -5,7 +5,6 @@ import 'package:cruise/src/page/channel/channellist_component/action.dart';
 import 'package:animations/animations.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 import 'state.dart';

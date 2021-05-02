@@ -40,6 +40,7 @@ class Item {
       this.kids,
       this.score,
       this.pubTime = 0,
+      this.editorPick = 0,
       this.title = "Unknown",
       this.type,
       this.link = "",
@@ -62,6 +63,7 @@ class Item {
   List<int>? kids;
   int? score;
   int pubTime;
+  int editorPick;
   String title;
   StoryType? type;
   String link;
@@ -102,7 +104,8 @@ class Item {
         isUpvote: json["isUpvote"] == null ? 0 : json["isUpvote"],
         upvoteCount: json["upvoteCount"] == null ? 0 : json["upvoteCount"],
         subSourceId: json["subSourceId"] == null ? "" : json["subSourceId"],
-      );
+        editorPick: json["editorPick"] == null ? "" : json["editorPick"],
+  );
 
   Map<String, dynamic> toMap() => {
         "id": id,
@@ -125,6 +128,7 @@ class Item {
         "isUpvote": isUpvote == null ? null : isUpvote,
         "upvoteCount": upvoteCount == null ? null : upvoteCount,
         "subSourceId": subSourceId == null ? null : subSourceId,
+        "editorPick": editorPick == null ? null : editorPick,
       };
 
   static StoryType castType(String type) {

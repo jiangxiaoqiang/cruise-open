@@ -64,6 +64,12 @@ class ChannelItemCard extends HookWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
+                  /*CircleAvatar(
+                    radius: 20,
+                    backgroundImage: NetworkImage(
+                      'https://source.unsplash.com/50x50/?portrait',
+                    ),
+                  ),*/
                   Flexible(
                       child:Text(
                       counter.value.subName,
