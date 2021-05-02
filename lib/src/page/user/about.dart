@@ -20,7 +20,7 @@ class About extends HookWidget {
           FlatButton(
             textColor: Colors.black,
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+              //Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
             },
             child: Text("关于cruise"),
             shape: CircleBorder(side: BorderSide(color: Colors.transparent)),

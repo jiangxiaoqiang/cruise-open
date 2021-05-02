@@ -90,7 +90,8 @@ Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewSe
                       child: Container(
                           color: Colors.white,
                           child: ListTile(
-                            leading: Icon(Feather.mail),
+                            leading: Icon(EvaIcons.email),
+                            trailing: Icon(Icons.keyboard_arrow_right),
                             title: Text("问题反馈"),
                             onTap: () async {
                               var data = {'name': "feedback"};
@@ -108,7 +109,8 @@ Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewSe
                       child: Container(
                           color: Colors.white,
                           child: ListTile(
-                            leading: Icon(Feather.award),
+                            leading: Icon(EvaIcons.info),
+                            trailing: Icon(Icons.keyboard_arrow_right),
                             title: Text("关于cruise"),
                             onTap: () async {
                               var data = {'name': "aboutPage"};
