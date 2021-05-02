@@ -57,7 +57,7 @@ Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService view
           builder: (context) {
             if (state.articleListState.articles.length == 0) {
               // when the article not fetched, show loading animation
-              return Center(child: CircularProgressIndicator());
+              return Center(child: Text("无订阅内容"));
             }
 
             if (state.articleListState.articles.length == 1 && state.articleListState.articles[0] == -1) {

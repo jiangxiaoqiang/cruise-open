@@ -69,3 +69,6 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   generate: true
+  assets:
+    - images/Icon-App-83.5x83.5@3x.png
+

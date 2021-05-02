@@ -114,14 +114,6 @@ class CommentTile extends HookWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Row(
                       children: [
-                        InkWell(
-                            onTap: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          ProfilePage(username: comment.author)),
-                                ),
-                            child: _buildAuthor(context, comment)),
                         if (comment.isVoted()) ...[
                           Text(
                             " ${String.fromCharCode(8226)}",

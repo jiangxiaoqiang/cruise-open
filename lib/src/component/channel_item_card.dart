@@ -15,6 +15,13 @@ class ChannelItemCard extends HookWidget {
 
   final Channel item;
 
+  NetworkImage getImage(){
+    NetworkImage ni = NetworkImage(
+      'https://source.unsplash.com/50x50/?portrait',
+    );
+    return ni;
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -51,6 +58,15 @@ class ChannelItemCard extends HookWidget {
         );
       }
     }
+    String imageNetwork = "http://pic41.nipic.com/20140514/5295460_234432363121_2.jpg";
+
+    AssetImage image = AssetImage('images/Icon-App-83.5x83.5@3x.png');
+
+    NetworkImage img =  NetworkImage(imageNetwork);
+
+    if(image.bundle == null){
+      return Container();
+    }
 
     return Card(
       key: Key(counter.value.id.toString()),
@@ -64,12 +80,15 @@ class ChannelItemCard extends HookWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  /*CircleAvatar(
+                  Container(
+                    width: 20,
+                      height: 10,
+                      child:CircleAvatar(
                     radius: 20,
-                    backgroundImage: NetworkImage(
-                      'https://source.unsplash.com/50x50/?portrait',
-                    ),
-                  ),*/
+                    backgroundImage: AssetImage('images/Icon-App-83.5x83.5@3x.png'),
+                        //backgroundImage: NetworkImage(imageNetwork),
+
+                      )),
                   Flexible(
                       child:Text(
                       counter.value.subName,
