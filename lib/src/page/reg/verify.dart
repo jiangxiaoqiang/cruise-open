@@ -1,13 +1,15 @@
+import 'package:cruise/src/common/style/global_style.dart';
 import 'package:cruise/src/page/reg/set_pwd.dart';
+import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:cruise/src/common/auth.dart';
 
 class VerifyPage extends HookWidget {
-
-  const VerifyPage({required this.phone});
+  const VerifyPage({required this.phone,required this.viewService});
 
   final String phone;
+  final ViewService viewService;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class VerifyPage extends HookWidget {
         child: ListView(
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB( 20.0, 120, 20.0, 40),
+              padding: const EdgeInsets.fromLTRB(20.0, 120, 20.0, 40),
               child: TextFormField(
                 autocorrect: false,
                 onChanged: (value) {
@@ -56,35 +58,33 @@ class VerifyPage extends HookWidget {
                       return ButtonTheme(
                           minWidth: screenWidth * 0.9,
                           height: 50.0,
-                          child:RaisedButton(
-                        color: Theme.of(context).primaryColor,
-                            shape: new RoundedRectangleBorder(
-                                borderRadius: new BorderRadius.circular(30.0)),
-                        onPressed: () async {
-                          if (_formKey.currentState!.validate()) {
-                            submitting.value = true;
-                            AuthResult result = await Auth.verifyPhone(
-                              phone: phone,
-                              verifyCode: verifyCode.value,
-                            );
-                            Widget page;
-                            page = SetPwdPage(phone: phone);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => page),
-                            );
-                          }
-                        },
-                        child: submitting.value
-                            ? SizedBox(
-                                height: 15,
-                                width: 15,
-                                child: CircularProgressIndicator(
-                                  backgroundColor: Colors.white,
-                                ),
-                              )
-                            : Text("下一步"),
-                      ));
+                          child: ElevatedButton(
+                            style: GlobalStyle.getButtonStyle(context),
+                            onPressed: () async {
+                              if (_formKey.currentState!.validate()) {
+                                submitting.value = true;
+                                AuthResult result = await Auth.verifyPhone(
+                                  phone: phone,
+                                  verifyCode: verifyCode.value,
+                                );
+                                Widget page;
+                                page = SetPwdPage(phone: phone,viewService: viewService,);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => page),
+                                );
+                              }
+                            },
+                            child: submitting.value
+                                ? SizedBox(
+                                    height: 15,
+                                    width: 15,
+                                    child: CircularProgressIndicator(
+                                      backgroundColor: Colors.white,
+                                    ),
+                                  )
+                                : Text("下一步"),
+                          ));
                     },
                   ),
                 ),

@@ -1,14 +1,20 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:cruise/src/common/auth.dart';
-import 'package:cruise/src/common/global_style.dart';
+import 'package:cruise/src/common/style/global_style.dart';
 import 'package:cruise/src/common/net/rest/http_result.dart';
 import 'package:cruise/src/component/user_agreement.dart';
 import 'package:cruise/src/models/api/login_type.dart';
 import 'package:cruise/src/page/reg/reg.dart';
+import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 class LoginPage extends HookWidget {
+
+  LoginPage({required this.viewService});
+
+  final ViewService viewService;
+
   @override
   Widget build(BuildContext context) {
     final _formKey = useMemoized(() => GlobalKey<FormState>());
@@ -28,7 +34,8 @@ class LoginPage extends HookWidget {
             TextButton(
               style: GlobalStyle.textButtonStyle,
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => RegPage(phoneNumber: username.value)));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => RegPage(phoneNumber: username.value,viewService: viewService,)));
               },
               child: Text("注册", style: TextStyle(fontSize: 16.0)),
             ),

@@ -24,7 +24,5 @@ HomeState _onSwitchNavSuccess(HomeState state, Action action) {
   newState.storiesType = (action.payload as HomeModel).storiesType!;
   newState.selectIndex = (action.payload as HomeModel).selectIndex!;
   newState.homeListState.currentStoriesType = (action.payload as HomeModel).storiesType!;
-  //newState.homeListState.homeListDefaultState.articleListState.articles = [];
-  //newState.homeListState.homeListDefaultState.articleListState.articleIds = [];
   return newState;
 }

@@ -1,4 +1,5 @@
 import 'package:cruise/src/common/auth.dart';
+import 'package:cruise/src/common/nav/nav_util.dart';
 import 'package:cruise/src/page/user/discover/page.dart';
 import 'package:cruise/src/page/user/fav/page.dart';
 import 'package:cruise/src/page/user/feedback/page.dart';
@@ -33,22 +34,13 @@ Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewSe
                             trailing: Icon(Icons.keyboard_arrow_right),
                             title: Text("登录"),
                             onTap: () async {
-                              Widget page;
                               bool isLoggedIn = await Auth.isLoggedIn();
                               if (isLoggedIn) {
-                                page = LoginPage();
+                                NavUtil.navLogin(context,viewService);
                                 //page = BottomNavigationDemo(type: BottomNavigationDemoType.withLabels);
                               } else {
-                                var user = await Auth.currentUser();
-                                page = ProfilePage(
-                                    isMe: true,
-                                    user: user
-                                );
+                                NavUtil.navProfile(context);
                               }
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => page),
-                              );
                             },
                           )))),
               Padding(

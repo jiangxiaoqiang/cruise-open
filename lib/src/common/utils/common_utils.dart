@@ -2,12 +2,22 @@ import 'package:cruise/src/component/channel_compact_tile.dart';
 import 'package:cruise/src/component/channel_item_card.dart';
 import 'package:cruise/src/component/channel_item_tile.dart';
 import 'package:cruise/src/models/Channel.dart';
+import 'package:cruise/src/page/home/page.dart';
+import 'package:fish_redux/src/redux_component/page.dart' as fishPage;
+import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../view_manager.dart';
 
 class CommonUtils{
+
+  static AbstractRoutes buildRoute() {
+    final AbstractRoutes routes = PageRoutes(
+      pages: <String, fishPage.Page<Object, dynamic>>{'home': HomePage()},
+    );
+    return routes;
+  }
 
   static Widget getChannelViewType(ViewType type, Channel item) {
     switch (type) {
@@ -33,6 +43,7 @@ class CommonUtils{
       throw 'Could not launch $url';
     }
   }
+
 }
 
 

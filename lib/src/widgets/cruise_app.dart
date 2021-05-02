@@ -1,4 +1,5 @@
 import 'package:cruise/src/common/theme.dart';
+import 'package:cruise/src/common/utils/common_utils.dart';
 import 'package:cruise/src/common/utils/navigation_service.dart';
 import 'package:cruise/src/common/view_manager.dart';
 import 'package:cruise/src/page/home/page.dart';
@@ -20,10 +21,7 @@ class CruiseApp extends HookWidget {
   Widget build(BuildContext context) {
     final currentTheme = ThemeManager.fromThemeName("lightTheme");
     bool showDebugInfo = false;
-
-    final AbstractRoutes routes = PageRoutes(
-      pages: <String, fishPage.Page<Object, dynamic>>{'home': HomePage()},
-    );
+    final AbstractRoutes routes = CommonUtils.buildRoute();
 
     return MaterialApp(
       title: 'Cruise',
@@ -50,7 +48,7 @@ class CruiseApp extends HookWidget {
         // ... other locales the app supports
       ],
       routes: {
-        "login": (BuildContext context) => LoginPage(),
+        //"login": (BuildContext context) => LoginPage(viewService: null,),
       },
       home: routes.buildPage('home', null),
       onGenerateRoute: (RouteSettings settings) {

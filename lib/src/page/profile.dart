@@ -31,7 +31,7 @@ class ProfilePage extends HookWidget {
                   builder: (context) {
                     return AlertDialog(
                       title: Text("登出"),
-                      content: Text("确定过要登出么?"),
+                      content: Text("确定要登出么?"),
                       actions: [
                         TextButton(
                           onPressed: () => Navigator.pop(context),
