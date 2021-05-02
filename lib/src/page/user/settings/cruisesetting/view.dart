@@ -4,6 +4,7 @@ import 'package:cruise/src/page/user/discover/page.dart';
 import 'package:cruise/src/page/user/fav/page.dart';
 import 'package:cruise/src/page/user/feedback/page.dart';
 import 'package:cruise/src/page/user/settings/about/page.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -30,7 +31,7 @@ Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewSe
                       child: Container(
                           color: Colors.white,
                           child: ListTile(
-                            leading: Icon(Feather.user),
+                            leading: Icon(EvaIcons.person),
                             trailing: Icon(Icons.keyboard_arrow_right),
                             title: Text("登录"),
                             onTap: () async {
@@ -51,7 +52,8 @@ Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewSe
                           child: Container(
                               color: Colors.white,
                               child: ListTile(
-                                leading: Icon(Feather.bookmark),
+                                leading: Icon(EvaIcons.bookmark),
+                                trailing: Icon(Icons.keyboard_arrow_right),
                                 title: Text("收藏"),
                                 onTap: () async {
                                   var data = {'name': "fav"};
@@ -69,7 +71,8 @@ Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewSe
                       child: Container(
                           color: Colors.white,
                           child: ListTile(
-                            leading: Icon(Feather.archive),
+                            leading: Icon(EvaIcons.bookOpen),
+                            trailing: Icon(Icons.keyboard_arrow_right),
                             title: Text("发现"),
                             onTap: () async {
                               var data = {'name': "originalstories"};

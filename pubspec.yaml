@@ -50,6 +50,7 @@ dependencies:
   dio: 4.0.0
   fish_redux: 0.3.7
   hive_flutter: 0.3.1
+  eva_icons_flutter: 3.0.0
 
 dev_dependencies:
   flutter_test:
