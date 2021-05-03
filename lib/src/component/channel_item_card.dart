@@ -74,7 +74,7 @@ class ChannelItemCard extends HookWidget {
                       child: Text(
                           counter.value.subName,
                           softWrap: true,
-                          textAlign: TextAlign.start,
+                          textAlign: TextAlign.left,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -88,8 +88,8 @@ class ChannelItemCard extends HookWidget {
                       child: ButtonTheme(
                           minWidth: 50,
                           height: 30.0,
-                          child: ElevatedButton.icon(
-                            style: GlobalStyle.getButtonStyle(context),
+                          child: RaisedButton.icon(
+                            color: Theme.of(context).primaryColor,
                             icon: Icon(
                               Feather.check_circle,
                               size: 16,
