@@ -23,7 +23,7 @@ void _onBuild(Action action, Context<HomeListDefaultState> ctx) {
   if (homeListDefaultState.lastStoriesType != articleRequest.storiesType) {
     // switch the article navigator tab
     // initial the new type of article
-    ctx.dispatch(HomeListDefaultActionCreator.onUpdateLastStroiesType(articleRequest.storiesType!));
+    ctx.dispatch(HomeListDefaultActionCreator.onUpdateLastStroiesType(articleRequest.storiesType));
     initArticles(action, ctx);
   }
 }

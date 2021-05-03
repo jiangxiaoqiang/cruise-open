@@ -21,7 +21,7 @@ Widget buildView(ChannelPgState state, Dispatch dispatch, ViewService viewServic
 
   return Scaffold(
     appBar: AppBar(
-      title: Text('cruise'),
+      title: Text('Cruise'),
       brightness: Brightness.light, // or use Brightness.dark
       actions: [
         if (item.parent != null)

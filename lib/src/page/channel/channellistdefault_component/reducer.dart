@@ -19,8 +19,6 @@ Reducer<ChannelListDefaultState> buildReducer() {
 
 ChannelListDefaultState _onLoadingChannels(ChannelListDefaultState state, Action action) {
   ChannelListDefaultState newState = state.clone();
-  List<int> ids = (action.payload as List<int>);
-  newState.channelListState.channelIds = ids;
   return newState;
 }
 
@@ -35,7 +33,6 @@ ChannelListDefaultState _onLoadingMoreChannelsUpdate(ChannelListDefaultState sta
 ChannelListDefaultState _onSetChannelIds(ChannelListDefaultState state, Action action){
   final ChannelListDefaultState newState = state.clone();
   ArticlePayload payload = (action.payload as ArticlePayload);
-  newState.channelListState.channelIds = payload.articleIds!;
   newState.articleRequest = payload.articleRequest!;
   if (payload.articleRequest!.pageNum == 1 && payload.articleIds!.isNotEmpty) {
     newState.articleRequest.offset = payload.articleIds!.reduce(max);

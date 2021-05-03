@@ -20,7 +20,7 @@ class HomeList extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    ArticleRequest articleRequest = new ArticleRequest(pageNum: 1);
+    ArticleRequest articleRequest = new ArticleRequest(pageNum: 1,storiesType: StoriesType.topStories);
     articleRequest.storiesType = StoriesType.topStories;
     var counter = useState<ArticleRequest>(articleRequest);
     counter.value = articleRequest;

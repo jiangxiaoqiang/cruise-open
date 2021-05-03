@@ -5,15 +5,13 @@ import 'package:fish_redux/fish_redux.dart';
 
 class ChannelListState implements Cloneable<ChannelListState> {
   Channel? channel;
-  List<int> channelIds = List.empty();
-  List<Channel> channels = List.empty();
+  List<Channel> channels = List.empty(growable: true);
   ChannelPgState channelPgState = ChannelPgState();
 
   @override
   ChannelListState clone() {
     return ChannelListState()
       ..channel = this.channel
-      ..channelIds = this.channelIds
       ..channels = this.channels
       ..channelPgState = this.channelPgState;
   }

@@ -4,7 +4,7 @@ import '../../Item.dart';
 class ArticleRequest{
   ArticleRequest({
      this.latestTime,
-     this.storiesType,
+    required this.storiesType,
      this.pageSize,
     required this.pageNum,
      this.offset,
@@ -12,7 +12,7 @@ class ArticleRequest{
   });
 
   int? latestTime;
-  StoriesType? storiesType;
+  StoriesType storiesType;
   int? pageSize=100;
   int pageNum = 1;
   int? offset;

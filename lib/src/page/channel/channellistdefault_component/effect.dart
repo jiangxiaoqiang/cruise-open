@@ -15,27 +15,27 @@ Effect<ChannelListDefaultState> buildEffect() {
 }
 
 Future _onInit(Action action, Context<ChannelListDefaultState> ctx) async {
-  ArticleRequest articleRequest = new ArticleRequest(pageSize: 15, pageNum: 1, storiesType: StoriesType.channels);
-  List<int> ids = await Repo.getElementIds(articleRequest);
-  if (ids != null) {
-    ctx.dispatch(ChannelListDefaultActionCreator.onSetChannelIds(ids, articleRequest));
+  ArticleRequest articleRequest = new ArticleRequest(
+      pageSize: 15, pageNum: 1, storiesType: StoriesType.channels);
+  List<Channel> channels = await Repo.getChannels(articleRequest);
+  if(channels.length > 0) {
+    ctx.dispatch(
+        ChannelListDefaultActionCreator.onLoadingMoreChannelsUpdate(channels));
   }
 }
 
-Future _onLoadingMoreChannels(Action action, Context<ChannelListDefaultState> ctx) async {
+Future _onLoadingMoreChannels(
+    Action action, Context<ChannelListDefaultState> ctx) async {
   ArticleRequest articleRequest = (action.payload as ArticleRequest);
   articleRequest.pageNum = articleRequest.pageNum + 1;
   ChannelListDefaultState homeListDefaultState = ctx.state;
-  if (homeListDefaultState.articleRequest.offset != null && homeListDefaultState.articleRequest.offset! > 0) {
+  if (homeListDefaultState.articleRequest.offset != null &&
+      homeListDefaultState.articleRequest.offset! > 0) {
     articleRequest.offset = homeListDefaultState.articleRequest.offset;
   }
-  List<int> ids = await Repo.getElementIds(articleRequest);
-  List<Channel> channels = [];
-  for (int id in ids) {
-    Channel channel = (await Repo.fetchChannelItem(id))!;
-    if (channel != null) {
-      channels.add(channel);
-    }
+  List<Channel> channels = await Repo.getChannels(articleRequest);
+  if (channels.length > 0) {
+    ctx.dispatch(
+        ChannelListDefaultActionCreator.onLoadingMoreChannelsUpdate(channels));
   }
-  ctx.dispatch(ChannelListDefaultActionCreator.onLoadingMoreChannelsUpdate(channels));
 }

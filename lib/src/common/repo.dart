@@ -25,13 +25,12 @@ class Repo {
 
   static Future<List<Item>> getArticles(ArticleRequest request) async {
     List<Item> articles = await _getArticles(request);
-    // TODO: remove the check code
-    for (Item comment in articles) {
-      if (comment.title == null || comment.title == "") {
-        print("null article");
-      }
-    }
     return articles;
+  }
+
+  static Future<List<Channel>> getChannels(ArticleRequest request) async {
+    List<Channel> channels = await _getChannels(request);
+    return channels;
   }
 
   static Future<List<String>> getCommentsIds({required Item item}) async {
@@ -76,8 +75,33 @@ class Repo {
     }));
   }
 
+  static Future<List<Channel>> _getChannels(ArticleRequest articleRequest) async {
+    final typeQuery = _getStoryTypeQuery(articleRequest.storiesType);
+    Map jsonMap = articleRequest.toMap();
+    final response = await RestClient.postHttp("$typeQuery", jsonMap);
+    if (response.statusCode == 200 && response.data["statusCode"] == "200") {
+      Map result = response.data["result"];
+      if (result == null) {
+        return List.empty();
+      }
+      List channels = result["list"];
+      List<Channel> items = List.empty(growable: true);
+      channels.forEach((element) {
+        if (element != null) {
+          HashMap<String, Object> map = HashMap.from(element);
+          Channel item = Channel.fromMap(map);
+          items.add(item);
+        } else {
+          print("null channel");
+        }
+      });
+      return items;
+    }
+    return List.empty();
+  }
+
   static Future<List<Item>> _getArticles(ArticleRequest articleRequest) async {
-    final typeQuery = _getStoryTypeQuery(articleRequest.storiesType!);
+    final typeQuery = _getStoryTypeQuery(articleRequest.storiesType);
     Map jsonMap = articleRequest.toMap();
     final response = await RestClient.postHttp("$typeQuery", jsonMap);
     if (response.statusCode == 200 && response.data["statusCode"] == "200") {
@@ -102,7 +126,7 @@ class Repo {
   }
 
   static Future<List<int>> _getIds(ArticleRequest articleRequest) async {
-    final typeQuery = _getStoryTypeQuery(articleRequest.storiesType!);
+    final typeQuery = _getStoryTypeQuery(articleRequest.storiesType);
     Map jsonMap = articleRequest.toMap();
     final response = await RestClient.postHttp("$typeQuery", jsonMap);
     if (response.statusCode == 200 && response.data["statusCode"] == "200") {
@@ -175,28 +199,21 @@ class Repo {
   static String _getStoryTypeQuery(StoriesType type) {
     switch (type) {
       case StoriesType.channels:
-        return "/post/sub/source/ids";
+        return "/post/sub/source/page/cache";
       case StoriesType.subStories:
         return "/post/article/substories";
-        break;
       case StoriesType.topStories:
         return "/post/article/newstories";
-        break;
       case StoriesType.showStories:
         return "/post/article/newstories";
-        break;
       case StoriesType.jobStories:
         return "/post/article/newstories";
-        break;
       case StoriesType.favStories:
         return "/post/user/fav/article";
-        break;
       case StoriesType.originalStories:
         return "/post/article/originalstories";
-        break;
       case StoriesType.channelStories:
         return "/post/article/channelstories";
-        break;
       default:
         return "/post/article/newstories";
     }

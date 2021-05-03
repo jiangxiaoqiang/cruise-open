@@ -23,7 +23,7 @@ class ChannelListDefault extends HookWidget{
   @override
   Widget build(BuildContext context) {
 
-    ArticleRequest articleRequest = new ArticleRequest(pageNum: 1);
+    ArticleRequest articleRequest = new ArticleRequest(pageNum: 1,storiesType: storiesType);
     articleRequest.storiesType = storiesType;
     var counter = useState<ArticleRequest>(articleRequest);
 
