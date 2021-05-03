@@ -33,7 +33,7 @@ Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewSe
                           child: ListTile(
                             leading: Icon(EvaIcons.person),
                             trailing: Icon(Icons.keyboard_arrow_right),
-                            title: Text("登录"),
+                            title: Text("我的"),
                             onTap: () async {
                               bool isLoggedIn = await Auth.isLoggedIn();
                               if (isLoggedIn) {
