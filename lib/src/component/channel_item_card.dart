@@ -10,7 +10,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 class ChannelItemCard extends HookWidget {
   const ChannelItemCard({
-     Key? key,
+    Key? key,
     required this.item,
   }) : super(key: key);
 
@@ -18,15 +18,12 @@ class ChannelItemCard extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-
     var counter = useState<Channel>(item);
     var isFav = useState(counter.value.isFav);
 
     void touchSub(String channelId, SubStatus subStatus) async {
-      HttpResult result = await ChannelAction.sub(
-          channelId: channelId,
-          subStatus: subStatus
-      );
+      HttpResult result =
+          await ChannelAction.sub(channelId: channelId, subStatus: subStatus);
 
       if (result.result == Result.error) {
         Fluttertoast.showToast(
@@ -36,20 +33,18 @@ class ChannelItemCard extends HookWidget {
             timeInSecForIosWeb: 1,
             backgroundColor: Colors.red,
             textColor: Colors.white,
-            fontSize: 16.0
-        );
+            fontSize: 16.0);
       } else {
-        isFav.value = subStatus.statusCode=="sub"?1:0;
+        isFav.value = subStatus.statusCode == "sub" ? 1 : 0;
         counter.value.isFav = isFav.value;
         Fluttertoast.showToast(
-            msg: subStatus.statusCode=="sub"?"订阅成功":"取消订阅成功",
+            msg: subStatus.statusCode == "sub" ? "订阅成功" : "取消订阅成功",
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 1,
             backgroundColor: Colors.red,
             textColor: Colors.white,
-            fontSize: 16.0
-        );
+            fontSize: 16.0);
       }
     }
 
@@ -71,38 +66,43 @@ class ChannelItemCard extends HookWidget {
                     radius: 20,
                     backgroundColor: Theme.of(context).primaryColor,
                     backgroundImage: backgroundImage,
-                    foregroundImage:  NetworkImage(counter.value.favIconUrl),
-                      ),
+                    foregroundImage: NetworkImage(counter.value.favIconUrl),
+                  ),
                   Flexible(
-                      child:Text(
-                      counter.value.subName,
-                      softWrap: true,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      )),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 8),
+                      child: Text(
+                          counter.value.subName,
+                          softWrap: true,
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          )),
                     ),
-                  if(isFav.value == 1)
+                  ),
+                  if (isFav.value == 1)
                     Padding(
-                      padding: const EdgeInsets.only(top: 8,bottom: 8.0,right: 1),
+                      padding:
+                          const EdgeInsets.only(top: 8, bottom: 8.0, right: 1),
                       child: ButtonTheme(
                           minWidth: 50,
                           height: 30.0,
                           child: ElevatedButton.icon(
-                            style:GlobalStyle.getButtonStyle(context),
+                            style: GlobalStyle.getButtonStyle(context),
                             icon: Icon(
                               Feather.check_circle,
                               size: 16,
                             ),
-                            onPressed: () => touchSub(counter.value.id.toString(),SubStatus.UNSUB),
+                            onPressed: () => touchSub(
+                                counter.value.id.toString(), SubStatus.UNSUB),
                             label: Text("已订阅"),
-                          )
-                      ),
-                    )
-                  ,
-                  if(isFav.value != 1)
+                          )),
+                    ),
+                  if (isFav.value != 1)
                     Padding(
-                      padding: const EdgeInsets.only(top: 8,bottom: 8.0,right: 1),
+                      padding:
+                          const EdgeInsets.only(top: 8, bottom: 8.0, right: 1),
                       child: ButtonTheme(
                           minWidth: 50,
                           height: 30.0,
@@ -110,18 +110,17 @@ class ChannelItemCard extends HookWidget {
                             color: Theme.of(context).primaryColor,
                             shape: new RoundedRectangleBorder(
                                 borderRadius: new BorderRadius.circular(5.0)),
-                            onPressed: () => touchSub(counter.value.id.toString(),SubStatus.SUB),
+                            onPressed: () => touchSub(
+                                counter.value.id.toString(), SubStatus.SUB),
                             child: Text("订阅"),
-                          )
-                      ),
+                          )),
                     )
                 ],
               ),
               Row(
                 children: [
                   Flexible(
-                    child:Text(
-                        counter.value.intro,
+                    child: Text(counter.value.intro,
                         softWrap: true,
                         style: TextStyle(
                           fontSize: 15,
