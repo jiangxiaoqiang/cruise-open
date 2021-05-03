@@ -1,5 +1,6 @@
 import 'package:cruise/src/common/channel_action.dart';
 import 'package:cruise/src/common/net/rest/http_result.dart';
+import 'package:cruise/src/common/style/global_style.dart';
 import 'package:cruise/src/models/Channel.dart';
 import 'package:cruise/src/models/api/sub_status.dart';
 import 'package:flutter/material.dart';
@@ -14,13 +15,6 @@ class ChannelItemCard extends HookWidget {
   }) : super(key: key);
 
   final Channel item;
-
-  NetworkImage getImage(){
-    NetworkImage ni = NetworkImage(
-      'https://source.unsplash.com/50x50/?portrait',
-    );
-    return ni;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,11 +52,10 @@ class ChannelItemCard extends HookWidget {
         );
       }
     }
-    String imageNetwork = "http://pic41.nipic.com/20140514/5295460_234432363121_2.jpg";
 
-    AssetImage image = AssetImage('images/Icon-App-83.5x83.5@3x.png');
-
-    NetworkImage img =  NetworkImage(imageNetwork);
+    String channelIconUrl = "https://" + Uri.parse(counter.value.subUrl).host + "/favicon.ico";
+    AssetImage backgroundImage = AssetImage('images/Icon-App-83.5x83.5@3x.png');
+    NetworkImage foregroundImage =  NetworkImage(channelIconUrl);
 
     return Card(
       key: Key(counter.value.id.toString()),
@@ -79,10 +72,8 @@ class ChannelItemCard extends HookWidget {
                   CircleAvatar(
                     radius: 20,
                     backgroundColor: Theme.of(context).primaryColor,
-                    //foregroundImage: AssetImage('images/Icon-App-83.5x83.5@3x.png'),
-                    backgroundImage: AssetImage('images/Icon-App-83.5x83.5@3x.png'),
-                        //backgroundImage: NetworkImage(imageNetwork),
-
+                    backgroundImage: backgroundImage,
+                    foregroundImage: foregroundImage,
                       ),
                   Flexible(
                       child:Text(
@@ -99,14 +90,12 @@ class ChannelItemCard extends HookWidget {
                       child: ButtonTheme(
                           minWidth: 50,
                           height: 30.0,
-                          child: RaisedButton.icon(
-                            color: Theme.of(context).primaryColor,
+                          child: ElevatedButton.icon(
+                            style:GlobalStyle.getButtonStyle(context),
                             icon: Icon(
                               Feather.check_circle,
                               size: 16,
                             ),
-                            shape: new RoundedRectangleBorder(
-                                borderRadius: new BorderRadius.circular(5.0)),
                             onPressed: () => touchSub(counter.value.id.toString(),SubStatus.UNSUB),
                             label: Text("已订阅"),
                           )
