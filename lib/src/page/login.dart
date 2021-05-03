@@ -63,7 +63,6 @@ class LoginPage extends HookWidget {
                               autocorrect: false,
                               onChanged: (value) {
                                 username.value = value;
-
                               },
                               keyboardType: TextInputType.phone,
                               obscureText: false,

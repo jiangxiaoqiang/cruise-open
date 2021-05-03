@@ -105,6 +105,7 @@ class RegPage extends HookWidget {
                                     );
 
                                     if (result.result == Result.error) {
+                                      submitting.value = false;
                                       Fluttertoast.showToast(
                                           msg: result.message,
                                           toastLength: Toast.LENGTH_SHORT,
