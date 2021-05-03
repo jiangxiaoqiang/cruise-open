@@ -48,7 +48,7 @@ class CruiseApp extends HookWidget {
         // ... other locales the app supports
       ],
       routes: {
-        //"login": (BuildContext context) => LoginPage(viewService: null,),
+        "login": (BuildContext context) => LoginPage(),
       },
       home: routes.buildPage('home', null),
       onGenerateRoute: (RouteSettings settings) {

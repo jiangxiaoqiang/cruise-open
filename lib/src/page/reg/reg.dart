@@ -4,18 +4,16 @@ import 'package:cruise/src/common/style/global_style.dart';
 import 'package:cruise/src/common/net/rest/http_result.dart';
 import 'package:cruise/src/page/login.dart';
 import 'package:cruise/src/page/reg/verify.dart';
-import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class RegPage extends HookWidget {
-  RegPage({required this.phoneNumber,required this.viewService});
+  RegPage({required this.phoneNumber});
 
   /// if user entered part of the phone number in login page and found not registered
   /// pass phone number make user switch to registered page did not need to input phone number again
   final String phoneNumber;
-  final ViewService viewService;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +31,7 @@ class RegPage extends HookWidget {
             TextButton(
               style: GlobalStyle.textButtonStyle,
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage(viewService: viewService,)));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
               },
               child: Text("登录"),
             ),
@@ -117,7 +115,7 @@ class RegPage extends HookWidget {
                                           fontSize: 18.0);
                                     } else {
                                       Widget page;
-                                      page = VerifyPage(phone:phoneNumber,viewService: viewService,);
+                                      page = VerifyPage(phone:phoneNumber);
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(builder: (context) => page),

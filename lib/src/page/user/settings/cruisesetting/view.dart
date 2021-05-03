@@ -37,7 +37,7 @@ Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewSe
                             onTap: () async {
                               bool isLoggedIn = await Auth.isLoggedIn();
                               if (isLoggedIn) {
-                                NavUtil.navLogin(context,viewService);
+                                NavUtil.navLogin(context);
                                 //page = BottomNavigationDemo(type: BottomNavigationDemoType.withLabels);
                               } else {
                                 NavUtil.navProfile(context);

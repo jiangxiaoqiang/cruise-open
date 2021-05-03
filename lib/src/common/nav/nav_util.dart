@@ -17,15 +17,15 @@ class NavUtil {
     );
   }
 
-  static Future<void> navLogin(BuildContext context,ViewService viewService) async {
-    Widget page = LoginPage(viewService: viewService,);
+  static Future<void> navLogin(BuildContext context) async {
+    Widget page = LoginPage();
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => page),
     );
   }
 
-  static Future<void> navHome(BuildContext context,ViewService viewService) async {
+  static Future<void> navHome(BuildContext context) async {
     final AbstractRoutes routes = CommonUtils.buildRoute();
     Widget page = routes.buildPage("home", null);
     Navigator.push(

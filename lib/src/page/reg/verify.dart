@@ -6,10 +6,9 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:cruise/src/common/auth.dart';
 
 class VerifyPage extends HookWidget {
-  const VerifyPage({required this.phone,required this.viewService});
+  const VerifyPage({required this.phone});
 
   final String phone;
-  final ViewService viewService;
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +67,7 @@ class VerifyPage extends HookWidget {
                                   verifyCode: verifyCode.value,
                                 );
                                 Widget page;
-                                page = SetPwdPage(phone: phone,viewService: viewService,);
+                                page = SetPwdPage(phone: phone);
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(builder: (context) => page),

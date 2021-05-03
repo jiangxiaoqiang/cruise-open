@@ -11,10 +11,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 class LoginPage extends HookWidget {
 
-  LoginPage({required this.viewService});
-
-  final ViewService viewService;
-
   @override
   Widget build(BuildContext context) {
     final _formKey = useMemoized(() => GlobalKey<FormState>());
@@ -35,7 +31,7 @@ class LoginPage extends HookWidget {
               style: GlobalStyle.textButtonStyle,
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => RegPage(phoneNumber: username.value,viewService: viewService,)));
+                    MaterialPageRoute(builder: (context) => RegPage(phoneNumber: username.value)));
               },
               child: Text("注册", style: TextStyle(fontSize: 16.0)),
             ),

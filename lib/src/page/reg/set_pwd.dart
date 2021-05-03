@@ -7,10 +7,9 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:cruise/src/common/auth.dart';
 
 class SetPwdPage extends HookWidget {
-  const SetPwdPage({required this.phone,required this.viewService});
+  const SetPwdPage({required this.phone});
 
   final String phone;
-  final ViewService viewService;
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +78,7 @@ class SetPwdPage extends HookWidget {
                                     ),
                                   );
                                 } else {
-                                  NavUtil.navHome(context,viewService);
+                                  NavUtil.navHome(context);
                                 }
                                 submitting.value = false;
                               }
