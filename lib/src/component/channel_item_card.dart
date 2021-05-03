@@ -53,9 +53,7 @@ class ChannelItemCard extends HookWidget {
       }
     }
 
-    String channelIconUrl = "https://" + Uri.parse(counter.value.subUrl).host + "/favicon.ico";
     AssetImage backgroundImage = AssetImage('images/Icon-App-83.5x83.5@3x.png');
-    NetworkImage foregroundImage =  NetworkImage(channelIconUrl);
 
     return Card(
       key: Key(counter.value.id.toString()),
@@ -73,7 +71,7 @@ class ChannelItemCard extends HookWidget {
                     radius: 20,
                     backgroundColor: Theme.of(context).primaryColor,
                     backgroundImage: backgroundImage,
-                    foregroundImage: foregroundImage,
+                    foregroundImage:  NetworkImage(counter.value.favIconUrl),
                       ),
                   Flexible(
                       child:Text(

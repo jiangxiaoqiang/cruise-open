@@ -23,6 +23,7 @@ class Channel {
     this.subUrl = "",
     this.isFav = 0,
     this.intro = "",
+    this.favIconUrl=""
   });
 
   int depth;
@@ -43,6 +44,7 @@ class Channel {
   String subUrl;
   int isFav;
   String intro;
+  String favIconUrl;
 
   factory Channel.fromJson(String str) => Channel.fromMap(json.decode(str));
 
@@ -70,6 +72,7 @@ class Channel {
         subName: json["subName"] == null ? "" : json["subName"],
         subUrl: json["subUrl"] == null ? "" : json["subUrl"],
         intro: json["intro"] == null ? "" : json["intro"],
+        favIconUrl: json["favIconUrl"] == null ? "" : json["favIconUrl"],
       );
 
   Map<String, dynamic> toMap() => {
@@ -90,5 +93,6 @@ class Channel {
         "subUrl": subUrl == null ? null : subUrl,
         "isFav": isFav == null ? null : isFav,
         "intro": intro == null ? null : intro,
+        "favIconUrl": favIconUrl == null ? null : favIconUrl,
       };
 }
