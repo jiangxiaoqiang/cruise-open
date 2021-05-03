@@ -64,10 +64,6 @@ class ChannelItemCard extends HookWidget {
 
     NetworkImage img =  NetworkImage(imageNetwork);
 
-    if(image.bundle == null){
-      return Container();
-    }
-
     return Card(
       key: Key(counter.value.id.toString()),
       child: Padding(
@@ -80,15 +76,14 @@ class ChannelItemCard extends HookWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Container(
-                    width: 20,
-                      height: 10,
-                      child:CircleAvatar(
+                  CircleAvatar(
                     radius: 20,
+                    backgroundColor: Theme.of(context).primaryColor,
+                    //foregroundImage: AssetImage('images/Icon-App-83.5x83.5@3x.png'),
                     backgroundImage: AssetImage('images/Icon-App-83.5x83.5@3x.png'),
                         //backgroundImage: NetworkImage(imageNetwork),
 
-                      )),
+                      ),
                   Flexible(
                       child:Text(
                       counter.value.subName,
