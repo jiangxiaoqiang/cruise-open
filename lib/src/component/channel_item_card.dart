@@ -1,6 +1,5 @@
 import 'package:cruise/src/common/channel_action.dart';
 import 'package:cruise/src/common/net/rest/http_result.dart';
-import 'package:cruise/src/common/style/global_style.dart';
 import 'package:cruise/src/models/Channel.dart';
 import 'package:cruise/src/models/api/sub_status.dart';
 import 'package:flutter/material.dart';
@@ -20,10 +19,10 @@ class ChannelItemCard extends HookWidget {
   Widget build(BuildContext context) {
     var counter = useState<Channel>(item);
     var isFav = useState(counter.value.isFav);
+    double screenWidth = MediaQuery.of(context).size.width;
 
     void touchSub(String channelId, SubStatus subStatus) async {
-      HttpResult result =
-          await ChannelAction.sub(channelId: channelId, subStatus: subStatus);
+      HttpResult result = await ChannelAction.sub(channelId: channelId, subStatus: subStatus);
 
       if (result.result == Result.error) {
         Fluttertoast.showToast(
@@ -49,6 +48,7 @@ class ChannelItemCard extends HookWidget {
     }
 
     AssetImage backgroundImage = AssetImage('images/Icon-App-83.5x83.5@3x.png');
+    var foregroundImage = counter.value.favIconUrl == "" ? null : NetworkImage(counter.value.favIconUrl);
 
     return Card(
       key: Key(counter.value.id.toString()),
@@ -66,25 +66,26 @@ class ChannelItemCard extends HookWidget {
                     radius: 20,
                     backgroundColor: Theme.of(context).primaryColor,
                     backgroundImage: backgroundImage,
-                    foregroundImage: NetworkImage(counter.value.favIconUrl),
+                    foregroundImage: foregroundImage,
                   ),
-                  Flexible(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 8),
-                      child: Text(
-                          counter.value.subName,
-                          softWrap: true,
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          )),
+                  SizedBox(
+                    width: screenWidth * 0.45,
+                    child: Flexible(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 8),
+                        child: Text(counter.value.subName,
+                            softWrap: true,
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            )),
+                      ),
                     ),
                   ),
                   if (isFav.value == 1)
                     Padding(
-                      padding:
-                          const EdgeInsets.only(top: 8, bottom: 8.0, right: 1),
+                      padding: const EdgeInsets.only(top: 8, bottom: 8.0, left: 10),
                       child: ButtonTheme(
                           minWidth: 50,
                           height: 30.0,
@@ -94,24 +95,20 @@ class ChannelItemCard extends HookWidget {
                               Feather.check_circle,
                               size: 16,
                             ),
-                            onPressed: () => touchSub(
-                                counter.value.id.toString(), SubStatus.UNSUB),
+                            onPressed: () => touchSub(counter.value.id.toString(), SubStatus.UNSUB),
                             label: Text("已订阅"),
                           )),
                     ),
                   if (isFav.value != 1)
                     Padding(
-                      padding:
-                          const EdgeInsets.only(top: 8, bottom: 8.0, right: 1),
+                      padding: const EdgeInsets.only(top: 8, bottom: 8.0, right: 1),
                       child: ButtonTheme(
                           minWidth: 50,
                           height: 30.0,
                           child: RaisedButton(
                             color: Theme.of(context).primaryColor,
-                            shape: new RoundedRectangleBorder(
-                                borderRadius: new BorderRadius.circular(5.0)),
-                            onPressed: () => touchSub(
-                                counter.value.id.toString(), SubStatus.SUB),
+                            shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(5.0)),
+                            onPressed: () => touchSub(counter.value.id.toString(), SubStatus.SUB),
                             child: Text("订阅"),
                           )),
                     )
