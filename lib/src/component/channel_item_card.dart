@@ -70,17 +70,15 @@ class ChannelItemCard extends HookWidget {
                   ),
                   SizedBox(
                     width: screenWidth - 230,
-                    child: Flexible(
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 8),
-                        child: Text(counter.value.subName,
-                            softWrap: true,
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            )),
-                      ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 8),
+                      child: Text(counter.value.subName,
+                          softWrap: true,
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          )),
                     ),
                   ),
                   if (isFav.value == 1)
