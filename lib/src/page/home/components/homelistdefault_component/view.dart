@@ -67,10 +67,6 @@ Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService view
               }
             }
 
-            if (state.articleListState.articles.length == 1 && state.articleListState.articles[0] == -1) {
-              return Text("data");
-            }
-
             return NotificationListener(
                 onNotification: (scrollNotification) {
                   if (scrollNotification is! ScrollNotification) {
@@ -97,9 +93,9 @@ Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService view
                             } else if (mode == LoadStatus.failed) {
                               body = Text("加载失败!点击重试!");
                             } else if (mode == LoadStatus.canLoading) {
-                              body = Text("release to load more");
+                              body = Text("放开加载更多");
                             } else {
-                              body = Text("No more Data");
+                              body = Text("无更多数据");
                             }
                             return Container(
                               height: 55.0,

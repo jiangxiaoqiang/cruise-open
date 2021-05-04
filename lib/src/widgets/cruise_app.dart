@@ -2,7 +2,6 @@ import 'package:cruise/src/common/theme.dart';
 import 'package:cruise/src/common/utils/common_utils.dart';
 import 'package:cruise/src/common/utils/navigation_service.dart';
 import 'package:cruise/src/common/view_manager.dart';
-import 'package:cruise/src/page/home/page.dart';
 import 'package:cruise/src/page/login.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:fish_redux/src/redux_component/page.dart' as fishPage;
