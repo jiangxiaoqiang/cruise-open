@@ -69,7 +69,7 @@ class ChannelItemCard extends HookWidget {
                     foregroundImage: foregroundImage,
                   ),
                   SizedBox(
-                    width: screenWidth * 0.45,
+                    width: screenWidth - 230,
                     child: Flexible(
                       child: Padding(
                         padding: const EdgeInsets.only(left: 8),
@@ -87,7 +87,7 @@ class ChannelItemCard extends HookWidget {
                     Padding(
                       padding: const EdgeInsets.only(top: 8, bottom: 8.0, left: 10),
                       child: ButtonTheme(
-                          minWidth: 50,
+                          minWidth: 100,
                           height: 30.0,
                           child: RaisedButton.icon(
                             color: Theme.of(context).primaryColor,
@@ -103,7 +103,7 @@ class ChannelItemCard extends HookWidget {
                     Padding(
                       padding: const EdgeInsets.only(top: 8, bottom: 8.0, right: 1),
                       child: ButtonTheme(
-                          minWidth: 50,
+                          minWidth: 100,
                           height: 30.0,
                           child: RaisedButton(
                             color: Theme.of(context).primaryColor,
