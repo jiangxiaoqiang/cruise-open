@@ -8,6 +8,7 @@ class ArticleListState implements Cloneable<ArticleListState> {
   List<Item> articles = List.empty();
   Item? article;
   int? channelId;
+  LoadingStatus loadingStatus = LoadingStatus.loading;
   ArticlePgState articlePgState = ArticlePgState();
 
   @override
@@ -16,6 +17,7 @@ class ArticleListState implements Cloneable<ArticleListState> {
       ..articles = this.articles
       ..channelId = channelId
       ..articlePgState = this.articlePgState
+      ..loadingStatus = this.loadingStatus
       ..article = this.article;
   }
 }

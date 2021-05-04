@@ -16,11 +16,11 @@ enum HomeListDefaultAction {
 }
 
 class HomeListDefaultActionCreator {
-  static Action onUpdateArticleLoadingStatus(ArticleLoadingStatus loadingStatus) {
+  static Action onUpdateArticleLoadingStatus(LoadingStatus loadingStatus) {
     return Action(HomeListDefaultAction.update_article_loading_status, payload: loadingStatus);
   }
 
-  static Action onUpdateLastStroiesType(StoriesType storiesType) {
+  static Action onUpdateLastStoriesType(StoriesType storiesType) {
     return Action(HomeListDefaultAction.update_latest_story_type, payload: storiesType);
   }
 

@@ -9,7 +9,7 @@ class HomeListDefaultState implements Cloneable<HomeListDefaultState> {
   StoriesType currentStoriesType = StoriesType.topStories;
   StoriesType lastStoriesType = StoriesType.topStories;
   ArticleListState articleListState = ArticleListState();
-  ArticleLoadingStatus articleLoadingStatus = ArticleLoadingStatus.complete;
+  LoadingStatus articleLoadingStatus = LoadingStatus.loading;
   bool isScrollTop = false;
 
   @override
@@ -19,6 +19,7 @@ class HomeListDefaultState implements Cloneable<HomeListDefaultState> {
       ..articleListState = this.articleListState
       ..isScrollTop = this.isScrollTop
       ..lastStoriesType = this.lastStoriesType
+      ..articleLoadingStatus = this.articleLoadingStatus
       ..articleRequest = this.articleRequest;
   }
 }
@@ -26,10 +27,10 @@ class HomeListDefaultState implements Cloneable<HomeListDefaultState> {
 class HomeListDefaultConnector extends ConnOp<HomeListState, HomeListDefaultState> {
   @override
   HomeListDefaultState get(HomeListState state) {
-    HomeListDefaultState substate = state.homeListDefaultState.clone();
-    substate.currentStoriesType = state.currentStoriesType;
-    substate.articleRequest.storiesType = state.currentStoriesType;
-    return substate;
+    HomeListDefaultState subState = state.homeListDefaultState.clone();
+    subState.currentStoriesType = state.currentStoriesType;
+    subState.articleRequest.storiesType = state.currentStoriesType;
+    return subState;
   }
 
   @override

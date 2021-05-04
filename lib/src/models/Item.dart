@@ -23,7 +23,7 @@ enum StoriesType {
   channelStories
 }
 
-enum ArticleLoadingStatus { loading, complete }
+enum LoadingStatus { loading, complete }
 
 class Item {
   Item(

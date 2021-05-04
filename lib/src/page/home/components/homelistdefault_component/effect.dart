@@ -23,7 +23,7 @@ void _onBuild(Action action, Context<HomeListDefaultState> ctx) {
   if (homeListDefaultState.lastStoriesType != articleRequest.storiesType) {
     // switch the article navigator tab
     // initial the new type of article
-    ctx.dispatch(HomeListDefaultActionCreator.onUpdateLastStroiesType(articleRequest.storiesType));
+    ctx.dispatch(HomeListDefaultActionCreator.onUpdateLastStoriesType(articleRequest.storiesType));
     initArticles(action, ctx);
   }
 }
@@ -38,8 +38,10 @@ Future initArticles(Action action, Context<HomeListDefaultState> ctx) async {
   articleRequest.pageNum = 1;
   articleRequest.offset = null;
   List<Item> articles = await Repo.getArticles(articleRequest);
+  // 这里注意即使文章为空也要设置状态
   List<int> ids = articles.map((e) => int.parse(e.id)).toList();
-  ctx.dispatch(HomeListDefaultActionCreator.onSetArticleIds(ids, articles, articleRequest));
+  ctx.dispatch(HomeListDefaultActionCreator.onSetArticleIds(
+      ids, articles, articleRequest));
 }
 
 Future _onLoadingMoreArticles(Action action, Context<HomeListDefaultState> ctx) async {

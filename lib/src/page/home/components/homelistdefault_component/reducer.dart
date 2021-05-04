@@ -35,7 +35,7 @@ HomeListDefaultState _onResumeScrollTop(HomeListDefaultState state, Action actio
 
 HomeListDefaultState _onUpdateArticleLoadingStatus(HomeListDefaultState state, Action action) {
   final HomeListDefaultState newState = state.clone();
-  ArticleLoadingStatus loadingStatus = (action.payload as ArticleLoadingStatus);
+  LoadingStatus loadingStatus = (action.payload as LoadingStatus);
   newState.articleLoadingStatus = loadingStatus;
   return newState;
 }
@@ -57,14 +57,12 @@ HomeListDefaultState _onFetchNewestArticlesUpdate(HomeListDefaultState state, Ac
 HomeListDefaultState _onSetArticleIds(HomeListDefaultState state, Action action) {
   final HomeListDefaultState newState = state.clone();
   ArticlePayload payload = (action.payload as ArticlePayload);
-
   ArticleListState articleListState = state.articleListState.clone();
   articleListState.articles = payload.articles!;
-
   newState.articleRequest = payload.articleRequest!;
   newState.currentStoriesType = state.currentStoriesType;
+  newState.articleLoadingStatus = LoadingStatus.complete;
   newState.articleListState = articleListState;
-
   if (payload.articleRequest!.pageNum == 1 && payload.articleIds!.isNotEmpty) {
     newState.articleRequest.offset = payload.articleIds!.reduce(max);
   }

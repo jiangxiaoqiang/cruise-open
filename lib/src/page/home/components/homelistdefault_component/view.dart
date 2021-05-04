@@ -1,3 +1,4 @@
+import 'package:cruise/src/models/Item.dart';
 import 'package:cruise/src/models/request/article/article_request.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
@@ -56,8 +57,14 @@ Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService view
         child: Builder(
           builder: (context) {
             if (state.articleListState.articles.length == 0) {
-              // when the article not fetched, show loading animation
-              return Center(child: Text("无订阅内容"));
+              if(state.articleLoadingStatus == LoadingStatus.complete) {
+                // when the article not fetched, show loading animation
+                return Center(child: Text("无内容"));
+              }else if(state.articleLoadingStatus == LoadingStatus.loading){
+                return Center(child: CircularProgressIndicator());
+              }else{
+                return Center(child: Text("无内容"));
+              }
             }
 
             if (state.articleListState.articles.length == 1 && state.articleListState.articles[0] == -1) {
