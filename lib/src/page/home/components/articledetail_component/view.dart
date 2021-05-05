@@ -112,26 +112,19 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
     );
   }
 
+  /// 是否是编辑选择频道链接显示不同的颜色
   TextStyle getDomainStyle(Item article){
-    TextStyle domainTextStyle;
     if(article.editorPick == 1) {
-       domainTextStyle = Theme
-          .of(context)
-          .textTheme
-          .caption!
-          .copyWith(color: Theme
-          .of(context)
-          .primaryColor);
+      return new TextStyle(
+          color: Color(0xFFFFA826),
+          fontSize: 15
+      );
     }else{
-      domainTextStyle = Theme
-          .of(context)
-          .textTheme
-          .caption!
-          .copyWith(color: Theme
-          .of(context)
-          .shadowColor);
+      return new TextStyle(
+          color: Color(0xFF0A0A0A),
+          fontSize: 15
+      );
     }
-    return domainTextStyle;
   }
 
   SingleChildScrollView buildListView(Item item, BuildContext context) {
