@@ -62,12 +62,18 @@ class ChannelItemCard extends HookWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  CircleAvatar(
-                    radius: 20,
-                    backgroundColor: Theme.of(context).primaryColor,
-                    backgroundImage: backgroundImage,
-                    foregroundImage: foregroundImage,
-                  ),
+                  if(counter.value.favIconUrl == "")
+                    CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Colors.transparent,
+                      backgroundImage: backgroundImage,
+                    ),
+                  if(counter.value.favIconUrl != "")
+                    CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Colors.transparent,
+                      backgroundImage: foregroundImage,
+                    ),
                   SizedBox(
                     width: screenWidth - 230,
                     child: Padding(
