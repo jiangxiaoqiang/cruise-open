@@ -75,6 +75,7 @@ class Channel {
         subUrl: json["subUrl"] == null ? "" : json["subUrl"],
         intro: json["intro"] == null ? "" : json["intro"],
         favIconUrl: json["favIconUrl"] == null ? "" : json["favIconUrl"],
+        localIconUrl: json["localIconUrl"] == null ? "" : json["localIconUrl"],
       );
 
   Map<String, dynamic> toMap() => {
@@ -96,5 +97,6 @@ class Channel {
         "isFav": isFav == null ? null : isFav,
         "intro": intro == null ? null : intro,
         "favIconUrl": favIconUrl == null ? null : favIconUrl,
+        "localIconUrl": localIconUrl == null ? null : localIconUrl,
       };
 }
