@@ -16,7 +16,8 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/style.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
+import 'package:html/parser.dart' as htmlparser;
+import 'package:html/dom.dart' as dom;
 import 'state.dart';
 
 Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewService) {
@@ -128,6 +129,7 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
   }
 
   SingleChildScrollView buildListView(Item item, BuildContext context) {
+    dom.Document document = htmlparser.parse(item.content);
     return SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -187,8 +189,9 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
                     fontSize: FontSize(19.0),
                   ),
                 },
-                onLinkTap: (url) => CommonUtils.launchUrl(url),
-              ),
+                onLinkTap: (String? url, RenderContext context, Map<String, String> attributes,  dom.Element? element){
+                  CommonUtils.launchUrl(url);
+              }),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
