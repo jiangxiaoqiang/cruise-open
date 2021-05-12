@@ -129,7 +129,6 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
   }
 
   SingleChildScrollView buildListView(Item item, BuildContext context) {
-    dom.Document document = htmlparser.parse(item.content);
     return SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

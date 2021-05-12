@@ -23,7 +23,8 @@ class Channel {
     this.subUrl = "",
     this.isFav = 0,
     this.intro = "",
-    this.favIconUrl=""
+    this.favIconUrl="",
+    this.localIconUrl=""
   });
 
   int depth;
@@ -45,6 +46,7 @@ class Channel {
   int isFav;
   String intro;
   String favIconUrl;
+  String localIconUrl;
 
   factory Channel.fromJson(String str) => Channel.fromMap(json.decode(str));
 

@@ -1,4 +1,5 @@
 import 'package:cruise/src/common/channel_action.dart';
+import 'package:cruise/src/common/config/global_config.dart' as global;
 import 'package:cruise/src/common/net/rest/http_result.dart';
 import 'package:cruise/src/models/Channel.dart';
 import 'package:cruise/src/models/api/sub_status.dart';
@@ -48,8 +49,7 @@ class ChannelItemCard extends HookWidget {
     }
 
     AssetImage backgroundImage = AssetImage('images/Icon-App-83.5x83.5@3x.png');
-    var foregroundImage = counter.value.favIconUrl == "" ? null : NetworkImage(counter.value.favIconUrl);
-
+    var foregroundImage = counter.value.favIconUrl == "" ? null : NetworkImage(global.staticResourceUrl + "/" + counter.value.localIconUrl);
     return Card(
       key: Key(counter.value.id.toString()),
       child: Padding(
@@ -62,13 +62,13 @@ class ChannelItemCard extends HookWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  if(counter.value.favIconUrl == "")
+                  if (counter.value.localIconUrl == "")
                     CircleAvatar(
                       radius: 20,
                       backgroundColor: Colors.transparent,
                       backgroundImage: backgroundImage,
                     ),
-                  if(counter.value.favIconUrl != "")
+                  if (counter.value.localIconUrl != "")
                     CircleAvatar(
                       radius: 20,
                       backgroundColor: Colors.transparent,
