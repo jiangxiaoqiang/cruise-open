@@ -7,14 +7,12 @@ import 'state.dart';
 
 Widget buildView(ArticlePgState state, Dispatch dispatch, ViewService viewService) {
   Item item = state.article;
-  var showToTopBtn = state.showToTopBtn;
   PageStorageBucket pageStorageBucket = state.pageStorageBucket;
   Map<String, ScrollController> scrollControllers = state.scrollControllers;
-  ScrollController scrollController = scrollControllers.length == 0 ? ScrollController() : scrollControllers[item.id]!;
+  ScrollController scrollController = scrollControllers[item.id]!;
   scrollController.addListener(() => {
-        if (scrollController.offset < 1000) {showToTopBtn = false} else if (scrollController.offset >= 1000) {showToTopBtn = true}
-      });
-
+        //if (scrollController.offset < 1000) {showToTopBtn = false} else if (scrollController.offset >= 1000) {showToTopBtn = true}
+  });
   Widget navDetail(Item article) {
     return viewService.buildComponent("articledetail");
   }
@@ -28,7 +26,8 @@ Widget buildView(ArticlePgState state, Dispatch dispatch, ViewService viewServic
           actions: [],
         ),
         body: NotificationListener<ScrollNotification>(
-          onNotification: (ScrollNotification sn) {
+          onNotification: (scrollNotification){
+           //scrollController.animateTo(scrollController.offset, duration: Duration(milliseconds: 1000), curve: Curves.ease);
             return true;
           },
           child: CupertinoScrollbar(
@@ -42,14 +41,5 @@ Widget buildView(ArticlePgState state, Dispatch dispatch, ViewService viewServic
             ],
           )),
         ),
-        floatingActionButton: !showToTopBtn
-            ? null
-            : FloatingActionButton(
-                child: Icon(Icons.arrow_upward),
-                onPressed: () {
-                  if (scrollController.hasClients) {
-                    scrollController.animateTo(.0, duration: Duration(milliseconds: 200), curve: Curves.ease);
-                  }
-                }),
       ));
 }

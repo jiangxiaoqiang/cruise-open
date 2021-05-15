@@ -1,5 +1,6 @@
 import 'package:cruise/src/models/Item.dart';
 import 'package:fish_redux/fish_redux.dart';
+import 'package:flutter/cupertino.dart' hide Action;
 
 import 'action.dart';
 import 'state.dart';
@@ -16,6 +17,7 @@ Reducer<ArticleListState> buildReducer() {
 ArticleListState _onSetDetailArticle(ArticleListState state, Action action){
   ArticleListState newState = state.clone();
   Item article = (action.payload as Item);
+  newState.articlePgState.scrollControllers.putIfAbsent(article.id, () => new ScrollController());
   newState.articlePgState.article = article;
   return newState;
 }

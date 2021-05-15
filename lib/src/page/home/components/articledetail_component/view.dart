@@ -38,6 +38,7 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
     if (_initialSwipeOffset != null) {
       final offsetDifference = _initialSwipeOffset!.dx - _finalSwipeOffset!.dx;
       if (offsetDifference < 0) {
+
         Navigator.pop(context);
       }
     }
