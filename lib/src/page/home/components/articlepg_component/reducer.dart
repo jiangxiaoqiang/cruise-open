@@ -16,5 +16,6 @@ ArticlePgState _onSetDetailArticle(ArticlePgState state, Action action) {
   final ArticlePgState newState = state.clone();
   Item article = (action.payload as Item);
   newState.articleDetailState.article = article;
+  newState.articleDetailState.scrollController = state.scrollControllers[article.id]!;
   return newState;
 }

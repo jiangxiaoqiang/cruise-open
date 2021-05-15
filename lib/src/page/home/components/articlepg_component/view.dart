@@ -9,10 +9,6 @@ Widget buildView(ArticlePgState state, Dispatch dispatch, ViewService viewServic
   Item item = state.article;
   PageStorageBucket pageStorageBucket = state.pageStorageBucket;
   Map<String, ScrollController> scrollControllers = state.scrollControllers;
-  ScrollController scrollController = scrollControllers[item.id]!;
-  scrollController.addListener(() => {
-        //if (scrollController.offset < 1000) {showToTopBtn = false} else if (scrollController.offset >= 1000) {showToTopBtn = true}
-  });
   Widget navDetail(Item article) {
     return viewService.buildComponent("articledetail");
   }
@@ -31,10 +27,9 @@ Widget buildView(ArticlePgState state, Dispatch dispatch, ViewService viewServic
             return true;
           },
           child: CupertinoScrollbar(
-            isAlwaysShown: true,
             child:CustomScrollView(
-            key: PageStorageKey(item.id),
-            controller: scrollController,
+            //key: PageStorageKey(item.id),
+            controller: scrollControllers[item.id],
             slivers: [
               SliverToBoxAdapter(child: navDetail(item)),
               //CommentList(item: item),
