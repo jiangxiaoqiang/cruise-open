@@ -9,6 +9,7 @@ Widget buildView(ArticlePgState state, Dispatch dispatch, ViewService viewServic
   Item item = state.article;
   PageStorageBucket pageStorageBucket = state.pageStorageBucket;
   Map<String, ScrollController> scrollControllers = state.scrollControllers;
+  Map<String,PageStorageKey> keys = state.keys;
   Widget navDetail(Item article) {
     return viewService.buildComponent("articledetail");
   }
@@ -17,7 +18,7 @@ Widget buildView(ArticlePgState state, Dispatch dispatch, ViewService viewServic
       bucket: pageStorageBucket,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('cruise'),
+          title: Text('Cruise'),
           brightness: Brightness.light, // or use Brightness.dark
           actions: [],
         ),
@@ -27,9 +28,9 @@ Widget buildView(ArticlePgState state, Dispatch dispatch, ViewService viewServic
             return true;
           },
           child: CupertinoScrollbar(
-            child:CustomScrollView(
-            //key: PageStorageKey(item.id),
-            controller: scrollControllers[item.id],
+            child: CustomScrollView(
+            key: PageStorageKey(item.id),
+            controller: scrollControllers[item.id.toString()],
             slivers: [
               SliverToBoxAdapter(child: navDetail(item)),
               //CommentList(item: item),

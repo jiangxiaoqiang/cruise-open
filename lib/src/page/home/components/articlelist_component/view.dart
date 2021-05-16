@@ -20,7 +20,7 @@ Widget buildView(ArticleListState state, Dispatch dispatch, ViewService viewServ
   return SliverList(
     delegate: SliverChildBuilderDelegate((context, index) {
       return Slidable(
-        key: Key(state.articles[index].id.toString()),
+        key: Key("article-list-" + state.articles[index].id.toString()),
         closeOnScroll: true,
         actionPane: SlidableScrollActionPane(),
         actions: <Widget>[

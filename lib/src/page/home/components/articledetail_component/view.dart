@@ -3,6 +3,7 @@ import 'package:cruise/src/common/helpers.dart';
 import 'package:cruise/src/common/net/rest/http_result.dart';
 import 'package:cruise/src/common/repo.dart';
 import 'package:cruise/src/common/utils/common_utils.dart';
+import 'package:cruise/src/common/utils/html_utils.dart';
 import 'package:cruise/src/models/Channel.dart';
 import 'package:cruise/src/models/Item.dart';
 import 'package:cruise/src/models/api/fav_status.dart';

@@ -8,6 +8,7 @@ class ArticlePgState implements Cloneable<ArticlePgState> {
   Item article = Item();
   PageStorageBucket pageStorageBucket = PageStorageBucket();
   Map<String, ScrollController> scrollControllers = new Map();
+  Map<String, PageStorageKey> keys = new Map();
   bool showToTopBtn = false;
 
   ArticleDetailState articleDetailState = ArticleDetailState();
@@ -19,6 +20,7 @@ class ArticlePgState implements Cloneable<ArticlePgState> {
       ..scrollControllers = scrollControllers
       ..pageStorageBucket = pageStorageBucket
       ..article = article
+      ..keys = keys
       ..articleDetailState = articleDetailState;
   }
 }
