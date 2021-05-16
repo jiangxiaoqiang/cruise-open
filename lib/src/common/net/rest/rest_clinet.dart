@@ -4,14 +4,15 @@ import 'package:dio/dio.dart';
 import '../../config/global_config.dart';
 
 class RestClient {
-  static Dio dioInstance = Dio(BaseOptions(connectTimeout: 10000, receiveTimeout: 30000, baseUrl: "$baseUrl"));
+  static Dio dioInstance = Dio(BaseOptions(connectTimeout: 10000, receiveTimeout: 30000, baseUrl: "$baseUrl"))
+      ..interceptors.add(AppInterceptors());
 
   static Dio createDio() {
-    return addInterceptors(dioInstance);
-  }
-
-  static Dio addInterceptors(Dio dio) {
-    return dio..interceptors.add(AppInterceptors());
+    // pay attention the dio instance should be single
+    // and the interceptor should add for one
+    // should not be added every time, it may cause multiple duplicate interceptor
+    // this may cause a massive flood http request(important)
+    return dioInstance;
   }
 
   static Future<Response> postHttp(String path, Object data) async {

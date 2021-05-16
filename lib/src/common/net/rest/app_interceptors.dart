@@ -54,8 +54,8 @@ class AppInterceptors extends InterceptorsWrapper {
       AuthResult result = await Auth.login(username: userName, password: password, loginType: LoginType.PHONE);
       if (result.result == Result.ok) {
         // resend a request to fetch data
-        Dio req = RestClient.createDio();
-        req.request(response.requestOptions.path);
+        //Dio req = RestClient.createDio();
+        dio.request(response.requestOptions.path);
       }
     } on Exception catch (e) {
       CruiseLogHandler.logErrorException("登录失败", e);
