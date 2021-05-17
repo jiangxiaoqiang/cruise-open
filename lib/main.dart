@@ -5,7 +5,6 @@ import 'package:cruise/src/common/theme.dart';
 import 'package:cruise/src/common/utils/custom_en.dart';
 import 'package:cruise/src/common/view_manager.dart';
 import 'package:cruise/src/widgets/cruise_app.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -13,7 +12,7 @@ import 'package:timeago/timeago.dart' as timeago;
 void main() async {
   // Initialize Firebase.
   // https://firebase.flutter.dev/docs/crashlytics/usage/
-  await Firebase.initializeApp();
+  // await Firebase.initializeApp();
   GlobalConfig.init(ConfigType.PRO);
   WidgetsFlutterBinding.ensureInitialized();
   timeago.setLocaleMessages('en', CustomEn());

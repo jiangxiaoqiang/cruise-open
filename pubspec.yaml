@@ -53,6 +53,7 @@ dependencies:
   eva_icons_flutter: 3.0.0
   firebase_core: "^1.1.0"
   firebase_crashlytics: "^2.0.2"
+  device_info: ^2.0.0
 
 dev_dependencies:
   flutter_test:

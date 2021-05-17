@@ -1,5 +1,7 @@
 import 'package:cruise/src/common/net/rest/rest_clinet.dart';
+import 'package:cruise/src/common/utils/common_utils.dart';
 import 'package:cruise/src/models/api/login_type.dart';
+import 'package:device_info/device_info.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:cruise/src/common/config/global_config.dart' as global;
 import 'config/global_config.dart';
@@ -115,11 +117,15 @@ class Auth {
   }
 
   static Future<AuthResult> login({required String username, required String password, required LoginType loginType}) async {
+    List<String> deviceInfo = await CommonUtils.getDeviceDetails();
     Map body = {
       "phone": username,
       "password": password,
       "goto": 'news',
-      "loginType": loginType.statusCode
+      "loginType": loginType.statusCode,
+      "deviceId": deviceInfo[2],
+      "deviceType": int.parse(deviceInfo[1]),
+      "app": 1
     };
     final response = await RestClient.postHttpNewDio("/post/user/login",body);
     if (RestClient.respSuccess(response)) {
