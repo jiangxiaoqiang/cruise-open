@@ -120,5 +120,11 @@ Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService view
                         ))));
           },
         )),
+    floatingActionButton: FloatingActionButton(
+      child: Icon(Icons.remove_red_eye),
+      onPressed: () => {
+        // showDebugInfo.value = showDebugInfor
+      },
+    ),
   );
 }

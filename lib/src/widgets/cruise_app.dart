@@ -1,3 +1,4 @@
+import 'package:cruise/src/common/config/global_config.dart';
 import 'package:cruise/src/common/theme.dart';
 import 'package:cruise/src/common/utils/common_utils.dart';
 import 'package:cruise/src/common/utils/navigation_service.dart';
@@ -19,18 +20,18 @@ class CruiseApp extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final currentTheme = ThemeManager.fromThemeName("lightTheme");
-    bool showDebugInfo = true;
     final AbstractRoutes routes = CommonUtils.buildRoute();
+    var showDebugInfo = useState(false);
 
     return MaterialApp(
       title: 'Cruise',
       theme: currentTheme,
       navigatorKey: NavigationService.instance.navigationKey,
-      checkerboardOffscreenLayers: showDebugInfo,
+      checkerboardOffscreenLayers: showDebugInfo.value,
       // saveLayer 方法使用情况的检查,使用了saveLayer的图像会显示为棋盘格式并随着页面刷新而闪烁
-      checkerboardRasterCacheImages: showDebugInfo,
+      checkerboardRasterCacheImages: showDebugInfo.value,
       // 检查缓存图像,做了缓存的静态图像图片在刷新页面使不会改变棋盘格的颜色；如果棋盘格颜色变了，说明被重新缓存，这是我们要避免的
-      showPerformanceOverlay: showDebugInfo,
+      showPerformanceOverlay: showDebugInfo.value,
       localizationsDelegates: [
         // ... app-specific localization delegate[s] here
         // TODO: uncomment the line below after codegen
