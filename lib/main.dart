@@ -10,6 +10,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 void main() async {
+  // Initialize Firebase.
+  // https://firebase.flutter.dev/docs/crashlytics/usage/
+  // await Firebase.initializeApp();
   GlobalConfig.init(ConfigType.PRO);
   WidgetsFlutterBinding.ensureInitialized();
   timeago.setLocaleMessages('en', CustomEn());
