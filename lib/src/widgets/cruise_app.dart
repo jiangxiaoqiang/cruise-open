@@ -19,7 +19,7 @@ class CruiseApp extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final currentTheme = ThemeManager.fromThemeName("lightTheme");
-    bool showDebugInfo = false;
+    bool showDebugInfo = true;
     final AbstractRoutes routes = CommonUtils.buildRoute();
 
     return MaterialApp(

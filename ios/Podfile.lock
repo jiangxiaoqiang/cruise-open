@@ -5,10 +5,6 @@ PODS:
   - fluttertoast (0.0.2):
     - Flutter
     - Toast
-  - libphonenumber (0.0.1):
-    - Flutter
-    - libPhoneNumber-iOS
-  - libPhoneNumber-iOS (0.9.15)
   - package_info (0.0.1):
     - Flutter
   - path_provider (0.0.1):
@@ -33,7 +29,6 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
-  - libphonenumber (from `.symlinks/plugins/libphonenumber/ios`)
   - package_info (from `.symlinks/plugins/package_info/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - share (from `.symlinks/plugins/share/ios`)
@@ -46,7 +41,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - libPhoneNumber-iOS
     - Toast
 
 EXTERNAL SOURCES:
@@ -56,8 +50,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_secure_storage/ios"
   fluttertoast:
     :path: ".symlinks/plugins/fluttertoast/ios"
-  libphonenumber:
-    :path: ".symlinks/plugins/libphonenumber/ios"
   package_info:
     :path: ".symlinks/plugins/package_info/ios"
   path_provider:
@@ -81,8 +73,6 @@ SPEC CHECKSUMS:
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
   flutter_secure_storage: 7953c38a04c3fdbb00571bcd87d8e3b5ceb9daec
   fluttertoast: 6122fa75143e992b1d3470f61000f591a798cc58
-  libphonenumber: bd14d5abfc5939ab0b0767234e2d8e2593af258e
-  libPhoneNumber-iOS: 0a32a9525cf8744fe02c5206eb30d571e38f7d75
   package_info: 873975fc26034f0b863a300ad47e7f1ac6c7ec62
   path_provider: f96fff6166a8867510d2c25fdcc346327cc4b259
   share: 0b2c3e82132f5888bccca3351c504d0003b3b410
@@ -91,8 +81,8 @@ SPEC CHECKSUMS:
   uni_links: d97da20c7701486ba192624d99bffaaffcfc298a
   url_launcher: 6fef411d543ceb26efce54b05a0a40bfd74cbbef
   video_player: 9cc823b1d9da7e8427ee591e8438bfbcde500e6e
-  wakelock: bfc7955c418d0db797614075aabbc58a39ab5107
-  webview_flutter: d2b4d6c66968ad042ad94cbb791f5b72b4678a96
+  wakelock: b0843b2479edbf6504d8d262c2959446f35373aa
+  webview_flutter: 9f491a9b5a66f2573946a389b2677987b0ff8c0b
 
 PODFILE CHECKSUM: de2120689bd64c50778c43ebcd6de450aa1587e0
 
