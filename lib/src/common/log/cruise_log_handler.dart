@@ -1,3 +1,4 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:logger/logger.dart';
 
 import 'cruise_api_error.dart';
@@ -9,6 +10,7 @@ class CruiseLogHandler {
 
   static Future<void> logErrorException(String message, Exception e) async {
     logger.e(message, e);
+    FirebaseCrashlytics.instance.log(message);
   }
 
   static Future<void> logError(CruiseApiError error, String message) async {
