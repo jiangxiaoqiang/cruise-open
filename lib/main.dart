@@ -24,7 +24,6 @@ void main() async {
   final theme = ThemeManager.fromThemeName(themeName);
   String? viewName = pref.getString('view');
   final view = ViewManager.fromViewName(viewName);
-  FirebaseCrashlytics.instance.crash();
   runApp(
     CruiseApp(
       theme: theme,

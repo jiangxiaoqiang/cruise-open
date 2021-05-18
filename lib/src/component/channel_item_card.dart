@@ -48,8 +48,12 @@ class ChannelItemCard extends HookWidget {
       }
     }
 
-    AssetImage backgroundImage = AssetImage('images/Icon-App-83.5x83.5@3x.png');
-    var foregroundImage = counter.value.favIconUrl == "" ? null : NetworkImage(global.staticResourceUrl + "/" + counter.value.localIconUrl);
+    final Image defaultImage = Image.asset('images/Icon-App-83.5x83.5@3x.png');
+    var foregroundImage = counter.value.favIconUrl == "" ? defaultImage : Image.network(
+        global.staticResourceUrl + "/" + counter.value.localIconUrl,
+      loadingBuilder: (context,child,loadingProgress)=>(loadingProgress == null) ? child : CircularProgressIndicator(),
+      errorBuilder: (context, error, stackTrace) => defaultImage,
+    );
     return Card(
       key: Key(counter.value.id.toString()),
       child: Padding(
@@ -62,17 +66,10 @@ class ChannelItemCard extends HookWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  if (counter.value.localIconUrl == "")
                     CircleAvatar(
                       radius: 20,
                       backgroundColor: Colors.transparent,
-                      backgroundImage: backgroundImage,
-                    ),
-                  if (counter.value.localIconUrl != "")
-                    CircleAvatar(
-                      radius: 20,
-                      backgroundColor: Colors.transparent,
-                      backgroundImage: foregroundImage,
+                      foregroundImage:  foregroundImage.image,
                     ),
                   SizedBox(
                     width: screenWidth - 230,
