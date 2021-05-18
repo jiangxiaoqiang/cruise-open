@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "532213106096",
+    "project_id": "cruise-1003f",
+    "storage_bucket": "cruise-1003f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:532213106096:android:a601d51dae6906622c4275",
+        "android_client_info": {
+          "package_name": "com.earth.dolphin.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "532213106096-s6vq9de5dnmibg691hhgevm0edr8guqe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwW6Ldo0tkK9RnGTU18VUXxQ7vQP5FHy4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "532213106096-s6vq9de5dnmibg691hhgevm0edr8guqe.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "532213106096-gdpt1m7t38r2384d6o4kjo118c3uabkb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.earth.dolphin"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
