@@ -9,12 +9,11 @@ class CruiseLogHandler {
   );
 
   static Future<void> logErrorException(String message, Exception e) async {
-    logger.e(message, e);
     FirebaseCrashlytics.instance.log(message);
   }
 
   static Future<void> logError(CruiseApiError error, String message) async {
-    logger.e(message);
+    FirebaseCrashlytics.instance.log(message);
   }
 
   static Future<void> logWaring(String message) async {

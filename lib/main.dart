@@ -6,6 +6,7 @@ import 'package:cruise/src/common/utils/custom_en.dart';
 import 'package:cruise/src/common/view_manager.dart';
 import 'package:cruise/src/widgets/cruise_app.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -23,6 +24,7 @@ void main() async {
   final theme = ThemeManager.fromThemeName(themeName);
   String? viewName = pref.getString('view');
   final view = ViewManager.fromViewName(viewName);
+  FirebaseCrashlytics.instance.crash();
   runApp(
     CruiseApp(
       theme: theme,
