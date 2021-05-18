@@ -51,5 +51,11 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
         onTap: _onItemTapped,
         unselectedItemColor: Color(0xff666666),
         type: BottomNavigationBarType.fixed),
+    floatingActionButton: FloatingActionButton(
+      child: Icon(Icons.remove_red_eye),
+      onPressed: () => {
+        // showDebugInfo.value = showDebugInfor
+      },
+    ),
   );
 }
