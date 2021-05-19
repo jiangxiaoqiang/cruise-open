@@ -2,6 +2,7 @@ import 'package:cruise/src/models/Item.dart';
 import 'package:cruise/src/models/home_model.dart';
 import 'package:cruise/src/models/system_enumn.dart';
 import 'package:cruise/src/page/home/action.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -55,7 +56,8 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
       child: Icon(Icons.remove_red_eye),
       onPressed: () => {
         // showDebugInfo.value = showDebugInfor
-      },
+        FirebaseCrashlytics.instance.crash()
+    },
     ),
   );
 }
