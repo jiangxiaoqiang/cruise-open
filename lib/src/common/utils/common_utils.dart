@@ -1,22 +1,35 @@
+import 'package:cruise/src/common/config/global_config.dart';
 import 'package:cruise/src/component/channel_compact_tile.dart';
 import 'package:cruise/src/component/channel_item_card.dart';
 import 'package:cruise/src/component/channel_item_tile.dart';
 import 'package:cruise/src/models/Channel.dart';
 import 'package:cruise/src/page/home/page.dart';
 import 'package:device_info/device_info.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:fish_redux/src/redux_component/page.dart' as fishPage;
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:async';
-
+import 'package:timeago/timeago.dart' as timeago;
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:device_info/device_info.dart';
+import '../history.dart';
 import '../view_manager.dart';
+import 'custom_en.dart';
 
 class CommonUtils{
+
+  static Future<void> initialApp() async {
+    GlobalConfig.init(ConfigType.PRO);
+    WidgetsFlutterBinding.ensureInitialized();
+    // Initialize Firebase, collection app crash report
+    // https://firebase.flutter.dev/docs/crashlytics/usage/
+    await Firebase.initializeApp();
+    timeago.setLocaleMessages('en', CustomEn());
+    await HistoryManager.init();
+  }
 
   static AbstractRoutes buildRoute() {
     final AbstractRoutes routes = PageRoutes(
