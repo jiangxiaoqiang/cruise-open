@@ -50,6 +50,7 @@ jobs:
           flutter precache
           flutter pub get
           cd ./ios
+          rm Podfile.lock
           pod repo update
           pod install
       #- run: flutter pub get
