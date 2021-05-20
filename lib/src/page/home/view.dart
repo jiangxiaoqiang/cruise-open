@@ -56,7 +56,7 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
       child: Icon(Icons.remove_red_eye),
       onPressed: () => {
         // showDebugInfo.value = showDebugInfor
-        FirebaseCrashlytics.instance.crash()
+        //FirebaseCrashlytics.instance.crash()
     },
     ),
   );
