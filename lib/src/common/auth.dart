@@ -1,5 +1,6 @@
 import 'package:cruise/src/common/net/rest/rest_clinet.dart';
 import 'package:cruise/src/common/utils/common_utils.dart';
+import 'package:cruise/src/common/utils/navigation_service.dart';
 import 'package:cruise/src/models/api/login_type.dart';
 import 'package:device_info/device_info.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -138,9 +139,8 @@ class Auth {
       await storage.write(key: "registerTime", value: registerTime);
       return AuthResult(message: "Login success", result: Result.ok);
     } else {
-      return AuthResult(
-          message: "Login failed. Did you mistype your credentials?",
-          result: Result.error);
+      NavigationService.instance.navigateToReplacement("login");
+      return AuthResult(message: "Login failed", result: Result.error);
     }
   }
 }
