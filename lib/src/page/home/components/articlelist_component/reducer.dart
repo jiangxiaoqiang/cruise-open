@@ -18,7 +18,6 @@ ArticleListState _onSetDetailArticle(ArticleListState state, Action action){
   ArticleListState newState = state.clone();
   Item article = (action.payload as Item);
   newState.articlePgState.scrollControllers.putIfAbsent(article.id, () => new ScrollController());
-  newState.articlePgState.keys.putIfAbsent(article.id, () => new PageStorageKey(article.id));
   newState.articlePgState.article = article;
   return newState;
 }

@@ -3,7 +3,6 @@ import 'package:cruise/src/common/helpers.dart';
 import 'package:cruise/src/common/net/rest/http_result.dart';
 import 'package:cruise/src/common/repo.dart';
 import 'package:cruise/src/common/utils/common_utils.dart';
-import 'package:cruise/src/common/utils/html_utils.dart';
 import 'package:cruise/src/models/Channel.dart';
 import 'package:cruise/src/models/Item.dart';
 import 'package:cruise/src/models/api/fav_status.dart';
@@ -64,7 +63,7 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
       if (upvoteStatus.statusCode == "unupvote" && item.upvoteCount > 0) {
         dispatch(ArticleDetailActionCreator.onVote(UpvoteStatus.UNUPVOTE));
       }
-      Fluttertoast.showToast(
+     Fluttertoast.showToast(
           msg: upvoteStatus.statusCode == "upvote" ? "点赞成功" : "取消点赞成功",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,

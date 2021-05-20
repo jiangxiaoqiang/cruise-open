@@ -7,9 +7,8 @@ import 'state.dart';
 
 Widget buildView(ArticlePgState state, Dispatch dispatch, ViewService viewService) {
   Item item = state.article;
-  PageStorageBucket pageStorageBucket = state.pageStorageBucket;
+  PageStorageBucket pageStorageBucket = PageStorageBucket();
   Map<String, ScrollController> scrollControllers = state.scrollControllers;
-  Map<String,PageStorageKey> keys = state.keys;
   Widget navDetail(Item article) {
     return viewService.buildComponent("articledetail");
   }
