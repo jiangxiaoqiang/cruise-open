@@ -2,6 +2,7 @@ import 'package:cruise/src/models/Item.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:cruise/src/common/config/global_config.dart' as global;
 
 import 'state.dart';
 
@@ -12,7 +13,9 @@ Widget buildView(ArticlePgState state, Dispatch dispatch, ViewService viewServic
     return viewService.buildComponent("articledetail");
   }
 
-  return Scaffold(
+  return PageStorage(
+    bucket: global.pageStorageBucket,
+      child:Scaffold(
         appBar: AppBar(
           title: Text('Cruise'),
           brightness: Brightness.light, // or use Brightness.dark
@@ -33,5 +36,5 @@ Widget buildView(ArticlePgState state, Dispatch dispatch, ViewService viewServic
             ],
           )),
         ),
-      );
+      ));
 }

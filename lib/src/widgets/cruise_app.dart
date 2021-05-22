@@ -7,6 +7,7 @@ import 'package:cruise/src/page/login.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:fish_redux/src/redux_component/page.dart' as fishPage;
 import 'package:flutter/foundation.dart';
+import 'package:cruise/src/common/config/global_config.dart' as global;
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -20,9 +21,10 @@ class CruiseApp extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+
     final currentTheme = ThemeManager.fromThemeName("lightTheme");
     final AbstractRoutes routes = CommonUtils.buildRoute();
-bool showDebugInfo = false;
+    bool showDebugInfo = false;
 
     return MaterialApp(
       title: 'Cruise',
@@ -51,7 +53,7 @@ bool showDebugInfo = false;
       routes: {
         "login": (BuildContext context) => LoginPage(),
       },
-      home: routes.buildPage('home', null),
+      home:routes.buildPage('home', null),
       onGenerateRoute: (RouteSettings settings) {
         return MaterialPageRoute<Object>(builder: (BuildContext context) {
           return routes.buildPage(settings.name, settings.arguments);

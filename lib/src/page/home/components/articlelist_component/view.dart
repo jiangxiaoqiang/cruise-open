@@ -10,7 +10,6 @@ import 'state.dart';
 
 Widget buildView(
     ArticleListState state, Dispatch dispatch, ViewService viewService) {
-  PageStorageBucket pageStorageBucket = PageStorageBucket();
 
   Widget buildArticle(Item item) {
     dispatch(ArticleListActionCreator.onSetDetailArticle(item));
@@ -19,9 +18,7 @@ Widget buildView(
 
   final currentView = ViewManager.fromViewName("itemCard");
 
-  return PageStorage(
-      bucket: pageStorageBucket,
-      child: SliverList(
+  return SliverList(
         delegate: SliverChildBuilderDelegate((context, index) {
           return Slidable(
             key: Key("article-list-" + state.articles[index].id.toString()),
@@ -62,5 +59,5 @@ Widget buildView(
             ),
           );
         }, childCount: state.articles.length),
-      ));
+      );
 }
