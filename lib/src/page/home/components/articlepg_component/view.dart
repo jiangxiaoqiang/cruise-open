@@ -7,15 +7,12 @@ import 'state.dart';
 
 Widget buildView(ArticlePgState state, Dispatch dispatch, ViewService viewService) {
   Item item = state.article;
-  PageStorageBucket pageStorageBucket = PageStorageBucket();
   Map<String, ScrollController> scrollControllers = state.scrollControllers;
   Widget navDetail(Item article) {
     return viewService.buildComponent("articledetail");
   }
 
-  return PageStorage(
-      bucket: pageStorageBucket,
-      child: Scaffold(
+  return Scaffold(
         appBar: AppBar(
           title: Text('Cruise'),
           brightness: Brightness.light, // or use Brightness.dark
@@ -36,5 +33,5 @@ Widget buildView(ArticlePgState state, Dispatch dispatch, ViewService viewServic
             ],
           )),
         ),
-      ));
+      );
 }

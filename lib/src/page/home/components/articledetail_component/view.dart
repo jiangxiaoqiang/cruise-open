@@ -135,12 +135,13 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
       attributes["src"]!.contains("base64,");
 
   Widget loadingWidget(){
-    return Container(
+    return Center(
+        child:Container(
       height: 400.0,
       width: 120.0,
-      child: Center(
-          child: Column(
+      child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children:<Widget> [
               SizedBox(
                 child: CircularProgressIndicator(),
@@ -166,6 +167,7 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
 
   SingleChildScrollView buildListView(Item item, BuildContext context) {
     return SingleChildScrollView(
+      key: PageStorageKey("detail"+item.id),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
