@@ -134,11 +134,34 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
       attributes["src"]!.startsWith("data:image") &&
       attributes["src"]!.contains("base64,");
 
+  Widget loadingWidget(){
+    return Container(
+      height: 400.0,
+      width: 120.0,
+      child: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children:<Widget> [
+              SizedBox(
+                child: CircularProgressIndicator(),
+                height: 50.0,
+                width: 50.0,
+              )
+            ],
+          )
+      ),
+    );
+  }
+
+
   final Map<ImageSourceMatcher, ImageRender> defaultImageRenders = {
     base64UriMatcher(): base64ImageRender(),
     assetUriMatcher(): assetImageRender(),
     networkSourceMatcher(extension: "svg"): svgNetworkImageRender(),
-    networkSourceMatcher(): networkImageRender(height: 400),
+    networkSourceMatcher(): networkImageRender(
+        height: 400,
+        loadingWidget: loadingWidget
+    ),
   };
 
   SingleChildScrollView buildListView(Item item, BuildContext context) {
