@@ -1,4 +1,5 @@
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:logger/logger.dart';
 
 import 'cruise_api_error.dart';
@@ -10,6 +11,14 @@ class CruiseLogHandler {
 
   static Future<void> logErrorException(String message, Exception e) async {
     FirebaseCrashlytics.instance.log(message);
+  }
+
+  static Future<void> logErrorStack(String message, StackTrace e) async {
+    FirebaseCrashlytics.instance.log(message+","+e.toString());
+  }
+
+  static Future<void> logFlutterErrorDetails(FlutterErrorDetails details) async {
+    FirebaseCrashlytics.instance.log(details.toString());
   }
 
   static Future<void> logError(CruiseApiError error, String message) async {

@@ -6,7 +6,8 @@ import 'package:cruise/src/common/config/global_config.dart' as global;
 
 import 'state.dart';
 
-Widget buildView(ArticlePgState state, Dispatch dispatch, ViewService viewService) {
+Widget buildView(
+    ArticlePgState state, Dispatch dispatch, ViewService viewService) {
   Item item = state.article;
   Map<String, ScrollController> scrollControllers = state.scrollControllers;
   Widget navDetail(Item article) {
@@ -14,20 +15,20 @@ Widget buildView(ArticlePgState state, Dispatch dispatch, ViewService viewServic
   }
 
   return PageStorage(
-    bucket: global.pageStorageBucket,
-      child:Scaffold(
+      bucket: global.pageStorageBucket,
+      child: Scaffold(
         appBar: AppBar(
           title: Text('Cruise'),
           brightness: Brightness.light, // or use Brightness.dark
           actions: [],
         ),
         body: NotificationListener<ScrollNotification>(
-          onNotification: (scrollNotification){
-           //scrollController.animateTo(scrollController.offset, duration: Duration(milliseconds: 1000), curve: Curves.ease);
+          onNotification: (scrollNotification) {
+            //scrollController.animateTo(scrollController.offset, duration: Duration(milliseconds: 1000), curve: Curves.ease);
             return true;
           },
           child: CupertinoScrollbar(
-            child: CustomScrollView(
+              child: CustomScrollView(
             key: PageStorageKey(item.id),
             controller: scrollControllers[item.id.toString()],
             slivers: [
