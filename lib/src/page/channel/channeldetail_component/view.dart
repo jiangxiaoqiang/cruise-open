@@ -41,7 +41,12 @@ Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewSe
   void _onHorizontalDragEnd(DragEndDetails details) {
     if (_initialSwipeOffset != null) {
       final offsetDifference = _initialSwipeOffset!.dx - _finalSwipeOffset!.dx;
-      if (offsetDifference < 0) {
+      /**
+       * set the offsetDifference value less than 0
+       * avoid mis touch the screen and return to back page unexpected
+       * if mis touch frequency, just decrease the offsetDifference value
+       */
+      if (offsetDifference < -25) {
         Navigator.pop(context);
       }
     }
