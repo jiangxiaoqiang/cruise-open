@@ -16,8 +16,8 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/style.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:html/parser.dart' as htmlparser;
 import 'package:html/dom.dart' as dom;
+
 import 'state.dart';
 
 Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewService) {
@@ -38,7 +38,10 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
     if (_initialSwipeOffset != null) {
       final offsetDifference = _initialSwipeOffset!.dx - _finalSwipeOffset!.dx;
       if (offsetDifference < 0) {
-
+        if (PaintingBinding.instance != null && PaintingBinding.instance!.imageCache != null) {
+          PaintingBinding.instance!.imageCache!.clear();
+          PaintingBinding.instance!.imageCache!.clearLiveImages();
+        }
         Navigator.pop(context);
       }
     }
@@ -63,7 +66,7 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
       if (upvoteStatus.statusCode == "unupvote" && item.upvoteCount > 0) {
         dispatch(ArticleDetailActionCreator.onVote(UpvoteStatus.UNUPVOTE));
       }
-     Fluttertoast.showToast(
+      Fluttertoast.showToast(
           msg: upvoteStatus.statusCode == "upvote" ? "点赞成功" : "取消点赞成功",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
@@ -115,59 +118,46 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
   }
 
   /// 是否是编辑选择频道链接显示不同的颜色
-  TextStyle getDomainStyle(Item article){
-    if(article.editorPick == 1) {
-      return new TextStyle(
-          color: Color(0xFFFFA826),
-          fontSize: 15
-      );
-    }else{
-      return new TextStyle(
-          color: Color(0xFF0A0A0A),
-          fontSize: 15
-      );
+  TextStyle getDomainStyle(Item article) {
+    if (article.editorPick == 1) {
+      return new TextStyle(color: Color(0xFFFFA826), fontSize: 15);
+    } else {
+      return new TextStyle(color: Color(0xFF0A0A0A), fontSize: 15);
     }
   }
 
-  ImageSourceMatcher base64UriMatcher() => (attributes, element) =>
-  attributes["src"] != null &&
-      attributes["src"]!.startsWith("data:image") &&
-      attributes["src"]!.contains("base64,");
+  ImageSourceMatcher base64UriMatcher() =>
+      (attributes, element) => attributes["src"] != null && attributes["src"]!.startsWith("data:image") && attributes["src"]!.contains("base64,");
 
-  Widget loadingWidget(){
+  Widget loadingWidget() {
     return Center(
-        child:Container(
-      height: 400.0,
-      width: 120.0,
-      child: Column(
+      child: Container(
+          height: 400.0,
+          width: 120.0,
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
-            children:<Widget> [
+            children: <Widget>[
               SizedBox(
                 child: CircularProgressIndicator(),
                 height: 50.0,
                 width: 50.0,
               )
             ],
-          )
-      ),
+          )),
     );
   }
-
 
   final Map<ImageSourceMatcher, ImageRender> defaultImageRenders = {
     base64UriMatcher(): base64ImageRender(),
     assetUriMatcher(): assetImageRender(),
     networkSourceMatcher(extension: "svg"): svgNetworkImageRender(),
-    networkSourceMatcher(): networkImageRender(
-        height: 400,
-        loadingWidget: loadingWidget
-    ),
+    networkSourceMatcher(): networkImageRender(height: 400, loadingWidget: loadingWidget),
   };
 
   SingleChildScrollView buildListView(Item item, BuildContext context) {
     return SingleChildScrollView(
-      key: PageStorageKey("detail"+item.id),
+        key: PageStorageKey("detail" + item.id),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -220,16 +210,16 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
             ),
             if (item.content != "")
               Html(
-                data: item.content,
-                style: {
-                  "body": Style(
-                    fontSize: FontSize(19.0),
-                  ),
-                },
+                  data: item.content,
+                  style: {
+                    "body": Style(
+                      fontSize: FontSize(19.0),
+                    ),
+                  },
                   customImageRenders: defaultImageRenders,
-                onLinkTap: (String? url, RenderContext context, Map<String, String> attributes,  dom.Element? element){
-                  CommonUtils.launchUrl(url);
-              }),
+                  onLinkTap: (String? url, RenderContext context, Map<String, String> attributes, dom.Element? element) {
+                    CommonUtils.launchUrl(url);
+                  }),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
