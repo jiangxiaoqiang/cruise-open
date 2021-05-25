@@ -46,7 +46,7 @@ Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewSe
        * avoid mis touch the screen and return to back page unexpected
        * if mis touch frequency, just decrease the offsetDifference value
        */
-      if (offsetDifference < -25) {
+      if (offsetDifference < -30) {
         Navigator.pop(context);
       }
     }
