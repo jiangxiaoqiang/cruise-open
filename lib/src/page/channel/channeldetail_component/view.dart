@@ -3,6 +3,7 @@ import 'package:cruise/src/common/net/rest/http_result.dart';
 import 'package:cruise/src/common/utils/common_utils.dart';
 import 'package:cruise/src/models/Channel.dart';
 import 'package:cruise/src/models/api/sub_status.dart';
+import 'package:cruise/src/models/api/upvote_status.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
@@ -13,6 +14,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../profile.dart';
+import 'action.dart';
 import 'state.dart';
 
 class AllowMultipleHorizontalDragGestureRecognizer extends HorizontalDragGestureRecognizer {
@@ -76,6 +78,7 @@ Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewSe
           textColor: Colors.white,
           fontSize: 16.0);
     }
+    dispatch(ChannelDetailActionCreator.onSubscribe(item));
   }
 
   return RawGestureDetector(

@@ -130,13 +130,7 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
 
   ImageSourceMatcher base64UriMatcher() =>
       (attributes, element) => attributes["src"] != null && attributes["src"]!.startsWith("data:image") && attributes["src"]!.contains("base64,");
-
-  bool ab(attributes, element){
-    return attributes["src"] != null && attributes["src"]!.startsWith("data:image") && attributes["src"]!.contains("base64,");
-  }
-
-  ImageSourceMatcher networkSourceMatcherCustom() =>
-      (attributes, element) => ab(attributes, element);
+  
 
   Widget loadingWidget() {
     return Center(
@@ -161,7 +155,7 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
     base64UriMatcher(): base64ImageRender(),
     assetUriMatcher(): assetImageRender(),
     networkSourceMatcher(extension: "svg"): svgNetworkImageRender(),
-    networkSourceMatcher(): networkImageRender(height: 400, loadingWidget: loadingWidget),
+    networkSourceMatcher(): networkImageRender( loadingWidget: loadingWidget),
   };
 
   SingleChildScrollView buildListView(Item item, BuildContext context) {
@@ -225,7 +219,7 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
                       fontSize: FontSize(19.0),
                     ),
                   },
-                  //customImageRenders: defaultImageRenders,
+                  customImageRenders: defaultImageRenders,
                   onLinkTap: (String? url, RenderContext context, Map<String, String> attributes, dom.Element? element) {
                     CommonUtils.launchUrl(url);
                   }),

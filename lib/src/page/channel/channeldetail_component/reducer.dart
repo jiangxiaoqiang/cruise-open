@@ -1,3 +1,4 @@
+import 'package:cruise/src/models/Channel.dart';
 import 'package:cruise/src/models/Item.dart';
 import 'package:fish_redux/fish_redux.dart';
 
@@ -10,6 +11,7 @@ Reducer<ChannelDetailState> buildReducer() {
       ChannelDetailAction.action: _onAction,
       ChannelDetailAction.set_channel_id: _onSetChannelId,
       ChannelDetailAction.fetch_channel_article_update: _onFetchChannelArticleUpdate,
+      ChannelDetailAction.subscribe: _onSubscribe,
     },
   );
 }
@@ -30,5 +32,12 @@ ChannelDetailState _onFetchChannelArticleUpdate(ChannelDetailState state, Action
   final ChannelDetailState newState = state.clone();
   List<Item> articles = action.payload as List<Item>;
   newState.articleListState.articles = articles;
+  return newState;
+}
+
+ChannelDetailState _onSubscribe(ChannelDetailState state, Action action) {
+  final ChannelDetailState newState = state.clone();
+  Channel channel = action.payload as Channel;
+  newState.channel = channel;
   return newState;
 }
