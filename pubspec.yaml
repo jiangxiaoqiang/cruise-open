@@ -54,6 +54,7 @@ dependencies:
   firebase_core: "^1.1.0"
   firebase_crashlytics: "^2.0.2"
   device_info: ^2.0.0
+  flutter_inapp_purchase: 5.0.1
 
 dev_dependencies:
   flutter_test:
