@@ -19,7 +19,7 @@ Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
   List<String> _consumables = [];
   bool _isAvailable = false;
   bool _purchasePending = false;
-  bool _loading = true;
+  bool _loading = state.payModel.loading;
   String? _queryProductError;
 
   const bool _kAutoConsume = true;
@@ -279,9 +279,6 @@ Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
       ),
     );
   }
-
-
-
 
   return Scaffold(
     appBar: AppBar(

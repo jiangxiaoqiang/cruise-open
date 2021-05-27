@@ -34,7 +34,6 @@ const List<String> _kProductIds = <String>[
 Future _onInit(Action action, Context<PayState> ctx) async {
   // https://pub.dev/packages/in_app_purchase
   // https://joebirch.co/flutter/adding-in-app-purchases-to-flutter-apps/
-  //loadingProducts();
   final Stream<List<PurchaseDetails>> purchaseUpdated =
       _inAppPurchase.purchaseStream;
 
