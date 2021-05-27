@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'state.dart';
 
 Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
+
   return Scaffold(
       body: SafeArea(
           child: Container(

@@ -15,6 +15,7 @@ Effect<PayState> buildEffect() {
 
 Future _onInit(Action action, Context<PayState> ctx) async {
   // https://pub.dev/packages/in_app_purchase
+  // https://joebirch.co/flutter/adding-in-app-purchases-to-flutter-apps/
   loadingProducts();
 }
 
