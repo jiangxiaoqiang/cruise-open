@@ -1,26 +1,28 @@
+import 'package:in_app_purchase/in_app_purchase.dart';
 
+class PayModel {
+  PayModel(
+      {required this.isAvailable,
+      required this.products,
+      required this.purchases,
+      required this.notFoundIds,
+      required this.purchasePending,
+      required this.loading});
 
-class PayModel{
-  PayModel({
-     this.latestTime,
-     this.pageSize,
-    required this.pageNum,
-     this.offset,
-     this.channelId
-  });
-
-  int? latestTime;
-  int? pageSize=100;
-  int pageNum = 1;
-  int? offset;
-  int? channelId;
+  bool isAvailable = false;
+  List<ProductDetails> products = [];
+  List<PurchaseDetails> purchases = [];
+  List<String> notFoundIds = [];
+  List<String> consumables = [];
+  bool purchasePending = false;
+  bool loading = true;
 
   Map<String, dynamic> toMap() {
     return {
-      'pageSize': pageSize,
-      'pageNum': pageNum,
-      'offset': offset,
-      'channelId': channelId
+      //'pageSize': pageSize,
+      //'pageNum': pageNum,
+      //'offset': offset,
+      //'channelId': channelId
     };
   }
 }
