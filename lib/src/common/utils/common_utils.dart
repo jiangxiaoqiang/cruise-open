@@ -9,6 +9,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:fish_redux/src/redux_component/page.dart' as fishPage;
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:async';
 import 'package:timeago/timeago.dart' as timeago;
@@ -18,6 +19,7 @@ import 'package:flutter/services.dart';
 import '../history.dart';
 import '../view_manager.dart';
 import 'custom_en.dart';
+import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 
 class CommonUtils{
 
@@ -29,6 +31,11 @@ class CommonUtils{
     await Firebase.initializeApp();
     timeago.setLocaleMessages('en', CustomEn());
     await HistoryManager.init();
+
+    // in app purchase initial
+    if (defaultTargetPlatform == TargetPlatform.android) {
+      InAppPurchaseAndroidPlatformAddition.enablePendingPurchases();
+    }
   }
 
   static AbstractRoutes buildRoute() {
