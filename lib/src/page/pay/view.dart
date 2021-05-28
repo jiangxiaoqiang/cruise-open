@@ -66,15 +66,6 @@ Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
     // The old subscription is only required on Android since Apple handles this internally
     // by using the subscription group feature in iTunesConnect.
     GooglePlayPurchaseDetails? oldSubscription;
-    if (productDetails.id == _kSilverSubscriptionId &&
-        purchases[_kGoldSubscriptionId] != null) {
-      oldSubscription =
-      purchases[_kGoldSubscriptionId] as GooglePlayPurchaseDetails;
-    } else if (productDetails.id == _kGoldSubscriptionId &&
-        purchases[_kSilverSubscriptionId] != null) {
-      oldSubscription =
-      purchases[_kSilverSubscriptionId] as GooglePlayPurchaseDetails;
-    }
     return oldSubscription;
   }
 
