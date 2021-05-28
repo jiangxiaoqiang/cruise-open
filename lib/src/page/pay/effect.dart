@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cruise/src/common/log/cruise_log_handler.dart';
 import 'package:cruise/src/models/pay/pay_model.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
@@ -33,29 +34,27 @@ const List<String> _kProductIds = <String>[
 Future _onInit(Action action, Context<PayState> ctx) async {
   // https://pub.dev/packages/in_app_purchase
   // https://joebirch.co/flutter/adding-in-app-purchases-to-flutter-apps/
-  final Stream<List<PurchaseDetails>> purchaseUpdated =
-      _inAppPurchase.purchaseStream;
-
+  final Stream<List<PurchaseDetails>> purchaseUpdated = _inAppPurchase.purchaseStream;
   _subscription = purchaseUpdated.listen((purchaseDetailsList) {
-    _listenToPurchaseUpdated(purchaseDetailsList);
+    _listenToPurchaseUpdated(purchaseDetailsList, ctx);
   }, onDone: () {
     _subscription.cancel();
   }, onError: (error) {
     // handle error here.
+    CruiseLogHandler.logErrorException("iap initial error", error);
   });
 
   initStoreInfo(ctx);
 }
 
-void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) {
+void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList, Context<PayState> ctx) {
   purchaseDetailsList.forEach((PurchaseDetails purchaseDetails) async {
     if (purchaseDetails.status == PurchaseStatus.pending) {
-      //_showPendingUI();
+      _showPendingUI(ctx);
     } else {
       if (purchaseDetails.status == PurchaseStatus.error) {
-        //_handleError(purchaseDetails.error!);
-      } else if (purchaseDetails.status == PurchaseStatus.purchased ||
-          purchaseDetails.status == PurchaseStatus.restored) {}
+        _handleError(purchaseDetails.error!, ctx);
+      } else if (purchaseDetails.status == PurchaseStatus.purchased || purchaseDetails.status == PurchaseStatus.restored) {}
       if (purchaseDetails.pendingCompletePurchase) {
         await InAppPurchase.instance.completePurchase(purchaseDetails);
       }
@@ -63,16 +62,21 @@ void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) {
   });
 }
 
+void _handleError(IAPError error, Context<PayState> ctx) {
+  PayModel payModel = PayModel(isAvailable: false, products: [], purchases: [], notFoundIds: [], purchasePending: false, loading: false);
+  CruiseLogHandler.logErrorException("IAPError", error);
+  ctx.dispatch(PayActionCreator.onUpdate(payModel));
+}
+
+void _showPendingUI(Context<PayState> ctx) {
+  PayModel payModel = PayModel(isAvailable: false, products: [], purchases: [], notFoundIds: [], purchasePending: true, loading: false);
+  ctx.dispatch(PayActionCreator.onUpdate(payModel));
+}
+
 Future<void> initStoreInfo(Context<PayState> ctx) async {
   final bool isAvailable = await _inAppPurchase.isAvailable();
   if (!isAvailable) {
-    PayModel payModel = PayModel(
-        isAvailable: isAvailable,
-        products: [],
-        purchases: [],
-        notFoundIds: [],
-        purchasePending: false,
-        loading: false);
+    PayModel payModel = PayModel(isAvailable: isAvailable, products: [], purchases: [], notFoundIds: [], purchasePending: false, loading: false);
     ctx.dispatch(PayActionCreator.onUpdate(payModel));
     return;
   }
@@ -118,5 +122,4 @@ Future<void> initStoreInfo(Context<PayState> ctx) async {
     _loading = false;
   });*/
 }
-
 
