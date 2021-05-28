@@ -21,7 +21,6 @@ const String _kUpgradeId = 'upgrade';
 const String _kSilverSubscriptionId = 'subscription_silver';
 const String _kGoldSubscriptionId = 'subscription_gold';
 
-final InAppPurchase _inAppPurchase = InAppPurchase.instance;
 late StreamSubscription<List<PurchaseDetails>> _subscription;
 String? _queryProductError;
 const List<String> _kProductIds = <String>[
@@ -32,6 +31,7 @@ const List<String> _kProductIds = <String>[
 ];
 
 Future _onInit(Action action, Context<PayState> ctx) async {
+  final InAppPurchase _inAppPurchase = InAppPurchase.instance;
   // https://pub.dev/packages/in_app_purchase
   // https://joebirch.co/flutter/adding-in-app-purchases-to-flutter-apps/
   final Stream<List<PurchaseDetails>> purchaseUpdated = _inAppPurchase.purchaseStream;
@@ -44,7 +44,7 @@ Future _onInit(Action action, Context<PayState> ctx) async {
     CruiseLogHandler.logErrorException("iap initial error", error);
   });
 
-  initStoreInfo(ctx);
+  initStoreInfo(ctx,_inAppPurchase);
 }
 
 void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList, Context<PayState> ctx) {
@@ -73,7 +73,7 @@ void _showPendingUI(Context<PayState> ctx) {
   ctx.dispatch(PayActionCreator.onUpdate(payModel));
 }
 
-Future<void> initStoreInfo(Context<PayState> ctx) async {
+Future<void> initStoreInfo(Context<PayState> ctx,InAppPurchase _inAppPurchase ) async {
   final bool isAvailable = await _inAppPurchase.isAvailable();
   if (!isAvailable) {
     PayModel payModel = PayModel(isAvailable: isAvailable, products: [], purchases: [], notFoundIds: [], purchasePending: false, loading: false);
