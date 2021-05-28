@@ -24,15 +24,9 @@ Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
 
   const bool _kAutoConsume = true;
 
-  const String _kConsumableId = 'consumable';
-  const String _kUpgradeId = 'upgrade';
-  const String _kSilverSubscriptionId = 'subscription_silver';
-  const String _kGoldSubscriptionId = 'subscription_gold';
+  const String _kConsumableId = 'cruise';
   const List<String> _kProductIds = <String>[
-    _kConsumableId,
-    _kUpgradeId,
-    _kSilverSubscriptionId,
-    _kGoldSubscriptionId,
+    _kConsumableId
   ];
 
 
