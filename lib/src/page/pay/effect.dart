@@ -83,36 +83,30 @@ Future<void> initStoreInfo(Context<PayState> ctx,InAppPurchase _inAppPurchase ) 
 
   ProductDetailsResponse productDetailResponse = await _inAppPurchase.queryProductDetails(_kProductIds.toSet());
   if (productDetailResponse.error != null) {
-    /*setState(() {
-      _queryProductError = productDetailResponse.error!.message;
-      _isAvailable = isAvailable;
-      _products = productDetailResponse.productDetails;
-      _purchases = [];
-      _notFoundIds = productDetailResponse.notFoundIDs;
-      _consumables = [];
-      _purchasePending = false;
-      _loading = false;
-    });*/
+    PayModel payModel = PayModel(isAvailable: isAvailable,
+        products: productDetailResponse.productDetails,
+        queryProductError :productDetailResponse.error!.message
+        purchases: [],
+        consumables = [],
+        notFoundIds: productDetailResponse.notFoundIDs,
+        purchasePending: false, loading: false);
     return;
   }
 
   if (productDetailResponse.productDetails.isEmpty) {
-    /*setState(() {
-      _queryProductError = null;
-      _isAvailable = isAvailable;
-      _products = productDetailResponse.productDetails;
-      _purchases = [];
-      _notFoundIds = productDetailResponse.notFoundIDs;
-      _consumables = [];
-      _purchasePending = false;
-      _loading = false;
-    });*/
+    PayModel payModel = PayModel(isAvailable: isAvailable,
+        products: productDetailResponse.productDetails,
+        queryProductError :null,
+        purchases: [],
+        consumables = [],
+        notFoundIds: productDetailResponse.notFoundIDs,
+        purchasePending: false, loading: false);
     return;
   }
 
   await _inAppPurchase.restorePurchases();
 
-  /*List<String> consumables = await ConsumableStore.load();
+  List<String> consumables = await ConsumableStore.load();
   setState(() {
     _isAvailable = isAvailable;
     _products = productDetailResponse.productDetails;
@@ -120,6 +114,6 @@ Future<void> initStoreInfo(Context<PayState> ctx,InAppPurchase _inAppPurchase ) 
     _consumables = consumables;
     _purchasePending = false;
     _loading = false;
-  });*/
+  });
 }
 
