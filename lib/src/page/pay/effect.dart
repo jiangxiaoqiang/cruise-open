@@ -9,7 +9,6 @@ import 'state.dart';
 
 Effect<PayState> buildEffect() {
   return combineEffects(<Object, Effect<PayState>>{
-    PayAction.action: _onAction,
     Lifecycle.initState: _onInit,
   });
 }
@@ -120,16 +119,4 @@ Future<void> initStoreInfo(Context<PayState> ctx) async {
   });*/
 }
 
-void loadingProducts() async {
-  // Set literals require Dart 2.2. Alternatively, use
-  // `Set<String> _kIds = <String>['product1', 'product2'].toSet()`.
-  const Set<String> _kIds = <String>{'product1', 'product2'};
-  final ProductDetailsResponse response =
-      await InAppPurchase.instance.queryProductDetails(_kIds);
-  if (response.notFoundIDs.isNotEmpty) {
-    // Handle the error.
-  }
-  List<ProductDetails> products = response.productDetails;
-}
 
-void _onAction(Action action, Context<PayState> ctx) {}
