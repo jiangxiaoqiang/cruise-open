@@ -9,7 +9,7 @@ class CruiseLogHandler {
     printer: PrettyPrinter(),
   );
 
-  static Future<void> logErrorException(String message, Exception e) async {
+  static Future<void> logErrorException(String message, Object e) async {
     FirebaseCrashlytics.instance.log(message);
   }
 
