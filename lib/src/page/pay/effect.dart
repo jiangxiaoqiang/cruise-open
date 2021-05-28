@@ -16,7 +16,7 @@ Effect<PayState> buildEffect() {
 
 const bool _kAutoConsume = true;
 
-const String _kConsumableId = 'consumable';
+const String _kConsumableId = 'subscription';
 const String _kUpgradeId = 'upgrade';
 const String _kSilverSubscriptionId = 'subscription_silver';
 const String _kGoldSubscriptionId = 'subscription_gold';
