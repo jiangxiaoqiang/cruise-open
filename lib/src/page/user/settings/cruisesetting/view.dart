@@ -147,7 +147,7 @@ Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewSe
                       child: Container(
                           color: Colors.white,
                           child: ListTile(
-                            leading: Icon(EvaIcons.info),
+                            leading: Icon(EvaIcons.heart),
                             trailing: Icon(Icons.keyboard_arrow_right),
                             title: Text("会员中心"),
                             onTap: () async {
