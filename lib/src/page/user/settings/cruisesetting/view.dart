@@ -4,15 +4,12 @@ import 'package:cruise/src/page/pay/page.dart';
 import 'package:cruise/src/page/user/discover/page.dart';
 import 'package:cruise/src/page/user/fav/page.dart';
 import 'package:cruise/src/page/user/feedback/page.dart';
+import 'package:cruise/src/page/user/history/page.dart';
 import 'package:cruise/src/page/user/settings/about/page.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
-import 'package:cruise/src/common/cruise_user.dart';
 
-import '../../../login.dart';
-import '../../../profile.dart';
 import 'state.dart';
 
 Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewService) {
@@ -72,7 +69,7 @@ Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewSe
                       child: Container(
                           color: Colors.white,
                           child: ListTile(
-                            leading: Icon(EvaIcons.bookOpen),
+                            leading: Icon(EvaIcons.bulb),
                             trailing: Icon(Icons.keyboard_arrow_right),
                             title: Text("发现"),
                             onTap: () async {
@@ -84,6 +81,26 @@ Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewSe
                               );
                             },
                           )))),
+              Padding(
+                  padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                  child: ClipRRect(
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Container(
+                              color: Colors.white,
+                              child: ListTile(
+                                leading: Icon(EvaIcons.clock),
+                                trailing: Icon(Icons.keyboard_arrow_right),
+                                title: Text("阅读历史"),
+                                onTap: () async {
+                                  var data = {'name': "history"};
+                                  Widget page = HistoryPage().buildPage(data);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => page),
+                                  );
+                                },
+                              ))))),
               Padding(
                   padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
                   child: ClipRRect(
