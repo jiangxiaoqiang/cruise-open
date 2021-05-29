@@ -1,18 +1,17 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:cruise/src/models/pay/pay_model.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:in_app_purchase_android/billing_client_wrappers.dart';
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
+
 import 'action.dart';
 import 'consumable_store.dart';
 import 'state.dart';
 
 Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
-
   final InAppPurchase _inAppPurchase = InAppPurchase.instance;
   late StreamSubscription<List<PurchaseDetails>> _subscription;
   List<String> _notFoundIds = state.payModel.notFoundIds;
@@ -22,6 +21,7 @@ Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
   bool _isAvailable = state.payModel.isAvailable;
   bool _purchasePending = state.payModel.purchasePending;
   bool _loading = state.payModel.loading;
+  String? debugMessage = state.payModel.debugMessage;
   String? _queryProductError = state.payModel.queryProductError;
 
   const bool _kAutoConsume = true;
@@ -33,10 +33,8 @@ Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
       return Card(child: ListTile(title: const Text('Trying to connect...')));
     }
     final Widget storeHeader = ListTile(
-      leading: Icon(_isAvailable ? Icons.check : Icons.block,
-          color: _isAvailable ? Colors.green : ThemeData.light().errorColor),
-      title: Text(
-          'The store is ' + (_isAvailable ? 'available' : 'unavailable') + '.'),
+      leading: Icon(_isAvailable ? Icons.check : Icons.block, color: _isAvailable ? Colors.green : ThemeData.light().errorColor),
+      title: Text('The store is ' + (_isAvailable ? 'available' : 'unavailable') + '.'),
     );
     final List<Widget> children = <Widget>[storeHeader];
 
@@ -44,18 +42,15 @@ Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
       children.addAll([
         Divider(),
         ListTile(
-          title: Text('Not connected',
-              style: TextStyle(color: ThemeData.light().errorColor)),
-          subtitle: const Text(
-              'Unable to connect to the payments processor. Has this app been configured correctly? See the example README for instructions.'),
+          title: Text('Not connected', style: TextStyle(color: ThemeData.light().errorColor)),
+          subtitle: const Text('Unable to connect to the payments processor. Has this app been configured correctly? See the example README for instructions.'),
         ),
       ]);
     }
     return Card(child: Column(children: children));
   }
 
-  GooglePlayPurchaseDetails? _getOldSubscription(
-      ProductDetails productDetails, Map<String, PurchaseDetails> purchases) {
+  GooglePlayPurchaseDetails? _getOldSubscription(ProductDetails productDetails, Map<String, PurchaseDetails> purchases) {
     // This is just to demonstrate a subscription upgrade or downgrade.
     // This method assumes that you have only 2 subscriptions under a group, 'subscription_silver' & 'subscription_gold'.
     // The 'subscription_silver' subscription can be upgraded to 'subscription_gold' and
@@ -69,10 +64,7 @@ Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
 
   Card _buildProductList() {
     if (_loading) {
-      return Card(
-          child: (ListTile(
-              leading: CircularProgressIndicator(),
-              title: Text('Fetching products...'))));
+      return Card(child: (ListTile(leading: CircularProgressIndicator(), title: Text('Fetching products...'))));
     }
     if (!_isAvailable) {
       return Card();
@@ -81,24 +73,21 @@ Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
     List<ListTile> productList = <ListTile>[];
     if (_notFoundIds.isNotEmpty) {
       productList.add(ListTile(
-          title: Text('[${_notFoundIds.join(", ")}] not found',
-              style: TextStyle(color: ThemeData.light().errorColor)),
-          subtitle: Text(
-              'This app needs special configuration to run. Please see example/README.md for instructions.')));
+          title: Text('[${_notFoundIds.join(", ")}] not found', style: TextStyle(color: ThemeData.light().errorColor)),
+          subtitle: Text('This app needs special configuration to run. Please see example/README.md for instructions.')));
     }
 
     // This loading previous purchases code is just a demo. Please do not use this as it is.
     // In your app you should always verify the purchase data using the `verificationData` inside the [PurchaseDetails] object before trusting it.
     // We recommend that you use your own server to verify the purchase data.
-    Map<String, PurchaseDetails> purchases =
-    Map.fromEntries(_purchases.map((PurchaseDetails purchase) {
+    Map<String, PurchaseDetails> purchases = Map.fromEntries(_purchases.map((PurchaseDetails purchase) {
       if (purchase.pendingCompletePurchase) {
         _inAppPurchase.completePurchase(purchase);
       }
       return MapEntry<String, PurchaseDetails>(purchase.productID, purchase);
     }));
     productList.addAll(_products.map(
-          (ProductDetails productDetails) {
+      (ProductDetails productDetails) {
         PurchaseDetails? previousPurchase = purchases[productDetails.id];
         return ListTile(
             title: Text(
@@ -110,56 +99,50 @@ Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
             trailing: previousPurchase != null
                 ? Icon(Icons.check)
                 : TextButton(
-              child: Text(productDetails.price),
-              style: TextButton.styleFrom(
-                backgroundColor: Colors.green[800],
-                primary: Colors.white,
-              ),
-              onPressed: () {
-                late PurchaseParam purchaseParam;
+                    child: Text(productDetails.price),
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.green[800],
+                      primary: Colors.white,
+                    ),
+                    onPressed: () {
+                      late PurchaseParam purchaseParam;
 
-                if (Platform.isAndroid) {
-                  // NOTE: If you are making a subscription purchase/upgrade/downgrade, we recommend you to
-                  // verify the latest status of you your subscription by using server side receipt validation
-                  // and update the UI accordingly. The subscription purchase status shown
-                  // inside the app may not be accurate.
-                  final oldSubscription =
-                  _getOldSubscription(productDetails, purchases);
+                      if (Platform.isAndroid) {
+                        // NOTE: If you are making a subscription purchase/upgrade/downgrade, we recommend you to
+                        // verify the latest status of you your subscription by using server side receipt validation
+                        // and update the UI accordingly. The subscription purchase status shown
+                        // inside the app may not be accurate.
+                        final oldSubscription = _getOldSubscription(productDetails, purchases);
 
-                  purchaseParam = GooglePlayPurchaseParam(
-                      productDetails: productDetails,
-                      applicationUserName: null,
-                      changeSubscriptionParam: (oldSubscription != null)
-                          ? ChangeSubscriptionParam(
-                        oldPurchaseDetails: oldSubscription,
-                        prorationMode: ProrationMode
-                            .immediateWithTimeProration,
-                      )
-                          : null);
-                } else {
-                  purchaseParam = PurchaseParam(
-                    productDetails: productDetails,
-                    applicationUserName: null,
-                  );
-                }
+                        purchaseParam = GooglePlayPurchaseParam(
+                            productDetails: productDetails,
+                            applicationUserName: null,
+                            changeSubscriptionParam: (oldSubscription != null)
+                                ? ChangeSubscriptionParam(
+                                    oldPurchaseDetails: oldSubscription,
+                                    prorationMode: ProrationMode.immediateWithTimeProration,
+                                  )
+                                : null);
+                      } else {
+                        purchaseParam = PurchaseParam(
+                          productDetails: productDetails,
+                          applicationUserName: null,
+                        );
+                      }
 
-                if (productDetails.id == _kConsumableId) {
-                  _inAppPurchase.buyConsumable(
-                      purchaseParam: purchaseParam,
-                      autoConsume: _kAutoConsume || Platform.isIOS);
-                } else {
-                  _inAppPurchase.buyNonConsumable(
-                      purchaseParam: purchaseParam);
-                }
-              },
-            ));
+                      if (productDetails.id == _kConsumableId) {
+                        _inAppPurchase.buyConsumable(purchaseParam: purchaseParam, autoConsume: _kAutoConsume || Platform.isIOS);
+                      } else {
+                        _inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
+                      }
+                    },
+                  ));
       },
     ));
 
-    return Card(
-        child:
-        Column(children: <Widget>[productHeader, Divider()] + productList));
+    return Card(child: Column(children: <Widget>[productHeader, Divider()] + productList));
   }
+
   Future<void> consume(String id) async {
     await ConsumableStore.consume(id);
     final List<String> consumables = await ConsumableStore.load();
@@ -168,16 +151,12 @@ Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
 
   Card _buildConsumableBox() {
     if (_loading) {
-      return Card(
-          child: (ListTile(
-              leading: CircularProgressIndicator(),
-              title: Text('Fetching consumables...'))));
+      return Card(child: (ListTile(leading: CircularProgressIndicator(), title: Text('Fetching consumables...'))));
     }
     if (!_isAvailable || _notFoundIds.contains(_kConsumableId)) {
       return Card();
     }
-    final ListTile consumableHeader =
-    ListTile(title: Text('Purchased consumables'));
+    final ListTile consumableHeader = ListTile(title: Text('Purchased consumables'));
     final List<Widget> tokens = _consumables.map((String id) {
       return GridTile(
         child: IconButton(
@@ -193,18 +172,19 @@ Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
     }).toList();
     return Card(
         child: Column(children: <Widget>[
-          consumableHeader,
-          Divider(),
-          GridView.count(
-            crossAxisCount: 5,
-            children: tokens,
-            shrinkWrap: true,
-            padding: EdgeInsets.all(16.0),
-          )
-        ]));
+      consumableHeader,
+      Divider(),
+      GridView.count(
+        crossAxisCount: 5,
+        children: tokens,
+        shrinkWrap: true,
+        padding: EdgeInsets.all(16.0),
+      )
+    ]));
   }
 
   List<Widget> stack = [];
+  stack.add(Text("debug:" + debugMessage!));
   if (_queryProductError == null) {
     stack.add(
       ListView(
@@ -245,5 +225,3 @@ Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
     ),
   );
 }
-
-

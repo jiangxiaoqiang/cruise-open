@@ -7,12 +7,14 @@ class PayModel {
       required this.purchases,
       required this.notFoundIds,
         this.queryProductError,
+        this.debugMessage,
       required this.consumables,
       required this.purchasePending,
       required this.loading});
 
   bool isAvailable = false;
   String? queryProductError;
+  String? debugMessage;
   List<ProductDetails> products = [];
   List<PurchaseDetails> purchases = [];
   List<String> notFoundIds = [];

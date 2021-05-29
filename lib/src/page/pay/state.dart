@@ -3,7 +3,7 @@ import 'package:fish_redux/fish_redux.dart';
 
 class PayState implements Cloneable<PayState> {
 
-  PayModel payModel = PayModel(isAvailable: false, products: [], purchases: [], notFoundIds: [], purchasePending: false, loading: true, queryProductError: 'initial', consumables: []);
+  PayModel payModel = PayModel(isAvailable: false, products: [], purchases: [], notFoundIds: [], purchasePending: false, loading: true, queryProductError: null, consumables: []);
 
   @override
   PayState clone() {

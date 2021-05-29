@@ -21,9 +21,7 @@ const String _kConsumableId = 'cruise';
 
 late StreamSubscription<List<PurchaseDetails>> _subscription;
 String? _queryProductError;
-const List<String> _kProductIds = <String>[
-  _kConsumableId
-];
+const List<String> _kProductIds = <String>[_kConsumableId];
 
 Future _onInit(Action action, Context<PayState> ctx) async {
   final InAppPurchase _inAppPurchase = InAppPurchase.instance;
@@ -39,7 +37,7 @@ Future _onInit(Action action, Context<PayState> ctx) async {
     CruiseLogHandler.logErrorException("iap initial error", error);
   });
 
-  initStoreInfo(ctx,_inAppPurchase);
+  initStoreInfo(ctx, _inAppPurchase);
 }
 
 void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList, Context<PayState> ctx) {
@@ -58,7 +56,15 @@ void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList, Context
 }
 
 void _handleError(IAPError error, Context<PayState> ctx) {
-  PayModel payModel = PayModel(isAvailable: false, products: [], purchases: [], notFoundIds: [], purchasePending: false, loading: false, queryProductError: error.message, consumables: []);
+  PayModel payModel = PayModel(
+      isAvailable: false,
+      products: [],
+      purchases: [],
+      notFoundIds: [],
+      purchasePending: false,
+      loading: false,
+      queryProductError: error.message,
+      consumables: []);
   CruiseLogHandler.logErrorException("IAPError", error);
   ctx.dispatch(PayActionCreator.onUpdate(payModel));
 }
@@ -67,35 +73,47 @@ void _showPendingUI(Context<PayState> ctx) {
   ctx.dispatch(PayActionCreator.onChangePending(true));
 }
 
-Future<void> initStoreInfo(Context<PayState> ctx,InAppPurchase _inAppPurchase ) async {
+Future<void> initStoreInfo(Context<PayState> ctx, InAppPurchase _inAppPurchase) async {
   final bool isAvailable = await _inAppPurchase.isAvailable();
   if (!isAvailable) {
-    PayModel payModel = PayModel(isAvailable: isAvailable, products: [], purchases: [], notFoundIds: [], purchasePending: false, loading: false, consumables: [], queryProductError: 'isAvailable false');
+    PayModel payModel = PayModel(
+        isAvailable: isAvailable,
+        products: [],
+        purchases: [],
+        notFoundIds: [],
+        purchasePending: false,
+        loading: false,
+        consumables: [],
+        queryProductError: 'isAvailable false');
     ctx.dispatch(PayActionCreator.onUpdate(payModel));
     return;
   }
 
   ProductDetailsResponse productDetailResponse = await _inAppPurchase.queryProductDetails(_kProductIds.toSet());
   if (productDetailResponse.error != null) {
-    PayModel payModel = PayModel(isAvailable: isAvailable,
+    PayModel payModel = PayModel(
+        isAvailable: isAvailable,
         products: productDetailResponse.productDetails,
-        queryProductError :productDetailResponse.error!.message,
+        queryProductError: productDetailResponse.error!.message,
         purchases: [],
-        consumables : [],
+        consumables: [],
         notFoundIds: productDetailResponse.notFoundIDs,
-        purchasePending: false, loading: false);
+        purchasePending: false,
+        loading: false);
     ctx.dispatch(PayActionCreator.onUpdate(payModel));
     return;
   }
 
   if (productDetailResponse.productDetails.isEmpty) {
-    PayModel payModel = PayModel(isAvailable: isAvailable,
+    PayModel payModel = PayModel(
+        isAvailable: isAvailable,
         products: productDetailResponse.productDetails,
-        queryProductError :'productDetails empty',
+        queryProductError: 'productDetails empty',
         purchases: [],
-        consumables : [],
+        consumables: [],
         notFoundIds: productDetailResponse.notFoundIDs,
-        purchasePending: false, loading: false);
+        purchasePending: false,
+        loading: false);
     ctx.dispatch(PayActionCreator.onUpdate(payModel));
     return;
   }
@@ -103,13 +121,15 @@ Future<void> initStoreInfo(Context<PayState> ctx,InAppPurchase _inAppPurchase ) 
   await _inAppPurchase.restorePurchases();
 
   List<String> consumables = await ConsumableStore.load();
-  PayModel payModel = PayModel(isAvailable: isAvailable,
+  PayModel payModel = PayModel(
+      isAvailable: isAvailable,
       products: productDetailResponse.productDetails,
-      queryProductError :'consumables:' + consumables.join(','),
+      queryProductError: null,
+      debugMessage: 'consumables:' + consumables.join(','),
       purchases: [],
-      consumables : consumables,
+      consumables: consumables,
       notFoundIds: productDetailResponse.notFoundIDs,
-      purchasePending: false, loading: false);
+      purchasePending: false,
+      loading: false);
   ctx.dispatch(PayActionCreator.onUpdate(payModel));
 }
-
