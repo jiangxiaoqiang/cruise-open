@@ -13,14 +13,14 @@ Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
 
   final InAppPurchase _inAppPurchase = InAppPurchase.instance;
   late StreamSubscription<List<PurchaseDetails>> _subscription;
-  List<String> _notFoundIds = [];
-  List<ProductDetails> _products = [];
-  List<PurchaseDetails> _purchases = [];
-  List<String> _consumables = [];
-  bool _isAvailable = false;
-  bool _purchasePending = false;
+  List<String> _notFoundIds = state.payModel.notFoundIds;
+  List<ProductDetails> _products = state.payModel.products;
+  List<PurchaseDetails> _purchases = state.payModel.purchases;
+  List<String> _consumables = state.payModel.consumables;
+  bool _isAvailable = state.payModel.isAvailable;
+  bool _purchasePending = state.payModel.purchasePending;
   bool _loading = state.payModel.loading;
-  String? _queryProductError;
+  String? _queryProductError = state.payModel.queryProductError;
 
   const bool _kAutoConsume = true;
 
