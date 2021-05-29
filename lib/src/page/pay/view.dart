@@ -197,7 +197,7 @@ Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
     );
   } else {
     stack.add(Center(
-      child: Text(_queryProductError),
+      child: Text("error:"+_queryProductError),
     ));
   }
   if (_purchasePending) {
@@ -218,7 +218,7 @@ Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
 
   return Scaffold(
     appBar: AppBar(
-      title: const Text('IAP Example'),
+      title: const Text('会员中心'),
     ),
     body: Stack(
       children: stack,
