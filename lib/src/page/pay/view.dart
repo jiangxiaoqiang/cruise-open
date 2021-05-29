@@ -204,37 +204,6 @@ Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
         ]));
   }
 
-  void showPendingUI() {
-  }
-
-  void deliverProduct(PurchaseDetails purchaseDetails) async {
-    // IMPORTANT!! Always verify purchase details before delivering the product.
-    if (purchaseDetails.productID == _kConsumableId) {
-      await ConsumableStore.save(purchaseDetails.purchaseID!);
-      List<String> consumables = await ConsumableStore.load();
-      PayModel payModel = new PayModel(isAvailable: state.payModel.isAvailable,
-          products: state.payModel.products,
-          purchases: state.payModel.purchases,
-          notFoundIds: state.payModel.notFoundIds,
-          queryProductError: state.payModel.queryProductError,
-          consumables: consumables,
-          purchasePending: false,
-          loading: state.payModel.loading);
-      dispatch(PayActionCreator.onUpdate(payModel));
-    } else {
-      _purchases.add(purchaseDetails);
-      PayModel payModel = new PayModel(isAvailable: state.payModel.isAvailable,
-          products: state.payModel.products,
-          purchases: _purchases,
-          notFoundIds: state.payModel.notFoundIds,
-          queryProductError: state.payModel.queryProductError,
-          consumables: state.payModel.consumables,
-          purchasePending: false,
-          loading: state.payModel.loading);
-      dispatch(PayActionCreator.onUpdate(payModel));
-    }
-  }
-
   List<Widget> stack = [];
   if (_queryProductError == null) {
     stack.add(
