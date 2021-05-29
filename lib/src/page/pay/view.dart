@@ -1,11 +1,13 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:cruise/src/models/pay/pay_model.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:in_app_purchase_android/billing_client_wrappers.dart';
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
+import 'action.dart';
 import 'consumable_store.dart';
 import 'state.dart';
 
@@ -25,10 +27,6 @@ Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
   const bool _kAutoConsume = true;
 
   const String _kConsumableId = 'cruise';
-  const List<String> _kProductIds = <String>[
-    _kConsumableId
-  ];
-
 
   Card _buildConnectionCheckTile() {
     if (_loading) {
@@ -165,9 +163,7 @@ Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
   Future<void> consume(String id) async {
     await ConsumableStore.consume(id);
     final List<String> consumables = await ConsumableStore.load();
-    /*setState(() {
-      _consumables = consumables;
-    });*/
+    dispatch(PayActionCreator.onSetConsumable(consumables));
   }
 
   Card _buildConsumableBox() {
@@ -208,12 +204,8 @@ Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
         ]));
   }
 
-
-
   void showPendingUI() {
-   /* setState(() {
-      _purchasePending = true;
-    });*/
+    dispatch(PayActionCreator.onChangePending(true));
   }
 
   void deliverProduct(PurchaseDetails purchaseDetails) async {
@@ -221,15 +213,26 @@ Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
     if (purchaseDetails.productID == _kConsumableId) {
       await ConsumableStore.save(purchaseDetails.purchaseID!);
       List<String> consumables = await ConsumableStore.load();
-      /*setState(() {
-        _purchasePending = false;
-        _consumables = consumables;
-      });*/
+      PayModel payModel = new PayModel(isAvailable: state.payModel.isAvailable,
+          products: state.payModel.products,
+          purchases: state.payModel.purchases,
+          notFoundIds: state.payModel.notFoundIds,
+          queryProductError: state.payModel.queryProductError,
+          consumables: consumables,
+          purchasePending: false,
+          loading: state.payModel.loading);
+      dispatch(PayActionCreator.onUpdate(payModel));
     } else {
-     /* setState(() {
-        _purchases.add(purchaseDetails);
-        _purchasePending = false;
-      });*/
+      _purchases.add(purchaseDetails);
+      PayModel payModel = new PayModel(isAvailable: state.payModel.isAvailable,
+          products: state.payModel.products,
+          purchases: _purchases,
+          notFoundIds: state.payModel.notFoundIds,
+          queryProductError: state.payModel.queryProductError,
+          consumables: state.payModel.consumables,
+          purchasePending: false,
+          loading: state.payModel.loading);
+      dispatch(PayActionCreator.onUpdate(payModel));
     }
   }
 

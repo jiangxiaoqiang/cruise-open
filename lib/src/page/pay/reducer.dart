@@ -7,14 +7,24 @@ import 'state.dart';
 Reducer<PayState> buildReducer() {
   return asReducer(
     <Object, Reducer<PayState>>{
-      PayAction.action: _onAction,
+      PayAction.set_consumable: _onSetConsumable,
+      PayAction.change_pending: _onChangePending,
       PayAction.update:_onUpdate,
     },
   );
 }
 
-PayState _onAction(PayState state, Action action) {
+PayState _onChangePending(PayState state, Action action) {
   final PayState newState = state.clone();
+  bool consumable = action.payload as bool;
+  newState.payModel.purchasePending = consumable;
+  return newState;
+}
+
+PayState _onSetConsumable(PayState state, Action action) {
+  final PayState newState = state.clone();
+  List<String> consumable = action.payload as List<String>;
+  newState.payModel.consumables = consumable;
   return newState;
 }
 
