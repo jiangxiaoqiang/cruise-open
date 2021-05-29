@@ -58,7 +58,7 @@ void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList, Context
 }
 
 void _handleError(IAPError error, Context<PayState> ctx) {
-  PayModel payModel = PayModel(isAvailable: false, products: [], purchases: [], notFoundIds: [], purchasePending: false, loading: false, queryProductError: '', consumables: []);
+  PayModel payModel = PayModel(isAvailable: false, products: [], purchases: [], notFoundIds: [], purchasePending: false, loading: false, queryProductError: error.message, consumables: []);
   CruiseLogHandler.logErrorException("IAPError", error);
   ctx.dispatch(PayActionCreator.onUpdate(payModel));
 }
@@ -70,7 +70,7 @@ void _showPendingUI(Context<PayState> ctx) {
 Future<void> initStoreInfo(Context<PayState> ctx,InAppPurchase _inAppPurchase ) async {
   final bool isAvailable = await _inAppPurchase.isAvailable();
   if (!isAvailable) {
-    PayModel payModel = PayModel(isAvailable: isAvailable, products: [], purchases: [], notFoundIds: [], purchasePending: false, loading: false, consumables: [], queryProductError: '');
+    PayModel payModel = PayModel(isAvailable: isAvailable, products: [], purchases: [], notFoundIds: [], purchasePending: false, loading: false, consumables: [], queryProductError: 'isAvailable false');
     ctx.dispatch(PayActionCreator.onUpdate(payModel));
     return;
   }
@@ -91,7 +91,7 @@ Future<void> initStoreInfo(Context<PayState> ctx,InAppPurchase _inAppPurchase ) 
   if (productDetailResponse.productDetails.isEmpty) {
     PayModel payModel = PayModel(isAvailable: isAvailable,
         products: productDetailResponse.productDetails,
-        queryProductError :'',
+        queryProductError :'productDetails empty',
         purchases: [],
         consumables : [],
         notFoundIds: productDetailResponse.notFoundIDs,
@@ -105,7 +105,7 @@ Future<void> initStoreInfo(Context<PayState> ctx,InAppPurchase _inAppPurchase ) 
   List<String> consumables = await ConsumableStore.load();
   PayModel payModel = PayModel(isAvailable: isAvailable,
       products: productDetailResponse.productDetails,
-      queryProductError :'',
+      queryProductError :'consumables',
       purchases: [],
       consumables : consumables,
       notFoundIds: productDetailResponse.notFoundIDs,
