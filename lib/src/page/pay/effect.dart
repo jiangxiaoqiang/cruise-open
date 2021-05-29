@@ -105,7 +105,7 @@ Future<void> initStoreInfo(Context<PayState> ctx,InAppPurchase _inAppPurchase ) 
   List<String> consumables = await ConsumableStore.load();
   PayModel payModel = PayModel(isAvailable: isAvailable,
       products: productDetailResponse.productDetails,
-      queryProductError :'consumables',
+      queryProductError :'consumables:' + consumables.join(','),
       purchases: [],
       consumables : consumables,
       notFoundIds: productDetailResponse.notFoundIDs,
