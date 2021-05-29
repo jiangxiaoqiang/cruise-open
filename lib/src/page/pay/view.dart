@@ -69,7 +69,7 @@ Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
     if (!_isAvailable) {
       return Card();
     }
-    final ListTile productHeader = ListTile(title: Text('Products for Sale'));
+    final ListTile productHeader = ListTile(title: Text('订阅列表'));
     List<ListTile> productList = <ListTile>[];
     if (_notFoundIds.isNotEmpty) {
       productList.add(ListTile(
@@ -156,7 +156,7 @@ Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
     if (!_isAvailable || _notFoundIds.contains(_kConsumableId)) {
       return Card();
     }
-    final ListTile consumableHeader = ListTile(title: Text('Purchased consumables'));
+    final ListTile consumableHeader = ListTile(title: Text('已购列表'));
     final List<Widget> tokens = _consumables.map((String id) {
       return GridTile(
         child: IconButton(
@@ -184,7 +184,7 @@ Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
   }
 
   List<Widget> stack = [];
-  stack.add(Text("debug:" + debugMessage!));
+  // stack.add(Text("debug:" + debugMessage!));
   if (_queryProductError == null) {
     stack.add(
       ListView(
