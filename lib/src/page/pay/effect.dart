@@ -64,8 +64,7 @@ void _handleError(IAPError error, Context<PayState> ctx) {
 }
 
 void _showPendingUI(Context<PayState> ctx) {
-  PayModel payModel = PayModel(isAvailable: false, products: [], purchases: [], notFoundIds: [], purchasePending: true, loading: false, consumables: [], queryProductError: '');
-  ctx.dispatch(PayActionCreator.onUpdate(payModel));
+  ctx.dispatch(PayActionCreator.onChangePending(true));
 }
 
 Future<void> initStoreInfo(Context<PayState> ctx,InAppPurchase _inAppPurchase ) async {

@@ -205,7 +205,6 @@ Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
   }
 
   void showPendingUI() {
-    dispatch(PayActionCreator.onChangePending(true));
   }
 
   void deliverProduct(PurchaseDetails purchaseDetails) async {
@@ -272,9 +271,9 @@ Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
     appBar: AppBar(
       title: const Text('IAP Example'),
     ),
-      body: Stack(
-         children: stack,
-      )
+    body: Stack(
+      children: stack,
+    ),
   );
 }
 
