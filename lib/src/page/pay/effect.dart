@@ -17,18 +17,12 @@ Effect<PayState> buildEffect() {
 
 const bool _kAutoConsume = true;
 
-const String _kConsumableId = 'subscription';
-const String _kUpgradeId = 'upgrade';
-const String _kSilverSubscriptionId = 'subscription_silver';
-const String _kGoldSubscriptionId = 'subscription_gold';
+const String _kConsumableId = 'cruise';
 
 late StreamSubscription<List<PurchaseDetails>> _subscription;
 String? _queryProductError;
 const List<String> _kProductIds = <String>[
-  _kConsumableId,
-  _kUpgradeId,
-  _kSilverSubscriptionId,
-  _kGoldSubscriptionId,
+  _kConsumableId
 ];
 
 Future _onInit(Action action, Context<PayState> ctx) async {
