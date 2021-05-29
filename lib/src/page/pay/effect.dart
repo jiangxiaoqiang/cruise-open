@@ -6,6 +6,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
 import 'action.dart';
+import 'consumable_store.dart';
 import 'state.dart';
 
 Effect<PayState> buildEffect() {
@@ -63,20 +64,20 @@ void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList, Context
 }
 
 void _handleError(IAPError error, Context<PayState> ctx) {
-  PayModel payModel = PayModel(isAvailable: false, products: [], purchases: [], notFoundIds: [], purchasePending: false, loading: false);
+  PayModel payModel = PayModel(isAvailable: false, products: [], purchases: [], notFoundIds: [], purchasePending: false, loading: false, queryProductError: '', consumables: []);
   CruiseLogHandler.logErrorException("IAPError", error);
   ctx.dispatch(PayActionCreator.onUpdate(payModel));
 }
 
 void _showPendingUI(Context<PayState> ctx) {
-  PayModel payModel = PayModel(isAvailable: false, products: [], purchases: [], notFoundIds: [], purchasePending: true, loading: false);
+  PayModel payModel = PayModel(isAvailable: false, products: [], purchases: [], notFoundIds: [], purchasePending: true, loading: false, consumables: [], queryProductError: '');
   ctx.dispatch(PayActionCreator.onUpdate(payModel));
 }
 
 Future<void> initStoreInfo(Context<PayState> ctx,InAppPurchase _inAppPurchase ) async {
   final bool isAvailable = await _inAppPurchase.isAvailable();
   if (!isAvailable) {
-    PayModel payModel = PayModel(isAvailable: isAvailable, products: [], purchases: [], notFoundIds: [], purchasePending: false, loading: false);
+    PayModel payModel = PayModel(isAvailable: isAvailable, products: [], purchases: [], notFoundIds: [], purchasePending: false, loading: false, consumables: [], queryProductError: '');
     ctx.dispatch(PayActionCreator.onUpdate(payModel));
     return;
   }
@@ -85,35 +86,37 @@ Future<void> initStoreInfo(Context<PayState> ctx,InAppPurchase _inAppPurchase ) 
   if (productDetailResponse.error != null) {
     PayModel payModel = PayModel(isAvailable: isAvailable,
         products: productDetailResponse.productDetails,
-        queryProductError :productDetailResponse.error!.message
+        queryProductError :productDetailResponse.error!.message,
         purchases: [],
-        consumables = [],
+        consumables : [],
         notFoundIds: productDetailResponse.notFoundIDs,
         purchasePending: false, loading: false);
+    ctx.dispatch(PayActionCreator.onUpdate(payModel));
     return;
   }
 
   if (productDetailResponse.productDetails.isEmpty) {
     PayModel payModel = PayModel(isAvailable: isAvailable,
         products: productDetailResponse.productDetails,
-        queryProductError :null,
+        queryProductError :'',
         purchases: [],
-        consumables = [],
+        consumables : [],
         notFoundIds: productDetailResponse.notFoundIDs,
         purchasePending: false, loading: false);
+    ctx.dispatch(PayActionCreator.onUpdate(payModel));
     return;
   }
 
   await _inAppPurchase.restorePurchases();
 
   List<String> consumables = await ConsumableStore.load();
-  setState(() {
-    _isAvailable = isAvailable;
-    _products = productDetailResponse.productDetails;
-    _notFoundIds = productDetailResponse.notFoundIDs;
-    _consumables = consumables;
-    _purchasePending = false;
-    _loading = false;
-  });
+  PayModel payModel = PayModel(isAvailable: isAvailable,
+      products: productDetailResponse.productDetails,
+      queryProductError :'',
+      purchases: [],
+      consumables : consumables,
+      notFoundIds: productDetailResponse.notFoundIDs,
+      purchasePending: false, loading: false);
+  ctx.dispatch(PayActionCreator.onUpdate(payModel));
 }
 
