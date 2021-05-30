@@ -1,4 +1,5 @@
 import 'package:cruise/src/models/Item.dart';
+import 'package:cruise/src/models/enumn/stories_type.dart';
 import 'package:cruise/src/models/request/article/article_request.dart';
 import 'package:cruise/src/page/channel/add_channel.dart';
 import 'package:flutter/material.dart';

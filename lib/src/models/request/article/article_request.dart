@@ -1,4 +1,6 @@
 
+import 'package:cruise/src/models/enumn/stories_type.dart';
+
 import '../../Item.dart';
 
 class ArticleRequest{

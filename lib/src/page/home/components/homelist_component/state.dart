@@ -1,3 +1,4 @@
+import 'package:cruise/src/models/enumn/stories_type.dart';
 import 'package:cruise/src/page/user/settings/cruisesetting/state.dart';
 import 'package:cruise/src/models/Item.dart';
 import 'package:cruise/src/page/channel/channellistdefault_component/state.dart';

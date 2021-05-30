@@ -1,4 +1,5 @@
 import 'package:cruise/src/models/Item.dart';
+import 'package:cruise/src/models/enumn/stories_type.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 //TODO replace with your own action

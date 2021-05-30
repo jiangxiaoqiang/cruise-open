@@ -8,6 +8,7 @@ import 'package:cruise/src/common/log/cruise_log_handler.dart';
 import 'package:cruise/src/common/net/rest/rest_clinet.dart';
 import 'package:cruise/src/models/Channel.dart';
 import 'package:cruise/src/models/Item.dart';
+import 'package:cruise/src/models/enumn/stories_type.dart';
 import 'package:cruise/src/models/request/article/article_request.dart';
 import 'package:http/http.dart' as http;
 

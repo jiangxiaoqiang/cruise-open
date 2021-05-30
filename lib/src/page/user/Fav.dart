@@ -1,5 +1,6 @@
 import 'package:cruise/src/component/home_list.dart';
 import 'package:cruise/src/models/Item.dart';
+import 'package:cruise/src/models/enumn/stories_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
