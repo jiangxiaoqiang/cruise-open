@@ -1,4 +1,5 @@
 import 'package:cruise/src/models/enumn/stories_type.dart';
+import 'package:cruise/src/page/user/history/state.dart';
 import 'package:cruise/src/page/user/settings/cruisesetting/state.dart';
 import 'package:cruise/src/models/Item.dart';
 import 'package:cruise/src/page/channel/channellistdefault_component/state.dart';
@@ -50,6 +51,20 @@ class FavArticleConnector extends ConnOp<FavArticleState, HomeListState> {
 
   @override
   void set(FavArticleState state, HomeListState subState) {
+    state.homeListState = subState;
+  }
+}
+
+class HistoryArticleConnector extends ConnOp<HistoryState, HomeListState> {
+  @override
+  HomeListState get(HistoryState state) {
+    HomeListState subState = state.homeListState.clone();
+    subState.currentStoriesType = state.currentStoriesType;
+    return subState;
+  }
+
+  @override
+  void set(HistoryState state, HomeListState subState) {
     state.homeListState = subState;
   }
 }

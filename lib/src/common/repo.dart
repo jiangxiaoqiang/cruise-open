@@ -190,6 +190,8 @@ class Repo {
         return "/post/article/newstories";
       case StoriesType.favStories:
         return "/post/user/fav/article";
+      case StoriesType.historyStories:
+        return "/post/user/history/article";
       case StoriesType.originalStories:
         return "/post/article/originalstories";
       case StoriesType.channelStories:
