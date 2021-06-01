@@ -1,3 +1,5 @@
+import 'package:cruise/src/common/article_action.dart';
+import 'package:cruise/src/common/net/rest/http_result.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'action.dart';
 import 'state.dart';
@@ -10,6 +12,11 @@ Effect<ArticleDetailState> buildEffect() {
 }
 
 Future _onInit(Action action, Context<ArticleDetailState> ctx) async {
-  //ArticleDetailState articleListState = ctx.state;
-  //ctx.dispatch(ArticleDetailActionCreator.onSetArticle(articleListState.article));
+  ArticleDetailState articleListState = ctx.state;
+  if(articleListState.article.readStatus == false) {
+    HttpResult result = await ArticleAction.read(articleId: articleListState.article.id);
+    if (result.result == Result.ok) {
+      ctx.dispatch(ArticleDetailActionCreator.onRead());
+    }
+  }
 }

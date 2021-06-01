@@ -4,7 +4,7 @@ import 'package:cruise/src/models/api/upvote_status.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 //TODO replace with your own action
-enum ArticleDetailAction { clear_detail_article, set_article, vote, fav }
+enum ArticleDetailAction { clear_detail_article, set_article, vote, fav,read }
 
 class ArticleDetailActionCreator {
   
@@ -18,6 +18,10 @@ class ArticleDetailActionCreator {
 
   static Action onClearDetailArticle() {
     return Action(ArticleDetailAction.clear_detail_article);
+  }
+
+  static Action onRead() {
+    return const Action(ArticleDetailAction.read);
   }
 
   static Action onSetArticle(Item article) {

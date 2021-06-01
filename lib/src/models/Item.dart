@@ -11,8 +11,6 @@ enum StoryType {
   pollopt,
 }
 
-
-
 enum LoadingStatus { loading, complete }
 
 class Item {
@@ -28,6 +26,7 @@ class Item {
       this.descendants,
       this.id = "0",
       this.kids,
+      this.readStatus = false,
       this.score,
       this.pubTime = 0,
       this.editorPick = 0,
@@ -43,6 +42,7 @@ class Item {
   int depth;
   String author;
   bool deleted;
+  bool readStatus;
   String content;
   bool? dead;
   int? poll;
@@ -71,7 +71,8 @@ class Item {
 
   String get domain => Uri.parse(link).host;
 
-  String get ago => timeago.format(DateTime.fromMillisecondsSinceEpoch(pubTime));
+  String get ago =>
+      timeago.format(DateTime.fromMillisecondsSinceEpoch(pubTime));
 
   factory Item.fromMap(Map<String, dynamic> json) => Item(
         id: json["id"],
@@ -81,9 +82,13 @@ class Item {
         dead: json["dead"] == null ? false : json["dead"],
         poll: json["poll"] == null ? null : json["poll"],
         parent: json["parent"] == null ? null : json["parent"],
-        parts: json["parts"] == null ? [] : List<int>.from(json["parts"].map((x) => x)),
+        parts: json["parts"] == null
+            ? []
+            : List<int>.from(json["parts"].map((x) => x)),
         descendants: json["descendants"] == null ? 0 : json["descendants"],
-        kids: json["kids"] == null ? [] : List<int>.from(json["kids"].map((x) => x)),
+        kids: json["kids"] == null
+            ? []
+            : List<int>.from(json["kids"].map((x) => x)),
         score: json["score"] == null ? 0 : json["score"],
         pubTime: json["pubTime"] == null ? 0 : json["pubTime"],
         title: json["title"] == null ? "" : json["title"],
@@ -95,7 +100,7 @@ class Item {
         upvoteCount: json["upvoteCount"] == null ? 0 : json["upvoteCount"],
         subSourceId: json["subSourceId"] == null ? "" : json["subSourceId"],
         editorPick: json["editorPick"] == null ? "" : json["editorPick"],
-  );
+      );
 
   Map<String, dynamic> toMap() => {
         "id": id,
@@ -105,7 +110,8 @@ class Item {
         "dead": dead == null ? null : dead,
         "poll": poll == null ? null : poll,
         "parent": parent == null ? null : parent,
-        "parts": parts == null ? null : List<dynamic>.from(parts!.map((x) => x)),
+        "parts":
+            parts == null ? null : List<dynamic>.from(parts!.map((x) => x)),
         "descendants": descendants == null ? null : descendants,
         "kids": kids == null ? null : List<dynamic>.from(kids!.map((x) => x)),
         "score": score == null ? null : score,

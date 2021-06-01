@@ -13,8 +13,15 @@ Reducer<ArticleDetailState> buildReducer() {
       ArticleDetailAction.set_article: _onSetArticle,
       ArticleDetailAction.vote: _onVote,
       ArticleDetailAction.fav: _onFav,
+      ArticleDetailAction.read: _onRead,
     },
   );
+}
+
+ArticleDetailState _onRead(ArticleDetailState state, Action action) {
+  final ArticleDetailState newState = state.clone();
+  newState.article.readStatus = true;
+  return newState;
 }
 
 ArticleDetailState _onFav(ArticleDetailState state, Action action) {
