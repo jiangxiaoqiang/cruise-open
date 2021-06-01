@@ -6,6 +6,8 @@ import 'package:cruise/src/common/utils/common_utils.dart';
 import 'package:cruise/src/common/view_manager.dart';
 import 'package:cruise/src/widgets/cruise_app.dart';
 import 'package:flutter/material.dart';
+import 'package:wheel/src/log/app_log_handler.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
@@ -17,12 +19,13 @@ void main() async {
   final view = ViewManager.fromViewName(viewName);
 
   void _handleError(Object obj, StackTrace stack) {
-    CruiseLogHandler.logErrorStack(obj.toString(),stack);
+    //AppLo
+    AppLogHandler.logErrorStack(obj.toString(),stack);
   }
 
   runZonedGuarded((){
     FlutterError.onError = (FlutterErrorDetails errorDetails) {
-      CruiseLogHandler.logFlutterErrorDetails(errorDetails);
+      AppLogHandler.logFlutterErrorDetails(errorDetails);
     };
     runApp(
       CruiseApp(
