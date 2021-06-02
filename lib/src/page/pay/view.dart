@@ -36,7 +36,7 @@ Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
       leading: Icon(_isAvailable ? Icons.check : Icons.block, color: _isAvailable ? Colors.green : ThemeData.light().errorColor),
       title: Text('The store is ' + (_isAvailable ? 'available' : 'unavailable') + '.'),
     );
-    final List<Widget> children = <Widget>[storeHeader];
+    final List<Widget> children = <Widget>[];
 
     if (!_isAvailable) {
       children.addAll([
