@@ -7,7 +7,7 @@ import 'package:cruise/src/models/api/sub_status.dart';
 import 'package:cruise/src/models/channel_suggestion.dart';
 import 'package:cruise/src/models/request/channel/channel_request.dart';
 import 'package:dio/dio.dart';
-import 'package:wheel/src/log/app_log_handler.dart';
+import 'package:wheel/log/app_log_handler.dart';
 import 'package:wheel/src/net/rest/rest_api_error.dart';
 import 'log/cruise_log_handler.dart';
 import 'log/cruise_api_error.dart';

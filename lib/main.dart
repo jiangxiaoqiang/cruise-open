@@ -1,12 +1,11 @@
 import 'dart:async';
 
-import 'package:cruise/src/common/log/cruise_log_handler.dart';
 import 'package:cruise/src/common/theme.dart';
 import 'package:cruise/src/common/utils/common_utils.dart';
 import 'package:cruise/src/common/view_manager.dart';
 import 'package:cruise/src/widgets/cruise_app.dart';
 import 'package:flutter/material.dart';
-import 'package:wheel/src/log/app_log_handler.dart';
+import 'package:wheel/wheel.dart' show AppLogHandler;
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,7 +18,6 @@ void main() async {
   final view = ViewManager.fromViewName(viewName);
 
   void _handleError(Object obj, StackTrace stack) {
-    //AppLo
     AppLogHandler.logErrorStack(obj.toString(),stack);
   }
 
