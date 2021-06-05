@@ -17,6 +17,7 @@ class Channel {
     this.id = "0",
     this.kids,
     this.score = 0,
+    this.iconData,
     this.pubTime = 0,
     this.title = "Unknown",
     this.subName = "Unknown",
@@ -29,6 +30,7 @@ class Channel {
 
   int depth;
   String author;
+  String? iconData;
   bool deleted;
   String content;
   bool dead;
@@ -76,6 +78,7 @@ class Channel {
         intro: json["intro"] == null ? "" : json["intro"],
         favIconUrl: json["favIconUrl"] == null ? "" : json["favIconUrl"],
         localIconUrl: json["localIconUrl"] == null ? "" : json["localIconUrl"],
+        iconData: json["iconData"] == null ? "" : json["iconData"],
       );
 
   Map<String, dynamic> toMap() => {
@@ -98,5 +101,6 @@ class Channel {
         "intro": intro == null ? null : intro,
         "favIconUrl": favIconUrl == null ? null : favIconUrl,
         "localIconUrl": localIconUrl == null ? null : localIconUrl,
+        "iconData": iconData == null ? null : iconData,
       };
 }
