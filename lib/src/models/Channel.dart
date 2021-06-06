@@ -17,7 +17,7 @@ class Channel {
     this.id = "0",
     this.kids,
     this.score = 0,
-    this.iconData,
+    this.iconData = "",
     this.pubTime = 0,
     this.title = "Unknown",
     this.subName = "Unknown",
@@ -30,7 +30,7 @@ class Channel {
 
   int depth;
   String author;
-  String? iconData;
+  String iconData;
   bool deleted;
   String content;
   bool dead;

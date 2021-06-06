@@ -16,7 +16,7 @@ dependencies:
   intl: 0.17.0
   meta: ^1.1.8
   flutter_svg: 0.22.0
-  logger: 0.9.4
+  logger: 1.0.0
   scoped_model: ^1.1.0
   shrine_images: ^1.1.2
   flare_dart: 2.3.4
@@ -44,12 +44,13 @@ dependencies:
   state_notifier: ^0.5.0
   flutter_secure_storage: 4.1.0
   flutter_slidable: 0.5.7
-  hive: ^1.4.1+1
+  hive: 2.0.0
   pull_to_refresh: 1.6.4
   country_code_picker: 2.0.1
   dio: 4.0.0
   fish_redux: 0.3.7
-  hive_flutter: 0.3.1
+  global_configuration: 2.0.0-nullsafety.1
+  hive_flutter: 1.0.0
   eva_icons_flutter: 3.0.0
   firebase_core: "^1.1.0"
   firebase_crashlytics: "^2.0.2"

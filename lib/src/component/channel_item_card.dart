@@ -1,3 +1,6 @@
+import 'dart:typed_data';
+import 'dart:convert';
+
 import 'package:cruise/src/common/channel_action.dart';
 import 'package:cruise/src/common/config/global_config.dart' as global;
 import 'package:cruise/src/common/net/rest/http_result.dart';
@@ -49,11 +52,20 @@ class ChannelItemCard extends HookWidget {
     }
 
     final Image defaultImage = Image.asset('images/Icon-App-83.5x83.5@3x.png');
-    var foregroundImage = counter.value.favIconUrl == "" ? defaultImage : Image.network(
+   /* var foregroundImage = counter.value.favIconUrl == "" ? defaultImage : Image.network(
         global.staticResourceUrl + "/" + counter.value.localIconUrl,
       loadingBuilder: (context,child,loadingProgress)=>(loadingProgress == null) ? child : CircularProgressIndicator(),
       errorBuilder: (context, error, stackTrace) => defaultImage,
-    );
+    );*/
+    var foregroundImage;
+    if(counter.value.iconData != null && counter.value.iconData != "") {
+      Uint8List base64Decode(String source) => base64.decode(source);
+      Uint8List uint8list = base64Decode(counter.value.iconData);
+      foregroundImage = Image.memory(uint8list);
+    }else{
+      foregroundImage = defaultImage;
+    }
+
     return Card(
       key: Key(counter.value.id.toString()),
       child: Padding(
