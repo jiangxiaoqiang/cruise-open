@@ -80,4 +80,5 @@ flutter:
   generate: true
   assets:
     - images/Icon-App-83.5x83.5@3x.png
+    - assets/cfg/
 

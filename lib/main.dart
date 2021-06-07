@@ -18,6 +18,7 @@ void main() async {
   final theme = ThemeManager.fromThemeName(themeName);
   String? viewName = pref.getString('view');
   final view = ViewManager.fromViewName(viewName);
+  print(GlobalConfiguration().getString("baseUrl"));
 
   void _handleError(Object obj, StackTrace stack) {
     AppLogHandler.logErrorStack(obj.toString(),stack);
