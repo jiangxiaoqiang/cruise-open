@@ -85,7 +85,7 @@ Widget buildView(ChannelListDefaultState state, Dispatch dispatch, ViewService v
                       controller: _refreshController,
                       onLoading: _loadingMoreChannel,
                       footer: CustomFooter(
-                        builder: (BuildContext context, LoadStatus mode) {
+                        builder: (BuildContext context, LoadStatus? mode) {
                           Widget? body;
                           if (mode == LoadStatus.idle) {
                             body = Text("pull up load");

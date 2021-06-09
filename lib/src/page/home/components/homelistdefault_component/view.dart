@@ -84,7 +84,7 @@ Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService view
                         controller: _refreshController,
                         onLoading: _loadingMoreArticle,
                         footer: CustomFooter(
-                          builder: (BuildContext context, LoadStatus mode) {
+                          builder: (BuildContext context, LoadStatus? mode) {
                             Widget body;
                             if (mode == LoadStatus.idle) {
                               body = Text("上拉加载更多");
