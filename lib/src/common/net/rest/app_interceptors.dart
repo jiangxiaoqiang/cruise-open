@@ -23,16 +23,11 @@ class AppInterceptors extends InterceptorsWrapper {
 
   @override
   Future onResponse(Response response, ResponseInterceptorHandler handler) async {
-    autoLogin(response);
-    return super.onResponse(response, handler);
+    Response handleResponse = await autoLogin(response);
+    return super.onResponse(handleResponse, handler);
   }
 
-  @override
-  Future onError(DioError err, ErrorInterceptorHandler handler) async {
-    return super.onError(err, handler);
-  }
-
-  void autoLogin(Response response) async {
+  Future<Response> autoLogin(Response response) async {
     String loginInvalidCode = ResponseStatus.LOGIN_INVALID.statusCode;
     String notLoginCode = ResponseStatus.NOT_LOGIN.statusCode;
     String statusCode = response.data["statusCode"];
@@ -41,26 +36,63 @@ class AppInterceptors extends InterceptorsWrapper {
       String? userName = await storage.read(key: "username");
       String? password = await storage.read(key: "password");
       if (userName != null && password != null) {
-        refreshAuthToken(dio, userName, password, response);
+       return refreshAuthToken(dio, userName, password, response);
       } else {
         NavigationService.instance.navigateToReplacement("login");
+        return response;
       }
+    }
+    else{
+      return response;
     }
   }
 
-  void refreshAuthToken(Dio dio, String userName, String password, Response response) async {
+  Future<Response<dynamic>> _retry(RequestOptions requestOptions,Dio dio) async {
+
+    final options = new Options(
+      method: requestOptions.method,
+      headers: requestOptions.headers,
+    );
+    return dio.request<dynamic>(requestOptions.path,
+        data: requestOptions.data,
+        queryParameters: requestOptions.queryParameters,
+        options: options);
+  }
+
+  Future<Response> _retryResponse(Response response,Dio dio) async {
+    // replace the new token
+    String? token = await storage.read(key: "token");
+    response.requestOptions.headers["token"] = token;
+    final options = new Options(
+      method: response.requestOptions.method,
+      headers: response.requestOptions.headers,
+    );
+    return dio.request<dynamic>(response.requestOptions.path,
+        data: response.requestOptions.data,
+        queryParameters: response.requestOptions.queryParameters,
+        options: options);
+  }
+
+  Future<Response> refreshAuthToken(Dio dio, String userName, String password, Response response) async {
     dio.lock();
     try {
       AuthResult result = await Auth.login(username: userName, password: password, loginType: LoginType.PHONE);
       if (result.result == Result.ok) {
         // resend a request to fetch data
-        //Dio req = RestClient.createDio();
-        dio.request(response.requestOptions.path);
+       return _retryResponse(response,dio);
+      }else{
+        return response;
       }
     } on Exception catch (e) {
       CruiseLogHandler.logErrorException("登录失败", e);
+      return response;
     } finally {
       dio.unlock();
     }
+  }
+
+  @override
+  Future onError(DioError err, ErrorInterceptorHandler handler) async {
+    return super.onError(err, handler);
   }
 }
