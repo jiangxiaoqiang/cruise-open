@@ -6,6 +6,7 @@ import 'package:cruise/src/common/net/rest/rest_clinet.dart';
 import 'package:cruise/src/common/utils/navigation_service.dart';
 import 'package:cruise/src/models/api/login_type.dart';
 import 'package:cruise/src/models/api/response_status.dart';
+import 'package:cruise/src/models/response.dart';
 import 'package:dio/dio.dart';
 
 import '../../config/global_config.dart';
@@ -13,7 +14,8 @@ import 'http_result.dart';
 
 class AppInterceptors extends InterceptorsWrapper {
   @override
-  Future<void> onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
+  Future<void> onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
     if (!options.headers.containsKey("token")) {
       String? token = await storage.read(key: "token");
       options.headers["token"] = token;
@@ -22,7 +24,8 @@ class AppInterceptors extends InterceptorsWrapper {
   }
 
   @override
-  Future onResponse(Response response, ResponseInterceptorHandler handler) async {
+  Future onResponse(
+      Response response, ResponseInterceptorHandler handler) async {
     Response handleResponse = await autoLogin(response);
     return super.onResponse(handleResponse, handler);
   }
@@ -34,35 +37,39 @@ class AppInterceptors extends InterceptorsWrapper {
     if (statusCode == loginInvalidCode || statusCode == notLoginCode) {
       Dio dio = RestClient.createDio();
       String? userName = await storage.read(key: "username");
-      String? password = await storage.read(key: "password");
-      if (userName != null && password != null) {
-       return refreshAuthToken(dio, userName, password, response);
+     String? password = await storage.read(key: "password");
+      /**
+       * the refresh time record the refresh request count
+       * to avoid a dead loop of refresh token
+       */
+      String? tokenRefreshTimes = await storage.read(key: "refreshTimes");
+      if (userName != null &&
+          password != null &&
+          tokenRefreshTimes != null &&
+          int.parse(tokenRefreshTimes) < 3) {
+        String newRefreshTimes = (int.parse(tokenRefreshTimes) + 1).toString();
+        storage.write(key: "refreshTimes", value: newRefreshTimes);
+        Future<Response> res= refreshAuthToken(dio, userName, password, response);
+        res.whenComplete(() => {
+        }).then((value) => {
+          if(RestClient.respSuccess(response)){
+            storage.write(key: "refreshTimes", value: "0")
+          }
+        });
+        return res;
       } else {
         NavigationService.instance.navigateToReplacement("login");
         return response;
       }
-    }
-    else{
+    } else {
       return response;
     }
   }
 
-  Future<Response<dynamic>> _retry(RequestOptions requestOptions,Dio dio) async {
-
-    final options = new Options(
-      method: requestOptions.method,
-      headers: requestOptions.headers,
-    );
-    return dio.request<dynamic>(requestOptions.path,
-        data: requestOptions.data,
-        queryParameters: requestOptions.queryParameters,
-        options: options);
-  }
-
-  Future<Response> _retryResponse(Response response,Dio dio) async {
+  Future<Response> _retryResponse(Response response, Dio dio) async {
     // replace the new token
     String? token = await storage.read(key: "token");
-    response.requestOptions.headers["token"] = token;
+    //response.requestOptions.headers["token"] = token;
     final options = new Options(
       method: response.requestOptions.method,
       headers: response.requestOptions.headers,
@@ -73,14 +80,16 @@ class AppInterceptors extends InterceptorsWrapper {
         options: options);
   }
 
-  Future<Response> refreshAuthToken(Dio dio, String userName, String password, Response response) async {
+  Future<Response> refreshAuthToken(
+      Dio dio, String userName, String password, Response response) async {
     dio.lock();
     try {
-      AuthResult result = await Auth.login(username: userName, password: password, loginType: LoginType.PHONE);
+      AuthResult result = await Auth.login(
+          username: userName, password: password, loginType: LoginType.PHONE);
       if (result.result == Result.ok) {
         // resend a request to fetch data
-       return _retryResponse(response,dio);
-      }else{
+        return _retryResponse(response, dio);
+      } else {
         return response;
       }
     } on Exception catch (e) {
