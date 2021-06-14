@@ -1,5 +1,6 @@
 import 'package:cruise/src/common/auth.dart';
 import 'package:cruise/src/common/cruise_user.dart';
+import 'package:cruise/src/common/utils/navigation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -20,9 +21,15 @@ class ProfilePage extends HookWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFEFEFEF),
       appBar: AppBar(
+        leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              NavigationService.instance.navigateToReplacement("home");
+            }),
         title: Text(
           "个人信息",
         ),
+
         actions: [
           if (isMe)
             IconButton(

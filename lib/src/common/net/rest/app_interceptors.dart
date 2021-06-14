@@ -8,6 +8,7 @@ import 'package:cruise/src/models/api/login_type.dart';
 import 'package:cruise/src/models/api/response_status.dart';
 import 'package:cruise/src/models/response.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../../config/global_config.dart';
 import 'http_result.dart';
@@ -58,7 +59,13 @@ class AppInterceptors extends InterceptorsWrapper {
         });
         return res;
       } else {
-        NavigationService.instance.navigateToReplacement("login");
+        //NavigationService.instance.navigateToReplacement("login");
+        /**
+         * if login invalid
+         * jump to the login page
+         * it will clear all page except / page
+         */
+        NavigationService.instance.navigationKey.currentState!.pushNamedAndRemoveUntil("login", ModalRoute.withName("/"));
         return response;
       }
     } else {
