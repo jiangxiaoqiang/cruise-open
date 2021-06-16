@@ -1,5 +1,8 @@
 import 'package:cruise/src/common/auth.dart';
 import 'package:cruise/src/common/cruise_user.dart';
+import 'package:cruise/src/common/utils/navigation_service.dart';
+import 'package:cruise/src/models/Item.dart';
+import 'package:cruise/src/models/enumn/stories_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -20,9 +23,19 @@ class ProfilePage extends HookWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFEFEFEF),
       appBar: AppBar(
+        leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Map<String,Object> args = new Map();
+              args.putIfAbsent("selectIndex", () => 3);
+              args.putIfAbsent("storiesType", () => StoriesType.profile);
+              args.putIfAbsent("autoTriggerNav", () => true);
+              NavigationService.instance.navigateToReplacementWithParam("home",args);
+            }),
         title: Text(
           "个人信息",
         ),
+
         actions: [
           if (isMe)
             IconButton(

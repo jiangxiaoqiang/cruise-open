@@ -32,7 +32,7 @@ void main() async {
     runApp(
       CruiseApp(
         theme: theme,
-        view: view,
+        view: view
       ),
     );
   },(Object error,StackTrace stackTrace){

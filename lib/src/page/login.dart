@@ -1,7 +1,9 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:cruise/src/common/auth.dart';
+import 'package:cruise/src/common/nav/nav_util.dart';
 import 'package:cruise/src/common/style/global_style.dart';
 import 'package:cruise/src/common/net/rest/http_result.dart';
+import 'package:cruise/src/common/utils/navigation_service.dart';
 import 'package:cruise/src/component/user_agreement.dart';
 import 'package:cruise/src/models/api/login_type.dart';
 import 'package:cruise/src/page/reg/reg.dart';
@@ -135,7 +137,9 @@ class LoginPage extends HookWidget {
                                         ),
                                       );
                                     } else {
-                                      Navigator.pop(context);
+                                      NavUtil.navProfile(context);
+                                      //NavigationService.instance.navigateToReplacement("home");
+                                      //Navigator.pop(context);
                                     }
                                     submitting.value = false;
                                   }

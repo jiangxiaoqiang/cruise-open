@@ -9,6 +9,10 @@ class NavigationService {
     navigationKey = GlobalKey<NavigatorState>();
   }
 
+  Future<dynamic> navigateToReplacementWithParam(String _rn,Map<String,Object> args) {
+    return navigationKey.currentState!.pushReplacementNamed(_rn,result: null,arguments: args);
+  }
+
   Future<dynamic> navigateToReplacement(String _rn) {
     return navigationKey.currentState!.pushReplacementNamed(_rn);
   }
