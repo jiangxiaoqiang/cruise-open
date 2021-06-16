@@ -5,6 +5,7 @@ import 'package:cruise/src/models/api/login_type.dart';
 import 'package:device_info/device_info.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:cruise/src/common/config/global_config.dart' as global;
+import 'package:global_configuration/global_configuration.dart';
 import 'config/global_config.dart';
 import 'cruise_user.dart';
 import 'net/rest/http_result.dart';
@@ -119,6 +120,7 @@ class Auth {
 
   static Future<AuthResult> login({required String username, required String password, required LoginType loginType}) async {
     List<String> deviceInfo = await CommonUtils.getDeviceDetails();
+    int appId = GlobalConfiguration().get("appId");
     Map body = {
       "phone": username,
       "password": password,
@@ -126,7 +128,7 @@ class Auth {
       "loginType": loginType.statusCode,
       "deviceId": deviceInfo[2],
       "deviceType": int.parse(deviceInfo[1]),
-      "app": 1
+      "app": appId
     };
     final response = await RestClient.postHttpNewDio("/post/user/login",body);
     if (RestClient.respSuccess(response)) {
