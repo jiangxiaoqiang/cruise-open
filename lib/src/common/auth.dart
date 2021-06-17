@@ -135,11 +135,13 @@ class Auth {
       Map result = response.data["result"];
       String token = result["token"];
       String accessToken = result["accessToken"];
+      String refreshToken = result["refreshToken"];
       String registerTime = result["registerTime"];
       await storage.write(key: "username", value: username);
       await storage.write(key: "password", value: password);
       await storage.write(key: "token", value: token);
       await storage.write(key: "accessToken", value: accessToken);
+      await storage.write(key: "refreshToken", value: refreshToken);
       await storage.write(key: "registerTime", value: registerTime);
       return AuthResult(message: "Login success", result: Result.ok);
     } else {
