@@ -118,6 +118,37 @@ class Auth {
     }
   }
 
+  static Future<AuthResult> refreshAccessToken({required String refreshToken}) async {
+    Map body = {
+      "refreshToken": refreshToken,
+    };
+    final response = await RestClient.postHttpNewDio("/post/auth/access_token/refresh",body);
+    if (RestClient.respSuccess(response)) {
+      Map result = response.data["result"];
+      String accessToken = result["accessToken"];
+      await storage.write(key: "accessToken", value: accessToken);
+      return AuthResult(message: "refresh success", result: Result.ok);
+    } else {
+      return AuthResult(message: "refresh access token failed", result: Result.error);
+    }
+  }
+
+  static Future<AuthResult> refreshRefreshToken({required String phone,required String password}) async {
+    Map body = {
+      "phone": phone,
+      "password": password
+    };
+    final response = await RestClient.postHttpNewDio("/post/auth/refresh_token/refresh",body);
+    if (RestClient.respSuccess(response)) {
+      Map result = response.data["result"];
+      String refreshToken = result["refreshToken"];
+      await storage.write(key: "refreshToken", value: refreshToken);
+      return AuthResult(message: "refresh success", result: Result.ok);
+    } else {
+      return AuthResult(message: "refresh refresh token failed", result: Result.error);
+    }
+  }
+
   static Future<AuthResult> login({required String username, required String password, required LoginType loginType}) async {
     List<String> deviceInfo = await CommonUtils.getDeviceDetails();
     int appId = GlobalConfiguration().get("appId");
