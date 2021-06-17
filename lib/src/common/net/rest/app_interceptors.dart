@@ -30,8 +30,12 @@ class AppInterceptors extends InterceptorsWrapper {
   @override
   Future onResponse(Response response, ResponseInterceptorHandler handler) async {
     Response handleResponse = await autoLogin(response);
-    Response handleAccessToken = await handleAccessTokenExpired(handleResponse);
-    return super.onResponse(handleAccessToken, handler);
+    try {
+      Response handleAccessToken = await handleAccessTokenExpired(handleResponse);
+    } on Exception catch (e) {
+      AppLogHandler.logErrorException("refresh refresh token failed", e);
+    }
+    return super.onResponse(handleResponse, handler);
   }
 
   Future<Response> handleRefreshTokenExpired(Response response) async {
