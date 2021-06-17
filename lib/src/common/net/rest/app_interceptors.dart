@@ -21,6 +21,10 @@ class AppInterceptors extends InterceptorsWrapper {
       String? token = await storage.read(key: "token");
       options.headers["token"] = token;
     }
+    if (!options.headers.containsKey("accessToken")) {
+      String? accessToken = await storage.read(key: "accessToken");
+      options.headers["accessToken"] = accessToken;
+    }
     handler.next(options);
   }
 
