@@ -1,11 +1,11 @@
+import 'package:cruise/src/common/config/global_config.dart' as global;
 import 'package:cruise/src/common/net/rest/rest_clinet.dart';
 import 'package:cruise/src/common/utils/common_utils.dart';
 import 'package:cruise/src/common/utils/navigation_service.dart';
 import 'package:cruise/src/models/api/login_type.dart';
-import 'package:device_info/device_info.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:cruise/src/common/config/global_config.dart' as global;
 import 'package:global_configuration/global_configuration.dart';
+
 import 'config/global_config.dart';
 import 'cruise_user.dart';
 import 'net/rest/http_result.dart';
@@ -27,9 +27,9 @@ class Auth {
   static Future<bool> isLoggedIn() async {
     final storage = new FlutterSecureStorage();
     String? username = await storage.read(key: "username");
-    if(username == null){
+    if (username == null) {
       return true;
-    }else{
+    } else {
       return false;
     }
   }
@@ -38,21 +38,17 @@ class Auth {
     final storage = new FlutterSecureStorage();
     String? userName = await storage.read(key: "username");
     String? registerTime = await storage.read(key: "registerTime");
-    CruiseUser user = new CruiseUser(phone: userName,registerTime:registerTime );
+    CruiseUser user = new CruiseUser(phone: userName, registerTime: registerTime);
     return user;
   }
 
   static Future<AuthResult> vote({required String itemId}) async {
-    Map body = {
-      "id": itemId
-    };
-    final response = await RestClient.putHttp("/post/article/upvote",body);
+    Map body = {"id": itemId};
+    final response = await RestClient.putHttp("/post/article/upvote", body);
     if (RestClient.respSuccess(response)) {
       return AuthResult(message: "SMS send success", result: Result.ok);
     } else {
-      return AuthResult(
-          message: "SMS send failed. Did you mistype your credentials?",
-          result: Result.error);
+      return AuthResult(message: "SMS send failed. Did you mistype your credentials?", result: Result.error);
     }
   }
 
@@ -65,18 +61,14 @@ class Auth {
   }
 
   static Future<AuthResult> sms({required String phone}) async {
-    Map body = {
-      "phone": phone
-    };
-    final response = await RestClient.postHttp("/post/user/sms",body);
+    Map body = {"phone": phone};
+    final response = await RestClient.postHttp("/post/user/sms", body);
     if (RestClient.respSuccess(response)) {
       final storage = new FlutterSecureStorage();
       await storage.write(key: "phone", value: phone);
       return AuthResult(message: "SMS send success", result: Result.ok);
     } else {
-      return AuthResult(
-          message: response.data["msg"],
-          result: Result.error);
+      return AuthResult(message: response.data["msg"], result: Result.error);
     }
   }
 
@@ -86,16 +78,14 @@ class Auth {
       "password": password,
       "goto": 'news',
     };
-    final response = await RestClient.postHttp("/post/user/set/pwd",body);
+    final response = await RestClient.postHttp("/post/user/set/pwd", body);
     if (RestClient.respSuccess(response)) {
       final storage = new FlutterSecureStorage();
       await storage.write(key: "username", value: phone);
       await storage.write(key: "password", value: password);
       return AuthResult(message: "Login success", result: Result.ok);
-    }  else {
-      return AuthResult(
-          message: "Login failed. Did you mistype your credentials?",
-          result: Result.error);
+    } else {
+      return AuthResult(message: "Login failed. Did you mistype your credentials?", result: Result.error);
     }
   }
 
@@ -105,16 +95,14 @@ class Auth {
       "verifyCode": verifyCode,
       "goto": 'news',
     };
-    final response = await RestClient.postHttp("/post/user/verify",body);
+    final response = await RestClient.postHttp("/post/user/verify", body);
     if (RestClient.respSuccess(response)) {
       final storage = new FlutterSecureStorage();
       await storage.write(key: "phone", value: phone);
       await storage.write(key: "verifyCode", value: verifyCode);
       return AuthResult(message: "Login success", result: Result.ok);
     } else {
-      return AuthResult(
-          message: "Login failed. Did you mistype your credentials?",
-          result: Result.error);
+      return AuthResult(message: "Login failed. Did you mistype your credentials?", result: Result.error);
     }
   }
 
@@ -122,27 +110,32 @@ class Auth {
     Map body = {
       "refreshToken": refreshToken,
     };
-    final response = await RestClient.postHttpNewDio("/post/auth/access_token/refresh",body);
+    final response = await RestClient.postHttpNewDio("/post/auth/access_token/refresh", body);
     if (RestClient.respSuccess(response)) {
       Map result = response.data["result"];
       String accessToken = result["accessToken"];
       await storage.write(key: "accessToken", value: accessToken);
-      return AuthResult(message: "refresh success", result: Result.ok);
+      String? username = await storage.read(key: "username");
+      String? password = await storage.read(key: "password");
+      if (username != null && password != null) {
+        return refreshRefreshToken(phone: username, password: password);
+      } else {
+        return AuthResult(message: "refresh access token failed", result: Result.error);
+      }
     } else {
       return AuthResult(message: "refresh access token failed", result: Result.error);
     }
   }
 
-  static Future<AuthResult> refreshRefreshToken({required String phone,required String password}) async {
-    Map body = {
-      "phone": phone,
-      "password": password
-    };
-    final response = await RestClient.postHttpNewDio("/post/auth/refresh_token/refresh",body);
+  static Future<AuthResult> refreshRefreshToken({required String phone, required String password}) async {
+    Map body = {"phone": phone, "password": password};
+    final response = await RestClient.postHttpNewDio("/post/auth/refresh_token/refresh", body);
     if (RestClient.respSuccess(response)) {
       Map result = response.data["result"];
       String refreshToken = result["refreshToken"];
+      String accessToken = result["accessToken"];
       await storage.write(key: "refreshToken", value: refreshToken);
+      await storage.write(key: "accessToken", value: accessToken);
       return AuthResult(message: "refresh success", result: Result.ok);
     } else {
       return AuthResult(message: "refresh refresh token failed", result: Result.error);
@@ -161,7 +154,7 @@ class Auth {
       "deviceType": int.parse(deviceInfo[1]),
       "app": appId
     };
-    final response = await RestClient.postHttpNewDio("/post/user/login",body);
+    final response = await RestClient.postHttpNewDio("/post/user/login", body);
     if (RestClient.respSuccess(response)) {
       Map result = response.data["result"];
       String token = result["token"];
