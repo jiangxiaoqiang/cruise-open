@@ -16,10 +16,6 @@ import 'http_result.dart';
 class AppInterceptors extends InterceptorsWrapper {
   @override
   Future<void> onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
-    if (!options.headers.containsKey("token")) {
-      String? token = await storage.read(key: "token");
-      options.headers["token"] = token;
-    }
     if (!options.headers.containsKey("accessToken")) {
       String? accessToken = await storage.read(key: "accessToken");
       options.headers["accessToken"] = accessToken;
@@ -115,8 +111,6 @@ class AppInterceptors extends InterceptorsWrapper {
 
   Future<Response> _retryResponse(Response response, Dio dio) async {
     // replace the new token
-    String? token = await storage.read(key: "token");
-    response.requestOptions.headers["token"] = token;
     String? accessToken = await storage.read(key: "accessToken");
     response.requestOptions.headers["accessToken"] = accessToken;
     final options = new Options(
