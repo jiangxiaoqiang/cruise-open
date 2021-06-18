@@ -32,6 +32,7 @@ class AppInterceptors extends InterceptorsWrapper {
     Response handleResponse = await autoLogin(response);
     try {
       Response handleAccessToken = await handleAccessTokenExpired(handleResponse);
+      print(handleAccessToken.statusCode);
     } on Exception catch (e) {
       AppLogHandler.logErrorException("refresh refresh token failed", e);
     }
@@ -60,7 +61,7 @@ class AppInterceptors extends InterceptorsWrapper {
 
   Future<Response> handleAccessTokenExpired(Response response) async {
     String accessExpiredCode = ResponseStatus.ACCESS_TOKEN_EXPIRED.statusCode;
-    String statusCode = response.data["statusCode"];
+    String statusCode = response.data["resultCode"];
     if (accessExpiredCode == statusCode) {
       String? refreshToken = await storage.read(key: "refreshToken");
       if (refreshToken == null) {

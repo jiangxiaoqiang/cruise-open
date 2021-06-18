@@ -3,6 +3,7 @@ import 'package:cruise/src/common/net/rest/rest_clinet.dart';
 import 'package:cruise/src/common/utils/common_utils.dart';
 import 'package:cruise/src/common/utils/navigation_service.dart';
 import 'package:cruise/src/models/api/login_type.dart';
+import 'package:cruise/src/models/api/response_status.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:global_configuration/global_configuration.dart';
 
@@ -111,10 +112,14 @@ class Auth {
       "refreshToken": refreshToken,
     };
     final response = await RestClient.postHttpNewDio("/post/auth/access_token/refresh", body);
+    String refreshExpiredCode = ResponseStatus.REFRESH_TOKEN_EXPIRED.statusCode;
+    String statusCode = response.data["resultCode"];
     if (RestClient.respSuccess(response)) {
       Map result = response.data["result"];
       String accessToken = result["accessToken"];
       await storage.write(key: "accessToken", value: accessToken);
+      return AuthResult(message: "ok", result: Result.ok);
+    } else if(refreshExpiredCode == statusCode){
       String? username = await storage.read(key: "username");
       String? password = await storage.read(key: "password");
       if (username != null && password != null) {
@@ -128,13 +133,21 @@ class Auth {
   }
 
   static Future<AuthResult> refreshRefreshToken({required String phone, required String password}) async {
-    Map body = {"phone": phone, "password": password};
+    List<String> deviceInfo = await CommonUtils.getDeviceDetails();
+    int appId = GlobalConfiguration().get("appId");
+    Map body = {
+      "phone": phone,
+      "password": password,
+      "deviceId": deviceInfo[2],
+      "app": appId
+    };
     final response = await RestClient.postHttpNewDio("/post/auth/refresh_token/refresh", body);
     if (RestClient.respSuccess(response)) {
       Map result = response.data["result"];
       String refreshToken = result["refreshToken"];
       String accessToken = result["accessToken"];
       await storage.write(key: "refreshToken", value: refreshToken);
+      await storage.write(key: "accessToken", value: accessToken);
       await storage.write(key: "accessToken", value: accessToken);
       return AuthResult(message: "refresh success", result: Result.ok);
     } else {
