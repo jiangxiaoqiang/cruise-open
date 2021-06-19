@@ -18,10 +18,8 @@ Future _onInit(Action action, Context<ChannelListDefaultState> ctx) async {
   ArticleRequest articleRequest = new ArticleRequest(
       pageSize: 15, pageNum: 1, storiesType: StoriesType.channels);
   List<Channel> channels = await Repo.getChannels(articleRequest);
-  if(channels.length > 0) {
-    ctx.dispatch(
+  ctx.dispatch(
         ChannelListDefaultActionCreator.onLoadingMoreChannelsUpdate(channels));
-  }
 }
 
 Future _onLoadingMoreChannels(
@@ -34,8 +32,6 @@ Future _onLoadingMoreChannels(
     articleRequest.offset = homeListDefaultState.articleRequest.offset;
   }
   List<Channel> channels = await Repo.getChannels(articleRequest);
-  if (channels.length > 0) {
-    ctx.dispatch(
+  ctx.dispatch(
         ChannelListDefaultActionCreator.onLoadingMoreChannelsUpdate(channels));
-  }
 }
