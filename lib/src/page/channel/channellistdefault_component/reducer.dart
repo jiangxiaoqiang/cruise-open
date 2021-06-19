@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:cruise/src/models/Channel.dart';
+import 'package:cruise/src/models/Item.dart';
 import 'package:cruise/src/page/home/components/homelistdefault_component/action.dart';
 import 'package:fish_redux/fish_redux.dart';
 
@@ -34,6 +35,7 @@ ChannelListDefaultState _onSetChannelIds(ChannelListDefaultState state, Action a
   final ChannelListDefaultState newState = state.clone();
   ArticlePayload payload = (action.payload as ArticlePayload);
   newState.articleRequest = payload.articleRequest!;
+  newState.channelLoadingStatus = LoadingStatus.complete;
   if (payload.articleRequest!.pageNum == 1 && payload.articleIds!.isNotEmpty) {
     newState.articleRequest.offset = payload.articleIds!.reduce(max);
   }

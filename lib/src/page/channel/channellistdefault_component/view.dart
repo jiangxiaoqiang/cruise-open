@@ -62,8 +62,14 @@ Widget buildView(ChannelListDefaultState state, Dispatch dispatch, ViewService v
       child: Builder(
         builder: (context) {
           if (state.channelListState.channels.length == 0) {
-            // when the article not fetched, show loading animation
-            return Center(child: CircularProgressIndicator());
+            if(state.channelLoadingStatus == LoadingStatus.complete) {
+              // when the channel not fetched, show loading animation
+              return Center(child: Text("无内容"));
+            }else if(state.channelLoadingStatus == LoadingStatus.loading){
+              return Center(child: CircularProgressIndicator());
+            }else{
+              return Center(child: Text("无内容"));
+            }
           }
           return NotificationListener(
               onNotification: (scrollNotification) {

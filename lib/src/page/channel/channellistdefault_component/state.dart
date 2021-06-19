@@ -10,6 +10,7 @@ class ChannelListDefaultState implements Cloneable<ChannelListDefaultState> {
       pageNum: 1, pageSize: 15, storiesType: StoriesType.channels);
 
   ChannelListState channelListState = ChannelListState();
+  LoadingStatus channelLoadingStatus = LoadingStatus.loading;
 
   @override
   ChannelListDefaultState clone() {

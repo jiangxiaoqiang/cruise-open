@@ -58,6 +58,8 @@ class Auth {
     await storage.delete(key: "username");
     await storage.delete(key: "password");
     await storage.delete(key: "registerTime");
+    await storage.delete(key: "accessToken");
+    await storage.delete(key: "freshToken");
     return true;
   }
 
