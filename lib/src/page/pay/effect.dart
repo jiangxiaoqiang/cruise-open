@@ -9,6 +9,7 @@ import 'action.dart';
 import 'consumable_store.dart';
 import 'state.dart';
 
+
 Effect<PayState> buildEffect() {
   return combineEffects(<Object, Effect<PayState>>{
     Lifecycle.initState: _onInit,
