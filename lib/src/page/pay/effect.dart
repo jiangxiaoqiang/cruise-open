@@ -50,7 +50,7 @@ void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList, Context
       if (purchaseDetails.status == PurchaseStatus.error) {
         _handleError(purchaseDetails.error!, ctx);
       } else if (purchaseDetails.status == PurchaseStatus.purchased || purchaseDetails.status == PurchaseStatus.restored) {
-        PayVerifyModel payVerifyModel = PayVerifyModel(orderId: purchaseDetails.purchaseID, receipt: purchaseDetails.verificationData, isSandBox: true);
+        PayVerifyModel payVerifyModel = PayVerifyModel(orderId: purchaseDetails.purchaseID, receipt: purchaseDetails.verificationData.serverVerificationData, isSandBox: true);
         Pay.verifyUserPay(payVerifyModel);
       }
       if (purchaseDetails.pendingCompletePurchase) {
