@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cruise/src/common/log/cruise_log_handler.dart';
 import 'package:cruise/src/common/pay.dart';
+import 'package:cruise/src/common/rest_log.dart';
 import 'package:cruise/src/models/pay/pay_model.dart';
 import 'package:cruise/src/models/pay/pay_verify_model.dart';
 import 'package:fish_redux/fish_redux.dart';
@@ -27,6 +28,7 @@ String? _queryProductError;
 const List<String> _kProductIds = <String>[_kConsumableId];
 
 Future _onInit(Action action, Context<PayState> ctx) async {
+  RestLog.logger("Initial Pay...");
   final InAppPurchase _inAppPurchase = InAppPurchase.instance;
   // https://pub.dev/packages/in_app_purchase
   // https://joebirch.co/flutter/adding-in-app-purchases-to-flutter-apps/
