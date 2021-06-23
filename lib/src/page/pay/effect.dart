@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:cruise/src/common/log/cruise_log_handler.dart';
+import 'package:cruise/src/common/pay.dart';
 import 'package:cruise/src/models/pay/pay_model.dart';
+import 'package:cruise/src/models/pay/pay_verify_model.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
@@ -48,7 +50,10 @@ void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList, Context
     } else {
       if (purchaseDetails.status == PurchaseStatus.error) {
         _handleError(purchaseDetails.error!, ctx);
-      } else if (purchaseDetails.status == PurchaseStatus.purchased || purchaseDetails.status == PurchaseStatus.restored) {}
+      } else if (purchaseDetails.status == PurchaseStatus.purchased || purchaseDetails.status == PurchaseStatus.restored) {
+        PayVerifyModel payVerifyModel = PayVerifyModel(orderId: purchaseDetails.purchaseID, receipt: purchaseDetails.verificationData.serverVerificationData, isSandBox: true);
+        Pay.verifyUserPay(payVerifyModel);
+      }
       if (purchaseDetails.pendingCompletePurchase) {
         await InAppPurchase.instance.completePurchase(purchaseDetails);
       }

@@ -16,6 +16,7 @@ class ChannelListDefaultState implements Cloneable<ChannelListDefaultState> {
   ChannelListDefaultState clone() {
     return ChannelListDefaultState()
       ..articleRequest = this.articleRequest
+      ..channelLoadingStatus = this.channelLoadingStatus
       ..channelListState = this.channelListState;
   }
 }
