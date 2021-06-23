@@ -21,8 +21,8 @@ class Repo {
   final baseUrl = global.baseUrl;
 
   static Future<List<Item>> getArticles(ArticleRequest request) async {
-    List<Item> articles = await _getArticles(request);
-    return articles;
+      List<Item> articles = await _getArticles(request);
+      return articles;
   }
 
   static Future<List<Channel>> getChannels(ArticleRequest request) async {

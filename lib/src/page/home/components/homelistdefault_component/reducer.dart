@@ -60,6 +60,7 @@ HomeListDefaultState _onSetArticleIds(HomeListDefaultState state, Action action)
   ArticlePayload payload = (action.payload as ArticlePayload);
   ArticleListState articleListState = state.articleListState.clone();
   articleListState.articles = payload.articles!;
+  articleListState.loadingStatus = LoadingStatus.complete;
   newState.articleRequest = payload.articleRequest!;
   newState.currentStoriesType = state.currentStoriesType;
   newState.articleLoadingStatus = LoadingStatus.complete;
