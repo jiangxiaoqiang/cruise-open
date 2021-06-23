@@ -2,7 +2,7 @@ import 'package:cruise/src/models/pay/pay_model.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 //TODO replace with your own action
-enum PayAction { update,set_consumable,change_pending }
+enum PayAction { update,set_consumable,change_pending,verify_purchase }
 
 class PayActionCreator {
 
@@ -16,5 +16,9 @@ class PayActionCreator {
 
   static Action onChangePending(bool pendingStatus) {
     return Action(PayAction.change_pending,payload: pendingStatus);
+  }
+
+  static Action onVerifyPurchase(bool pendingStatus) {
+    return Action(PayAction.verify_purchase,payload: pendingStatus);
   }
 }

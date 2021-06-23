@@ -47,7 +47,9 @@ void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList, Context
     } else {
       if (purchaseDetails.status == PurchaseStatus.error) {
         _handleError(purchaseDetails.error!, ctx);
-      } else if (purchaseDetails.status == PurchaseStatus.purchased || purchaseDetails.status == PurchaseStatus.restored) {}
+      } else if (purchaseDetails.status == PurchaseStatus.purchased || purchaseDetails.status == PurchaseStatus.restored) {
+
+      }
       if (purchaseDetails.pendingCompletePurchase) {
         await InAppPurchase.instance.completePurchase(purchaseDetails);
       }

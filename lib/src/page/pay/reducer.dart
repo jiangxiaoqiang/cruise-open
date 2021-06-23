@@ -10,6 +10,7 @@ Reducer<PayState> buildReducer() {
       PayAction.set_consumable: _onSetConsumable,
       PayAction.change_pending: _onChangePending,
       PayAction.update:_onUpdate,
+      PayAction.verify_purchase: _verifyPurchase
     },
   );
 }
@@ -29,6 +30,13 @@ PayState _onSetConsumable(PayState state, Action action) {
 }
 
 PayState _onUpdate(PayState state, Action action) {
+  final PayState newState = state.clone();
+  PayModel payModel = action.payload as PayModel;
+  newState.payModel = payModel;
+  return newState;
+}
+
+PayState _verifyPurchase(PayState state, Action action) {
   final PayState newState = state.clone();
   PayModel payModel = action.payload as PayModel;
   newState.payModel = payModel;
