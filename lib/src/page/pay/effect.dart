@@ -12,7 +12,6 @@ import 'action.dart';
 import 'consumable_store.dart';
 import 'state.dart';
 
-
 Effect<PayState> buildEffect() {
   return combineEffects(<Object, Effect<PayState>>{
     Lifecycle.initState: _onInit,
@@ -38,6 +37,7 @@ Future _onInit(Action action, Context<PayState> ctx) async {
   }, onDone: () {
     _subscription.cancel();
   }, onError: (error) {
+    RestLog.logger("purchaseUpdated error:" + error.toString());
     // handle error here.
     CruiseLogHandler.logErrorException("iap initial error", error);
   });
@@ -51,9 +51,12 @@ void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList, Context
       _showPendingUI(ctx);
     } else {
       if (purchaseDetails.status == PurchaseStatus.error) {
+        RestLog.logger("PurchaseStatus error");
         _handleError(purchaseDetails.error!, ctx);
       } else if (purchaseDetails.status == PurchaseStatus.purchased || purchaseDetails.status == PurchaseStatus.restored) {
-        PayVerifyModel payVerifyModel = PayVerifyModel(orderId: purchaseDetails.purchaseID, receipt: purchaseDetails.verificationData.serverVerificationData, isSandBox: true);
+        RestLog.logger("trigger verify");
+        PayVerifyModel payVerifyModel =
+            PayVerifyModel(orderId: purchaseDetails.purchaseID, receipt: purchaseDetails.verificationData.serverVerificationData, isSandBox: true);
         Pay.verifyUserPay(payVerifyModel);
       }
       if (purchaseDetails.pendingCompletePurchase) {
