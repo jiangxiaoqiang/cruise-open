@@ -48,13 +48,14 @@ Future _onInit(Action action, Context<PayState> ctx) async {
 void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList, Context<PayState> ctx) {
   purchaseDetailsList.forEach((PurchaseDetails purchaseDetails) async {
     if (purchaseDetails.status == PurchaseStatus.pending) {
+      RestLog.logger("PurchaseStatus pending..." + ctx.state.payModel.isAvailable.toString());
       _showPendingUI(ctx);
     } else {
       if (purchaseDetails.status == PurchaseStatus.error) {
         RestLog.logger("PurchaseStatus error");
         _handleError(purchaseDetails.error!, ctx);
       } else if (purchaseDetails.status == PurchaseStatus.purchased || purchaseDetails.status == PurchaseStatus.restored) {
-        RestLog.logger("trigger verify");
+        RestLog.logger("purchase successful trigger verify");
         PayVerifyModel payVerifyModel =
             PayVerifyModel(orderId: purchaseDetails.purchaseID, receipt: purchaseDetails.verificationData.serverVerificationData, isSandBox: true);
         Pay.verifyUserPay(payVerifyModel);
