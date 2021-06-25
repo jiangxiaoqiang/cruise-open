@@ -7,10 +7,8 @@ class PayVerifyModel {
 
   Map<String, dynamic> toMap() {
     return {
-      //'pageSize': pageSize,
-      //'pageNum': pageNum,
-      //'offset': offset,
-      //'channelId': channelId
+      'orderId': orderId,
+      'receipt': receipt
     };
   }
 }

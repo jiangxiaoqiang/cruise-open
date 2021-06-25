@@ -19,9 +19,10 @@ class Pay {
         if (channelResult != null) {
           // Pay attention: channelResult would be null sometimes
           String jsonContent = JsonEncoder().convert(channelResult);
+          RestLog.logger("server back result" + jsonContent);
         }
       } else {
-        RestLog.logger("send verify error" + payVerifyModel.toString());
+        RestLog.logger("send verify error:" + response.toString());
         AppLogHandler.logError(RestApiError('Item failed to fetch.'),
             JsonEncoder().convert(response));
       }
