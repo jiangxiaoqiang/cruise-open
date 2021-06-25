@@ -4,7 +4,8 @@ import 'dart:convert';
 import 'package:cruise/src/common/config/global_config.dart' as global;
 import 'package:cruise/src/common/rest_log.dart';
 import 'package:cruise/src/models/pay/pay_verify_model.dart';
-import 'package:wheel/wheel.dart' show AppLogHandler,RestClient,RestApiError;
+import 'package:wheel/wheel.dart' show AppLogHandler,RestApiError;
+import 'net/rest/rest_clinet.dart';
 
 class Pay {
   final baseUrl = global.baseUrl;
@@ -12,7 +13,7 @@ class Pay {
   static Future<void> verifyUserPay(PayVerifyModel payVerifyModel) async {
     try {
       Map jsonMap = payVerifyModel.toMap();
-      final response = await RestClient.postHttp( global.baseUrl +
+      final response = await RestClient.postHttp(
           "/post/pay/v1/success", jsonMap);
       if (response.statusCode == 200 && response.data["statusCode"] == "200") {
         Map channelResult = response.data["result"];

@@ -6,6 +6,7 @@ import 'package:cruise/src/models/api/login_type.dart';
 import 'package:cruise/src/models/api/response_status.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:global_configuration/global_configuration.dart';
+import 'package:wheel/wheel.dart' show SecureStorageUtil;
 
 import 'config/global_config.dart';
 import 'cruise_user.dart';
@@ -120,6 +121,7 @@ class Auth {
       Map result = response.data["result"];
       String accessToken = result["accessToken"];
       await storage.write(key: "accessToken", value: accessToken);
+      SecureStorageUtil.putString("accessToken", accessToken);
       return AuthResult(message: "ok", result: Result.ok);
     } else if(refreshExpiredCode == statusCode){
       String? username = await storage.read(key: "username");
@@ -150,7 +152,8 @@ class Auth {
       String accessToken = result["accessToken"];
       await storage.write(key: "refreshToken", value: refreshToken);
       await storage.write(key: "accessToken", value: accessToken);
-      await storage.write(key: "accessToken", value: accessToken);
+      SecureStorageUtil.putString("refreshToken", refreshToken);
+      SecureStorageUtil.putString("accessToken", accessToken);
       return AuthResult(message: "refresh success", result: Result.ok);
     } else {
       return AuthResult(message: "refresh refresh token failed", result: Result.error);
@@ -175,6 +178,11 @@ class Auth {
       String accessToken = result["accessToken"];
       String refreshToken = result["refreshToken"];
       String registerTime = result["registerTime"];
+      SecureStorageUtil.putString("username", username);
+      SecureStorageUtil.putString("password", password);
+      SecureStorageUtil.putString("accessToken", accessToken);
+      SecureStorageUtil.putString("refreshToken", refreshToken);
+      SecureStorageUtil.putString("registerTime", registerTime);
       await storage.write(key: "username", value: username);
       await storage.write(key: "password", value: password);
       await storage.write(key: "accessToken", value: accessToken);
