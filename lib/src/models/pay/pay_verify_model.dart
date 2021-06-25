@@ -8,7 +8,8 @@ class PayVerifyModel {
   Map<String, dynamic> toMap() {
     return {
       'orderId': orderId,
-      'receipt': receipt
+      'receipt': receipt,
+      'isSandBox': isSandBox
     };
   }
 }
