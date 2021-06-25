@@ -12,7 +12,7 @@ class Pay {
   static Future<void> verifyUserPay(PayVerifyModel payVerifyModel) async {
     try {
       Map jsonMap = payVerifyModel.toMap();
-      final response = await RestClient.postHttp(
+      final response = await RestClient.postHttp( global.baseUrl +
           "/post/pay/v1/success", jsonMap);
       if (response.statusCode == 200 && response.data["statusCode"] == "200") {
         Map channelResult = response.data["result"];
