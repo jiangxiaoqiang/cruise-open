@@ -57,8 +57,14 @@ void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList, Context
       } else if (purchaseDetails.status == PurchaseStatus.purchased || purchaseDetails.status == PurchaseStatus.restored) {
         RestLog.logger("purchase successful trigger verify");
         PayVerifyModel payVerifyModel =
-            PayVerifyModel(orderId: purchaseDetails.purchaseID, receipt: purchaseDetails.verificationData.serverVerificationData, isSandBox: true);
-        Pay.verifyUserPay(payVerifyModel);
+            PayVerifyModel(orderId: purchaseDetails.purchaseID, receipt: purchaseDetails.verificationData.serverVerificationData);
+        int result = await Pay.verifyUserPay(payVerifyModel);
+        if(result == 0){
+          RestLog.logger("verify success:" + result.toString());
+          await InAppPurchase.instance.completePurchase(purchaseDetails);
+        }else{
+          RestLog.logger("verify failed:" + result.toString());
+        }
       }
       if (purchaseDetails.pendingCompletePurchase) {
         await InAppPurchase.instance.completePurchase(purchaseDetails);

@@ -10,18 +10,13 @@ import 'net/rest/rest_clinet.dart';
 class Pay {
   final baseUrl = global.baseUrl;
 
-  static Future<void> verifyUserPay(PayVerifyModel payVerifyModel) async {
+  static Future<int> verifyUserPay(PayVerifyModel payVerifyModel) async {
     try {
       Map jsonMap = payVerifyModel.toMap();
-      final response = await RestClient.postHttp(
-          "/post/pay/v1/success", jsonMap);
+      final response = await RestClient.postHttp("/post/pay/v1/success", jsonMap);
       if (response.statusCode == 200 && response.data["statusCode"] == "200") {
-        Map channelResult = response.data["result"];
-        if (channelResult != null) {
-          // Pay attention: channelResult would be null sometimes
-          String jsonContent = JsonEncoder().convert(channelResult);
-          RestLog.logger("server back result" + jsonContent);
-        }
+        int result = response.data["result"];
+        return result;
       } else {
         RestLog.logger("send verify error:" + response.toString());
         AppLogHandler.logError(RestApiError('Item failed to fetch.'),
@@ -30,5 +25,6 @@ class Pay {
     }  on Exception catch (e) {
       RestLog.logger("send verify http error" +e.toString());
     }
+    return -1;
   }
 }
