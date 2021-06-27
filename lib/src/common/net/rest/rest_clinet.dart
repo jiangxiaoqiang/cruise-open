@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import '../../config/global_config.dart';
 
 class RestClient {
-  static Dio dioInstance = Dio(BaseOptions(connectTimeout: 10000, receiveTimeout: 30000, baseUrl: "$baseUrl"))
+  static Dio dioInstance = Dio(BaseOptions(connectTimeout: 20000, receiveTimeout: 30000, baseUrl: "$baseUrl"))
       ..interceptors.add(AppInterceptors());
 
   static Dio createDio() {

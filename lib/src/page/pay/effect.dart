@@ -94,6 +94,7 @@ void _handleError(IAPError error, Context<PayState> ctx) {
       loading: false,
       queryProductError: error.message,
       consumables: []);
+  RestLog.logger("IAPError:" + error.toString());
   CruiseLogHandler.logErrorException("IAPError", error);
   ctx.dispatch(PayActionCreator.onUpdate(payModel));
 }
