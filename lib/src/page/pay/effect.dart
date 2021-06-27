@@ -55,15 +55,7 @@ void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList, Context
         RestLog.logger("PurchaseStatus error");
         _handleError(purchaseDetails.error!, ctx);
       } else if (purchaseDetails.status == PurchaseStatus.restored) {
-        RestLog.logger("purchase successful trigger verify");
-        PayVerifyModel payVerifyModel = PayVerifyModel(orderId: purchaseDetails.purchaseID, receipt: purchaseDetails.verificationData.serverVerificationData);
-        int result = await Pay.verifyReceipt(payVerifyModel);
-        if(result == 0){
-          RestLog.logger("verify success:" + result.toString());
-          await InAppPurchase.instance.completePurchase(purchaseDetails);
-        }else{
-          RestLog.logger("verify failed:" + result.toString());
-        }
+        verifyReceipt(purchaseDetails);
       }else if(purchaseDetails.status == PurchaseStatus.purchased ){
         RestLog.logger("purchaseDetails purchased:" + purchaseDetails.productID);
       }
@@ -72,6 +64,24 @@ void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList, Context
       }
     }
   });
+}
+
+void verifyReceipt(PurchaseDetails purchaseDetails) async {
+  try {
+    RestLog.logger("purchase successful trigger verify");
+    PayVerifyModel payVerifyModel = PayVerifyModel(
+        orderId: purchaseDetails.purchaseID,
+        receipt: purchaseDetails.verificationData.serverVerificationData);
+    int receiptVerifyResult = await Pay.verifyReceipt(payVerifyModel);
+    if (receiptVerifyResult == 0) {
+      RestLog.logger("verify success:" + receiptVerifyResult.toString());
+      await InAppPurchase.instance.completePurchase(purchaseDetails);
+    } else {
+      RestLog.logger("verify failed:" + receiptVerifyResult.toString());
+    }
+  }on Exception catch (e) {
+    RestLog.logger("verify receipt encount an eror:" + e.toString());
+  }
 }
 
 void _handleError(IAPError error, Context<PayState> ctx) {
