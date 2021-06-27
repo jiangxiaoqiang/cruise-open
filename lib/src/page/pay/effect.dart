@@ -57,7 +57,7 @@ void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList, Context
       } else if (purchaseDetails.status == PurchaseStatus.restored) {
         RestLog.logger("purchase successful trigger verify");
         PayVerifyModel payVerifyModel = PayVerifyModel(orderId: purchaseDetails.purchaseID, receipt: purchaseDetails.verificationData.serverVerificationData);
-        int result = await Pay.verifyUserPay(payVerifyModel);
+        int result = await Pay.verifyReceipt(payVerifyModel);
         if(result == 0){
           RestLog.logger("verify success:" + result.toString());
           await InAppPurchase.instance.completePurchase(purchaseDetails);

@@ -10,10 +10,10 @@ import 'net/rest/rest_clinet.dart';
 class Pay {
   final baseUrl = global.baseUrl;
 
-  static Future<int> verifyUserPay(PayVerifyModel payVerifyModel) async {
+  static Future<int> verifyReceipt(PayVerifyModel payVerifyModel) async {
     try {
       Map jsonMap = payVerifyModel.toMap();
-      final response = await RestClient.postHttp("/post/pay/v1/success", jsonMap);
+      final response = await RestClient.postHttp("/post/pay/v1/verifyReceipt", jsonMap);
       if (response.statusCode == 200 && response.data["statusCode"] == "200") {
         int result = response.data["result"];
         return result;
