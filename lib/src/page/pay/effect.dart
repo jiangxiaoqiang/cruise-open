@@ -55,6 +55,7 @@ void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList, Context
         RestLog.logger("PurchaseStatus error");
         _handleError(purchaseDetails.error!, ctx);
       } else if (purchaseDetails.status == PurchaseStatus.restored) {
+        await InAppPurchase.instance.completePurchase(purchaseDetails);
         verifyReceipt(purchaseDetails);
       }else if(purchaseDetails.status == PurchaseStatus.purchased ){
         RestLog.logger("purchaseDetails purchased:" + purchaseDetails.productID);
