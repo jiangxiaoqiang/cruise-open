@@ -1,13 +1,19 @@
 class PayVerifyModel {
-  PayVerifyModel({this.orderId, this.receipt});
+  PayVerifyModel({
+    this.productId,
+    this.receipt,
+    this.transactionId
+  });
 
-  String? orderId;
+  String? productId;
   String? receipt;
+  String? transactionId;
 
   Map<String, dynamic> toMap() {
     return {
-      'orderId': orderId,
-      'receipt': receipt
+      'productId': productId,
+      'receipt': receipt,
+      'transactionId': transactionId
     };
   }
 }

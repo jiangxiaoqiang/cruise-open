@@ -70,7 +70,8 @@ void verifyReceipt(PurchaseDetails purchaseDetails) async {
   try {
     RestLog.logger("purchase successful trigger verify");
     PayVerifyModel payVerifyModel = PayVerifyModel(
-        orderId: purchaseDetails.purchaseID,
+        productId: purchaseDetails.productID,
+        transactionId: purchaseDetails.purchaseID,
         receipt: purchaseDetails.verificationData.serverVerificationData);
     int receiptVerifyResult = await Pay.verifyReceipt(payVerifyModel);
     if (receiptVerifyResult == 0) {
