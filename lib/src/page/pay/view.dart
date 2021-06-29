@@ -131,9 +131,9 @@ Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
                       }
 
                       if (productDetails.id == _kConsumableId) {
-                        _inAppPurchase.buyConsumable(purchaseParam: purchaseParam, autoConsume: _kAutoConsume || Platform.isIOS);
-                      } else {
                         _inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
+                      } else {
+                        _inAppPurchase.buyConsumable(purchaseParam: purchaseParam, autoConsume: _kAutoConsume || Platform.isIOS);
                       }
                     },
                   ));
