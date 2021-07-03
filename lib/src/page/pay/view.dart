@@ -134,8 +134,6 @@ Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
     return Card(child: Column(children: <Widget>[productHeader, Divider()] + productList));
   }
 
-
-
   Future<void> consume(String id) async {
     await ConsumableStore.consume(id);
     final List<String> consumables = await ConsumableStore.load();
