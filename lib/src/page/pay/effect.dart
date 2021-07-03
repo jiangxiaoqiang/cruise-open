@@ -7,6 +7,7 @@ import 'package:cruise/src/common/rest_log.dart';
 import 'package:cruise/src/models/pay/pay_model.dart';
 import 'package:cruise/src/models/pay/pay_verify_model.dart';
 import 'package:fish_redux/fish_redux.dart';
+import 'package:global_configuration/global_configuration.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
 import 'action.dart';
@@ -70,7 +71,8 @@ void verifyReceipt(PurchaseDetails purchaseDetails, Context<PayState> ctx) async
     PayVerifyModel payVerifyModel = PayVerifyModel(
         productId: purchaseDetails.productID,
         transactionId: purchaseDetails.purchaseID,
-        receipt: purchaseDetails.verificationData.serverVerificationData);
+        receipt: purchaseDetails.verificationData.serverVerificationData,
+        appId: GlobalConfiguration().get("appId"));
     int receiptVerifyResult = await Pay.verifyReceipt(payVerifyModel);
     if (receiptVerifyResult == 0) {
       RestLog.logger("verify success:" + receiptVerifyResult.toString());
