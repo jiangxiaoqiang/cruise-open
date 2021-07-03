@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 
 bool isLoggedIn = false;
 String baseUrl = "";
@@ -7,12 +8,10 @@ String shareUrl = "";
 String staticResourceUrl = "";
 final storage = new FlutterSecureStorage();
 final pageStorageBucket = PageStorageBucket();
-
+final InAppPurchase inAppPurchase = InAppPurchase.instance;
 enum ConfigType { DEV, PRO }
 
 class GlobalConfig {
-
-
   static init(ConfigType configType) {
     switch (configType) {
       case ConfigType.DEV:

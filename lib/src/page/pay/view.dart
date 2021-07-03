@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:cruise/src/common/config/global_config.dart' as global;
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
@@ -12,8 +13,6 @@ import 'consumable_store.dart';
 import 'state.dart';
 
 Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
-  final InAppPurchase _inAppPurchase = InAppPurchase.instance;
-  late StreamSubscription<List<PurchaseDetails>> _subscription;
   List<String> _notFoundIds = state.payModel.notFoundIds;
   List<ProductDetails> _products = state.payModel.products;
   List<PurchaseDetails> _purchases = state.payModel.purchases;
@@ -21,12 +20,9 @@ Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
   bool _isAvailable = state.payModel.isAvailable;
   bool _purchasePending = state.payModel.purchasePending;
   bool _loading = state.payModel.loading;
-  String? debugMessage = state.payModel.debugMessage;
   String? _queryProductError = state.payModel.queryProductError;
 
   const bool _kAutoConsume = true;
-
-  const String _kConsumableId = 'cruise';
 
   Card _buildConnectionCheckTile() {
     if (_loading) {
@@ -82,7 +78,7 @@ Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
     // We recommend that you use your own server to verify the purchase data.
     Map<String, PurchaseDetails> purchases = Map.fromEntries(_purchases.map((PurchaseDetails purchase) {
       if (purchase.pendingCompletePurchase) {
-        _inAppPurchase.completePurchase(purchase);
+        global.inAppPurchase.completePurchase(purchase);
       }
       return MapEntry<String, PurchaseDetails>(purchase.productID, purchase);
     }));
@@ -113,7 +109,6 @@ Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
                         // and update the UI accordingly. The subscription purchase status shown
                         // inside the app may not be accurate.
                         final oldSubscription = _getOldSubscription(productDetails, purchases);
-
                         purchaseParam = GooglePlayPurchaseParam(
                             productDetails: productDetails,
                             applicationUserName: null,
@@ -130,11 +125,7 @@ Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
                         );
                       }
 
-                      if (productDetails.id == _kConsumableId) {
-                        _inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
-                      } else {
-                        _inAppPurchase.buyConsumable(purchaseParam: purchaseParam, autoConsume: _kAutoConsume || Platform.isIOS);
-                      }
+                      global.inAppPurchase.buyConsumable(purchaseParam: purchaseParam, autoConsume: _kAutoConsume || Platform.isIOS);
                     },
                   ));
       },
@@ -143,17 +134,43 @@ Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
     return Card(child: Column(children: <Widget>[productHeader, Divider()] + productList));
   }
 
+
+
   Future<void> consume(String id) async {
     await ConsumableStore.consume(id);
     final List<String> consumables = await ConsumableStore.load();
     dispatch(PayActionCreator.onSetConsumable(consumables));
   }
 
+  Widget _buildRestoreButton() {
+    if (_loading) {
+      return Container();
+    }
+
+    return Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          TextButton(
+            child: Text('Restore purchases'),
+            style: TextButton.styleFrom(
+              backgroundColor: Theme.of(viewService.context).primaryColor,
+              primary: Colors.white,
+            ),
+            onPressed: () => global.inAppPurchase.restorePurchases(),
+          ),
+        ],
+      ),
+    );
+  }
+
   Card _buildConsumableBox() {
     if (_loading) {
       return Card(child: (ListTile(leading: CircularProgressIndicator(), title: Text('Fetching consumables...'))));
     }
-    if (!_isAvailable || _notFoundIds.contains(_kConsumableId)) {
+    if (!_isAvailable) {
       return Card();
     }
     final ListTile consumableHeader = ListTile(title: Text('已购列表'));
@@ -192,6 +209,7 @@ Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
           _buildConnectionCheckTile(),
           _buildProductList(),
           _buildConsumableBox(),
+          _buildRestoreButton()
         ],
       ),
     );

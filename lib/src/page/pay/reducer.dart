@@ -1,5 +1,6 @@
 import 'package:cruise/src/models/pay/pay_model.dart';
 import 'package:fish_redux/fish_redux.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 
 import 'action.dart';
 import 'state.dart';
@@ -10,7 +11,8 @@ Reducer<PayState> buildReducer() {
       PayAction.set_consumable: _onSetConsumable,
       PayAction.change_pending: _onChangePending,
       PayAction.update:_onUpdate,
-      PayAction.verify_purchase: _verifyPurchase
+      PayAction.verify_purchase: _verifyPurchase,
+      PayAction.deliver_product: _deliverProduct
     },
   );
 }
@@ -40,5 +42,13 @@ PayState _verifyPurchase(PayState state, Action action) {
   final PayState newState = state.clone();
   PayModel payModel = action.payload as PayModel;
   newState.payModel = payModel;
+  return newState;
+}
+
+PayState _deliverProduct(PayState state, Action action) {
+  final PayState newState = state.clone();
+  PurchaseDetails purchaseDetails = action.payload as PurchaseDetails;
+  newState.payModel.purchases.add(purchaseDetails);
+  newState.payModel.purchasePending = false;
   return newState;
 }

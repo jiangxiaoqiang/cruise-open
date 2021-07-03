@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cruise/src/common/config/global_config.dart' as global;
 import 'package:cruise/src/common/log/cruise_log_handler.dart';
 import 'package:cruise/src/common/pay.dart';
 import 'package:cruise/src/common/rest_log.dart';
@@ -18,20 +19,18 @@ Effect<PayState> buildEffect() {
   });
 }
 
-const bool _kAutoConsume = true;
-
-const String _kConsumableId = 'cruise';
+const String _kSilverSubscriptionId = 'cruise';
+const List<String> _kProductIds = <String>[
+  _kSilverSubscriptionId,
+];
 
 late StreamSubscription<List<PurchaseDetails>> _subscription;
-String? _queryProductError;
-const List<String> _kProductIds = <String>[_kConsumableId];
 
 Future _onInit(Action action, Context<PayState> ctx) async {
   RestLog.logger("Initial Pay...");
-  final InAppPurchase _inAppPurchase = InAppPurchase.instance;
   // https://pub.dev/packages/in_app_purchase
   // https://joebirch.co/flutter/adding-in-app-purchases-to-flutter-apps/
-  final Stream<List<PurchaseDetails>> purchaseUpdated = _inAppPurchase.purchaseStream;
+  final Stream<List<PurchaseDetails>> purchaseUpdated = global.inAppPurchase.purchaseStream;
   _subscription = purchaseUpdated.listen((purchaseDetailsList) {
     _listenToPurchaseUpdated(purchaseDetailsList, ctx);
   }, onDone: () {
@@ -42,7 +41,7 @@ Future _onInit(Action action, Context<PayState> ctx) async {
     CruiseLogHandler.logErrorException("iap initial error", error);
   });
 
-  initStoreInfo(ctx, _inAppPurchase);
+  initStoreInfo(ctx, global.inAppPurchase);
 }
 
 void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList, Context<PayState> ctx) {
@@ -55,8 +54,8 @@ void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList, Context
         RestLog.logger("PurchaseStatus error");
         _handleError(purchaseDetails.error!, ctx);
       } else if (purchaseDetails.status == PurchaseStatus.restored) {
-        verifyReceipt(purchaseDetails);
-      }else if(purchaseDetails.status == PurchaseStatus.purchased ){
+        verifyReceipt(purchaseDetails, ctx);
+      } else if (purchaseDetails.status == PurchaseStatus.purchased) {
         RestLog.logger("purchaseDetails purchased:" + purchaseDetails.productID);
       }
       if (purchaseDetails.pendingCompletePurchase) {
@@ -66,7 +65,7 @@ void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList, Context
   });
 }
 
-void verifyReceipt(PurchaseDetails purchaseDetails) async {
+void verifyReceipt(PurchaseDetails purchaseDetails, Context<PayState> ctx) async {
   try {
     RestLog.logger("purchase successful trigger verify");
     PayVerifyModel payVerifyModel = PayVerifyModel(
@@ -77,12 +76,23 @@ void verifyReceipt(PurchaseDetails purchaseDetails) async {
     if (receiptVerifyResult == 0) {
       RestLog.logger("verify success:" + receiptVerifyResult.toString());
       await InAppPurchase.instance.completePurchase(purchaseDetails);
+      deliverProduct(purchaseDetails, ctx);
     } else {
       RestLog.logger("verify failed:" + receiptVerifyResult.toString());
+      _handleInvalidPurchase(purchaseDetails);
     }
-  }on Exception catch (e) {
+  } on Exception catch (e) {
     RestLog.logger("verify receipt encount an eror:" + e.toString());
   }
+}
+
+void _handleInvalidPurchase(PurchaseDetails purchaseDetails) {
+  // handle invalid purchase here if  _verifyPurchase` failed.
+}
+
+void deliverProduct(PurchaseDetails purchaseDetails, Context<PayState> ctx) async {
+  // IMPORTANT!! Always verify purchase details before delivering the product.
+  ctx.dispatch(PayActionCreator.onDeliverProduct(purchaseDetails));
 }
 
 void _handleError(IAPError error, Context<PayState> ctx) {
@@ -95,7 +105,7 @@ void _handleError(IAPError error, Context<PayState> ctx) {
       loading: false,
       queryProductError: error.message,
       consumables: []);
-  RestLog.logger("IAPError:" + error.toString());
+  RestLog.logger("_handleError IAPError:" + error.toString());
   CruiseLogHandler.logErrorException("IAPError", error);
   ctx.dispatch(PayActionCreator.onUpdate(payModel));
 }

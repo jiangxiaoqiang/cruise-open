@@ -7,13 +7,11 @@ class PayState implements Cloneable<PayState> {
 
   @override
   PayState clone() {
-
     return PayState()
       ..payModel = this.payModel;
   }
 }
 
 PayState initState(Map<String, dynamic> args) {
-
   return PayState();
 }
