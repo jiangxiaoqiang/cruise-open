@@ -158,9 +158,7 @@ Future<void> initStoreInfo(Context<PayState> ctx, InAppPurchase _inAppPurchase) 
     ctx.dispatch(PayActionCreator.onUpdate(payModel));
     return;
   }
-
-  await _inAppPurchase.restorePurchases();
-
+  
   List<String> consumables = await ConsumableStore.load();
   PayModel payModel = PayModel(
       isAvailable: isAvailable,
