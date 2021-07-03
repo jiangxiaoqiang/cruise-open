@@ -53,10 +53,9 @@ void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList, Context
       if (purchaseDetails.status == PurchaseStatus.error) {
         RestLog.logger("PurchaseStatus error");
         _handleError(purchaseDetails.error!, ctx);
-      } else if (purchaseDetails.status == PurchaseStatus.restored) {
+      } else if (purchaseDetails.status == PurchaseStatus.restored ||
+          purchaseDetails.status == PurchaseStatus.restored) {
         verifyReceipt(purchaseDetails, ctx);
-      } else if (purchaseDetails.status == PurchaseStatus.purchased) {
-        RestLog.logger("purchaseDetails purchased:" + purchaseDetails.productID);
       }
       if (purchaseDetails.pendingCompletePurchase) {
         await InAppPurchase.instance.completePurchase(purchaseDetails);
@@ -158,7 +157,7 @@ Future<void> initStoreInfo(Context<PayState> ctx, InAppPurchase _inAppPurchase) 
     ctx.dispatch(PayActionCreator.onUpdate(payModel));
     return;
   }
-  
+
   List<String> consumables = await ConsumableStore.load();
   PayModel payModel = PayModel(
       isAvailable: isAvailable,
