@@ -26,15 +26,9 @@ void main() {
 
 const bool _kAutoConsume = true;
 
-const String _kConsumableId = 'consumable';
-const String _kUpgradeId = 'upgrade';
 const String _kSilverSubscriptionId = 'cruise';
-const String _kGoldSubscriptionId = 'subscription_gold';
 const List<String> _kProductIds = <String>[
-  _kConsumableId,
-  _kUpgradeId,
   _kSilverSubscriptionId,
-  _kGoldSubscriptionId,
 ];
 
 class _MyApp extends StatefulWidget {
@@ -279,15 +273,9 @@ class _MyAppState extends State<_MyApp> {
                     applicationUserName: null,
                   );
                 }
-
-                if (productDetails.id == _kConsumableId) {
                   _inAppPurchase.buyConsumable(
                       purchaseParam: purchaseParam,
                       autoConsume: _kAutoConsume || Platform.isIOS);
-                } else {
-                  _inAppPurchase.buyNonConsumable(
-                      purchaseParam: purchaseParam);
-                }
               },
             ));
       },
@@ -305,7 +293,7 @@ class _MyAppState extends State<_MyApp> {
               leading: CircularProgressIndicator(),
               title: Text('Fetching consumables...'))));
     }
-    if (!_isAvailable || _notFoundIds.contains(_kConsumableId)) {
+    if (!_isAvailable) {
       return Card();
     }
     final ListTile consumableHeader =
@@ -376,19 +364,10 @@ class _MyAppState extends State<_MyApp> {
 
   void deliverProduct(PurchaseDetails purchaseDetails) async {
     // IMPORTANT!! Always verify purchase details before delivering the product.
-    if (purchaseDetails.productID == _kConsumableId) {
-      await ConsumableStore.save(purchaseDetails.purchaseID!);
-      List<String> consumables = await ConsumableStore.load();
-      setState(() {
-        _purchasePending = false;
-        _consumables = consumables;
-      });
-    } else {
       setState(() {
         _purchases.add(purchaseDetails);
         _purchasePending = false;
       });
-    }
   }
 
   void handleError(IAPError error) {
@@ -424,7 +403,7 @@ class _MyAppState extends State<_MyApp> {
           }
         }
         if (Platform.isAndroid) {
-          if (!_kAutoConsume && purchaseDetails.productID == _kConsumableId) {
+          if (!_kAutoConsume) {
             final InAppPurchaseAndroidPlatformAddition androidAddition =
             _inAppPurchase.getPlatformAddition<
                 InAppPurchaseAndroidPlatformAddition>();
@@ -448,15 +427,8 @@ class _MyAppState extends State<_MyApp> {
     // The old subscription is only required on Android since Apple handles this internally
     // by using the subscription group feature in iTunesConnect.
     GooglePlayPurchaseDetails? oldSubscription;
-    if (productDetails.id == _kSilverSubscriptionId &&
-        purchases[_kGoldSubscriptionId] != null) {
-      oldSubscription =
-      purchases[_kGoldSubscriptionId] as GooglePlayPurchaseDetails;
-    } else if (productDetails.id == _kGoldSubscriptionId &&
-        purchases[_kSilverSubscriptionId] != null) {
-      oldSubscription =
-      purchases[_kSilverSubscriptionId] as GooglePlayPurchaseDetails;
-    }
+    if (productDetails.id == _kSilverSubscriptionId) {
+    } 
     return oldSubscription;
   }
 }
