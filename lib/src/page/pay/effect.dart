@@ -132,7 +132,12 @@ Future<void> initStoreInfo(Context<PayState> ctx, InAppPurchase _inAppPurchase) 
   }
 
   ProductDetailsResponse productDetailResponse = await _inAppPurchase.queryProductDetails(_kProductIds.toSet());
-  RestLog.logger("Initial store product detail:" + productDetailResponse.toString());
+  RestLog.logger("Initial store product detail:" + productDetailResponse.productDetails.length.toString());
+  if (productDetailResponse.productDetails.length > 0) {
+    productDetailResponse.productDetails.forEach((element) {
+      RestLog.logger("productDetails status:" + element.currencyCode);
+    });
+  }
   if (productDetailResponse.error != null) {
     PayModel payModel = PayModel(
         isAvailable: isAvailable,
