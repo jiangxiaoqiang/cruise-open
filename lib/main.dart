@@ -4,6 +4,7 @@
 
 import 'dart:async';
 import 'dart:io';
+import 'package:cruise/src/common/rest_log.dart';
 import 'package:cruise/src/page/pay/consumable_store.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -58,6 +59,7 @@ class _MyAppState extends State<_MyApp> {
       _subscription.cancel();
     }, onError: (error) {
       // handle error here.
+
     });
     initStoreInfo();
     super.initState();
@@ -224,6 +226,7 @@ class _MyAppState extends State<_MyApp> {
     Map<String, PurchaseDetails> purchases =
     Map.fromEntries(_purchases.map((PurchaseDetails purchase) {
       if (purchase.pendingCompletePurchase) {
+        RestLog.logger("enter fromEntries completePurchase");
         _inAppPurchase.completePurchase(purchase);
       }
       return MapEntry<String, PurchaseDetails>(purchase.productID, purchase);
@@ -392,8 +395,10 @@ class _MyAppState extends State<_MyApp> {
         showPendingUI();
       } else {
         if (purchaseDetails.status == PurchaseStatus.error) {
+          RestLog.logger("enter error");
           handleError(purchaseDetails.error!);
         } else if (purchaseDetails.status == PurchaseStatus.purchased) {
+          RestLog.logger("enter purchased");
           bool valid = await _verifyPurchase(purchaseDetails);
           if (valid) {
             deliverProduct(purchaseDetails);
@@ -411,6 +416,7 @@ class _MyAppState extends State<_MyApp> {
           }
         }
         if (purchaseDetails.pendingCompletePurchase) {
+          RestLog.logger("enter pendingCompletePurchase");
           await _inAppPurchase.completePurchase(purchaseDetails);
         }
       }
