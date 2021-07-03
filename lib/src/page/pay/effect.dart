@@ -71,8 +71,7 @@ void verifyReceipt(PurchaseDetails purchaseDetails, Context<PayState> ctx) async
     PayVerifyModel payVerifyModel = PayVerifyModel(
         productId: purchaseDetails.productID,
         transactionId: purchaseDetails.purchaseID,
-        receipt: purchaseDetails.verificationData.serverVerificationData,
-        appId: GlobalConfiguration().get("appId"));
+        receipt: purchaseDetails.verificationData.serverVerificationData);
     int receiptVerifyResult = await Pay.verifyReceipt(payVerifyModel);
     if (receiptVerifyResult == 0) {
       RestLog.logger("verify success:" + receiptVerifyResult.toString());
