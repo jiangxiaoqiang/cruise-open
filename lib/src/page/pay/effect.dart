@@ -2,12 +2,13 @@ import 'dart:async';
 
 import 'package:cruise/src/common/config/global_config.dart' as global;
 import 'package:cruise/src/common/log/cruise_log_handler.dart';
-import 'package:cruise/src/common/pay.dart';
+import 'package:cruise/src/common/pay/pay.dart';
+import 'package:cruise/src/common/product/product.dart';
 import 'package:cruise/src/common/rest_log.dart';
 import 'package:cruise/src/models/pay/pay_model.dart';
 import 'package:cruise/src/models/pay/pay_verify_model.dart';
+import 'package:cruise/src/models/product/iap_product.dart';
 import 'package:fish_redux/fish_redux.dart';
-import 'package:global_configuration/global_configuration.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
 import 'action.dart';
@@ -54,7 +55,7 @@ void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList, Context
       if (purchaseDetails.status == PurchaseStatus.error) {
         RestLog.logger("PurchaseStatus error");
         _handleError(purchaseDetails.error!, ctx);
-      } else if (purchaseDetails.status == PurchaseStatus.restored ||
+      } else if (purchaseDetails.status == PurchaseStatus.purchased ||
           purchaseDetails.status == PurchaseStatus.restored) {
         verifyReceipt(purchaseDetails, ctx);
       }
@@ -166,6 +167,9 @@ Future<void> initStoreInfo(Context<PayState> ctx, InAppPurchase _inAppPurchase) 
   }
 
   List<String> consumables = await ConsumableStore.load();
+  PayVerifyModel payVerifyModel = new PayVerifyModel(productId: productDetailResponse.productDetails[0].id);
+  IapProduct? product = await Product.getPurchasedStatus(payVerifyModel);
+  List<PurchaseDetails> purchases = List.empty(growable: true);
   PayModel payModel = PayModel(
       isAvailable: isAvailable,
       products: productDetailResponse.productDetails,
