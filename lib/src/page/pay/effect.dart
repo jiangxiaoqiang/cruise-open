@@ -7,6 +7,7 @@ import 'package:cruise/src/common/product/product.dart';
 import 'package:cruise/src/common/rest_log.dart';
 import 'package:cruise/src/models/pay/pay_model.dart';
 import 'package:cruise/src/models/pay/pay_verify_model.dart';
+import 'package:cruise/src/models/pay/purchased_model.dart';
 import 'package:cruise/src/models/product/iap_product.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
@@ -67,8 +68,8 @@ void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList, Context
 void verifyReceipt(PurchaseDetails purchaseDetails, Context<PayState> ctx) async {
   try {
     RestLog.logger("purchase successful trigger verify");
-    //PayVerifyModel payVerifyModel = PayVerifyModel();
-    int receiptVerifyResult = 1;//await Pay.verifyReceipt();
+    PayVerifyModel payVerifyModel = PayVerifyModel(productId: purchaseDetails.productID,receipt: purchaseDetails.verificationData.serverVerificationData,transactionId: purchaseDetails.purchaseID);
+    int receiptVerifyResult = await Pay.verifyReceipt(payVerifyModel);
     if (receiptVerifyResult == 0) {
       RestLog.logger("verify success:" + receiptVerifyResult.toString());
       await InAppPurchase.instance.completePurchase(purchaseDetails);
@@ -163,8 +164,8 @@ Future<void> initStoreInfo(Context<PayState> ctx, InAppPurchase _inAppPurchase) 
 
   List<String> consumables = await ConsumableStore.load();
   // get product subscribe status
-  PayVerifyModel payVerifyModel =
-      new PayVerifyModel(productId: productDetailResponse.productDetails.map((e) => e.id).toList());
+  PurchasedModel payVerifyModel =
+      new PurchasedModel(productIds: productDetailResponse.productDetails.map((e) => e.id).toList());
   IapProduct? product = await Product.getPurchasedStatus(payVerifyModel);
   List<PurchaseDetails> purchases = List.empty(growable: true);
 

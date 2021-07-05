@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:cruise/src/common/config/global_config.dart' as global;
 import 'package:cruise/src/common/rest_log.dart';
 import 'package:cruise/src/models/pay/pay_verify_model.dart';
+import 'package:cruise/src/models/pay/purchased_model.dart';
 import 'package:cruise/src/models/product/iap_product.dart';
 import 'package:wheel/wheel.dart' show AppLogHandler,RestApiError;
 import '../net/rest/rest_clinet.dart';
@@ -11,7 +12,7 @@ import '../net/rest/rest_clinet.dart';
 class Product {
   final baseUrl = global.baseUrl;
 
-  static Future<IapProduct?> getPurchasedStatus(PayVerifyModel payVerifyModel) async {
+  static Future<IapProduct?> getPurchasedStatus(PurchasedModel payVerifyModel) async {
     try {
       Map jsonMap = payVerifyModel.toMap();
       final response = await RestClient.postHttp("/post/product/v1/previousPurchase", jsonMap);
