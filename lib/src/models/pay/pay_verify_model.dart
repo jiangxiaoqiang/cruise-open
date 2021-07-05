@@ -5,7 +5,7 @@ class PayVerifyModel {
     this.transactionId,
   });
 
-  String? productId;
+  List<String>? productId;
   String? receipt;
   String? transactionId;
 

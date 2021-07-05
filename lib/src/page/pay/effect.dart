@@ -21,10 +21,8 @@ Effect<PayState> buildEffect() {
   });
 }
 
-const String _kSilverSubscriptionId = 'cruise';
-const List<String> _kProductIds = <String>[
-  _kSilverSubscriptionId,
-];
+//
+const List<String> _productIds = <String>['cruise', 'cruise_twelve_month'];
 
 late StreamSubscription<List<PurchaseDetails>> _subscription;
 
@@ -131,7 +129,7 @@ Future<void> initStoreInfo(Context<PayState> ctx, InAppPurchase _inAppPurchase) 
     return;
   }
 
-  ProductDetailsResponse productDetailResponse = await _inAppPurchase.queryProductDetails(_kProductIds.toSet());
+  ProductDetailsResponse productDetailResponse = await _inAppPurchase.queryProductDetails(_productIds.toSet());
   RestLog.logger("Initial store product detail:" + productDetailResponse.productDetails.length.toString());
   if (productDetailResponse.productDetails.length > 0) {
     productDetailResponse.productDetails.forEach((element) {
@@ -167,9 +165,12 @@ Future<void> initStoreInfo(Context<PayState> ctx, InAppPurchase _inAppPurchase) 
   }
 
   List<String> consumables = await ConsumableStore.load();
-  PayVerifyModel payVerifyModel = new PayVerifyModel(productId: productDetailResponse.productDetails[0].id);
+  // get product subscribe status
+  PayVerifyModel payVerifyModel =
+      new PayVerifyModel(productId: productDetailResponse.productDetails.map((e) => e.id).toList());
   IapProduct? product = await Product.getPurchasedStatus(payVerifyModel);
   List<PurchaseDetails> purchases = List.empty(growable: true);
+
   PayModel payModel = PayModel(
       isAvailable: isAvailable,
       products: productDetailResponse.productDetails,
