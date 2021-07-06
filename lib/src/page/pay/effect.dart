@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:cruise/src/common/config/global_config.dart' as global;
 import 'package:cruise/src/common/log/cruise_log_handler.dart';
@@ -41,7 +42,11 @@ Future _onInit(Action action, Context<PayState> ctx) async {
     CruiseLogHandler.logErrorException("iap initial error", error);
   });
 
-  initStoreInfo(ctx, global.inAppPurchase);
+  try {
+    initStoreInfo(ctx, global.inAppPurchase);
+  } on Exception catch (e) {
+    RestLog.logger("initial store error" + json.encode(e));
+  }
 }
 
 void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList, Context<PayState> ctx) {
@@ -67,7 +72,10 @@ void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList, Context
 void verifyReceipt(PurchaseDetails purchaseDetails, Context<PayState> ctx) async {
   try {
     RestLog.logger("purchase successful trigger verify");
-    PayVerifyModel payVerifyModel = PayVerifyModel(productId: purchaseDetails.productID,receipt: purchaseDetails.verificationData.serverVerificationData,transactionId: purchaseDetails.purchaseID);
+    PayVerifyModel payVerifyModel = PayVerifyModel(
+        productId: purchaseDetails.productID,
+        receipt: purchaseDetails.verificationData.serverVerificationData,
+        transactionId: purchaseDetails.purchaseID);
     int receiptVerifyResult = await Pay.verifyReceipt(payVerifyModel);
     if (receiptVerifyResult == 0) {
       RestLog.logger("verify success:" + receiptVerifyResult.toString());
@@ -127,7 +135,7 @@ Future<void> initStoreInfo(Context<PayState> ctx, InAppPurchase _inAppPurchase) 
   }
 
   ProductDetailsResponse productDetailResponse = await _inAppPurchase.queryProductDetails(_productIds.toSet());
-  RestLog.logger("Initial store product detail:" + productDetailResponse.productDetails.length.toString());
+  RestLog.logger("Initial store product detail:" + json.encode(productDetailResponse));
   if (productDetailResponse.productDetails.length > 0) {
     productDetailResponse.productDetails.forEach((element) {
       RestLog.logger("productDetails status:" + element.currencyCode);
@@ -163,7 +171,8 @@ Future<void> initStoreInfo(Context<PayState> ctx, InAppPurchase _inAppPurchase) 
 
   List<String> consumables = await ConsumableStore.load();
   // get product subscribe status
-  PurchasedModel payVerifyModel = new PurchasedModel(productIds: productDetailResponse.productDetails.map((e) => e.id).toList());
+  PurchasedModel payVerifyModel =
+      new PurchasedModel(productIds: productDetailResponse.productDetails.map((e) => e.id).toList());
   IapProduct? product = await Product.getPurchasedStatus(payVerifyModel);
   List<PurchaseDetails> purchases = List.empty(growable: true);
 

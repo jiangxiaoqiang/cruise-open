@@ -8,6 +8,7 @@ import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:in_app_purchase_android/billing_client_wrappers.dart';
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 
+
 import 'action.dart';
 import 'consumable_store.dart';
 import 'state.dart';
@@ -82,6 +83,7 @@ Widget buildView(PayState state, Dispatch dispatch, ViewService viewService) {
       }
       return MapEntry<String, PurchaseDetails>(purchase.productID, purchase);
     }));
+
     productList.addAll(_products.map(
       (ProductDetails productDetails) {
         PurchaseDetails? previousPurchase = purchases[productDetails.id];
