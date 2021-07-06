@@ -43,6 +43,7 @@ Future _onInit(Action action, Context<PayState> ctx) async {
   });
 
   try {
+    RestLog.logger("initial store...");
     initStoreInfo(ctx, global.inAppPurchase);
   } on Exception catch (e) {
     RestLog.logger("initial store error" + json.encode(e));
@@ -50,6 +51,7 @@ Future _onInit(Action action, Context<PayState> ctx) async {
 }
 
 void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList, Context<PayState> ctx) {
+  RestLog.logger("Purchase details:" + json.encode(purchaseDetailsList));
   purchaseDetailsList.forEach((PurchaseDetails purchaseDetails) async {
     if (purchaseDetails.status == PurchaseStatus.pending) {
       RestLog.logger("PurchaseStatus pending..." + ctx.state.payModel.isAvailable.toString());
