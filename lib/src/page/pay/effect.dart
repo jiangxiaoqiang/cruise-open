@@ -23,7 +23,7 @@ Effect<PayState> buildEffect() {
   });
 }
 
-const List<String> _productIds = <String>['cruise', 'cruise_three_month', 'cruise_six_month', 'cruise_twelve_month'];
+const List<String> _productIds = <String>['cruise', 'cruise_three_month'];
 
 late StreamSubscription<List<PurchaseDetails>> _subscription;
 
@@ -175,7 +175,7 @@ Future<void> initStoreInfo(Context<PayState> ctx, InAppPurchase _inAppPurchase) 
 
   List<String> consumables = await ConsumableStore.load();
   try {
-    RestLog.logger("load products");
+    RestLog.logger("load products：" + productDetailResponse.productDetails.length.toString());
     // get product subscribe status
     PurchasedModel payVerifyModel =
         new PurchasedModel(productIds: productDetailResponse.productDetails.map((e) => e.id).toList());
