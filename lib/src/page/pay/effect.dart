@@ -174,16 +174,7 @@ Future<void> initStoreInfo(Context<PayState> ctx, InAppPurchase _inAppPurchase) 
   }
 
   List<String> consumables = await ConsumableStore.load();
-  try {
-    RestLog.logger("load products：" + productDetailResponse.productDetails.length.toString());
-    // get product subscribe status
-    PurchasedModel payVerifyModel =
-        new PurchasedModel(productIds: productDetailResponse.productDetails.map((e) => e.id).toList());
-    IapProduct? product = await Product.getPurchasedStatus(payVerifyModel);
-    List<PurchaseDetails> purchases = List.empty(growable: true);
-  } on Exception catch (e) {
-    RestLog.logger("load product error:" + e.toString());
-  }
+  
   PayModel payModel = PayModel(
       isAvailable: isAvailable,
       products: productDetailResponse.productDetails,
