@@ -23,7 +23,7 @@ Effect<PayState> buildEffect() {
   });
 }
 
-const List<String> _productIds = <String>['cruise', 'cruise_three_month'];
+const List<String> _productIds = <String>['cruise', 'cruise_three_month','cruise_six_month','cruise_twelve_month'];
 
 late StreamSubscription<List<PurchaseDetails>> _subscription;
 
@@ -46,7 +46,7 @@ Future _onInit(Action action, Context<PayState> ctx) async {
     RestLog.logger("initial store...");
     initStoreInfo(ctx, global.inAppPurchase);
   } on Exception catch (e) {
-    RestLog.logger("initial store error" + json.encode(e));
+    RestLog.logger("initial store error" + e.toString());
   }
 }
 
@@ -174,7 +174,7 @@ Future<void> initStoreInfo(Context<PayState> ctx, InAppPurchase _inAppPurchase) 
   }
 
   List<String> consumables = await ConsumableStore.load();
-  
+
   PayModel payModel = PayModel(
       isAvailable: isAvailable,
       products: productDetailResponse.productDetails,
