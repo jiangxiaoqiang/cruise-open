@@ -122,6 +122,7 @@ void _showPendingUI(Context<PayState> ctx) {
 
 Future<void> initStoreInfo(Context<PayState> ctx, InAppPurchase _inAppPurchase) async {
   final bool isAvailable = await _inAppPurchase.isAvailable();
+  RestLog.logger("available status:" + isAvailable.toString());
   if (!isAvailable) {
     PayModel payModel = PayModel(
         isAvailable: isAvailable,
