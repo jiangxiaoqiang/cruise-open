@@ -138,6 +138,7 @@ Future<void> initStoreInfo(Context<PayState> ctx, InAppPurchase _inAppPurchase) 
   }
 
   ProductDetailsResponse productDetailResponse = await _inAppPurchase.queryProductDetails(_productIds.toSet());
+  RestLog.logger("complete load products");
   RestLog.logger("Initial store product detail:" + json.encode(productDetailResponse));
   if (productDetailResponse.productDetails.length > 0) {
     productDetailResponse.productDetails.forEach((element) {
