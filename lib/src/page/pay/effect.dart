@@ -51,7 +51,7 @@ Future _onInit(Action action, Context<PayState> ctx) async {
 }
 
 void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList, Context<PayState> ctx) {
-  RestLog.logger("Purchase details:" + json.encode(purchaseDetailsList));
+  RestLog.logger("Purchase details:");
   purchaseDetailsList.forEach((PurchaseDetails purchaseDetails) async {
     if (purchaseDetails.status == PurchaseStatus.pending) {
       RestLog.logger("PurchaseStatus pending..." + ctx.state.payModel.isAvailable.toString());
@@ -139,7 +139,7 @@ Future<void> initStoreInfo(Context<PayState> ctx, InAppPurchase _inAppPurchase) 
 
   ProductDetailsResponse productDetailResponse = await _inAppPurchase.queryProductDetails(_productIds.toSet());
   RestLog.logger("complete load products");
-  RestLog.logger("Initial store product detail:" + json.encode(productDetailResponse));
+  RestLog.logger("Initial store product detail:");
   if (productDetailResponse.productDetails.length > 0) {
     productDetailResponse.productDetails.forEach((element) {
       RestLog.logger("productDetails status:" + element.currencyCode);
