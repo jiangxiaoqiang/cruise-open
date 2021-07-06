@@ -7,7 +7,7 @@ class PurchasedModel {
 
   Map<String, dynamic> toMap() {
     return {
-      'productId': productIds,
+      'productIds': productIds,
     };
   }
 }

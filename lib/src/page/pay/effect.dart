@@ -22,8 +22,7 @@ Effect<PayState> buildEffect() {
   });
 }
 
-//
-const List<String> _productIds = <String>['cruise', 'cruise_twelve_month'];
+const List<String> _productIds = <String>['cruise', 'cruise_three_month', 'cruise_six_month', 'cruise_twelve_month',''];
 
 late StreamSubscription<List<PurchaseDetails>> _subscription;
 
