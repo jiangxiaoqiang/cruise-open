@@ -44,7 +44,10 @@ Future _onInit(Action action, Context<PayState> ctx) async {
 
   try {
     RestLog.logger("initial store...");
-    Future<void> result = initStoreInfo(ctx, global.inAppPurchase);
+    fetchPurchasedProduct(ctx)
+    .then((value) => {
+      initStoreInfo(ctx, global.inAppPurchase,value)
+    });
   } on Exception catch (e) {
     RestLog.logger("initial store error" + e.toString());
   }
@@ -53,7 +56,7 @@ Future _onInit(Action action, Context<PayState> ctx) async {
 // attention the sequence of data load
 // to avoid the initial store data override the purchased data
 // render the purchased data after store initial complete
-Future<void> fetchPurchasedProduct(Context<PayState> ctx) async {
+Future<PurchaseDetails?> fetchPurchasedProduct(Context<PayState> ctx) async {
   try {
     RestLog.logger("load products...");
     // get product subscribe status
@@ -62,11 +65,12 @@ Future<void> fetchPurchasedProduct(Context<PayState> ctx) async {
       PurchaseVerificationData data = PurchaseVerificationData(localVerificationData: '',serverVerificationData: '',source: '');
       PurchaseDetails purchaseDetails = PurchaseDetails(productID: product.productId,
       purchaseID:'',verificationData: data,transactionDate: '',status: PurchaseStatus.purchased);
-      ctx.dispatch(PayActionCreator.onDeliverProduct(purchaseDetails));
+      return purchaseDetails;
     }
   } on Exception catch (e) {
     RestLog.logger("fetchPurchasedProduct error:" + e.toString());
   }
+  return null;
 }
 
 void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList, Context<PayState> ctx) {
@@ -139,7 +143,7 @@ void _showPendingUI(Context<PayState> ctx) {
   ctx.dispatch(PayActionCreator.onChangePending(true));
 }
 
-Future<void> initStoreInfo(Context<PayState> ctx, InAppPurchase _inAppPurchase) async {
+Future<void> initStoreInfo(Context<PayState> ctx, InAppPurchase _inAppPurchase,PurchaseDetails? purchaseDetail) async {
   final bool isAvailable = await _inAppPurchase.isAvailable();
   RestLog.logger("available status:" + isAvailable.toString());
   if (!isAvailable) {
@@ -198,7 +202,7 @@ Future<void> initStoreInfo(Context<PayState> ctx, InAppPurchase _inAppPurchase) 
       products: productDetailResponse.productDetails,
       queryProductError: null,
       debugMessage: 'consumables:' + consumables.join(','),
-      purchases: [],
+      purchases: purchaseDetail == null?[]:new List<PurchaseDetails>.from([purchaseDetail]),
       consumables: consumables,
       notFoundIds: productDetailResponse.notFoundIDs,
       purchasePending: false,
