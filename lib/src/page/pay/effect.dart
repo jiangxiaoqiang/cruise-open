@@ -45,9 +45,6 @@ Future _onInit(Action action, Context<PayState> ctx) async {
   try {
     RestLog.logger("initial store...");
     Future<void> result = initStoreInfo(ctx, global.inAppPurchase);
-    result.whenComplete(() => {
-      fetchPurchasedProduct(ctx)
-    });
   } on Exception catch (e) {
     RestLog.logger("initial store error" + e.toString());
   }
@@ -207,4 +204,6 @@ Future<void> initStoreInfo(Context<PayState> ctx, InAppPurchase _inAppPurchase) 
       purchasePending: false,
       loading: false);
   ctx.dispatch(PayActionCreator.onUpdate(payModel));
+
+  fetchPurchasedProduct(ctx);
 }
