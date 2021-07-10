@@ -43,14 +43,19 @@ Future _onInit(Action action, Context<PayState> ctx) async {
   });
 
   try {
-    fetchPurchasedProduct(ctx);
     RestLog.logger("initial store...");
-    initStoreInfo(ctx, global.inAppPurchase);
+    Future<void> result = initStoreInfo(ctx, global.inAppPurchase);
+    result.whenComplete(() => {
+      fetchPurchasedProduct(ctx)
+    });
   } on Exception catch (e) {
     RestLog.logger("initial store error" + e.toString());
   }
 }
 
+// attention the sequence of data load
+// to avoid the initial store data override the purchased data
+// render the purchased data after store initial complete
 Future<void> fetchPurchasedProduct(Context<PayState> ctx) async {
   try {
     RestLog.logger("load products...");
@@ -155,7 +160,6 @@ Future<void> initStoreInfo(Context<PayState> ctx, InAppPurchase _inAppPurchase) 
   }
 
   ProductDetailsResponse productDetailResponse = await _inAppPurchase.queryProductDetails(_productIds.toSet());
-  RestLog.logger("complete load products");
   RestLog.logger("Initial store product detail:");
   if (productDetailResponse.productDetails.length > 0) {
     productDetailResponse.productDetails.forEach((element) {

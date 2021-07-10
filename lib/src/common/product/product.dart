@@ -19,6 +19,7 @@ class Product {
         int iapProductResult = response.data["result"];
         String iapProductJson = JsonEncoder().convert(iapProductResult);
         IapProduct parseItem = IapProduct.fromJson(iapProductJson);
+        RestLog.logger("get product id:" + parseItem.productId);
         return parseItem;
       } else {
         RestLog.logger("send verify error:" + response.toString());
