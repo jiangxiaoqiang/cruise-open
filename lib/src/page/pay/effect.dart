@@ -57,13 +57,10 @@ Future<void> fetchPurchasedProduct(Context<PayState> ctx) async {
     // get product subscribe status
     IapProduct? product = await Product.getPurchasedStatus();
     if(product != null) {
-      ProductDetails details = ProductDetails(id: product.productId,
-          description: '',
-          price: '',
-          rawPrice: 0.0,
-          currencyCode: '',
-          title: '');
-      ctx.dispatch(PayActionCreator.onLoadPurchasedProduct(details));
+      PurchaseVerificationData data = PurchaseVerificationData(localVerificationData: '',serverVerificationData: '',source: '');
+      PurchaseDetails purchaseDetails = PurchaseDetails(productID: product.productId,
+      purchaseID:'',verificationData: data,transactionDate: '',status: PurchaseStatus.purchased);
+      ctx.dispatch(PayActionCreator.onDeliverProduct(purchaseDetails));
     }
   } on Exception catch (e) {
     RestLog.logger("fetchPurchasedProduct error:" + e.toString());

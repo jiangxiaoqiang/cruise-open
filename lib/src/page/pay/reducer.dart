@@ -56,7 +56,5 @@ PayState _deliverProduct(PayState state, Action action) {
 
 PayState _loadPurchasedProduct(PayState state, Action action) {
   final PayState newState = state.clone();
-  ProductDetails purchaseDetails = action.payload as ProductDetails;
-  newState.payModel.products.add(purchaseDetails);
   return newState;
 }
