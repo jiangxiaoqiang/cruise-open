@@ -12,10 +12,9 @@ import '../net/rest/rest_clinet.dart';
 class Product {
   final baseUrl = global.baseUrl;
 
-  static Future<IapProduct?> getPurchasedStatus(PurchasedModel payVerifyModel) async {
+  static Future<IapProduct?> getPurchasedStatus() async {
     try {
-      Map jsonMap = payVerifyModel.toMap();
-      final response = await RestClient.postHttp("/post/product/v1/previousPurchase", jsonMap);
+      final response = await RestClient.getHttp("/post/product/v1/previousPurchase");
       if (response.statusCode == 200 && response.data["statusCode"] == "200") {
         int iapProductResult = response.data["result"];
         String iapProductJson = JsonEncoder().convert(iapProductResult);

@@ -12,7 +12,8 @@ Reducer<PayState> buildReducer() {
       PayAction.change_pending: _onChangePending,
       PayAction.update:_onUpdate,
       PayAction.verify_purchase: _verifyPurchase,
-      PayAction.deliver_product: _deliverProduct
+      PayAction.deliver_product: _deliverProduct,
+      PayAction.load_purchased_product: _loadPurchasedProduct
     },
   );
 }
@@ -50,5 +51,12 @@ PayState _deliverProduct(PayState state, Action action) {
   PurchaseDetails purchaseDetails = action.payload as PurchaseDetails;
   newState.payModel.purchases.add(purchaseDetails);
   newState.payModel.purchasePending = false;
+  return newState;
+}
+
+PayState _loadPurchasedProduct(PayState state, Action action) {
+  final PayState newState = state.clone();
+  ProductDetails purchaseDetails = action.payload as ProductDetails;
+  newState.payModel.products.add(purchaseDetails);
   return newState;
 }

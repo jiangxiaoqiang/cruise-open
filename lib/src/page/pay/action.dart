@@ -8,7 +8,8 @@ enum PayAction {
   set_consumable,
   change_pending,
   verify_purchase,
-  deliver_product
+  deliver_product,
+  load_purchased_product
 }
 
 class PayActionCreator {
@@ -31,5 +32,9 @@ class PayActionCreator {
 
   static Action onDeliverProduct(PurchaseDetails purchaseDetails) {
     return Action(PayAction.deliver_product,payload: purchaseDetails);
+  }
+
+  static Action onLoadPurchasedProduct(ProductDetails productDetails) {
+    return Action(PayAction.load_purchased_product,payload: productDetails);
   }
 }

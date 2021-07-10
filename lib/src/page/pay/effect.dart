@@ -43,10 +43,30 @@ Future _onInit(Action action, Context<PayState> ctx) async {
   });
 
   try {
+    fetchPurchasedProduct(ctx);
     RestLog.logger("initial store...");
     initStoreInfo(ctx, global.inAppPurchase);
   } on Exception catch (e) {
     RestLog.logger("initial store error" + e.toString());
+  }
+}
+
+Future<void> fetchPurchasedProduct(Context<PayState> ctx) async {
+  try {
+    RestLog.logger("load products...");
+    // get product subscribe status
+    IapProduct? product = await Product.getPurchasedStatus();
+    if(product != null) {
+      ProductDetails details = ProductDetails(id: product.productId,
+          description: '',
+          price: '',
+          rawPrice: 0.0,
+          currencyCode: '',
+          title: '');
+      ctx.dispatch(PayActionCreator.onLoadPurchasedProduct(details));
+    }
+  } on Exception catch (e) {
+    RestLog.logger("fetchPurchasedProduct error:" + e.toString());
   }
 }
 
