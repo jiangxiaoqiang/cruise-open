@@ -18,7 +18,7 @@ class Product {
       final response = await RestClient.getHttp("/post/product/v1/previousPurchase");
       if (response.statusCode == 200 && response.data["statusCode"] == "200") {
         RestLog.logger("get product return:");
-        int iapProductResult = response.data["result"];
+        Map iapProductResult = response.data["result"];
         String iapProductJson = JsonEncoder().convert(iapProductResult);
         RestLog.logger("iapProductJson:" + iapProductJson);
         IapProduct parseItem = IapProduct.fromJson(iapProductJson);
