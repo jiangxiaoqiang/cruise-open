@@ -29,5 +29,5 @@ class RestLog {
       } on Exception catch (e) {
         print("a");
       }
-      }
+  }
 }

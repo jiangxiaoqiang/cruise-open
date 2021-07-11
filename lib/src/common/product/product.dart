@@ -17,7 +17,7 @@ class Product {
       RestLog.logger("get getPurchasedStatus" );
       final response = await RestClient.getHttp("/post/product/v1/previousPurchase");
       if (response.statusCode == 200 && response.data["statusCode"] == "200") {
-        RestLog.logger("get product return:");
+        RestLog.logger("get product rern:");
         Map iapProductResult = response.data["result"];
         String iapProductJson = JsonEncoder().convert(iapProductResult);
         RestLog.logger("iapProductJson:" + iapProductJson);
@@ -29,8 +29,12 @@ class Product {
         AppLogHandler.logError(RestApiError('Item failed to fetch.'),
             JsonEncoder().convert(response));
       }
-    }  on Exception catch (e) {
-      RestLog.logger("getPurchasedStatus http error" +e.toString());
+    } on Exception catch (e) {
+      // only executed if error is of type Exception
+      RestLog.logger("type exception http error" +e.toString());
+    } catch (error){
+      // executed for errors of all types other than Exception
+      RestLog.logger("getPurchasedStatus http error" +error.toString());
     }
     return null;
   }
