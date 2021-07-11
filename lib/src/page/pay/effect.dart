@@ -66,6 +66,8 @@ Future<PurchaseDetails?> fetchPurchasedProduct(Context<PayState> ctx) async {
       PurchaseDetails purchaseDetails = PurchaseDetails(productID: product.productId,
       purchaseID:'',verificationData: data,transactionDate: '',status: PurchaseStatus.purchased);
       return purchaseDetails;
+    }else{
+      RestLog.logger("product is null...");
     }
   } on Exception catch (e) {
     RestLog.logger("fetchPurchasedProduct error:" + e.toString());

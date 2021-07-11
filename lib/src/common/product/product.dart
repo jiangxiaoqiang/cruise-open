@@ -14,10 +14,13 @@ class Product {
 
   static Future<IapProduct?> getPurchasedStatus() async {
     try {
+      RestLog.logger("get getPurchasedStatus" );
       final response = await RestClient.getHttp("/post/product/v1/previousPurchase");
       if (response.statusCode == 200 && response.data["statusCode"] == "200") {
+        RestLog.logger("get product return:");
         int iapProductResult = response.data["result"];
         String iapProductJson = JsonEncoder().convert(iapProductResult);
+        RestLog.logger("iapProductJson:" + iapProductJson);
         IapProduct parseItem = IapProduct.fromJson(iapProductJson);
         RestLog.logger("get product id:" + parseItem.productId);
         return parseItem;
