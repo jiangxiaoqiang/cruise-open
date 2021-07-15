@@ -1,4 +1,3 @@
-import 'package:cruise/src/common/config/global_config.dart';
 import 'package:cruise/src/common/theme.dart';
 import 'package:cruise/src/common/utils/common_utils.dart';
 import 'package:cruise/src/common/utils/navigation_service.dart';

@@ -1,3 +1,6 @@
+import 'dart:collection';
+
+import 'package:cruise/src/page/home/state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
@@ -9,6 +12,7 @@ String staticResourceUrl = "";
 final storage = new FlutterSecureStorage();
 final pageStorageBucket = PageStorageBucket();
 final InAppPurchase inAppPurchase = InAppPurchase.instance;
+final Map<String,HomeState> viewCache = HashMap();
 enum ConfigType { DEV, PRO }
 
 class GlobalConfig {
