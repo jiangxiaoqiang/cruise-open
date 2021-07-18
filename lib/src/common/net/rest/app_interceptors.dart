@@ -26,7 +26,7 @@ class AppInterceptors extends InterceptorsWrapper {
   @override
   Future onResponse(Response response, ResponseInterceptorHandler handler) async {
     Response handleResponse = await autoLogin(response);
-    Response handleAccessToken = await handleAccessTokenExpired(handleResponse);
+    Response handleAccessToken = await handleResponseByCode(handleResponse);
     return super.onResponse(handleAccessToken, handler);
   }
 
@@ -50,21 +50,29 @@ class AppInterceptors extends InterceptorsWrapper {
     return response;
   }
 
-  Future<Response> handleAccessTokenExpired(Response response) async {
-    String accessExpiredCode = ResponseStatus.ACCESS_TOKEN_EXPIRED.statusCode;
+  Future<Response> handleResponseByCode(Response response) async {
     String statusCode = response.data["resultCode"];
-    if (accessExpiredCode == statusCode) {
-      String? refreshToken = await storage.read(key: "refreshToken");
-      if (refreshToken == null) {
-        return response;
-      }
-      AuthResult result = await Auth.refreshAccessToken(refreshToken: refreshToken);
-      if (result.result == Result.ok) {
-        Dio dio = RestClient.createDio();
-        return _retryResponse(response, dio);
-      } else {
-        AppLogHandler.logErrorException("refresh access token failed", result);
-      }
+    if (statusCode == ResponseStatus.ACCESS_TOKEN_EXPIRED.statusCode) {
+      return handleAccessTokenExpired(response);
+    }
+    if (statusCode == ResponseStatus.ACCESS_TOKEN_INVALID.statusCode) {
+      NavigationService.instance.navigationKey.currentState!
+          .pushNamedAndRemoveUntil("login", ModalRoute.withName("/"));
+    }
+    return response;
+  }
+
+  Future<Response> handleAccessTokenExpired(Response response) async {
+    String? refreshToken = await storage.read(key: "refreshToken");
+    if (refreshToken == null) {
+      return response;
+    }
+    AuthResult result = await Auth.refreshAccessToken(refreshToken: refreshToken);
+    if (result.result == Result.ok) {
+      Dio dio = RestClient.createDio();
+      return _retryResponse(response, dio);
+    } else {
+      AppLogHandler.logErrorException("refresh access token failed", result);
     }
     return response;
   }
@@ -96,7 +104,8 @@ class AppInterceptors extends InterceptorsWrapper {
          * jump to the login page
          * it will clear all page except / page
          */
-        NavigationService.instance.navigationKey.currentState!.pushNamedAndRemoveUntil("login", ModalRoute.withName("/"));
+        NavigationService.instance.navigationKey.currentState!
+            .pushNamedAndRemoveUntil("login", ModalRoute.withName("/"));
         return response;
       }
     } else {

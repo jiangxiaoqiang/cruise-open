@@ -24,6 +24,7 @@ class HomeListState implements Cloneable<HomeListState> {
     return HomeListState()
     ..currentStoriesType = this.currentStoriesType
     ..homeListDefaultState = this.homeListDefaultState
+      ..subListDefaultState = this.subListDefaultState
     ..channelListDefaultState = this.channelListDefaultState
     ..cruiseSettingState = this.cruiseSettingState;
   }

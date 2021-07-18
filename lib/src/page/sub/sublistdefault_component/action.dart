@@ -16,7 +16,7 @@ enum HomeListDefaultAction {
   update_latest_story_type,
 }
 
-class HomeListDefaultActionCreator {
+class SubHomeListDefaultActionCreator {
   static Action onUpdateArticleLoadingStatus(LoadingStatus loadingStatus) {
     return Action(HomeListDefaultAction.update_article_loading_status, payload: loadingStatus);
   }

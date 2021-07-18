@@ -9,7 +9,7 @@ enum ArticleListAction {
   set_detail_article
 }
 
-class ArticleListActionCreator {
+class SubArticleListActionCreator {
   static Action onAction() {
     return const Action(ArticleListAction.action);
   }

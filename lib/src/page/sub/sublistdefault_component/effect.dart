@@ -1,5 +1,4 @@
 import 'package:cruise/src/common/repo.dart';
-import 'package:cruise/src/common/article_action.dart';
 import 'package:cruise/src/models/Item.dart';
 import 'package:cruise/src/models/request/article/article_request.dart';
 import 'package:fish_redux/fish_redux.dart';
@@ -18,17 +17,20 @@ Effect<SubListDefaultState> buildEffect() {
 }
 
 void _onBuild(Action action, Context<SubListDefaultState> ctx) {
-  SubListDefaultState homeListDefaultState = ctx.state;
+  /*SubListDefaultState homeListDefaultState = ctx.state;
   ArticleRequest articleRequest = homeListDefaultState.articleRequest;
   if (homeListDefaultState.lastStoriesType != articleRequest.storiesType) {
     // switch the article navigator tab
     // initial the new type of article
-    ctx.dispatch(HomeListDefaultActionCreator.onUpdateLastStoriesType(articleRequest.storiesType));
-    initArticles(action, ctx);
-  }
+    //ctx.dispatch(HomeListDefaultActionCreator.onUpdateLastStoriesType(articleRequest.storiesType));
+    //initArticles(action, ctx);
+  }*/
 }
 
 Future _onInit(Action action, Context<SubListDefaultState> ctx) async {
+  if (ctx.state.subArticleListState.articles.length > 0) {
+    return;
+  }
   initArticles(action, ctx);
 }
 
@@ -40,8 +42,7 @@ Future initArticles(Action action, Context<SubListDefaultState> ctx) async {
   List<Item> articles = await Repo.getArticles(articleRequest);
   // 这里注意即使文章为空也要设置状态
   List<int> ids = articles.map((e) => int.parse(e.id)).toList();
-  ctx.dispatch(HomeListDefaultActionCreator.onSetArticleIds(
-      ids, articles, articleRequest));
+  ctx.dispatch(SubHomeListDefaultActionCreator.onSetArticleIds(ids, articles, articleRequest));
 }
 
 Future _onLoadingMoreArticles(Action action, Context<SubListDefaultState> ctx) async {
@@ -52,13 +53,13 @@ Future _onLoadingMoreArticles(Action action, Context<SubListDefaultState> ctx) a
     articleRequest.offset = homeListDefaultState.articleRequest.offset;
   }
   List<Item> articles = await Repo.getArticles(articleRequest);
-  ctx.dispatch(HomeListDefaultActionCreator.onLoadingMoreArticlesUpdate(articles));
+  ctx.dispatch(SubHomeListDefaultActionCreator.onLoadingMoreArticlesUpdate(articles));
 }
 
 Future _onFetchNewestArticles(Action action, Context<SubListDefaultState> ctx) async {
   ArticleRequest articleRequest = (action.payload as ArticleRequest);
   List<Item> articles = await Repo.getArticles(articleRequest);
-  ctx.dispatch(HomeListDefaultActionCreator.onFetchNewestArticlesUpdate(articles));
+  ctx.dispatch(SubHomeListDefaultActionCreator.onFetchNewestArticlesUpdate(articles));
 }
 
 Future _onFetchArticleIds(Action action, Context<SubListDefaultState> ctx) async {
@@ -66,5 +67,5 @@ Future _onFetchArticleIds(Action action, Context<SubListDefaultState> ctx) async
   articleRequest.pageNum = articleRequest.pageNum + 1;
   List<Item> articles = await Repo.getArticles(articleRequest);
   List<int> ids = articles.map((e) => int.parse(e.id)).toList();
-  ctx.dispatch(HomeListDefaultActionCreator.onSetArticleIds(ids, articles, articleRequest));
+  ctx.dispatch(SubHomeListDefaultActionCreator.onSetArticleIds(ids, articles, articleRequest));
 }

@@ -18,14 +18,14 @@ Widget buildView(SubListDefaultState state, Dispatch dispatch, ViewService viewS
   ArticleRequest articleRequest = state.articleRequest;
   articleRequest.storiesType = state.currentStoriesType;
   if (state.isScrollTop) {
-    dispatch(HomeListDefaultActionCreator.onResumeScrollTop());
+    dispatch(SubHomeListDefaultActionCreator.onResumeScrollTop());
     if(scrollController.hasClients) {
       scrollController.animateTo(.0, duration: Duration(milliseconds: 200), curve: Curves.ease);
     }
   }
 
   void _loadingMoreArticle() {
-    dispatch(HomeListDefaultActionCreator.onLoadingMoreArticles(articleRequest));
+    dispatch(SubHomeListDefaultActionCreator.onLoadingMoreArticles(articleRequest));
     _refreshController.loadComplete();
   }
 
@@ -45,7 +45,7 @@ Widget buildView(SubListDefaultState state, Dispatch dispatch, ViewService viewS
 
   void _onRefreshLoadingNewestArticle() async {
     var fetchNewestReq = new ArticleRequest(offset: null, pageSize: 10, pageNum: 1, storiesType: state.currentStoriesType);
-    dispatch(HomeListDefaultActionCreator.onFetchNewestArticles(fetchNewestReq));
+    dispatch(SubHomeListDefaultActionCreator.onFetchNewestArticles(fetchNewestReq));
     await Future.delayed(Duration(milliseconds: 1000));
     _refreshController.refreshCompleted();
   }
