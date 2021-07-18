@@ -15,7 +15,7 @@ class SubListDefaultComponent extends Component<SubListDefaultState> {
           effect: buildEffect(),
           dependencies: Dependencies<SubListDefaultState>(
               adapter: null, slots: <String, Dependent<SubListDefaultState>>{
-                'articlelist': SubArticleListConnector() + SubArticleListComponent()
+                'subarticlelist': SubArticleListConnector() + SubArticleListComponent()
               }),
         );
 }

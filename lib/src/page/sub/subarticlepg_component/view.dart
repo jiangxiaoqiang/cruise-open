@@ -6,12 +6,11 @@ import 'package:cruise/src/common/config/global_config.dart' as global;
 
 import 'state.dart';
 
-Widget buildView(
-    SubArticlePgState state, Dispatch dispatch, ViewService viewService) {
+Widget buildView(SubArticlePgState state, Dispatch dispatch, ViewService viewService) {
   Item item = state.article;
   Map<String, ScrollController> scrollControllers = state.scrollControllers;
   Widget navDetail(Item article) {
-    return viewService.buildComponent("articledetail");
+    return viewService.buildComponent("subarticledetail");
   }
 
   return PageStorage(

@@ -6,14 +6,14 @@ import 'package:animations/animations.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'action.dart';
 import 'state.dart';
 
-Widget buildView(
-    SubArticleListState state, Dispatch dispatch, ViewService viewService) {
+Widget buildView(SubArticleListState state, Dispatch dispatch, ViewService viewService) {
 
   Widget buildArticle(Item item) {
-    dispatch(ArticleListActionCreator.onSetDetailArticle(item));
-    return viewService.buildComponent("articlepg");
+    dispatch(SubArticleListActionCreator.onSetDetailArticle(item));
+    return viewService.buildComponent("subarticlepg");
   }
 
   final currentView = ViewManager.fromViewName("itemCard");

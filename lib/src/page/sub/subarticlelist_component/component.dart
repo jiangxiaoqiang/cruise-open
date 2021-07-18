@@ -17,7 +17,7 @@ class SubArticleListComponent extends Component<SubArticleListState> {
             dependencies: Dependencies<SubArticleListState>(
                 adapter: null,
                 slots: <String, Dependent<SubArticleListState>>{
-                  'articlepg': SubArticlePgConnector() +
+                  'subarticlepg': SubArticlePgConnector() +
                       SubArticlePgComponent()
                 }),);
 

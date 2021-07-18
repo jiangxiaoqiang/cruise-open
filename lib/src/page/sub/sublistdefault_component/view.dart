@@ -105,7 +105,6 @@ Widget buildView(SubListDefaultState state, Dispatch dispatch, ViewService viewS
                           },
                         ),
                         child: CustomScrollView(
-                          key: PageStorageKey(StoriesType.subStories),
                           controller: scrollController,
                           slivers: <Widget>[
                             SliverOverlapInjector(
@@ -116,7 +115,7 @@ Widget buildView(SubListDefaultState state, Dispatch dispatch, ViewService viewS
                             if (state.subArticleListState.articles.length > 0)
                               SliverPadding(
                                 padding: const EdgeInsets.symmetric(vertical: 8.0),
-                                sliver: viewService.buildComponent("articlelist"),
+                                sliver: viewService.buildComponent("subarticlelist"),
                               )
                           ],
                         ))));
