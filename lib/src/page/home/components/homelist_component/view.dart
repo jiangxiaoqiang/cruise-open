@@ -25,7 +25,7 @@ Widget buildView(HomeListState state, Dispatch dispatch, ViewService viewService
     } else if (currentStoriesType == StoriesType.channels) {
       return switchNavTab(StoriesType.channels, "channellistdefault");
     } else if (currentStoriesType == StoriesType.subStories) {
-      return switchNavTab(StoriesType.subStories, "homelistdefault");
+      return switchNavTab(StoriesType.subStories, "sublistdefault");
     } else if (currentStoriesType == StoriesType.favStories) {
       return switchNavTab(StoriesType.favStories, "homelistdefault");
     } else if (currentStoriesType == StoriesType.profile) {

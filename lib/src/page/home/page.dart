@@ -17,7 +17,7 @@ class HomePage extends Page<HomeState, Map<String, dynamic>> {
             dependencies: Dependencies<HomeState>(
                 adapter: null,
                 slots: <String, Dependent<HomeState>>{
-                  'homelist': HomeListConnector() + HomeListComponent(),
+                  'homelist': HomeListConnector() + HomeListComponent()
                 }),
             middleware: <Middleware<HomeState>>[
             ],);
