@@ -105,6 +105,7 @@ Widget buildView(SubListDefaultState state, Dispatch dispatch, ViewService viewS
                           },
                         ),
                         child: CustomScrollView(
+                          key: PageStorageKey(StoriesType.subStories),
                           controller: scrollController,
                           slivers: <Widget>[
                             SliverOverlapInjector(
