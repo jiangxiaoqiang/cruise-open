@@ -14,6 +14,7 @@ Reducer<HomeState> buildReducer() {
 HomeState _onScrollTop(HomeState state, Action action) {
   final HomeState newState = state.clone();
   newState.homeListState.homeListDefaultState.isScrollTop = true;
+  newState.homeListState.subListDefaultState.isScrollTop = true;
   return newState;
 }
 
