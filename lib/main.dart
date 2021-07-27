@@ -22,7 +22,7 @@ void main() async {
   print(GlobalConfiguration().get("baseUrl"));
 
   void _handleError(Object obj, StackTrace stack) {
-    AppLogHandler.logErrorStack(obj.toString(),stack);
+    AppLogHandler.logErrorStack("global error",obj, stack);
   }
 
   runZonedGuarded((){
