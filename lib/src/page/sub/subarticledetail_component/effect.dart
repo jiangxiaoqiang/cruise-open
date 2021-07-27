@@ -16,7 +16,7 @@ Future _onInit(Action action, Context<SubArticleDetailState> ctx) async {
   if(articleListState.article.readStatus == false) {
     HttpResult result = await ArticleAction.read(articleId: articleListState.article.id);
     if (result.result == Result.ok) {
-      ctx.dispatch(ArticleDetailActionCreator.onRead());
+      ctx.dispatch(SubArticleDetailActionCreator.onRead());
     }
   }
 }

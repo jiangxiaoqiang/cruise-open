@@ -4,27 +4,27 @@ import 'package:cruise/src/models/api/upvote_status.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 //TODO replace with your own action
-enum ArticleDetailAction { clear_detail_article, set_article, vote, fav,read }
+enum SubArticleDetailAction { clear_detail_article, set_article, vote, fav,read }
 
-class ArticleDetailActionCreator {
+class SubArticleDetailActionCreator {
   
   static Action onFav(FavStatus favStatus) {
-    return Action(ArticleDetailAction.fav, payload: favStatus);
+    return Action(SubArticleDetailAction.fav, payload: favStatus);
   }
 
   static Action onVote(UpvoteStatus voteType) {
-    return Action(ArticleDetailAction.vote, payload: voteType);
+    return Action(SubArticleDetailAction.vote, payload: voteType);
   }
 
   static Action onClearDetailArticle() {
-    return Action(ArticleDetailAction.clear_detail_article);
+    return Action(SubArticleDetailAction.clear_detail_article);
   }
 
   static Action onRead() {
-    return const Action(ArticleDetailAction.read);
+    return const Action(SubArticleDetailAction.read);
   }
 
   static Action onSetArticle(Item article) {
-    return Action(ArticleDetailAction.set_article, payload: article);
+    return Action(SubArticleDetailAction.set_article, payload: article);
   }
 }

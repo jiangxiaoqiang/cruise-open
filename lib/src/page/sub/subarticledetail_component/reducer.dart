@@ -9,11 +9,11 @@ import 'state.dart';
 Reducer<SubArticleDetailState> buildReducer() {
   return asReducer(
     <Object, Reducer<SubArticleDetailState>>{
-      ArticleDetailAction.clear_detail_article: _onClearDetailArticle,
-      ArticleDetailAction.set_article: _onSetArticle,
-      ArticleDetailAction.vote: _onVote,
-      ArticleDetailAction.fav: _onFav,
-      ArticleDetailAction.read: _onRead,
+      SubArticleDetailAction.clear_detail_article: _onClearDetailArticle,
+      SubArticleDetailAction.set_article: _onSetArticle,
+      SubArticleDetailAction.vote: _onVote,
+      SubArticleDetailAction.fav: _onFav,
+      SubArticleDetailAction.read: _onRead,
     },
   );
 }

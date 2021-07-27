@@ -8,7 +8,6 @@ import 'package:cruise/src/models/Item.dart';
 import 'package:cruise/src/models/api/fav_status.dart';
 import 'package:cruise/src/models/api/upvote_status.dart';
 import 'package:cruise/src/page/channel/channelpg_component/page.dart';
-import 'package:cruise/src/page/home/components/articledetail_component/action.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +17,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:html/dom.dart' as dom;
 
+import 'action.dart';
 import 'state.dart';
 
 Widget buildView(SubArticleDetailState state, Dispatch dispatch, ViewService viewService) {
@@ -63,10 +63,10 @@ Widget buildView(SubArticleDetailState state, Dispatch dispatch, ViewService vie
           fontSize: 16.0);
     } else {
       if (upvoteStatus.statusCode == "upvote") {
-        dispatch(ArticleDetailActionCreator.onVote(UpvoteStatus.UPVOTE));
+        dispatch(SubArticleDetailActionCreator.onVote(UpvoteStatus.UPVOTE));
       }
       if (upvoteStatus.statusCode == "unupvote" && item.upvoteCount > 0) {
-        dispatch(ArticleDetailActionCreator.onVote(UpvoteStatus.UNUPVOTE));
+        dispatch(SubArticleDetailActionCreator.onVote(UpvoteStatus.UNUPVOTE));
       }
       Fluttertoast.showToast(
           msg: upvoteStatus.statusCode == "upvote" ? "点赞成功" : "取消点赞成功",
@@ -93,10 +93,10 @@ Widget buildView(SubArticleDetailState state, Dispatch dispatch, ViewService vie
           fontSize: 16.0);
     } else {
       if (favStatus.statusCode == "fav") {
-        dispatch(ArticleDetailActionCreator.onFav(FavStatus.FAV));
+        dispatch(SubArticleDetailActionCreator.onFav(FavStatus.FAV));
       }
       if (favStatus.statusCode == "unfav" && item.favCount > 0) {
-        dispatch(ArticleDetailActionCreator.onFav(FavStatus.UNFAV));
+        dispatch(SubArticleDetailActionCreator.onFav(FavStatus.UNFAV));
       }
       Fluttertoast.showToast(
           msg: favStatus.statusCode == "fav" ? "添加收藏成功" : "取消收藏成功",
