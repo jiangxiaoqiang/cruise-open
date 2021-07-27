@@ -1,5 +1,6 @@
 import 'package:cruise/src/common/feedback_rest_action.dart';
 import 'package:cruise/src/common/net/rest/http_result.dart';
+import 'package:cruise/src/common/style/global_style.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -87,9 +88,8 @@ Widget buildView(FeedbackState state, Dispatch dispatch, ViewService viewService
                         minWidth: screenWidth * 0.85,
                         height: 50.0,
                         child: Center(
-                            child: RaisedButton(
-                          color: Theme.of(context).primaryColor,
-                          shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
+                            child: ElevatedButton(
+                              style: GlobalStyle.getButtonStyle(context),
                           onPressed: () async {
                             handleSubmitFeedback(feedbackContent!);
                           },
