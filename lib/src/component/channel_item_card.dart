@@ -101,7 +101,7 @@ class ChannelItemCard extends HookWidget {
                       padding: const EdgeInsets.only(top: 8, bottom: 8.0, left: 10),
                       child: ButtonTheme(
                           minWidth: 100,
-                          height: 30.0,
+                          height: 40.0,
                           child: RaisedButton.icon(
                             color: Theme.of(context).primaryColor,
                             icon: Icon(
@@ -117,7 +117,7 @@ class ChannelItemCard extends HookWidget {
                       padding: const EdgeInsets.only(top: 8, bottom: 8.0, right: 1),
                       child: ButtonTheme(
                           minWidth: 100,
-                          height: 30.0,
+                          height: 40.0,
                           child: RaisedButton(
                             color: Theme.of(context).primaryColor,
                             shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(5.0)),
