@@ -27,4 +27,5 @@ class ArticleDetailActionCreator {
   static Action onSetArticle(Item article) {
     return Action(ArticleDetailAction.set_article, payload: article);
   }
+
 }

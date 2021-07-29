@@ -1,6 +1,7 @@
 import 'package:cruise/src/common/auth.dart';
 import 'package:cruise/src/common/nav/nav_util.dart';
 import 'package:cruise/src/page/pay/page.dart';
+import 'package:cruise/src/page/test/page.dart';
 import 'package:cruise/src/page/user/discover/page.dart';
 import 'package:cruise/src/page/user/fav/page.dart';
 import 'package:cruise/src/page/user/feedback/page.dart';
@@ -170,6 +171,25 @@ Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewSe
                             onTap: () async {
                               var data = {'name': "payPage"};
                               Widget payPage = PayPage().buildPage(data);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => payPage),
+                              );
+                            },
+                          )))),
+              Padding(
+                  padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Container(
+                          color: Colors.white,
+                          child: ListTile(
+                            leading: Icon(EvaIcons.heart),
+                            trailing: Icon(Icons.keyboard_arrow_right),
+                            title: Text("test"),
+                            onTap: () async {
+                              var data = {'name': "testPage"};
+                              Widget payPage = TestPage().buildPage(data);
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) => payPage),
