@@ -2,22 +2,21 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:cruise/src/common/config/global_config.dart' as global;
-import 'package:cruise/src/common/log/cruise_log_handler.dart';
 import 'package:cruise/src/common/pay/pay.dart';
 import 'package:cruise/src/common/product/product.dart';
 import 'package:cruise/src/common/rest_log.dart';
 import 'package:cruise/src/models/pay/pay_model.dart';
 import 'package:cruise/src/models/pay/pay_verify_model.dart';
-import 'package:cruise/src/models/pay/purchased_model.dart';
 import 'package:cruise/src/models/product/iap_product.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:wheel/wheel.dart' show AppLogHandler;
 
 import 'action.dart';
 import 'consumable_store.dart';
 import 'state.dart';
 
-Effect<PayState> buildEffect() {
+Effect<PayState>? buildEffect() {
   return combineEffects(<Object, Effect<PayState>>{
     Lifecycle.initState: _onInit,
   });
@@ -39,7 +38,7 @@ Future _onInit(Action action, Context<PayState> ctx) async {
   }, onError: (error) {
     RestLog.logger("purchaseUpdated error:" + error.toString());
     // handle error here.
-    CruiseLogHandler.logErrorException("iap initial error", error);
+    AppLogHandler.logErrorException("iap initial error", error);
   });
 
   try {
@@ -137,7 +136,7 @@ void _handleError(IAPError error, Context<PayState> ctx) {
       queryProductError: error.message,
       consumables: []);
   RestLog.logger("_handleError IAPError:" + error.toString());
-  CruiseLogHandler.logErrorException("IAPError", error);
+  AppLogHandler.logErrorException("IAPError", error);
   ctx.dispatch(PayActionCreator.onUpdate(payModel));
 }
 

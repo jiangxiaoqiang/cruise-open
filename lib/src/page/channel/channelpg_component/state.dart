@@ -17,8 +17,8 @@ class ChannelPgState implements Cloneable<ChannelPgState> {
 
 class ChannelPgConnector extends ConnOp<ChannelListState, ChannelPgState> {
   @override
-  ChannelPgState get(ChannelListState state) {
-    ChannelPgState substate = state.channelPgState.clone();
+  ChannelPgState get(ChannelListState? state) {
+    ChannelPgState substate = state!.channelPgState.clone();
     return substate;
   }
 
@@ -28,8 +28,8 @@ class ChannelPgConnector extends ConnOp<ChannelListState, ChannelPgState> {
   }
 }
 
-ChannelPgState initState(Map<String, dynamic> args) {
-  Channel channel = args["channel"];
+ChannelPgState initState(Map<String, dynamic>? args) {
+  Channel channel = args!["channel"];
 
   return ChannelPgState()
     ..channel = channel

@@ -3,12 +3,11 @@ import 'package:fish_redux/fish_redux.dart';
 import 'action.dart';
 import 'state.dart';
 
-Reducer<LoginState> buildReducer() {
+Reducer<LoginState>? buildReducer() {
   return asReducer(
     <Object, Reducer<LoginState>>{
-      //收到相应type 的action执行相应的方法
-      loginAction.emailFail: _onEmailFail,
-      loginAction.loginSuccess: _onLoginSuccess
+      LoginAction.emailFail: _onEmailFail,
+      LoginAction.loginSuccess: _onLoginSuccess
     },
   );
 }

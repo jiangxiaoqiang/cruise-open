@@ -8,6 +8,6 @@ class VersionState implements Cloneable<VersionState> {
   }
 }
 
-VersionState initState(Map<String, dynamic> args) {
+VersionState initState(Map<String, dynamic>? args) {
   return VersionState();
 }

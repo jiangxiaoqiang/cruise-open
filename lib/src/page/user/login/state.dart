@@ -28,7 +28,7 @@ class LoginState implements Cloneable<LoginState> {
   }
 }
 
-LoginState initState(Map<String, dynamic> args) {
+LoginState initState(Map<String, dynamic>? args) {
   return LoginState()
     ..loginResult = 0
     ..userName = ""

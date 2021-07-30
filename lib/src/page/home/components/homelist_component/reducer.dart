@@ -1,11 +1,10 @@
-import 'package:cruise/src/models/Item.dart';
 import 'package:cruise/src/models/enumn/stories_type.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'action.dart';
 import 'state.dart';
 
-Reducer<HomeListState> buildReducer() {
+Reducer<HomeListState>? buildReducer() {
   return asReducer(
     <Object, Reducer<HomeListState>>{
       HomeListAction.change_stories_type: _onChangeStoriesType,

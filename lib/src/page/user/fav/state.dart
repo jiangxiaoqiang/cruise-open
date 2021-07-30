@@ -15,6 +15,6 @@ class FavArticleState implements Cloneable<FavArticleState> {
   }
 }
 
-FavArticleState initState(Map<String, dynamic> args) {
+FavArticleState initState(Map<String, dynamic>? args) {
   return FavArticleState();
 }

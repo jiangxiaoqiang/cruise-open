@@ -27,8 +27,8 @@ class SubListDefaultState implements Cloneable<SubListDefaultState> {
 
 class SubHomeListDefaultConnector extends ConnOp<HomeListState, SubListDefaultState> {
   @override
-  SubListDefaultState get(HomeListState state) {
-    SubListDefaultState subState = state.subListDefaultState.clone();
+  SubListDefaultState get(HomeListState? state) {
+    SubListDefaultState subState = state!.subListDefaultState.clone();
     subState.currentStoriesType = state.currentStoriesType;
     subState.articleRequest.storiesType = state.currentStoriesType;
     return subState;

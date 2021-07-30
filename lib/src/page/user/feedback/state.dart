@@ -8,6 +8,6 @@ class FeedbackState implements Cloneable<FeedbackState> {
   }
 }
 
-FeedbackState initState(Map<String, dynamic> args) {
+FeedbackState initState(Map<String, dynamic>? args) {
   return FeedbackState();
 }

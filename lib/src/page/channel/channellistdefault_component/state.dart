@@ -24,9 +24,9 @@ class ChannelListDefaultState implements Cloneable<ChannelListDefaultState> {
 class ChannelListDefaultConnector
     extends ConnOp<HomeListState, ChannelListDefaultState> {
   @override
-  ChannelListDefaultState get(HomeListState state) {
-    ChannelListDefaultState substate = state.channelListDefaultState.clone();
-    return substate;
+  ChannelListDefaultState get(HomeListState? state) {
+    ChannelListDefaultState subState = state!.channelListDefaultState.clone();
+    return subState;
   }
 
   @override

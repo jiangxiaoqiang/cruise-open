@@ -3,7 +3,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'action.dart';
 import 'state.dart';
 
-Reducer<FavArticleState> buildReducer() {
+Reducer<FavArticleState>? buildReducer() {
   return asReducer(
     <Object, Reducer<FavArticleState>>{
       FavArticleAction.action: _onAction,

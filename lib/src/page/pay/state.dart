@@ -12,6 +12,6 @@ class PayState implements Cloneable<PayState> {
   }
 }
 
-PayState initState(Map<String, dynamic> args) {
+PayState initState(Map<String, dynamic>? args) {
   return PayState();
 }

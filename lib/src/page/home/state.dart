@@ -22,8 +22,8 @@ class HomeState implements Cloneable<HomeState> {
   }
 }
 
-HomeState initState(Map<String, dynamic> args) {
-  int selectIndex = args["selectIndex"] == null ? 0 : args["selectIndex"];
+HomeState initState(Map<String, dynamic>? args) {
+  int selectIndex = args!["selectIndex"] == null ? 0 : args["selectIndex"];
   StoriesType storiesType = args["storiesType"] == null
       ? StoriesType.topStories
       : args["storiesType"];

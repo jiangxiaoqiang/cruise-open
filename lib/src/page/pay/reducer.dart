@@ -5,7 +5,7 @@ import 'package:in_app_purchase/in_app_purchase.dart';
 import 'action.dart';
 import 'state.dart';
 
-Reducer<PayState> buildReducer() {
+Reducer<PayState>? buildReducer() {
   return asReducer(
     <Object, Reducer<PayState>>{
       PayAction.set_consumable: _onSetConsumable,

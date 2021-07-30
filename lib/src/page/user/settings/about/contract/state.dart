@@ -8,6 +8,6 @@ class ContractState implements Cloneable<ContractState> {
   }
 }
 
-ContractState initState(Map<String, dynamic> args) {
+ContractState initState(Map<String, dynamic>? args) {
   return ContractState();
 }

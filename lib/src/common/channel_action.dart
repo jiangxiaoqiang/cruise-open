@@ -82,7 +82,7 @@ class ChannelAction {
           Channel parsedChannel = Channel.fromMap(element);
           channels.add(parsedChannel);
         } on Exception catch (e) {
-          CruiseLogHandler.logError(CruiseApiError('Channel parsed failed.'), JsonEncoder().convert(response));
+          AppLogHandler.logError(RestApiError('Channel parsed failed.'), JsonEncoder().convert(response));
         }
       });
       return channels;

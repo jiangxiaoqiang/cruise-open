@@ -4,13 +4,13 @@ import 'dart:convert';
 
 import 'package:cruise/src/common/config/global_config.dart' as global;
 import 'package:cruise/src/common/cruise_user.dart';
-import 'package:cruise/src/common/log/cruise_log_handler.dart';
 import 'package:cruise/src/common/net/rest/rest_clinet.dart';
 import 'package:cruise/src/models/Channel.dart';
 import 'package:cruise/src/models/Item.dart';
 import 'package:cruise/src/models/enumn/stories_type.dart';
 import 'package:cruise/src/models/request/article/article_request.dart';
 import 'package:http/http.dart' as http;
+import 'package:wheel/wheel.dart' show AppLogHandler, RestApiError;
 
 import 'log/cruise_api_error.dart';
 
@@ -133,7 +133,7 @@ class Repo {
         Item parseItem = Item.fromJson(articleJson);
         _itemsCache[id] = parseItem;
       } else {
-        CruiseLogHandler.logError(CruiseApiError('Item $id failed to fetch.'), JsonEncoder().convert(response));
+        AppLogHandler.logError(RestApiError('Item $id failed to fetch.'), JsonEncoder().convert(response));
       }
       return _itemsCache[id];
     }
@@ -153,7 +153,7 @@ class Repo {
           _itemsChannelCache[id] = parseItem;
         }
       } else {
-        CruiseLogHandler.logError(CruiseApiError('Item $id failed to fetch.'), JsonEncoder().convert(response));
+        AppLogHandler.logError(RestApiError('Item $id failed to fetch.'), JsonEncoder().convert(response));
       }
     }
     return _itemsChannelCache[id];
@@ -170,7 +170,7 @@ class Repo {
         if (response.body == "null") return null;
         _usersCache[id] = CruiseUser.fromJson(response.body);
       } else {
-        CruiseLogHandler.logError(CruiseApiError('User $id failed to fetch.'), JsonEncoder().convert(response));
+        AppLogHandler.logError(RestApiError('User $id failed to fetch.'), JsonEncoder().convert(response));
       }
     }
     return _usersCache[id];

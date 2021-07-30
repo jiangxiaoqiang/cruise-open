@@ -14,9 +14,9 @@ class CruiseSettingState implements Cloneable<CruiseSettingState> {
 
 class CruiseSettingConnector extends ConnOp<HomeListState, CruiseSettingState> {
   @override
-  CruiseSettingState get(HomeListState state) {
-    CruiseSettingState substate = state.cruiseSettingState.clone();
-    return substate;
+  CruiseSettingState get(HomeListState? state) {
+    CruiseSettingState subState = state!.cruiseSettingState.clone();
+    return subState;
   }
 }
 

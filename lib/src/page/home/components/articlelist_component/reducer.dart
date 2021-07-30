@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart' hide Action;
 import 'action.dart';
 import 'state.dart';
 
-Reducer<ArticleListState> buildReducer() {
+Reducer<ArticleListState>? buildReducer() {
   return asReducer(
     <Object, Reducer<ArticleListState>>{
       ArticleListAction.set_articles: _onSetArticles,

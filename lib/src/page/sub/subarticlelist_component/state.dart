@@ -24,8 +24,8 @@ class SubArticleListState implements Cloneable<SubArticleListState> {
 
 class SubArticleListConnector extends ConnOp<SubListDefaultState, SubArticleListState> {
   @override
-  SubArticleListState get(SubListDefaultState state) {
-    SubArticleListState articleListState = state.subArticleListState.clone();
+  SubArticleListState get(SubListDefaultState? state) {
+    SubArticleListState articleListState = state!.subArticleListState.clone();
     return articleListState;
   }
 
@@ -37,8 +37,8 @@ class SubArticleListConnector extends ConnOp<SubListDefaultState, SubArticleList
 
 class SubArticleListChannelDetailConnector extends ConnOp<ChannelDetailState, SubArticleListState> {
   @override
-  SubArticleListState get(ChannelDetailState state) {
-    SubArticleListState articleListState = state.subArticleListState.clone();
+  SubArticleListState get(ChannelDetailState? state) {
+    SubArticleListState articleListState = state!.subArticleListState.clone();
     return articleListState;
   }
 

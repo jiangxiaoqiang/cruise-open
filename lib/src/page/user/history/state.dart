@@ -15,6 +15,6 @@ class HistoryState implements Cloneable<HistoryState> {
   }
 }
 
-HistoryState initState(Map<String, dynamic> args) {
+HistoryState initState(Map<String, dynamic>? args) {
   return HistoryState();
 }

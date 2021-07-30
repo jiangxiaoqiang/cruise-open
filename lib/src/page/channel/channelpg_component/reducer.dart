@@ -3,7 +3,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'action.dart';
 import 'state.dart';
 
-Reducer<ChannelPgState> buildReducer() {
+Reducer<ChannelPgState>? buildReducer() {
   return asReducer(
     <Object, Reducer<ChannelPgState>>{
       ChannelPgAction.action: _onAction,

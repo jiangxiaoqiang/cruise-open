@@ -1,11 +1,8 @@
-import 'package:cruise/src/common/repo.dart';
-import 'package:cruise/src/models/Item.dart';
 import 'package:fish_redux/fish_redux.dart';
 
-import 'action.dart';
 import 'state.dart';
 
-Effect<ArticleListState> buildEffect() {
+Effect<ArticleListState>? buildEffect() {
   return combineEffects(<Object, Effect<ArticleListState>>{
     Lifecycle.initState: _onInit,
     Lifecycle.build: _didUpdateWidget,

@@ -5,7 +5,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'action.dart';
 import 'state.dart';
 
-Effect<FeedbackState> buildEffect() {
+Effect<FeedbackState>? buildEffect() {
   return combineEffects(<Object, Effect<FeedbackState>>{
     FeedbackAction.action: _onAction,
     FeedbackAction.submit: _onSubmit,
