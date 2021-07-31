@@ -1,5 +1,4 @@
 import 'package:cruise/src/common/repo.dart';
-import 'package:cruise/src/common/article_action.dart';
 import 'package:cruise/src/models/Item.dart';
 import 'package:cruise/src/models/request/article/article_request.dart';
 import 'package:fish_redux/fish_redux.dart';
@@ -7,7 +6,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'action.dart';
 import 'state.dart';
 
-Effect<HomeListDefaultState> buildEffect() {
+Effect<HomeListDefaultState>? buildEffect() {
   return combineEffects(<Object, Effect<HomeListDefaultState>>{
     HomeListDefaultAction.fetch_articleIds: _onFetchArticleIds,
     HomeListDefaultAction.loading_more_articles: _onLoadingMoreArticles,

@@ -3,7 +3,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'action.dart';
 import 'state.dart';
 
-Reducer<DiscoverState> buildReducer() {
+Reducer<DiscoverState>? buildReducer() {
   return asReducer(
     <Object, Reducer<DiscoverState>>{
       DiscoverAction.action: _onAction,

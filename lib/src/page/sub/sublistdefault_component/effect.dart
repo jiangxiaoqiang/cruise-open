@@ -6,7 +6,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'action.dart';
 import 'state.dart';
 
-Effect<SubListDefaultState> buildEffect() {
+Effect<SubListDefaultState>? buildEffect() {
   return combineEffects(<Object, Effect<SubListDefaultState>>{
     HomeListDefaultAction.fetch_articleIds: _onFetchArticleIds,
     HomeListDefaultAction.loading_more_articles: _onLoadingMoreArticles,

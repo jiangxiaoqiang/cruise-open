@@ -137,7 +137,7 @@ class AppInterceptors extends InterceptorsWrapper {
         return response;
       }
     } on Exception catch (e) {
-      CruiseLogHandler.logErrorException("登录失败", e);
+      AppLogHandler.logErrorException("登录失败", e);
       return response;
     } finally {
       dio.unlock();

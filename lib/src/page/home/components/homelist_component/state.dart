@@ -2,7 +2,6 @@ import 'package:cruise/src/models/enumn/stories_type.dart';
 import 'package:cruise/src/page/sub/sublistdefault_component/state.dart';
 import 'package:cruise/src/page/user/history/state.dart';
 import 'package:cruise/src/page/user/settings/cruisesetting/state.dart';
-import 'package:cruise/src/models/Item.dart';
 import 'package:cruise/src/page/channel/channellistdefault_component/state.dart';
 import 'package:cruise/src/page/home/components/homelistdefault_component/state.dart';
 import 'package:cruise/src/page/user/discover/state.dart';
@@ -24,7 +23,7 @@ class HomeListState implements Cloneable<HomeListState> {
     return HomeListState()
     ..currentStoriesType = this.currentStoriesType
     ..homeListDefaultState = this.homeListDefaultState
-      ..subListDefaultState = this.subListDefaultState
+    ..subListDefaultState = this.subListDefaultState
     ..channelListDefaultState = this.channelListDefaultState
     ..cruiseSettingState = this.cruiseSettingState;
   }
@@ -32,8 +31,8 @@ class HomeListState implements Cloneable<HomeListState> {
 
 class HomeListConnector extends ConnOp<HomeState, HomeListState> {
   @override
-  HomeListState get(HomeState state) {
-    HomeListState subState = state.homeListState.clone();
+  HomeListState get(HomeState? state) {
+    HomeListState subState = state!.homeListState.clone();
     return subState;
   }
 
@@ -46,8 +45,8 @@ class HomeListConnector extends ConnOp<HomeState, HomeListState> {
 
 class FavArticleConnector extends ConnOp<FavArticleState, HomeListState> {
   @override
-  HomeListState get(FavArticleState state) {
-    HomeListState subState = state.homeListState.clone();
+  HomeListState get(FavArticleState? state) {
+    HomeListState subState = state!.homeListState.clone();
     subState.currentStoriesType = state.currentStoriesType;
     return subState;
   }
@@ -60,8 +59,8 @@ class FavArticleConnector extends ConnOp<FavArticleState, HomeListState> {
 
 class HistoryArticleConnector extends ConnOp<HistoryState, HomeListState> {
   @override
-  HomeListState get(HistoryState state) {
-    HomeListState subState = state.homeListState.clone();
+  HomeListState get(HistoryState? state) {
+    HomeListState subState = state!.homeListState.clone();
     subState.currentStoriesType = state.currentStoriesType;
     return subState;
   }
@@ -74,10 +73,10 @@ class HistoryArticleConnector extends ConnOp<HistoryState, HomeListState> {
 
 class DiscoverConnector extends ConnOp<DiscoverState, HomeListState> {
   @override
-  HomeListState get(DiscoverState state) {
-    HomeListState substate = state.homeListState.clone();
-    substate.currentStoriesType = state.currentStoriesType;
-    return substate;
+  HomeListState get(DiscoverState? state) {
+    HomeListState subState = state!.homeListState.clone();
+    subState.currentStoriesType = state.currentStoriesType;
+    return subState;
   }
 
   @override

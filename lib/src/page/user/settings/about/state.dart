@@ -1,13 +1,13 @@
 import 'package:fish_redux/fish_redux.dart';
 
-class aboutState implements Cloneable<aboutState> {
+class AboutState implements Cloneable<AboutState> {
 
   @override
-  aboutState clone() {
-    return aboutState();
+  AboutState clone() {
+    return AboutState();
   }
 }
 
-aboutState initState(Map<String, dynamic> args) {
-  return aboutState();
+AboutState initState(Map<String, dynamic>? args) {
+  return AboutState();
 }

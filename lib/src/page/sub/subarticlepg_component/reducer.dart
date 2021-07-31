@@ -4,7 +4,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'action.dart';
 import 'state.dart';
 
-Reducer<SubArticlePgState> buildReducer() {
+Reducer<SubArticlePgState>? buildReducer() {
   return asReducer(
     <Object, Reducer<SubArticlePgState>>{
       ArticlePgAction.set_detail_article: _onSetDetailArticle,

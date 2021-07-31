@@ -46,13 +46,13 @@ dependencies:
   pull_to_refresh: 2.0.0
   country_code_picker: 2.0.1
   dio: 4.0.0
-  fish_redux: 0.3.7
   global_configuration: 2.0.0-nullsafety.1
   hive_flutter: 1.0.0
   eva_icons_flutter: 3.0.0
   firebase_core: "^1.1.0"
   firebase_crashlytics: "^2.0.2"
   device_info: ^2.0.0
+  fish_redux: 0.3.7
   wheel:
     git:
       url: https://github.com/jiangxiaoqiang/wheel.git

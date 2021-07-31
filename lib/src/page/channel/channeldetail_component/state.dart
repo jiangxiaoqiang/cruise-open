@@ -1,5 +1,4 @@
 import 'package:cruise/src/models/Channel.dart';
-import 'package:cruise/src/models/Item.dart';
 import 'package:cruise/src/models/enumn/stories_type.dart';
 import 'package:cruise/src/models/request/article/article_request.dart';
 import 'package:cruise/src/page/channel/channelpg_component/state.dart';
@@ -28,8 +27,8 @@ class ChannelDetailState implements Cloneable<ChannelDetailState> {
 
 class ChannelDetailConnector extends ConnOp<ChannelPgState, ChannelDetailState> {
   @override
-  ChannelDetailState get(ChannelPgState state) {
-    ChannelDetailState subState = state.channelDetailState.clone();
+  ChannelDetailState get(ChannelPgState? state) {
+    ChannelDetailState subState = state!.channelDetailState.clone();
     subState.channel = state.channel;
     return subState;
   }

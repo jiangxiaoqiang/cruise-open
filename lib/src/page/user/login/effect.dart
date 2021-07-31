@@ -2,11 +2,11 @@ import 'package:fish_redux/fish_redux.dart';
 import 'action.dart';
 import 'state.dart';
 
-Effect<LoginState> buildEffect() {
+Effect<LoginState>? buildEffect() {
   return combineEffects(<Object, Effect<LoginState>>{
     //收到type为login的action执行，onlogin方法，这里开发者不用定义参数，是因为已经被Effect定义好的，
     //参数为action和Context<T>
-    loginAction.login: onLogin,
+    LoginAction.login: onLogin,
   });
 }
 

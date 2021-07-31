@@ -4,7 +4,7 @@ import 'package:logger/logger.dart';
 
 import 'cruise_api_error.dart';
 
-class CruiseLogHandler {
+class CruiseLogHandler1 {
   static Logger logger = Logger(
     printer: PrettyPrinter(),
   );

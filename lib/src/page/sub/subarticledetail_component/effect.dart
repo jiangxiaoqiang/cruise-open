@@ -4,7 +4,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'action.dart';
 import 'state.dart';
 
-Effect<SubArticleDetailState> buildEffect() {
+Effect<SubArticleDetailState>? buildEffect() {
   return combineEffects(<Object, Effect<SubArticleDetailState>>{
     Lifecycle.initState: _onInit,
     //Lifecycle.build: _didUpdateWidget,

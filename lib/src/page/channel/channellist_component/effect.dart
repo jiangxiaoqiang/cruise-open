@@ -5,7 +5,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'action.dart';
 import 'state.dart';
 
-Effect<ChannelListState> buildEffect() {
+Effect<ChannelListState>? buildEffect() {
   return combineEffects(<Object, Effect<ChannelListState>>{
     Lifecycle.initState: _onInit,
   });

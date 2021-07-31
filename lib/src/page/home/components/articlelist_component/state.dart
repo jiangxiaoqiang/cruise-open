@@ -24,8 +24,8 @@ class ArticleListState implements Cloneable<ArticleListState> {
 
 class ArticleListConnector extends ConnOp<HomeListDefaultState, ArticleListState> {
   @override
-  ArticleListState get(HomeListDefaultState state) {
-    ArticleListState articleListState = state.articleListState.clone();
+  ArticleListState get(HomeListDefaultState? state) {
+    ArticleListState articleListState = state!.articleListState.clone();
     return articleListState;
   }
 
@@ -37,8 +37,8 @@ class ArticleListConnector extends ConnOp<HomeListDefaultState, ArticleListState
 
 class ArticleListChannelDetailConnector extends ConnOp<ChannelDetailState, ArticleListState> {
   @override
-  ArticleListState get(ChannelDetailState state) {
-    ArticleListState articleListState = state.articleListState.clone();
+  ArticleListState get(ChannelDetailState? state) {
+    ArticleListState articleListState = state!.articleListState.clone();
     return articleListState;
   }
 

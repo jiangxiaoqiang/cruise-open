@@ -23,8 +23,8 @@ class ArticlePgState implements Cloneable<ArticlePgState> {
 
 class ArticlePgConnector extends ConnOp<ArticleListState, ArticlePgState> {
   @override
-  ArticlePgState get(ArticleListState state) {
-    ArticlePgState articlePageState = state.articlePgState.clone();
+  ArticlePgState get(ArticleListState? state) {
+    ArticlePgState articlePageState = state!.articlePgState.clone();
     if (state.article != null) {
       articlePageState.article = state.article!;
     }

@@ -8,7 +8,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'action.dart';
 import 'state.dart';
 
-Reducer<ChannelListDefaultState> buildReducer() {
+Reducer<ChannelListDefaultState>? buildReducer() {
   return asReducer(
     <Object, Reducer<ChannelListDefaultState>>{
       ChannelListDefaultAction.loading_channels: _onLoadingChannels,

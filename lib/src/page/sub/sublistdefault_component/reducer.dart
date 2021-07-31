@@ -8,7 +8,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'action.dart';
 import 'state.dart';
 
-Reducer<SubListDefaultState> buildReducer() {
+Reducer<SubListDefaultState>? buildReducer() {
   return asReducer(
     <Object, Reducer<SubListDefaultState>>{
       HomeListDefaultAction.loading_more_articles_update: _onLoadingMoreArticlesUpdate,

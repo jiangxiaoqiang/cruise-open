@@ -3,7 +3,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'action.dart';
 import 'state.dart';
 
-Reducer<ContractState> buildReducer() {
+Reducer<ContractState>? buildReducer() {
   return asReducer(
     <Object, Reducer<ContractState>>{
       ContractAction.action: _onAction,

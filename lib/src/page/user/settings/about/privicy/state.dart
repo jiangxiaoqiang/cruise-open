@@ -8,6 +8,6 @@ class PrivicyState implements Cloneable<PrivicyState> {
   }
 }
 
-PrivicyState initState(Map<String, dynamic> args) {
+PrivicyState initState(Map<String, dynamic>? args) {
   return PrivicyState();
 }

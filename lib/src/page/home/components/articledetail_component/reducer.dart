@@ -6,7 +6,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'action.dart';
 import 'state.dart';
 
-Reducer<ArticleDetailState> buildReducer() {
+Reducer<ArticleDetailState>? buildReducer() {
   return asReducer(
     <Object, Reducer<ArticleDetailState>>{
       ArticleDetailAction.clear_detail_article: _onClearDetailArticle,

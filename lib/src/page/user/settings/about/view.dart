@@ -7,7 +7,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'contract/page.dart';
 import 'state.dart';
 
-Widget buildView(aboutState state, Dispatch dispatch, ViewService viewService) {
+Widget buildView(AboutState state, Dispatch dispatch, ViewService viewService) {
   return Scaffold(
     backgroundColor: const Color(0xFFEFEFEF),
     body: Form(

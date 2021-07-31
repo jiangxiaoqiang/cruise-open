@@ -16,6 +16,6 @@ class DiscoverState implements Cloneable<DiscoverState> {
   }
 }
 
-DiscoverState initState(Map<String, dynamic> args) {
+DiscoverState initState(Map<String, dynamic>? args) {
   return DiscoverState();
 }

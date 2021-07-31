@@ -18,8 +18,8 @@ class ArticleDetailState implements Cloneable<ArticleDetailState> {
 class ArticleDetailConnector
     extends ConnOp<ArticlePgState, ArticleDetailState> {
   @override
-  ArticleDetailState get(ArticlePgState state) {
-    ArticleDetailState articleDetailState = state.articleDetailState.clone();
+  ArticleDetailState get(ArticlePgState? state) {
+    ArticleDetailState articleDetailState = state!.articleDetailState.clone();
     articleDetailState.article = state.article;
     return articleDetailState;
   }

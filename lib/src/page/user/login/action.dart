@@ -1,15 +1,15 @@
 import 'package:fish_redux/fish_redux.dart';
 
-enum loginAction { login,emailFail,loginSuccess}
+enum LoginAction { login,emailFail,loginSuccess}
 
 class LoginActionCreator {
   static Action onEmailFail() {
-    return Action(loginAction.emailFail);
+    return Action(LoginAction.emailFail);
   }
-  static Action onLoginSuccess(loginAction loginModel) {
-    return Action(loginAction.loginSuccess,payload: loginModel);
+  static Action onLoginSuccess(LoginAction loginModel) {
+    return Action(LoginAction.loginSuccess,payload: loginModel);
   }
   static Action onLoginAction(params) {
-    return Action(loginAction.login,payload: params);
+    return Action(LoginAction.login,payload: params);
   }
 }

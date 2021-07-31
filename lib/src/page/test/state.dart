@@ -8,6 +8,6 @@ class TestState implements Cloneable<TestState> {
   }
 }
 
-TestState initState(Map<String, dynamic> args) {
+TestState initState(Map<String, dynamic>? args) {
   return TestState();
 }

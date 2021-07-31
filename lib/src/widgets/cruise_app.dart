@@ -23,7 +23,7 @@ class CruiseApp extends HookWidget {
 
     final currentTheme = ThemeManager.fromThemeName("lightTheme");
     final AbstractRoutes routes = CommonUtils.buildRoute();
-    bool showDebugInfo = true;
+    bool showDebugInfo = false;
 
     return MaterialApp(
       title: 'Cruise',
@@ -55,7 +55,7 @@ class CruiseApp extends HookWidget {
       home:routes.buildPage('home', {"selectIndex":0}),
       onGenerateRoute: (RouteSettings settings) {
         return MaterialPageRoute<Object>(builder: (BuildContext context) {
-          return routes.buildPage(settings.name, settings.arguments);
+          return routes.buildPage(settings.name!, settings.arguments);
         });
       },
     );
