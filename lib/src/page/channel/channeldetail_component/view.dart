@@ -1,19 +1,16 @@
 import 'package:cruise/src/common/channel_action.dart';
 import 'package:cruise/src/common/net/rest/http_result.dart';
-import 'package:cruise/src/common/utils/common_utils.dart';
 import 'package:cruise/src/models/Channel.dart';
 import 'package:cruise/src/models/api/sub_status.dart';
-import 'package:cruise/src/models/api/upvote_status.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/style.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../../profile.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -129,7 +126,7 @@ Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewSe
                       child: RaisedButton.icon(
                         color: Theme.of(context).primaryColor,
                         icon: Icon(
-                          Feather.check_circle,
+                          EvaIcons.checkmarkCircle,
                           size: 16,
                           color: Theme.of(context).canvasColor,
                         ),

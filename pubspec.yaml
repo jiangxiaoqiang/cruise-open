@@ -30,7 +30,6 @@ dependencies:
   adaptive_breakpoints: ^0.0.2
   cupertino_icons: 1.0.2
   http: 0.13.1
-  flutter_icons: ^1.0.0
   timeago: 3.0.2
   animations: 2.0.0
   flutter_hooks: 0.16.0

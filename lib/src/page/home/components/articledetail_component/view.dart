@@ -9,12 +9,12 @@ import 'package:cruise/src/models/api/fav_status.dart';
 import 'package:cruise/src/models/api/upvote_status.dart';
 import 'package:cruise/src/page/channel/channelpg_component/page.dart';
 import 'package:cruise/src/page/home/components/articledetail_component/action.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/style.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:html/dom.dart' as dom;
 
@@ -286,7 +286,7 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
                 ),
                 IconButton(
                   icon: Icon(
-                    Feather.share_2,
+                    EvaIcons.share,
                   ),
                   onPressed: () => handleShare(id: item.id, title: item.title, postUrl: item.link),
                 ),

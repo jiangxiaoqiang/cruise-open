@@ -1,8 +1,8 @@
 import 'package:cruise/src/page/user/settings/about/privicy/page.dart';
 import 'package:cruise/src/page/user/settings/about/version/page.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 
 import 'contract/page.dart';
 import 'state.dart';
@@ -20,7 +20,7 @@ Widget buildView(AboutState state, Dispatch dispatch, ViewService viewService) {
                   child: Container(
                       color: Colors.white,
                       child: ListTile(
-                        leading: Icon(Feather.award),
+                        leading: Icon(EvaIcons.award),
                         title: Text("关于cruise"),
                         onTap: () {
                           var data = {'name': "contractPage"};
@@ -38,7 +38,7 @@ Widget buildView(AboutState state, Dispatch dispatch, ViewService viewService) {
                   child: Container(
                       color: Colors.white,
                       child: ListTile(
-                        leading: Icon(Feather.award),
+                        leading: Icon(EvaIcons.award),
                         title: Text("隐私政策"),
                         onTap: () {
                           var data = {'name': "privacyPage"};
@@ -56,7 +56,7 @@ Widget buildView(AboutState state, Dispatch dispatch, ViewService viewService) {
                   child: Container(
                       color: Colors.white,
                       child: ListTile(
-                        leading: Icon(Feather.award),
+                        leading: Icon(EvaIcons.award),
                         title: Text("版本信息"),
                         onTap: () {
                           var data = {'name': "versionPage"};

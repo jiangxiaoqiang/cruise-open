@@ -1,17 +1,13 @@
 import 'package:cruise/src/common/theme.dart';
 import 'package:cruise/src/common/view_manager.dart';
-import 'package:cruise/src/page/login.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 
 class About extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final _formKey = useMemoized(() => GlobalKey<FormState>());
-    final currentView = ViewManager.fromViewName("itemCard");
-    final ViewManager viewManager = new ViewManager();
-    final currentTheme = ThemeManager.fromThemeName("lightTheme");
 
     return Scaffold(
       appBar: AppBar(
@@ -33,17 +29,17 @@ class About extends HookWidget {
           children: [
             ListTile(
               title: Text("软件许可协议"),
-              leading: Icon(Feather.moon),
+              leading: Icon(EvaIcons.moon),
               onTap: () => {},
             ),
             ListTile(
               title: Text("隐私政策"),
-              leading: Icon(Feather.moon),
+              leading: Icon(EvaIcons.moon),
               onTap: () => {},
             ),
             ListTile(
               title: Text("版本信息"),
-              leading: Icon(Feather.moon),
+              leading: Icon(EvaIcons.moon),
               onTap: () => {},
             ),
           ],

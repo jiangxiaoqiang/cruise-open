@@ -1,10 +1,9 @@
 import 'package:cruise/src/common/search.dart';
-import 'package:cruise/src/models/Item.dart';
 import 'package:cruise/src/models/enumn/stories_type.dart';
 import 'package:cruise/src/page/channel/add_channel.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 
 import 'action.dart';
 import 'state.dart';
@@ -77,7 +76,7 @@ Widget buildView(HomeListState state, Dispatch dispatch, ViewService viewService
                           MaterialPageRoute(builder: (context) => page),
                         );
                       },
-                      icon: Icon(Feather.plus),
+                      icon: Icon(EvaIcons.plus),
                     ),
                 ],
               )),

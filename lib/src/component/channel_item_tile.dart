@@ -1,6 +1,6 @@
 import 'package:cruise/src/models/Channel.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 
 class ChannelItemTile extends StatelessWidget {
   const ChannelItemTile({
@@ -26,7 +26,7 @@ class ChannelItemTile extends StatelessWidget {
                   child: Row(
                     children: [
                       Icon(
-                        Feather.clock,
+                        EvaIcons.clock,
                         size: 16,
                       ),
                       Padding(
