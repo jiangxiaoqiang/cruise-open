@@ -1,14 +1,11 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:cruise/src/common/config/global_config.dart' as global;
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:in_app_purchase_android/billing_client_wrappers.dart';
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
-
-
 import 'action.dart';
 import 'consumable_store.dart';
 import 'state.dart';

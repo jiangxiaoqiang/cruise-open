@@ -7,7 +7,6 @@ import 'package:cruise/src/common/product/product.dart';
 import 'package:cruise/src/common/rest_log.dart';
 import 'package:cruise/src/models/pay/pay_model.dart';
 import 'package:cruise/src/models/pay/pay_verify_model.dart';
-import 'package:cruise/src/models/product/iap_product.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:wheel/wheel.dart' show AppLogHandler;
@@ -36,16 +35,14 @@ Future _onInit(Action action, Context<PayState> ctx) async {
   }, onDone: () {
     _subscription.cancel();
   }, onError: (error) {
-    RestLog.logger("purchaseUpdated error:" + error.toString());
     // handle error here.
     AppLogHandler.logErrorException("iap initial error", error);
   });
 
   try {
-    RestLog.logger("initial store...");
     fetchPurchasedProduct(ctx)
-    .then((value) => {
-      initStoreInfo(ctx, global.inAppPurchase,value)
+    .then((productDetailsResponse) => {
+      initStoreInfo(ctx, global.inAppPurchase,productDetailsResponse)
     });
   } on Exception catch (e) {
     RestLog.logger("initial store error" + e.toString());
@@ -55,23 +52,10 @@ Future _onInit(Action action, Context<PayState> ctx) async {
 // attention the sequence of data load
 // to avoid the initial store data override the purchased data
 // render the purchased data after store initial complete
-Future<PurchaseDetails?> fetchPurchasedProduct(Context<PayState> ctx) async {
-  try {
-    RestLog.logger("load products...");
+Future<ProductDetailsResponse> fetchPurchasedProduct(Context<PayState> ctx) async {
     // get product subscribe status
-    IapProduct? product = await Product.getPurchasedStatus();
-    if(product != null) {
-      PurchaseVerificationData data = PurchaseVerificationData(localVerificationData: '',serverVerificationData: '',source: '');
-      PurchaseDetails purchaseDetails = PurchaseDetails(productID: product.productId,
-      purchaseID:'',verificationData: data,transactionDate: '',status: PurchaseStatus.purchased);
-      return purchaseDetails;
-    }else{
-      RestLog.logger("product is null...");
-    }
-  } on Exception catch (e) {
-    RestLog.logger("fetchPurchasedProduct error:" + e.toString());
-  }
-  return null;
+    ProductDetailsResponse product = await Product.getProductInfo();
+    return product;
 }
 
 void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList, Context<PayState> ctx) {
@@ -144,7 +128,7 @@ void _showPendingUI(Context<PayState> ctx) {
   ctx.dispatch(PayActionCreator.onChangePending(true));
 }
 
-Future<void> initStoreInfo(Context<PayState> ctx, InAppPurchase _inAppPurchase,PurchaseDetails? purchaseDetail) async {
+Future<void> initStoreInfo(Context<PayState> ctx, InAppPurchase _inAppPurchase,ProductDetailsResponse productDetailsResponse) async {
   final bool isAvailable = await _inAppPurchase.isAvailable();
   RestLog.logger("available status:" + isAvailable.toString());
   if (!isAvailable) {
@@ -163,11 +147,6 @@ Future<void> initStoreInfo(Context<PayState> ctx, InAppPurchase _inAppPurchase,P
 
   ProductDetailsResponse productDetailResponse = await _inAppPurchase.queryProductDetails(_productIds.toSet());
   RestLog.logger("Initial store product detail:");
-  if (productDetailResponse.productDetails.length > 0) {
-    productDetailResponse.productDetails.forEach((element) {
-      RestLog.logger("productDetails status:" + element.currencyCode);
-    });
-  }
   if (productDetailResponse.error != null) {
     PayModel payModel = PayModel(
         isAvailable: isAvailable,
@@ -203,12 +182,10 @@ Future<void> initStoreInfo(Context<PayState> ctx, InAppPurchase _inAppPurchase,P
       products: productDetailResponse.productDetails,
       queryProductError: null,
       debugMessage: 'consumables:' + consumables.join(','),
-      purchases: purchaseDetail == null?[]:new List<PurchaseDetails>.from([purchaseDetail]),
+      purchases: [],// purchaseDetail == null?[]:new List<PurchaseDetails>.from([purchaseDetail]),
       consumables: consumables,
       notFoundIds: productDetailResponse.notFoundIDs,
       purchasePending: false,
       loading: false);
   ctx.dispatch(PayActionCreator.onUpdate(payModel));
-
-  fetchPurchasedProduct(ctx);
 }
