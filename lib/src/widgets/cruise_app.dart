@@ -23,7 +23,7 @@ class CruiseApp extends HookWidget {
 
     final currentTheme = ThemeManager.fromThemeName("lightTheme");
     final AbstractRoutes routes = CommonUtils.buildRoute();
-    bool showDebugInfo = true;
+    bool showDebugInfo = false;
 
     return MaterialApp(
       title: 'Cruise',
