@@ -1,9 +1,8 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:cruise/src/models/Item.dart';
-import 'package:cruise/src/page/profile.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CommentTile extends HookWidget {
@@ -120,7 +119,7 @@ class CommentTile extends HookWidget {
                             style: Theme.of(context).textTheme.caption,
                           ),
                           Icon(
-                            Feather.arrow_up,
+                            EvaIcons.arrowUp,
                             size: 14,
                             color: Theme.of(context).primaryColor,
                           ),

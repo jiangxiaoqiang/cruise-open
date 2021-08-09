@@ -1,7 +1,7 @@
 import 'package:cruise/src/models/Item.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 
 class ItemTile extends StatelessWidget {
   const ItemTile({
@@ -50,7 +50,7 @@ class ItemTile extends StatelessWidget {
                     child: Row(
                       children: [
                         Icon(
-                          Feather.arrow_up,
+                          EvaIcons.arrowUp,
                           size: 16,
                           color: item.isVoted() ? Theme.of(context).primaryColor : Theme.of(context).iconTheme.color,
                         ),
@@ -72,7 +72,7 @@ class ItemTile extends StatelessWidget {
                     child: Row(
                       children: [
                         Icon(
-                          Feather.message_square,
+                          EvaIcons.messageSquare,
                           size: 16,
                         ),
                         Padding(
@@ -92,7 +92,7 @@ class ItemTile extends StatelessWidget {
                   child: Row(
                     children: [
                       Icon(
-                        Feather.clock,
+                        EvaIcons.clock,
                         size: 16,
                       ),
                       Padding(

@@ -2,13 +2,13 @@ import 'dart:typed_data';
 import 'dart:convert';
 
 import 'package:cruise/src/common/channel_action.dart';
-import 'package:cruise/src/common/config/global_config.dart' as global;
+import 'package:cruise/src/common/config/cruise_global_config.dart' as global;
 import 'package:cruise/src/common/net/rest/http_result.dart';
 import 'package:cruise/src/models/Channel.dart';
 import 'package:cruise/src/models/api/sub_status.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class ChannelItemCard extends HookWidget {
@@ -105,7 +105,7 @@ class ChannelItemCard extends HookWidget {
                           child: RaisedButton.icon(
                             color: Theme.of(context).primaryColor,
                             icon: Icon(
-                              Feather.check_circle,
+                              EvaIcons.checkmarkCircle,
                               size: 16,
                             ),
                             onPressed: () => touchSub(counter.value.id.toString(), SubStatus.UNSUB),

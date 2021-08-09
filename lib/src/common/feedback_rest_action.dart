@@ -1,6 +1,5 @@
-import 'package:cruise/src/common/config/global_config.dart' as global;
-import 'package:cruise/src/common/net/rest/rest_clinet.dart';
-
+import 'package:cruise/src/common/config/cruise_global_config.dart' as global;
+import 'package:wheel/wheel.dart';
 import 'net/rest/http_result.dart';
 
 class FeedbackRestAction {

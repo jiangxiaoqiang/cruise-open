@@ -1,11 +1,10 @@
 import 'package:cruise/src/common/auth.dart';
 import 'package:cruise/src/common/cruise_user.dart';
 import 'package:cruise/src/common/utils/navigation_service.dart';
-import 'package:cruise/src/models/Item.dart';
 import 'package:cruise/src/models/enumn/stories_type.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:intl/intl.dart';
 
 class ProfilePage extends HookWidget {
@@ -70,7 +69,7 @@ class ProfilePage extends HookWidget {
                     );
                   }),
               icon: Icon(
-                Feather.log_out,
+                EvaIcons.logOut,
               ),
             ),
         ],

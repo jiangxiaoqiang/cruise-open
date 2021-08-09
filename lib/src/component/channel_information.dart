@@ -3,11 +3,11 @@ import 'package:cruise/src/common/net/rest/http_result.dart';
 import 'package:cruise/src/common/style/global_style.dart';
 import 'package:cruise/src/models/Channel.dart';
 import 'package:cruise/src/models/api/sub_status.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/style.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -115,7 +115,7 @@ class ChannelInformation extends HookWidget {
                         child: ElevatedButton.icon(
                           style: GlobalStyle.getButtonStyle(context),
                           icon: Icon(
-                            Feather.check_circle,
+                            EvaIcons.checkmarkCircle,
                             size: 16,
                             color: Theme.of(context).canvasColor,
                           ),

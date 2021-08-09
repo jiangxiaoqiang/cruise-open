@@ -1,8 +1,8 @@
 import 'package:cruise/src/common/repo.dart';
 import 'package:cruise/src/models/Channel.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 
 import '../../channel_page.dart';
 import 'action.dart';
@@ -26,7 +26,7 @@ Widget buildView(ChannelPgState state, Dispatch dispatch, ViewService viewServic
       actions: [
         if (item.parent != null)
           IconButton(
-            icon: Icon(Feather.corner_left_up),
+            icon: Icon(EvaIcons.cornerLeftUp),
             onPressed: () async {
               Channel parent = (await Repo.fetchChannelItem(item.parent))!;
               Navigator.push(

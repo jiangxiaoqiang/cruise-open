@@ -1,6 +1,6 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:cruise/src/models/Item.dart';
 
 class ItemCard extends StatelessWidget {
@@ -50,7 +50,7 @@ class ItemCard extends StatelessWidget {
                     child: Row(
                       children: [
                         Icon(
-                          Feather.clock,
+                          EvaIcons.clock,
                           size: 16,
                         ),
                         Padding(

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:cruise/src/common/config/global_config.dart';
 import 'package:cruise/src/component/channel_compact_tile.dart';
 import 'package:cruise/src/component/channel_item_card.dart';
 import 'package:cruise/src/component/channel_item_tile.dart';
@@ -15,7 +14,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:global_configuration/global_configuration.dart';
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:url_launcher/url_launcher.dart';
@@ -25,20 +23,6 @@ import '../view_manager.dart';
 import 'custom_en.dart';
 
 class CommonUtils {
-  static void initialApp() {
-    GlobalConfig.init(ConfigType.PRO);
-    WidgetsFlutterBinding.ensureInitialized();
-    // Initialize Firebase, collection app crash report
-    // https://firebase.flutter.dev/docs/crashlytics/usage/
-    Firebase.initializeApp();
-    timeago.setLocaleMessages('en', CustomEn());
-    HistoryManager.init();
-
-    // in app purchase initial
-    if (defaultTargetPlatform == TargetPlatform.android) {
-      InAppPurchaseAndroidPlatformAddition.enablePendingPurchases();
-    }
-  }
 
   static AbstractRoutes buildRoute() {
     final AbstractRoutes routes = PageRoutes(

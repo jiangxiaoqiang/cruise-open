@@ -1,19 +1,17 @@
 import 'dart:async';
 
 import 'package:cruise/src/common/auth.dart';
-import 'package:cruise/src/common/log/cruise_log_handler.dart';
-import 'package:cruise/src/common/net/rest/rest_clinet.dart';
 import 'package:cruise/src/common/utils/navigation_service.dart';
 import 'package:cruise/src/models/api/login_type.dart';
 import 'package:cruise/src/models/api/response_status.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:wheel/wheel.dart' show AppLogHandler;
+import 'package:wheel/wheel.dart' show AppLogHandler, RestClient;
 
-import '../../config/global_config.dart';
+import '../../config/cruise_global_config.dart';
 import 'http_result.dart';
 
-class AppInterceptors extends InterceptorsWrapper {
+class AppIntercgiteptors extends InterceptorsWrapper {
   @override
   Future<void> onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
     if (!options.headers.containsKey("accessToken")) {

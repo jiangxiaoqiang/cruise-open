@@ -3,9 +3,9 @@ import 'package:cruise/src/common/helpers.dart';
 import 'package:cruise/src/component/comment_tile.dart';
 import 'package:cruise/src/component/loading_item.dart';
 import 'package:cruise/src/models/Item.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class CommentList extends HookWidget {
@@ -60,7 +60,7 @@ class CommentList extends HookWidget {
                           actions: <Widget>[
                             IconSlideAction(
                               color: Colors.deepOrangeAccent,
-                              icon: Feather.arrow_up_circle,
+                              icon: EvaIcons.arrowUp,
                               onTap: () {
                                 handleUpvote(context, item: comment);
                               },

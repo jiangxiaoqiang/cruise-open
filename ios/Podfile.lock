@@ -1,53 +1,53 @@
 PODS:
   - device_info (0.0.1):
     - Flutter
-  - Firebase/CoreOnly (8.0.0):
-    - FirebaseCore (= 8.0.0)
-  - Firebase/Crashlytics (8.0.0):
+  - Firebase/CoreOnly (8.3.0):
+    - FirebaseCore (= 8.3.0)
+  - Firebase/Crashlytics (8.3.0):
     - Firebase/CoreOnly
-    - FirebaseCrashlytics (~> 8.0.0)
-  - firebase_core (1.2.1):
-    - Firebase/CoreOnly (= 8.0.0)
+    - FirebaseCrashlytics (~> 8.3.0)
+  - firebase_core (1.4.0):
+    - Firebase/CoreOnly (= 8.3.0)
     - Flutter
-  - firebase_crashlytics (2.0.5):
-    - Firebase/Crashlytics (= 8.0.0)
+  - firebase_crashlytics (2.1.1):
+    - Firebase/Crashlytics (= 8.3.0)
     - firebase_core
     - Flutter
-  - FirebaseCore (8.0.0):
+  - FirebaseCore (8.3.0):
     - FirebaseCoreDiagnostics (~> 8.0)
     - GoogleUtilities/Environment (~> 7.4)
     - GoogleUtilities/Logger (~> 7.4)
-  - FirebaseCoreDiagnostics (8.1.0):
+  - FirebaseCoreDiagnostics (8.4.0):
     - GoogleDataTransport (~> 9.0)
     - GoogleUtilities/Environment (~> 7.4)
     - GoogleUtilities/Logger (~> 7.4)
     - nanopb (~> 2.30908.0)
-  - FirebaseCrashlytics (8.0.0):
+  - FirebaseCrashlytics (8.3.0):
     - FirebaseCore (~> 8.0)
     - FirebaseInstallations (~> 8.0)
     - GoogleDataTransport (~> 9.0)
     - nanopb (~> 2.30908.0)
     - PromisesObjC (~> 1.2)
-  - FirebaseInstallations (8.1.0):
+  - FirebaseInstallations (8.4.0):
     - FirebaseCore (~> 8.0)
     - GoogleUtilities/Environment (~> 7.4)
     - GoogleUtilities/UserDefaults (~> 7.4)
-    - PromisesObjC (~> 1.2)
+    - PromisesObjC (< 3.0, >= 1.2)
   - Flutter (1.0.0)
   - flutter_secure_storage (3.3.1):
     - Flutter
   - fluttertoast (0.0.2):
     - Flutter
     - Toast
-  - GoogleDataTransport (9.0.1):
+  - GoogleDataTransport (9.1.0):
     - GoogleUtilities/Environment (~> 7.2)
     - nanopb (~> 2.30908.0)
-    - PromisesObjC (~> 1.2)
-  - GoogleUtilities/Environment (7.4.1):
-    - PromisesObjC (~> 1.2)
-  - GoogleUtilities/Logger (7.4.1):
+    - PromisesObjC (< 3.0, >= 1.2)
+  - GoogleUtilities/Environment (7.5.0):
+    - PromisesObjC (< 3.0, >= 1.2)
+  - GoogleUtilities/Logger (7.5.0):
     - GoogleUtilities/Environment
-  - GoogleUtilities/UserDefaults (7.4.1):
+  - GoogleUtilities/UserDefaults (7.5.0):
     - GoogleUtilities/Logger
   - in_app_purchase_ios (0.0.1):
     - Flutter
@@ -144,19 +144,19 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   device_info: d7d233b645a32c40dfdc212de5cf646ca482f175
-  Firebase: 73c3e3b216ec1ecbc54d2ffdd4670c65c749edb1
-  firebase_core: a9b69f8583dc992f1b15f376b4918537c1804bb4
-  firebase_crashlytics: 5ecd67c6e882cc0483bc7cb403e57307d43a630b
-  FirebaseCore: 3f09591d51292843e2a46f18358d60bf4e996255
-  FirebaseCoreDiagnostics: 3e249cee3de5c5f9cfd6cc2a19997231286fec11
-  FirebaseCrashlytics: 69cddb6bfa7656c5346e603bc85b029392252ee6
-  FirebaseInstallations: 7f31798a8198c354eadcb87176d2090b62edc187
+  Firebase: 817b9171d0d51dccc458b94a5e8edff6b1dd323d
+  firebase_core: 72374607c8c6f5a0adc0559e5c5bf57deda975e3
+  firebase_crashlytics: f5c47b951fb9b494f2bc4212c8aa8de3ed8417cf
+  FirebaseCore: a6dba751680d7033b9d3831e1cfc95ead0605118
+  FirebaseCoreDiagnostics: cad03be1904b975f845e632f2720c3337da27faf
+  FirebaseCrashlytics: 3d83f2e8a47f476f47c82ff4536b169df6781271
+  FirebaseInstallations: 1585729afc787877763208c2088ed84221161f77
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
   flutter_secure_storage: 7953c38a04c3fdbb00571bcd87d8e3b5ceb9daec
   fluttertoast: 6122fa75143e992b1d3470f61000f591a798cc58
-  GoogleDataTransport: 04c3e9a480bbcaa2ec3f5d27f1cdeb6a92f20c8d
-  GoogleUtilities: f8a43108b38a68eebe8b3540e1f4f2d28843ce20
-  in_app_purchase_ios: 1fd2beee2a16ec0c1b52c0e8720036612dd9f86f
+  GoogleDataTransport: 85fd18ff3019bb85d3f2c551d04c481dedf71fc9
+  GoogleUtilities: eea970f4a389963963bffe8d8fabe43540678b9c
+  in_app_purchase_ios: 18c65275991b8a28b2a47634a7797fb23d5d773e
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   package_info: 873975fc26034f0b863a300ad47e7f1ac6c7ec62
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
@@ -168,8 +168,8 @@ SPEC CHECKSUMS:
   url_launcher: 6fef411d543ceb26efce54b05a0a40bfd74cbbef
   video_player: 9cc823b1d9da7e8427ee591e8438bfbcde500e6e
   wakelock: b0843b2479edbf6504d8d262c2959446f35373aa
-  webview_flutter: 9f491a9b5a66f2573946a389b2677987b0ff8c0b
+  webview_flutter: 3603125dfd3bcbc9d8d418c3f80aeecf331c068b
 
 PODFILE CHECKSUM: 348dad678b7cce6be8a224f25af1488a984f0e6a
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.10.2

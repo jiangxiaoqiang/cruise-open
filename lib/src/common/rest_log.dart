@@ -1,11 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:cruise/src/common/config/global_config.dart' as global;
 import 'package:cruise/src/models/log/rest_log_model.dart';
-import 'package:wheel/wheel.dart' show AppLogHandler,RestApiError;
+import 'package:wheel/wheel.dart' show AppLogHandler, RestApiError, RestClient;
 
-import 'net/rest/rest_clinet.dart';
 
 class RestLog {
 

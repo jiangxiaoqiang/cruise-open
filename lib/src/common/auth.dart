@@ -1,14 +1,13 @@
-import 'package:cruise/src/common/config/global_config.dart' as global;
-import 'package:cruise/src/common/net/rest/rest_clinet.dart';
+import 'package:cruise/src/common/config/cruise_global_config.dart' as global;
 import 'package:cruise/src/common/utils/common_utils.dart';
 import 'package:cruise/src/common/utils/navigation_service.dart';
 import 'package:cruise/src/models/api/login_type.dart';
 import 'package:cruise/src/models/api/response_status.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:global_configuration/global_configuration.dart';
-import 'package:wheel/wheel.dart' show SecureStorageUtil;
+import 'package:wheel/wheel.dart' show RestClient, SecureStorageUtil;
 
-import 'config/global_config.dart';
+import 'config/cruise_global_config.dart';
 import 'cruise_user.dart';
 import 'net/rest/http_result.dart';
 
