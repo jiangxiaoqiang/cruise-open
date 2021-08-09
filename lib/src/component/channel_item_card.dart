@@ -2,7 +2,7 @@ import 'dart:typed_data';
 import 'dart:convert';
 
 import 'package:cruise/src/common/channel_action.dart';
-import 'package:cruise/src/common/config/global_config.dart' as global;
+import 'package:cruise/src/common/config/cruise_global_config.dart' as global;
 import 'package:cruise/src/common/net/rest/http_result.dart';
 import 'package:cruise/src/models/Channel.dart';
 import 'package:cruise/src/models/api/sub_status.dart';

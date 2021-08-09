@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:cruise/src/common/config/global_config.dart' as global;
-import 'package:cruise/src/common/net/rest/rest_clinet.dart';
+import 'package:cruise/src/common/config/cruise_global_config.dart' as global;
+import 'package:cruise/src/common/net/rest/legacy_rest_clinet.dart';
 import 'package:cruise/src/models/Channel.dart';
 import 'package:cruise/src/models/api/sub_status.dart';
 import 'package:cruise/src/models/channel_suggestion.dart';
@@ -17,8 +17,8 @@ class ChannelAction {
 
   static Future<HttpResult> sub({required String channelId, required SubStatus subStatus}) async {
     String url = "/post/sub/source/" + subStatus.statusCode + "/" + channelId;
-    final response = await RestClient.putHttp(url, null);
-    if (RestClient.respSuccess(response)) {
+    final response = await LegacyRestClient.putHttp(url, null);
+    if (LegacyRestClient.respSuccess(response)) {
       return HttpResult(message: "SMS send success", result: Result.ok);
     } else {
       return HttpResult(message: "Sub failed.", result: Result.error);
@@ -27,8 +27,8 @@ class ChannelAction {
 
   static Future<HttpResult> addChannel({required String url}) async {
     Map body = {"subUrl": url};
-    final response = await RestClient.postHttp("/post/sub/source/add", body);
-    if (RestClient.respSuccess(response)) {
+    final response = await LegacyRestClient.postHttp("/post/sub/source/add", body);
+    if (LegacyRestClient.respSuccess(response)) {
       return HttpResult(message: "Channel add success", result: Result.ok);
     } else {
       return HttpResult(message: "Sub failed.", result: Result.error);
@@ -37,18 +37,18 @@ class ChannelAction {
 
   static Future<List<Channel>> searchChannel(ChannelRequest request) async {
     Map jsonMap = request.toMap();
-    final response = await RestClient.postHttp("/post/sub/source/page", jsonMap);
+    final response = await LegacyRestClient.postHttp("/post/sub/source/page", jsonMap);
     return convertTheResult(response);
   }
 
   static Future<List<ChannelSuggestion>> fetchSuggestion(ChannelRequest request) async {
     Map jsonMap = request.toMap();
-    final response = await RestClient.postHttp("/post/sub/source/suggestion", jsonMap);
+    final response = await LegacyRestClient.postHttp("/post/sub/source/suggestion", jsonMap);
     return convertSuggestionResult(response);
   }
 
   static List<ChannelSuggestion> convertSuggestionResult(Response response) {
-    if (RestClient.respSuccess(response)) {
+    if (LegacyRestClient.respSuccess(response)) {
       var channelResult = response.data["result"];
       if (channelResult == null) {
         return List.empty();
@@ -70,7 +70,7 @@ class ChannelAction {
   }
 
   static List<Channel> convertTheResult(Response response) {
-    if (RestClient.respSuccess(response)) {
+    if (LegacyRestClient.respSuccess(response)) {
       var channelResult = response.data["result"];
       if (channelResult == null) {
         return List.empty();

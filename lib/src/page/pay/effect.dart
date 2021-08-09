@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:cruise/src/common/config/global_config.dart' as global;
+import 'package:cruise/src/common/config/cruise_global_config.dart' as global;
 import 'package:cruise/src/common/pay/pay.dart';
 import 'package:cruise/src/common/product/product.dart';
 import 'package:cruise/src/common/rest_log.dart';

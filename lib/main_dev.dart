@@ -1,28 +1,12 @@
 // @dart=2.12
-import 'package:cruise/src/common/config/global_config.dart';
-import 'package:cruise/src/common/history.dart';
-import 'package:cruise/src/common/theme.dart';
-import 'package:cruise/src/common/utils/custom_en.dart';
-import 'package:cruise/src/common/view_manager.dart';
-import 'package:cruise/src/widgets/cruise_app.dart';
-import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:cruise/src/common/config/cruise_global_config.dart';
+import 'package:global_configuration/global_configuration.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:wheel/wheel.dart';
 
 void main() async {
-  GlobalConfig.init(ConfigType.DEV);
-  WidgetsFlutterBinding.ensureInitialized();
-  timeago.setLocaleMessages('en', CustomEn());
-  await HistoryManager.init();
-  SharedPreferences pref = await SharedPreferences.getInstance();
-  String? themeName = pref.getString('theme');
-  final theme = ThemeManager.fromThemeName(themeName);
-  String? viewName = pref.getString('view');
-  final view = ViewManager.fromViewName(viewName);
-  runApp(
-    CruiseApp(
-      theme: theme,
-      view: view,
-    ),
-  );
+  CommonUtils.initialApp(ConfigType.DEV);
+  GlobalConfiguration().loadFromAsset("dev_app_settings").whenComplete(() => {
+    CruiseGlobalConfig.loadApp()
+  });
 }

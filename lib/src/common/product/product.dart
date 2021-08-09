@@ -1,17 +1,17 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:cruise/src/common/config/global_config.dart' as global;
+import 'package:cruise/src/common/config/cruise_global_config.dart' as global;
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:wheel/wheel.dart' show AppLogHandler, RestApiError;
 
-import '../net/rest/rest_clinet.dart';
+import '../net/rest/legacy_rest_clinet.dart';
 
 class Product {
   final baseUrl = global.baseUrl;
 
   static Future<ProductDetailsResponse> getProductInfo() async {
     try {
-      final response = await RestClient.getHttp("/post/product/v1/previousPurchase");
+      final response = await LegacyRestClient.getHttp("/post/product/v1/previousPurchase");
       if (response.statusCode == 200 && response.data["statusCode"] == "200") {
         Map iapProductResult = response.data["result"];
         String iapProductJson = JsonEncoder().convert(iapProductResult);

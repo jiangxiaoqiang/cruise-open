@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:cruise/src/common/auth.dart';
 import 'package:cruise/src/common/log/cruise_log_handler.dart';
-import 'package:cruise/src/common/net/rest/rest_clinet.dart';
+import 'package:cruise/src/common/net/rest/legacy_rest_clinet.dart';
 import 'package:cruise/src/common/utils/navigation_service.dart';
 import 'package:cruise/src/models/api/login_type.dart';
 import 'package:cruise/src/models/api/response_status.dart';
@@ -10,7 +10,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:wheel/wheel.dart' show AppLogHandler;
 
-import '../../config/global_config.dart';
+import '../../config/cruise_global_config.dart';
 import 'http_result.dart';
 
 class AppInterceptors extends InterceptorsWrapper {
@@ -41,7 +41,7 @@ class AppInterceptors extends InterceptorsWrapper {
       }
       AuthResult result = await Auth.refreshRefreshToken(phone: phone, password: password);
       if (result.result == Result.ok) {
-        Dio dio = RestClient.createDio();
+        Dio dio = LegacyRestClient.createDio();
         return _retryResponse(response, dio);
       } else {
         AppLogHandler.logErrorException("refresh refresh token failed", result);
@@ -69,7 +69,7 @@ class AppInterceptors extends InterceptorsWrapper {
     }
     AuthResult result = await Auth.refreshAccessToken(refreshToken: refreshToken);
     if (result.result == Result.ok) {
-      Dio dio = RestClient.createDio();
+      Dio dio = LegacyRestClient.createDio();
       return _retryResponse(response, dio);
     } else {
       AppLogHandler.logErrorException("refresh access token failed", result);
@@ -94,7 +94,7 @@ class AppInterceptors extends InterceptorsWrapper {
         storage.write(key: "refreshTimes", value: newRefreshTimes);
         Future<Response> res = refreshAuthToken(userName, password, response);
         res.whenComplete(() => {}).then((value) => {
-              if (RestClient.respSuccess(response)) {storage.write(key: "refreshTimes", value: "0")}
+              if (LegacyRestClient.respSuccess(response)) {storage.write(key: "refreshTimes", value: "0")}
             });
         return res;
       } else {
@@ -126,7 +126,7 @@ class AppInterceptors extends InterceptorsWrapper {
   }
 
   Future<Response> refreshAuthToken(String userName, String password, Response response) async {
-    Dio dio = RestClient.createDio();
+    Dio dio = LegacyRestClient.createDio();
     dio.lock();
     try {
       AuthResult result = await Auth.login(username: userName, password: password, loginType: LoginType.PHONE);

@@ -2,7 +2,7 @@ import 'package:cruise/src/models/Item.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:cruise/src/common/config/global_config.dart' as global;
+import 'package:cruise/src/common/config/cruise_global_config.dart' as global;
 
 import 'state.dart';
 

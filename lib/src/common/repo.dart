@@ -2,17 +2,15 @@ import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
 
-import 'package:cruise/src/common/config/global_config.dart' as global;
+import 'package:cruise/src/common/config/cruise_global_config.dart' as global;
 import 'package:cruise/src/common/cruise_user.dart';
-import 'package:cruise/src/common/net/rest/rest_clinet.dart';
 import 'package:cruise/src/models/Channel.dart';
 import 'package:cruise/src/models/Item.dart';
 import 'package:cruise/src/models/enumn/stories_type.dart';
 import 'package:cruise/src/models/request/article/article_request.dart';
 import 'package:http/http.dart' as http;
-import 'package:wheel/wheel.dart' show AppLogHandler, RestApiError;
+import 'package:wheel/wheel.dart' show AppLogHandler, RestApiError, RestClient;
 
-import 'log/cruise_api_error.dart';
 
 class Repo {
   static final _itemsCache = <int, Item>{};

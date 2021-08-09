@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:cruise/src/common/config/global_config.dart' as global;
+import 'package:cruise/src/common/config/cruise_global_config.dart' as global;
 import 'package:cruise/src/models/log/rest_log_model.dart';
 import 'package:wheel/wheel.dart' show AppLogHandler,RestApiError;
 
-import 'net/rest/rest_clinet.dart';
+import 'net/rest/legacy_rest_clinet.dart';
 
 class RestLog {
 
@@ -14,7 +14,7 @@ class RestLog {
     restLogModel.message = restLog;
       Map jsonMap = restLogModel.toMap();
       try {
-        final response = await RestClient.postHttp( "/post/logger/v1/log", jsonMap);
+        final response = await LegacyRestClient.postHttp( "/post/logger/v1/log", jsonMap);
         if (response.statusCode == 200 &&
             response.data["statusCode"] == "200") {
           Map channelResult = response.data["result"];

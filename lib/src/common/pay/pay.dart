@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:cruise/src/common/config/global_config.dart' as global;
+import 'package:cruise/src/common/config/cruise_global_config.dart' as global;
 import 'package:cruise/src/common/rest_log.dart';
 import 'package:cruise/src/models/pay/pay_verify_model.dart';
 import 'package:wheel/wheel.dart' show AppLogHandler,RestApiError;
-import '../net/rest/rest_clinet.dart';
+import '../net/rest/legacy_rest_clinet.dart';
 
 class Pay {
   final baseUrl = global.baseUrl;
@@ -13,7 +13,7 @@ class Pay {
   static Future<int> verifyReceipt(PayVerifyModel payVerifyModel) async {
     try {
       Map jsonMap = payVerifyModel.toMap();
-      final response = await RestClient.postHttp("/post/pay/v1/verifyReceipt", jsonMap);
+      final response = await LegacyRestClient.postHttp("/post/pay/v1/verifyReceipt", jsonMap);
       if (response.statusCode == 200 && response.data["statusCode"] == "200") {
         int result = response.data["result"];
         return result;
