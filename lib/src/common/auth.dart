@@ -1,12 +1,11 @@
 import 'package:cruise/src/common/config/cruise_global_config.dart' as global;
-import 'package:cruise/src/common/net/rest/legacy_rest_clinet.dart';
 import 'package:cruise/src/common/utils/common_utils.dart';
 import 'package:cruise/src/common/utils/navigation_service.dart';
 import 'package:cruise/src/models/api/login_type.dart';
 import 'package:cruise/src/models/api/response_status.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:global_configuration/global_configuration.dart';
-import 'package:wheel/wheel.dart' show SecureStorageUtil;
+import 'package:wheel/wheel.dart' show RestClient, SecureStorageUtil;
 
 import 'config/cruise_global_config.dart';
 import 'cruise_user.dart';
@@ -46,8 +45,8 @@ class Auth {
 
   static Future<AuthResult> vote({required String itemId}) async {
     Map body = {"id": itemId};
-    final response = await LegacyRestClient.putHttp("/post/article/upvote", body);
-    if (LegacyRestClient.respSuccess(response)) {
+    final response = await RestClient.putHttp("/post/article/upvote", body);
+    if (RestClient.respSuccess(response)) {
       return AuthResult(message: "SMS send success", result: Result.ok);
     } else {
       return AuthResult(message: "SMS send failed. Did you mistype your credentials?", result: Result.error);
@@ -66,8 +65,8 @@ class Auth {
 
   static Future<AuthResult> sms({required String phone}) async {
     Map body = {"phone": phone};
-    final response = await LegacyRestClient.postHttp("/post/user/sms", body);
-    if (LegacyRestClient.respSuccess(response)) {
+    final response = await RestClient.postHttp("/post/user/sms", body);
+    if (RestClient.respSuccess(response)) {
       final storage = new FlutterSecureStorage();
       await storage.write(key: "phone", value: phone);
       return AuthResult(message: "SMS send success", result: Result.ok);
@@ -82,8 +81,8 @@ class Auth {
       "password": password,
       "goto": 'news',
     };
-    final response = await LegacyRestClient.postHttp("/post/user/set/pwd", body);
-    if (LegacyRestClient.respSuccess(response)) {
+    final response = await RestClient.postHttp("/post/user/set/pwd", body);
+    if (RestClient.respSuccess(response)) {
       final storage = new FlutterSecureStorage();
       await storage.write(key: "username", value: phone);
       await storage.write(key: "password", value: password);
@@ -99,8 +98,8 @@ class Auth {
       "verifyCode": verifyCode,
       "goto": 'news',
     };
-    final response = await LegacyRestClient.postHttp("/post/user/verify", body);
-    if (LegacyRestClient.respSuccess(response)) {
+    final response = await RestClient.postHttp("/post/user/verify", body);
+    if (RestClient.respSuccess(response)) {
       final storage = new FlutterSecureStorage();
       await storage.write(key: "phone", value: phone);
       await storage.write(key: "verifyCode", value: verifyCode);
@@ -114,10 +113,10 @@ class Auth {
     Map body = {
       "refreshToken": refreshToken,
     };
-    final response = await LegacyRestClient.postHttpNewDio("/post/auth/access_token/refresh", body);
+    final response = await RestClient.postHttpNewDio("/post/auth/access_token/refresh", body);
     String refreshExpiredCode = ResponseStatus.REFRESH_TOKEN_EXPIRED.statusCode;
     String statusCode = response.data["resultCode"];
-    if (LegacyRestClient.respSuccess(response)) {
+    if (RestClient.respSuccess(response)) {
       Map result = response.data["result"];
       String accessToken = result["accessToken"];
       await storage.write(key: "accessToken", value: accessToken);
@@ -145,8 +144,8 @@ class Auth {
       "deviceId": deviceInfo[2],
       "app": appId
     };
-    final response = await LegacyRestClient.postHttpNewDio("/post/auth/refresh_token/refresh", body);
-    if (LegacyRestClient.respSuccess(response)) {
+    final response = await RestClient.postHttpNewDio("/post/auth/refresh_token/refresh", body);
+    if (RestClient.respSuccess(response)) {
       Map result = response.data["result"];
       String refreshToken = result["refreshToken"];
       String accessToken = result["accessToken"];
@@ -172,8 +171,8 @@ class Auth {
       "deviceType": int.parse(deviceInfo[1]),
       "app": appId
     };
-    final response = await LegacyRestClient.postHttpNewDio("/post/user/login", body);
-    if (LegacyRestClient.respSuccess(response)) {
+    final response = await RestClient.postHttpNewDio("/post/user/login", body);
+    if (RestClient.respSuccess(response)) {
       Map result = response.data["result"];
       String accessToken = result["accessToken"];
       String refreshToken = result["refreshToken"];
