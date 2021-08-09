@@ -11,7 +11,7 @@ import 'package:wheel/wheel.dart' show AppLogHandler, RestClient;
 import '../../config/cruise_global_config.dart';
 import 'http_result.dart';
 
-class AppInterceptors extends InterceptorsWrapper {
+class AppIntercgiteptors extends InterceptorsWrapper {
   @override
   Future<void> onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
     if (!options.headers.containsKey("accessToken")) {
