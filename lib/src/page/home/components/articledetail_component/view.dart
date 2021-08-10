@@ -1,5 +1,6 @@
 import 'package:cruise/src/common/article_action.dart';
 import 'package:cruise/src/common/helpers.dart';
+import 'package:cruise/src/common/nav/nav_util.dart';
 import 'package:cruise/src/common/net/rest/http_result.dart';
 import 'package:cruise/src/common/repo.dart';
 import 'package:cruise/src/common/utils/common_utils.dart';
@@ -17,11 +18,11 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/style.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:html/dom.dart' as dom;
+import 'package:wheel/wheel.dart' show Auth;
 
 import 'state.dart';
 
-Widget buildView(
-    ArticleDetailState state, Dispatch dispatch, ViewService viewService) {
+Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewService) {
   Item item = state.article;
   BuildContext context = viewService.context;
   Offset? _initialSwipeOffset;
@@ -39,8 +40,7 @@ Widget buildView(
     if (_initialSwipeOffset != null) {
       final offsetDifference = _initialSwipeOffset!.dx - _finalSwipeOffset!.dx;
       if (offsetDifference < 0) {
-        if (PaintingBinding.instance != null &&
-            PaintingBinding.instance!.imageCache != null) {
+        if (PaintingBinding.instance != null && PaintingBinding.instance!.imageCache != null) {
           // https://mp.weixin.qq.com/s/yUm4UFggYLgDbj4_JCjEdg
           // https://musicfe.dev/flutter/
           PaintingBinding.instance!.imageCache!.clear();
@@ -51,7 +51,7 @@ Widget buildView(
     }
   }
 
-  void touchUpvote(String action, UpvoteStatus upvoteStatus) async {
+  void handleVoteImpl(UpvoteStatus upvoteStatus, String action) async {
     HttpResult result = (await ArticleAction.upvote(articleId: item.id.toString(), action: action))!;
     if (result.result == Result.error) {
       Fluttertoast.showToast(
@@ -80,7 +80,45 @@ Widget buildView(
     }
   }
 
+
+
+  void popDialog(String tips){
+    showDialog(context: context, builder: (context) {
+      return AlertDialog(
+        title: Text("提示"),
+        content: Text(tips),
+        actions: <Widget>[
+          TextButton(
+            child: Text("暂不"),
+            onPressed: () => {Navigator.of(context).pop()}, //关闭对话框
+          ),
+          TextButton(
+            child: Text("去登陆"),
+            onPressed: () {
+              // ... 执行删除操作
+              NavUtil.navLogin(context);
+              // Navigator.of(context).pop(true); //关闭对话框
+            },
+          ),
+        ],
+      );;
+    });
+  }
+
+  void touchUpvote(String action, UpvoteStatus upvoteStatus) async {
+    bool isLoggedIn = await Auth.isLoggedIn();
+    if (!isLoggedIn) {
+      popDialog("登录后可点赞，确定去登陆吗?");
+    } else {
+      handleVoteImpl(upvoteStatus, action);
+    }
+  }
+
   void touchFav(String action, FavStatus favStatus) async {
+    bool isLoggedIn = await Auth.isLoggedIn();
+    if (!isLoggedIn) {
+      popDialog("登录后可收藏，确定去登陆吗?");
+    }
     HttpResult result = (await ArticleAction.fav(articleId: item.id.toString(), action: action))!;
     if (result.result == Result.error) {
       Fluttertoast.showToast(
@@ -110,8 +148,7 @@ Widget buildView(
   }
 
   void navToChannelDetail() async {
-    Channel channel =
-        (await Repo.fetchChannelItem(int.parse(item.subSourceId)))!;
+    Channel channel = (await Repo.fetchChannelItem(int.parse(item.subSourceId)))!;
     var data = {'name': "originalstories", "channel": channel};
     Widget page = ChannelpgPage().buildPage(data);
     Navigator.push(
@@ -222,8 +259,8 @@ Widget buildView(
                     ),
                   },
                   customImageRenders: defaultImageRenders,
-                  onLinkTap: (String? url, RenderContext context,
-                      Map<String, String> attributes, dom.Element? element) {
+                  onLinkTap:
+                      (String? url, RenderContext context, Map<String, String> attributes, dom.Element? element) {
                     CommonUtils.launchUrl(url);
                   }),
             Row(
@@ -237,10 +274,8 @@ Widget buildView(
                         children: [
                           if (item.isFav == 1)
                             IconButton(
-                              icon: Icon(Icons.bookmark,
-                                  color: Theme.of(context).primaryColor),
-                              onPressed: () =>
-                                  touchFav("unfav", FavStatus.UNFAV),
+                              icon: Icon(Icons.bookmark, color: Theme.of(context).primaryColor),
+                              onPressed: () => touchFav("unfav", FavStatus.UNFAV),
                             ),
                           if (item.isFav != 1)
                             IconButton(
@@ -252,10 +287,9 @@ Widget buildView(
                             child: Text(
                               "${item.favCount}",
                               textAlign: TextAlign.center,
-                              style:
-                                  Theme.of(context).textTheme.caption!.copyWith(
-                                        color: Theme.of(context).primaryColor,
-                                      ),
+                              style: Theme.of(context).textTheme.caption!.copyWith(
+                                    color: Theme.of(context).primaryColor,
+                                  ),
                             ),
                           ),
                         ],
@@ -267,26 +301,22 @@ Widget buildView(
                         children: [
                           if (item.isUpvote == 1)
                             IconButton(
-                              icon: Icon(Icons.thumb_up,
-                                  color: Theme.of(context).primaryColor),
-                              onPressed: () => touchUpvote(
-                                  "unupvote", UpvoteStatus.UNUPVOTE),
+                              icon: Icon(Icons.thumb_up, color: Theme.of(context).primaryColor),
+                              onPressed: () => touchUpvote("unupvote", UpvoteStatus.UNUPVOTE),
                             ),
                           if (item.isUpvote != 1)
                             IconButton(
                               icon: Icon(Icons.thumb_up),
-                              onPressed: () =>
-                                  touchUpvote("upvote", UpvoteStatus.UPVOTE),
+                              onPressed: () => touchUpvote("upvote", UpvoteStatus.UPVOTE),
                             ),
                           Padding(
                             padding: const EdgeInsets.only(left: 8.0),
                             child: Text(
                               "${item.upvoteCount}",
                               textAlign: TextAlign.center,
-                              style:
-                                  Theme.of(context).textTheme.caption!.copyWith(
-                                        color: Theme.of(context).primaryColor,
-                                      ),
+                              style: Theme.of(context).textTheme.caption!.copyWith(
+                                    color: Theme.of(context).primaryColor,
+                                  ),
                             ),
                           ),
                         ],
@@ -298,8 +328,7 @@ Widget buildView(
                   icon: Icon(
                     EvaIcons.share,
                   ),
-                  onPressed: () => handleShare(
-                      id: item.id, title: item.title, postUrl: item.link),
+                  onPressed: () => handleShare(id: item.id, title: item.title, postUrl: item.link),
                 ),
               ],
             ),

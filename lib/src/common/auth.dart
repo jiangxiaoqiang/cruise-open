@@ -25,16 +25,6 @@ class Auth {
   final baseUrl = global.baseUrl;
   static RegExp validationRequired = RegExp(r"Validation required");
 
-  static Future<bool> isLoggedIn() async {
-    final storage = new FlutterSecureStorage();
-    String? username = await storage.read(key: "username");
-    if (username == null) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   static Future<CruiseUser> currentUser() async {
     final storage = new FlutterSecureStorage();
     String? userName = await storage.read(key: "username");
@@ -51,16 +41,6 @@ class Auth {
     } else {
       return AuthResult(message: "SMS send failed. Did you mistype your credentials?", result: Result.error);
     }
-  }
-
-  static Future<bool> logout() async {
-    final storage = new FlutterSecureStorage();
-    await storage.delete(key: "username");
-    await storage.delete(key: "password");
-    await storage.delete(key: "registerTime");
-    await storage.delete(key: "accessToken");
-    await storage.delete(key: "freshToken");
-    return true;
   }
 
   static Future<AuthResult> sms({required String phone}) async {
