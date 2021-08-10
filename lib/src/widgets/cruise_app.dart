@@ -20,7 +20,6 @@ class CruiseApp extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final currentTheme = ThemeManager.fromThemeName("lightTheme");
     final AbstractRoutes routes = CommonUtils.buildRoute();
     bool showDebugInfo = false;
@@ -46,13 +45,14 @@ class CruiseApp extends HookWidget {
       supportedLocales: [
         const Locale('en', ''), // English, no country code
         const Locale('ar', ''), // Arabic, no country code
-        const Locale.fromSubtags(languageCode: 'zh'), // Chinese *See Advanced Locales below*
+        const Locale.fromSubtags(
+            languageCode: 'zh'), // Chinese *See Advanced Locales below*
         // ... other locales the app supports
       ],
       routes: {
         "login": (BuildContext context) => LoginPage(),
       },
-      home:routes.buildPage('home', {"selectIndex":0}),
+      home: routes.buildPage('home', {"selectIndex": 0}),
       onGenerateRoute: (RouteSettings settings) {
         return MaterialPageRoute<Object>(builder: (BuildContext context) {
           return routes.buildPage(settings.name!, settings.arguments);

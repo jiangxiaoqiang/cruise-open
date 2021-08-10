@@ -20,7 +20,8 @@ import 'package:html/dom.dart' as dom;
 
 import 'state.dart';
 
-Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewService) {
+Widget buildView(
+    ArticleDetailState state, Dispatch dispatch, ViewService viewService) {
   Item item = state.article;
   BuildContext context = viewService.context;
   Offset? _initialSwipeOffset;
@@ -38,7 +39,8 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
     if (_initialSwipeOffset != null) {
       final offsetDifference = _initialSwipeOffset!.dx - _finalSwipeOffset!.dx;
       if (offsetDifference < 0) {
-        if (PaintingBinding.instance != null && PaintingBinding.instance!.imageCache != null) {
+        if (PaintingBinding.instance != null &&
+            PaintingBinding.instance!.imageCache != null) {
           // https://mp.weixin.qq.com/s/yUm4UFggYLgDbj4_JCjEdg
           // https://musicfe.dev/flutter/
           PaintingBinding.instance!.imageCache!.clear();
@@ -50,9 +52,7 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
   }
 
   void touchUpvote(String action, UpvoteStatus upvoteStatus) async {
-
     HttpResult result = (await ArticleAction.upvote(articleId: item.id.toString(), action: action))!;
-
     if (result.result == Result.error) {
       Fluttertoast.showToast(
           msg: "点赞失败",
@@ -110,7 +110,8 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
   }
 
   void navToChannelDetail() async {
-    Channel channel = (await Repo.fetchChannelItem(int.parse(item.subSourceId)))!;
+    Channel channel =
+        (await Repo.fetchChannelItem(int.parse(item.subSourceId)))!;
     var data = {'name': "originalstories", "channel": channel};
     Widget page = ChannelpgPage().buildPage(data);
     Navigator.push(
@@ -128,9 +129,10 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
     }
   }
 
-  ImageSourceMatcher base64UriMatcher() =>
-      (attributes, element) => attributes["src"] != null && attributes["src"]!.startsWith("data:image") && attributes["src"]!.contains("base64,");
-  
+  ImageSourceMatcher base64UriMatcher() => (attributes, element) =>
+      attributes["src"] != null &&
+      attributes["src"]!.startsWith("data:image") &&
+      attributes["src"]!.contains("base64,");
 
   Widget loadingWidget() {
     return Center(
@@ -155,7 +157,7 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
     base64UriMatcher(): base64ImageRender(),
     assetUriMatcher(): assetImageRender(),
     networkSourceMatcher(extension: "svg"): svgNetworkImageRender(),
-    networkSourceMatcher(): networkImageRender( loadingWidget: loadingWidget),
+    networkSourceMatcher(): networkImageRender(loadingWidget: loadingWidget),
   };
 
   SingleChildScrollView buildListView(Item item, BuildContext context) {
@@ -220,7 +222,8 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
                     ),
                   },
                   customImageRenders: defaultImageRenders,
-                  onLinkTap: (String? url, RenderContext context, Map<String, String> attributes, dom.Element? element) {
+                  onLinkTap: (String? url, RenderContext context,
+                      Map<String, String> attributes, dom.Element? element) {
                     CommonUtils.launchUrl(url);
                   }),
             Row(
@@ -234,8 +237,10 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
                         children: [
                           if (item.isFav == 1)
                             IconButton(
-                              icon: Icon(Icons.bookmark, color: Theme.of(context).primaryColor),
-                              onPressed: () => touchFav("unfav", FavStatus.UNFAV),
+                              icon: Icon(Icons.bookmark,
+                                  color: Theme.of(context).primaryColor),
+                              onPressed: () =>
+                                  touchFav("unfav", FavStatus.UNFAV),
                             ),
                           if (item.isFav != 1)
                             IconButton(
@@ -247,9 +252,10 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
                             child: Text(
                               "${item.favCount}",
                               textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.caption!.copyWith(
-                                    color: Theme.of(context).primaryColor,
-                                  ),
+                              style:
+                                  Theme.of(context).textTheme.caption!.copyWith(
+                                        color: Theme.of(context).primaryColor,
+                                      ),
                             ),
                           ),
                         ],
@@ -261,22 +267,26 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
                         children: [
                           if (item.isUpvote == 1)
                             IconButton(
-                              icon: Icon(Icons.thumb_up, color: Theme.of(context).primaryColor),
-                              onPressed: () => touchUpvote("unupvote", UpvoteStatus.UNUPVOTE),
+                              icon: Icon(Icons.thumb_up,
+                                  color: Theme.of(context).primaryColor),
+                              onPressed: () => touchUpvote(
+                                  "unupvote", UpvoteStatus.UNUPVOTE),
                             ),
                           if (item.isUpvote != 1)
                             IconButton(
                               icon: Icon(Icons.thumb_up),
-                              onPressed: () => touchUpvote("upvote", UpvoteStatus.UPVOTE),
+                              onPressed: () =>
+                                  touchUpvote("upvote", UpvoteStatus.UPVOTE),
                             ),
                           Padding(
                             padding: const EdgeInsets.only(left: 8.0),
                             child: Text(
                               "${item.upvoteCount}",
                               textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.caption!.copyWith(
-                                    color: Theme.of(context).primaryColor,
-                                  ),
+                              style:
+                                  Theme.of(context).textTheme.caption!.copyWith(
+                                        color: Theme.of(context).primaryColor,
+                                      ),
                             ),
                           ),
                         ],
@@ -288,7 +298,8 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
                   icon: Icon(
                     EvaIcons.share,
                   ),
-                  onPressed: () => handleShare(id: item.id, title: item.title, postUrl: item.link),
+                  onPressed: () => handleShare(
+                      id: item.id, title: item.title, postUrl: item.link),
                 ),
               ],
             ),
