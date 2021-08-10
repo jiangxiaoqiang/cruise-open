@@ -50,6 +50,7 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
   }
 
   void touchUpvote(String action, UpvoteStatus upvoteStatus) async {
+
     HttpResult result = (await ArticleAction.upvote(articleId: item.id.toString(), action: action))!;
 
     if (result.result == Result.error) {
@@ -81,7 +82,6 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
 
   void touchFav(String action, FavStatus favStatus) async {
     HttpResult result = (await ArticleAction.fav(articleId: item.id.toString(), action: action))!;
-
     if (result.result == Result.error) {
       Fluttertoast.showToast(
           msg: favStatus.statusCode == "fav" ? "添加收藏失败" : "取消收藏失败",
@@ -295,11 +295,6 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
           ],
         ));
   }
-
-  //var imageCache= PaintingBinding.instance!.imageCache;
-
-  //print("dd:"+imageCache!.currentSizeBytes.toString());
-  //print("size:" + imageCache.currentSize.toString());
 
   return GestureDetector(
       onHorizontalDragStart: _onHorizontalDragStart,
