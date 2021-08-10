@@ -39,3 +39,5 @@ cruise_open.iml
 *.ipa
 *.apk
 android/fastlane/report.xml
+.metadata
+
