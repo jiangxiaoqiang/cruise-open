@@ -1,12 +1,11 @@
 import 'dart:async';
 
-import 'package:cruise/src/common/auth.dart';
 import 'package:cruise/src/common/utils/navigation_service.dart';
-import 'package:cruise/src/models/api/login_type.dart';
 import 'package:cruise/src/models/api/response_status.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:wheel/wheel.dart' show AppLogHandler, RestClient;
+import 'package:wheel/wheel.dart' show AppLogHandler, Auth, AuthResult, RestClient;
+import 'package:wheel/wheel.dart';
 
 import '../../config/cruise_global_config.dart';
 import 'http_result.dart';

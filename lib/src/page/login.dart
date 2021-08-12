@@ -1,14 +1,12 @@
 import 'package:country_code_picker/country_code_picker.dart';
-import 'package:cruise/src/common/auth.dart';
 import 'package:cruise/src/common/nav/nav_util.dart';
 import 'package:cruise/src/common/style/global_style.dart';
 import 'package:cruise/src/common/net/rest/http_result.dart';
-import 'package:cruise/src/common/utils/navigation_service.dart';
 import 'package:cruise/src/component/user_agreement.dart';
-import 'package:cruise/src/models/api/login_type.dart';
 import 'package:cruise/src/page/reg/reg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:wheel/wheel.dart';
 
 class LoginPage extends HookWidget {
 

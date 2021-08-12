@@ -8,8 +8,9 @@ import 'package:cruise/src/page/user/settings/about/page.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
-import 'package:wheel/wheel.dart';
+import 'package:wheel/wheel.dart' show Auth;
 
+import '../custom_setting.dart';
 import 'state.dart';
 
 Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewService) {
@@ -139,7 +140,7 @@ Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewSe
                               );
                             },
                           )))),
-              /*Padding(
+              Padding(
                   padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
@@ -147,7 +148,7 @@ Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewSe
                           color: Colors.white,
                           //margin: const EdgeInsets.only(left: 20.0, right: 20.0),
                           child: ListTile(
-                            leading: Icon(Feather.settings),
+                            leading: Icon(EvaIcons.settings),
                             title: Text("设置"),
                             onTap: () async {
                               Widget page = CustomSetting();
@@ -156,7 +157,7 @@ Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewSe
                                 MaterialPageRoute(builder: (context) => page),
                               );
                             },
-                          ))))*/
+                          )))),
               Padding(
                   padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
                   child: ClipRRect(

@@ -1,16 +1,17 @@
+import 'package:cruise/src/common/cruise_user.dart';
 import 'package:cruise/src/common/utils/common_utils.dart';
 import 'package:cruise/src/page/login.dart';
 import 'package:cruise/src/page/profile.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
-
-import '../auth.dart';
+import 'package:wheel/wheel.dart' show Auth;
 
 class NavUtil {
 
   static Future<void> navProfile(BuildContext context) async {
     var user = await Auth.currentUser();
-    Widget page = ProfilePage(isMe: true, user: user);
+    CruiseUser cruiseUser = new CruiseUser(phone: user.phone,registerTime: user.registerTime);
+    Widget page = ProfilePage(isMe: true, user: cruiseUser);
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => page),

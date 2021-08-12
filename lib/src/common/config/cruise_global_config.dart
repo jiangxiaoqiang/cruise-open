@@ -15,7 +15,6 @@ import '../view_manager.dart';
 
 bool isLoggedIn = false;
 String baseUrl = "";
-String shareUrl = "";
 String staticResourceUrl = "";
 final storage = new FlutterSecureStorage();
 final pageStorageBucket = PageStorageBucket();
