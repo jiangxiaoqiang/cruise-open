@@ -52,6 +52,7 @@ class CruiseApp extends HookWidget {
       routes: {
         "login": (BuildContext context) => LoginPage(),
       },
+
       home: routes.buildPage('home', {"selectIndex": 0}),
       onGenerateRoute: (RouteSettings settings) {
         return MaterialPageRoute<Object>(builder: (BuildContext context) {

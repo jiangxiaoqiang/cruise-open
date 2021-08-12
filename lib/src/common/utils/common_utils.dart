@@ -1,32 +1,42 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:cruise/src/common/store/store.dart';
+import 'package:cruise/src/common/store/global_state.dart';
 import 'package:cruise/src/component/channel_compact_tile.dart';
 import 'package:cruise/src/component/channel_item_card.dart';
 import 'package:cruise/src/component/channel_item_tile.dart';
 import 'package:cruise/src/models/Channel.dart';
 import 'package:cruise/src/page/home/page.dart';
 import 'package:device_info/device_info.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:fish_redux/src/redux_component/page.dart' as fishPage;
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:in_app_purchase_android/in_app_purchase_android.dart';
-import 'package:timeago/timeago.dart' as timeago;
 import 'package:url_launcher/url_launcher.dart';
 
-import '../history.dart';
 import '../view_manager.dart';
-import 'custom_en.dart';
 
 class CommonUtils {
 
   static AbstractRoutes buildRoute() {
     final AbstractRoutes routes = PageRoutes(
       pages: <String, fishPage.Page<Object, dynamic>>{'home': HomePage()},
+      visitor: (String path, fishPage.Page<Object, dynamic> page){
+        page.connectExtraStore<GlobalState>(GlobalStore.store, (Object pageState,GlobalState appState){
+          final GlobalBaseState p = pageState as GlobalState;
+          if(p.themeColor !=appState.themeColor){
+            if(pageState is Cloneable){
+              final GlobalState copy = pageState.clone();
+              final GlobalBaseState newState = copy;
+              newState.themeColor = appState.themeColor;
+              return newState;
+            }
+          }
+          return pageState;
+        });
+      }
     );
     return routes;
   }

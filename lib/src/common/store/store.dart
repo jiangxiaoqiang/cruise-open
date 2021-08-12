@@ -1,18 +1,9 @@
-import 'dart:ui';
+import 'package:cruise/src/common/store/global_state.dart';
 import 'package:fish_redux/fish_redux.dart';
+import 'reducer.dart';
 
-// https://www.jianshu.com/p/b2581f5dadc8
-abstract class GlobalBaseState{
-  Color get themeColor;
-  set themeColor(Color color);
-}
-
-class GlobalState implements GlobalBaseState, Cloneable<GlobalState>{
-  @override
-  late Color themeColor;
-
-  @override
-  GlobalState clone() {
-    return GlobalState();
-  }
+class GlobalStore{
+  static Store<GlobalState>? _globalStore;
+  static Store<GlobalState> get store =>
+      _globalStore ??= createStore<GlobalState>(GlobalState(), buildReducer());
 }

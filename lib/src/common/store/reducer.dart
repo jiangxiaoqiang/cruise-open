@@ -1,4 +1,4 @@
-import 'package:cruise/src/common/store/store.dart';
+import 'package:cruise/src/common/store/global_state.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart' hide Action;
