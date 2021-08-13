@@ -1,4 +1,4 @@
-import 'package:cruise/src/common/store/global_state.dart';
+import 'package:cruise/src/common/store/state.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'reducer.dart';
 

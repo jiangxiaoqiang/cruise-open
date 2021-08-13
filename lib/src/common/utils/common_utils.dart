@@ -1,13 +1,16 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:cruise/src/common/store/state.dart';
 import 'package:cruise/src/common/store/store.dart';
-import 'package:cruise/src/common/store/global_state.dart';
 import 'package:cruise/src/component/channel_compact_tile.dart';
 import 'package:cruise/src/component/channel_item_card.dart';
 import 'package:cruise/src/component/channel_item_tile.dart';
 import 'package:cruise/src/models/Channel.dart';
 import 'package:cruise/src/page/home/page.dart';
+import 'package:cruise/src/page/user/settings/main/page.dart';
+import 'package:cruise/src/page/user/settings/main/state.dart';
+import 'package:cruise/src/widgets/app/page.dart';
 import 'package:device_info/device_info.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:fish_redux/src/redux_component/page.dart' as fishPage;
@@ -19,25 +22,26 @@ import 'package:url_launcher/url_launcher.dart';
 import '../view_manager.dart';
 
 class CommonUtils {
-
   static AbstractRoutes buildRoute() {
     final AbstractRoutes routes = PageRoutes(
-      pages: <String, fishPage.Page<Object, dynamic>>{'home': HomePage()},
-      visitor: (String path, fishPage.Page<Object, dynamic> page){
-        page.connectExtraStore<GlobalState>(GlobalStore.store, (Object pageState,GlobalState appState){
-          final GlobalBaseState p = pageState as GlobalState;
-          if(p.themeColor !=appState.themeColor){
-            if(pageState is Cloneable){
-              final GlobalState copy = pageState.clone();
-              final GlobalBaseState newState = copy;
-              newState.themeColor = appState.themeColor;
-              return newState;
-            }
+        pages: <String, fishPage.Page<Object, dynamic>>{
+          'home_page': HomePage(), 'app_page': AppPage(), 'main_page': MainPage()
+        },
+        visitor: (String path, fishPage.Page<Object, dynamic> page) {
+          if (page.isTypeof<GlobalBaseState>()) {
+            page.connectExtraStore<GlobalState>(GlobalStore.store, (Object pageState, GlobalState appState) {
+              final GlobalBaseState p = pageState as GlobalBaseState;
+              if(p.showDebug !=appState.showDebug){
+                if(pageState is Cloneable){
+                  // final Object newState = pageState.clone();
+                  pageState.showDebug = true;
+                  return pageState;
+                }
+              }
+              return pageState;
+            });
           }
-          return pageState;
         });
-      }
-    );
     return routes;
   }
 
