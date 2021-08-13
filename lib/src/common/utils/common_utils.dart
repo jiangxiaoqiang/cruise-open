@@ -9,6 +9,7 @@ import 'package:cruise/src/models/Channel.dart';
 import 'package:cruise/src/page/home/page.dart';
 import 'package:cruise/src/page/user/settings/main/page.dart';
 import 'package:cruise/src/page/user/settings/main/state.dart';
+import 'package:cruise/src/widgets/app/action.dart';
 import 'package:cruise/src/widgets/app/page.dart';
 import 'package:cruise/src/widgets/app/state.dart';
 import 'package:device_info/device_info.dart';
@@ -34,6 +35,7 @@ class CommonUtils {
               final GlobalBaseState p = pageState as GlobalBaseState;
               if(p.showDebug !=appState.showDebug && pageState is MainState){
                 if(pageState is Cloneable){
+                  //dispatch(AppActionCreator.onChangeDebug());
                   final GlobalBaseState newState = (pageState as MainState).clone();
                   newState.showDebug = true;
                   return newState;
