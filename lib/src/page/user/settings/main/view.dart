@@ -1,4 +1,5 @@
 import 'package:cruise/src/page/user/settings/main/action.dart';
+import 'package:cruise/src/widgets/app/action.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +18,7 @@ Widget buildView(MainState state, Dispatch dispatch, ViewService viewService) {
 
   void _changed(isCheck) {
     dispatch(MainActionCreator.onChangeDebug());
+
     isCheck = !isCheck;
   }
 

@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:cruise/src/common/store/state.dart';
 import 'package:cruise/src/common/store/store.dart';
 import 'package:cruise/src/component/channel_compact_tile.dart';
@@ -11,12 +10,14 @@ import 'package:cruise/src/page/home/page.dart';
 import 'package:cruise/src/page/user/settings/main/page.dart';
 import 'package:cruise/src/page/user/settings/main/state.dart';
 import 'package:cruise/src/widgets/app/page.dart';
+import 'package:cruise/src/widgets/app/state.dart';
 import 'package:device_info/device_info.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:fish_redux/src/redux_component/page.dart' as fishPage;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fish_redux/src/redux/connector.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../view_manager.dart';
@@ -31,11 +32,11 @@ class CommonUtils {
           if (page.isTypeof<GlobalBaseState>()) {
             page.connectExtraStore<GlobalState>(GlobalStore.store, (Object pageState, GlobalState appState) {
               final GlobalBaseState p = pageState as GlobalBaseState;
-              if(p.showDebug !=appState.showDebug){
+              if(p.showDebug !=appState.showDebug && pageState is MainState){
                 if(pageState is Cloneable){
-                  // final Object newState = pageState.clone();
-                  pageState.showDebug = true;
-                  return pageState;
+                  final GlobalBaseState newState = (pageState as MainState).clone();
+                  newState.showDebug = true;
+                  return newState;
                 }
               }
               return pageState;

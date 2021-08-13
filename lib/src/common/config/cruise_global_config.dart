@@ -25,8 +25,8 @@ class CruiseGlobalConfig {
         AppLogHandler.logFlutterErrorDetails(errorDetails);
       };
       runApp(
-          //AppPage().buildPage({'name': "app_page"})
-          createApp()
+          AppPage().buildPage({'name': "app_page"})
+          //createApp()
       );
     },(Object error,StackTrace stackTrace){
       _handleError(error,stackTrace);

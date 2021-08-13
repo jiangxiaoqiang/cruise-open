@@ -6,7 +6,7 @@ import 'package:fish_redux/fish_redux.dart';
 class AppState implements GlobalBaseState, Cloneable<AppState> {
   @override
   AppState clone() {
-    return AppState()..showDebug = this.showDebug;
+    return AppState()..showDebug = showDebug;
   }
 
   @override

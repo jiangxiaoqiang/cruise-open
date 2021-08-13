@@ -2,6 +2,7 @@ import 'package:cruise/src/common/theme.dart';
 import 'package:cruise/src/common/utils/common_utils.dart';
 import 'package:cruise/src/common/utils/navigation_service.dart';
 import 'package:cruise/src/page/login.dart';
+import 'package:cruise/src/widgets/app/page.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -40,6 +41,7 @@ Widget buildView(AppState state, Dispatch dispatch, ViewService viewService) {
     ],
     routes: {
       "login": (BuildContext context) => LoginPage(),
+      "app_page":(BuildContext context) => AppPage().buildPage({'name':'app_page'})
     },
 
     home: routes.buildPage('home_page', {"selectIndex": 0}),
