@@ -5,8 +5,8 @@ import 'reducer.dart';
 import 'state.dart';
 import 'view.dart';
 
-class AppPage extends Page<AppState, Map<String, dynamic>> {
-  AppPage()
+class App1Page extends Page<AppState, Map<String, dynamic>> {
+  App1Page()
       : super(
             initState: initState,
             effect: buildEffect(),

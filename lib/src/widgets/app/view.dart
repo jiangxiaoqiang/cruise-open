@@ -41,7 +41,6 @@ Widget buildView(AppState state, Dispatch dispatch, ViewService viewService) {
     ],
     routes: {
       "login": (BuildContext context) => LoginPage(),
-      "app_page":(BuildContext context) => AppPage().buildPage({'name':'app_page'})
     },
 
     home: routes.buildPage('home_page', {"selectIndex": 0}),

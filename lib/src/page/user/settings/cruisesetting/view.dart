@@ -5,7 +5,7 @@ import 'package:cruise/src/page/user/fav/page.dart';
 import 'package:cruise/src/page/user/feedback/page.dart';
 import 'package:cruise/src/page/user/history/page.dart';
 import 'package:cruise/src/page/user/settings/about/page.dart';
-import 'package:cruise/src/page/user/settings/main/page.dart';
+import 'package:cruise/src/page/user/settings/main/main_page.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
@@ -151,7 +151,11 @@ Widget buildView(CruiseSettingState state, Dispatch dispatch, ViewService viewSe
                             leading: Icon(EvaIcons.settings),
                             title: Text("设置"),
                             onTap: () async {
-                              Navigator.of(context).pushNamed('main_page',arguments: null);
+                              MainPage mp = new MainPage();
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => mp),
+                              );
                             },
                           )))),
               Padding(

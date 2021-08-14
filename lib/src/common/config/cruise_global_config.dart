@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:collection';
 
 import 'package:cruise/src/page/home/state.dart';
-import 'package:cruise/src/widgets/app/app.dart';
+import 'package:cruise/src/widgets/app/app_page.dart';
 import 'package:cruise/src/widgets/app/page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -25,7 +25,7 @@ class CruiseGlobalConfig {
         AppLogHandler.logFlutterErrorDetails(errorDetails);
       };
       runApp(
-          AppPage().buildPage({'name': "app_page"})
+          AppPage()
           //createApp()
       );
     },(Object error,StackTrace stackTrace){

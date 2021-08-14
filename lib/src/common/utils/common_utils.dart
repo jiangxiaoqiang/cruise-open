@@ -27,7 +27,7 @@ class CommonUtils {
   static AbstractRoutes buildRoute() {
     final AbstractRoutes routes = PageRoutes(
         pages: <String, fishPage.Page<Object, dynamic>>{
-          'home_page': HomePage(), 'app_page': AppPage(), 'main_page': MainPage()
+          'home_page': HomePage()
         },
         visitor: (String path, fishPage.Page<Object, dynamic> page) {
           if (page.isTypeof<GlobalBaseState>()) {
