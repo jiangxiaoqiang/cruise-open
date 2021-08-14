@@ -3,7 +3,6 @@ import 'dart:collection';
 
 import 'package:cruise/src/page/home/state.dart';
 import 'package:cruise/src/widgets/app/app_page.dart';
-import 'package:cruise/src/widgets/app/page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
