@@ -5,6 +5,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:cruise/src/common/utils/common_utils.dart';
 import 'global_controller.dart';
@@ -13,15 +14,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class AppPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    print('SimplePage--build');
-
     final currentTheme = ThemeManager.fromThemeName("lightTheme");
     final AbstractRoutes routes = CommonUtils.buildRoute();
 
     return GetBuilder<GlobalController>(
         init: GlobalController(),
         builder: (controller) {
-          return MaterialApp(
+          return GetMaterialApp(
             title: 'Cruise',
             theme: currentTheme,
             navigatorKey: NavigationService.instance.navigationKey,

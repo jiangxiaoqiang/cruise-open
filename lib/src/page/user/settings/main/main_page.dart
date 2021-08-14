@@ -19,7 +19,6 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('SimplePage--build');
     return Scaffold(
         appBar: AppBar(
           title: Text("语言选择"),
@@ -50,7 +49,7 @@ class MainPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: 200,
+                    width: MediaQuery.of(context).size.width * 0.94,
                     child: SwitchListTile(
                       // 是否选中 是否打开
                       value: Get.find<GlobalController>().showDebug,
