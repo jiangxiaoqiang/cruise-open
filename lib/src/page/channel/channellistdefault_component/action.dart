@@ -4,14 +4,18 @@ import 'package:cruise/src/page/home/components/homelistdefault_component/action
 import 'package:fish_redux/fish_redux.dart';
 
 //TODO replace with your own action
-enum ChannelListDefaultAction { action, loading_channels, loading_more_channels, loading_more_channels_update, set_channel_ids }
+enum ChannelListDefaultAction { action, loading_channels, loading_more_channels, loading_more_channels_update, set_channel_ids, resume_scroll_top }
 
 class ChannelListDefaultActionCreator {
   static Action onAction() {
     return const Action(ChannelListDefaultAction.action);
   }
 
-  static Action onSetChannelIds(List<int> channelIds,ArticleRequest articleRequest) {
+  static Action onResumeScrollTop() {
+    return Action(ChannelListDefaultAction.resume_scroll_top);
+  }
+
+  static Action onSetChannelIds(List<int> channelIds, ArticleRequest articleRequest) {
     ArticlePayload articlePayload = new ArticlePayload();
     articlePayload.articleRequest = articleRequest;
     articlePayload.articleIds = channelIds;

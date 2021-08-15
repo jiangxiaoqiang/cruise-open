@@ -10,7 +10,6 @@ import 'package:fish_redux/fish_redux.dart';
 import '../../state.dart';
 
 class HomeListState implements Cloneable<HomeListState> {
-
   StoriesType currentStoriesType = StoriesType.topStories;
   HomeListDefaultState homeListDefaultState = HomeListDefaultState();
   SubListDefaultState subListDefaultState = SubListDefaultState();
@@ -19,10 +18,10 @@ class HomeListState implements Cloneable<HomeListState> {
   @override
   HomeListState clone() {
     return HomeListState()
-    ..currentStoriesType = this.currentStoriesType
-    ..homeListDefaultState = this.homeListDefaultState
-    ..subListDefaultState = this.subListDefaultState
-    ..channelListDefaultState = this.channelListDefaultState;
+      ..currentStoriesType = this.currentStoriesType
+      ..homeListDefaultState = this.homeListDefaultState
+      ..subListDefaultState = this.subListDefaultState
+      ..channelListDefaultState = this.channelListDefaultState;
   }
 }
 
@@ -38,7 +37,6 @@ class HomeListConnector extends ConnOp<HomeState, HomeListState> {
     state.homeListState = subState;
   }
 }
-
 
 class FavArticleConnector extends ConnOp<FavArticleState, HomeListState> {
   @override

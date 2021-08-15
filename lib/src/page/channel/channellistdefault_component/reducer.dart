@@ -14,8 +14,15 @@ Reducer<ChannelListDefaultState>? buildReducer() {
       ChannelListDefaultAction.loading_channels: _onLoadingChannels,
       ChannelListDefaultAction.loading_more_channels_update: _onLoadingMoreChannelsUpdate,
       ChannelListDefaultAction.set_channel_ids: _onSetChannelIds,
+      ChannelListDefaultAction.resume_scroll_top: _onResumeScrollTop,
     },
   );
+}
+
+ChannelListDefaultState _onResumeScrollTop(ChannelListDefaultState state, Action action) {
+  final ChannelListDefaultState newState = state.clone();
+  newState.isScrollTop = false;
+  return newState;
 }
 
 ChannelListDefaultState _onLoadingChannels(ChannelListDefaultState state, Action action) {
@@ -31,8 +38,7 @@ ChannelListDefaultState _onLoadingMoreChannelsUpdate(ChannelListDefaultState sta
   return newState;
 }
 
-
-ChannelListDefaultState _onSetChannelIds(ChannelListDefaultState state, Action action){
+ChannelListDefaultState _onSetChannelIds(ChannelListDefaultState state, Action action) {
   final ChannelListDefaultState newState = state.clone();
   ArticlePayload payload = (action.payload as ArticlePayload);
   newState.articleRequest = payload.articleRequest!;
