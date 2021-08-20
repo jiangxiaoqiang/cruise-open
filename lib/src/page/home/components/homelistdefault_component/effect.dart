@@ -28,6 +28,9 @@ void _onBuild(Action action, Context<HomeListDefaultState> ctx) {
 }
 
 Future _onInit(Action action, Context<HomeListDefaultState> ctx) async {
+  if (ctx.state.articleListState.articles.length > 0) {
+    return;
+  }
   initArticles(action, ctx);
 }
 

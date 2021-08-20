@@ -18,7 +18,7 @@ void handleShare({required String id, required String title, required String pos
 }
 
 String buildShareURL(String id) {
-  return shareUrl + "/product/cruise/share/$id";
+  return GlobalConfig.getShareUrl() + "/product/cruise/share/$id";
 }
 
 void handleUpvote(context, {required Item item}) async {
