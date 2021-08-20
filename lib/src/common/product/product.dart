@@ -2,11 +2,11 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:cruise/src/common/config/cruise_global_config.dart' as global;
 import 'package:in_app_purchase/in_app_purchase.dart';
-import 'package:wheel/wheel.dart' show AppLogHandler, RestApiError, RestClient;
+import 'package:wheel/wheel.dart' show AppLogHandler, GlobalConfig, RestApiError, RestClient;
 
 
 class Product {
-  final baseUrl = global.baseUrl;
+  final baseUrl = GlobalConfig.getBaseUrl();
 
   static Future<ProductDetailsResponse> getProductInfo() async {
     try {

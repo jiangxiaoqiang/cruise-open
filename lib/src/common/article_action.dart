@@ -5,7 +5,7 @@ import 'repo.dart';
 import 'net/rest/http_result.dart';
 
 class ArticleAction {
-  final baseUrl = global.baseUrl;
+  final baseUrl = GlobalConfig.getBaseUrl();
 
   static Future<HttpResult?> fav({required String articleId,required String action}) async {
     final response = await RestClient.putHttp("/post/article/" + action + "/" + articleId,null);

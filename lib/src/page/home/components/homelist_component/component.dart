@@ -4,8 +4,6 @@ import 'package:cruise/src/page/home/components/homelistdefault_component/compon
 import 'package:cruise/src/page/home/components/homelistdefault_component/state.dart';
 import 'package:cruise/src/page/sub/sublistdefault_component/component.dart';
 import 'package:cruise/src/page/sub/sublistdefault_component/state.dart';
-import 'package:cruise/src/page/user/settings/cruisesetting/component.dart';
-import 'package:cruise/src/page/user/settings/cruisesetting/state.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'reducer.dart';
@@ -25,8 +23,6 @@ class HomeListComponent extends Component<HomeListState> {
                 'channellistdefault': ChannelListDefaultConnector() +
                     ChannelListDefaultComponent(),
                 'sublistdefault':SubHomeListDefaultConnector() + SubListDefaultComponent(),
-                'cruisesetting': CruiseSettingConnector() +
-                    CruiseSettingComponent()
               }),
         );
 }

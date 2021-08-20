@@ -3,7 +3,7 @@ import 'package:wheel/wheel.dart';
 import 'net/rest/http_result.dart';
 
 class FeedbackRestAction {
-  final baseUrl = global.baseUrl;
+  final baseUrl = GlobalConfig.getBaseUrl();
 
   static Future<HttpResult> submitFeedback(String feedback) async {
     String url = "/post/user/feedback/submit";

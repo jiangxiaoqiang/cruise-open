@@ -15,6 +15,7 @@ HomeState _onScrollTop(HomeState state, Action action) {
   final HomeState newState = state.clone();
   newState.homeListState.homeListDefaultState.isScrollTop = true;
   newState.homeListState.subListDefaultState.isScrollTop = true;
+  newState.homeListState.channelListDefaultState.isScrollTop = true;
   return newState;
 }
 

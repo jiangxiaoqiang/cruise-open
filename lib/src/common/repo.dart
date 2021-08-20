@@ -9,14 +9,14 @@ import 'package:cruise/src/models/Item.dart';
 import 'package:cruise/src/models/enumn/stories_type.dart';
 import 'package:cruise/src/models/request/article/article_request.dart';
 import 'package:http/http.dart' as http;
-import 'package:wheel/wheel.dart' show AppLogHandler, RestApiError, RestClient;
+import 'package:wheel/wheel.dart' show AppLogHandler, GlobalConfig, RestApiError, RestClient;
 
 
 class Repo {
   static final _itemsCache = <int, Item>{};
   static final _itemsChannelCache = <int, Channel>{};
   static final _usersCache = <String, CruiseUser>{};
-  final baseUrl = global.baseUrl;
+  final baseUrl = GlobalConfig.getBaseUrl();
 
   static Future<List<Item>> getArticles(ArticleRequest request) async {
       List<Item> articles = await _getArticles(request);
@@ -161,7 +161,7 @@ class Repo {
     if (_usersCache.containsKey(id)) {
       return _usersCache[id];
     } else {
-      String url = global.baseUrl + "/user/$id.json";
+      String url = GlobalConfig.getBaseUrl() + "/user/$id.json";
       Uri uri = Uri.parse(url);
       final response = await http.get(uri);
       if (response.statusCode == 200) {

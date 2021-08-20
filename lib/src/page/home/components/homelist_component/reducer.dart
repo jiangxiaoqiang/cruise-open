@@ -16,6 +16,5 @@ HomeListState _onChangeStoriesType(HomeListState state, Action action) {
   final HomeListState newState = state.clone();
   StoriesType storiesType = action.payload as StoriesType;
   newState.currentStoriesType = storiesType;
-
   return newState;
 }

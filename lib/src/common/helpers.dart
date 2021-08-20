@@ -8,7 +8,6 @@ import 'package:cruise/src/common/history.dart';
 import 'package:cruise/src/models/Item.dart';
 import 'package:wheel/wheel.dart';
 import 'net/rest/http_result.dart';
-import 'config/cruise_global_config.dart';
 
 void handleShare({required String id, required String title, required String postUrl}) {
   String hnUrl = buildShareURL(id);

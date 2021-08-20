@@ -26,11 +26,18 @@ void _onScroll(offset) {
 }
 
 RefreshController _refreshController = RefreshController(initialRefresh: false);
+ScrollController scrollController = ScrollController();
 
 Widget buildView(ChannelListDefaultState state, Dispatch dispatch, ViewService viewService) {
   ArticleRequest articleRequest = state.articleRequest;
   articleRequest.storiesType = StoriesType.channels;
   StoriesType storiesType = StoriesType.channels;
+  if (state.isScrollTop) {
+    dispatch(ChannelListDefaultActionCreator.onResumeScrollTop());
+    if (scrollController.hasClients) {
+      scrollController.animateTo(.0, duration: Duration(milliseconds: 200), curve: Curves.ease);
+    }
+  }
 
   Widget navChannelPage() {
     return viewService.buildComponent("channellist");
@@ -62,12 +69,12 @@ Widget buildView(ChannelListDefaultState state, Dispatch dispatch, ViewService v
       child: Builder(
         builder: (context) {
           if (state.channelListState.channels.length == 0) {
-            if(state.channelLoadingStatus == LoadingStatus.complete) {
+            if (state.channelLoadingStatus == LoadingStatus.complete) {
               // when the channel not fetched, show loading animation
               return Center(child: Text("无内容"));
-            }else if(state.channelLoadingStatus == LoadingStatus.loading){
+            } else if (state.channelLoadingStatus == LoadingStatus.loading) {
               return Center(child: CircularProgressIndicator());
-            }else{
+            } else {
               return Center(child: Text("无内容"));
             }
           }
@@ -111,6 +118,7 @@ Widget buildView(ChannelListDefaultState state, Dispatch dispatch, ViewService v
                         },
                       ),
                       child: CustomScrollView(
+                        controller: scrollController,
                         key: PageStorageKey(storiesType),
                         slivers: <Widget>[
                           SliverOverlapInjector(
