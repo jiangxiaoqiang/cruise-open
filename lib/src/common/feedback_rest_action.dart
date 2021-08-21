@@ -7,7 +7,10 @@ class FeedbackRestAction {
 
   static Future<HttpResult> submitFeedback(String feedback) async {
     String url = "/post/user/feedback/submit";
-    Map data = {"feedback": feedback};
+    Map data = {
+      "feedback": feedback,
+      "appId": GlobalConfig.getConfig("appId")
+    };
     final response = await RestClient.postHttp(url, data);
     if (RestClient.respSuccess(response)) {
       return HttpResult(message: "Feedback submit success", result: Result.ok);

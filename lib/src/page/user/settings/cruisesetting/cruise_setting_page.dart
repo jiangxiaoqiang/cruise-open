@@ -2,7 +2,7 @@ import 'package:cruise/src/common/nav/nav_util.dart';
 import 'package:cruise/src/page/pay/page.dart';
 import 'package:cruise/src/page/user/discover/page.dart';
 import 'package:cruise/src/page/user/fav/page.dart';
-import 'package:cruise/src/page/user/feedback/page.dart';
+import 'package:cruise/src/page/user/feedback/feedback_page.dart';
 import 'package:cruise/src/page/user/history/page.dart';
 import 'package:cruise/src/page/user/settings/about/page.dart';
 import 'package:cruise/src/page/user/settings/main/main_page.dart';
@@ -13,7 +13,6 @@ import 'package:get/get.dart';
 import 'package:wheel/wheel.dart';
 
 class CruiseSettingPage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -111,14 +110,9 @@ class CruiseSettingPage extends StatelessWidget {
                             child: ListTile(
                               leading: Icon(EvaIcons.email),
                               trailing: Icon(Icons.keyboard_arrow_right),
-                              title: Text("问题反馈"),
+                              title: Text("意见建议"),
                               onTap: () async {
-                                var data = {'name': "feedback"};
-                                Widget feedback = FeedbackPage().buildPage(data);
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => feedback),
-                                );
+                                Get.to(() => FeedbackPage());
                               },
                             )))),
                 Padding(

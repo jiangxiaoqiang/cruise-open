@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:532213106096:android:a601d51dae6906622c4275",
         "android_client_info": {
-          "package_name": "com.earth.dolphin.dev"
+          "package_name": "com.earth.dolphin"
         }
       },
       "oauth_client": [
@@ -34,7 +34,7 @@
               "client_id": "532213106096-gdpt1m7t38r2384d6o4kjo118c3uabkb.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.earth.dolphin.dev"
+                "bundle_id": "com.earth.dolphin"
               }
             }
           ]
