@@ -3,13 +3,15 @@ import 'dart:async';
 import 'package:cruise/src/widgets/app/app_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
-import 'package:wheel/wheel.dart' show AppLogHandler;
+import 'package:wheel/wheel.dart' show AppLogHandler, GlobalConfig;
+import 'package:wheel/wheel.dart';
 
 final pageStorageBucket = PageStorageBucket();
 final InAppPurchase inAppPurchase = InAppPurchase.instance;
 
 class CruiseGlobalConfig {
-  static void loadApp() async{
+  static void loadApp(ConfigType configType) async{
+    GlobalConfig.init(configType);
     void _handleError(Object obj, StackTrace stack) {
       AppLogHandler.logErrorStack("global error",obj, stack);
     }
