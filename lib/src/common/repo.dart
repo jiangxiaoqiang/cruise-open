@@ -74,7 +74,7 @@ class Repo {
     final typeQuery = _getStoryTypeQuery(articleRequest.storiesType);
     Map jsonMap = articleRequest.toMap();
     final response = await RestClient.postHttp("$typeQuery", jsonMap);
-    if (response.statusCode == 200 && response.data["statusCode"] == "200") {
+    if(RestClient.respSuccess(response)){
       Map result = response.data["result"];
       if (result == null) {
         return List.empty();
@@ -99,7 +99,7 @@ class Repo {
     final typeQuery = _getStoryTypeQuery(articleRequest.storiesType);
     Map jsonMap = articleRequest.toMap();
     final response = await RestClient.postHttp("$typeQuery", jsonMap);
-    if (response.statusCode == 200 && response.data["statusCode"] == "200") {
+    if(RestClient.respSuccess(response)){
       Map result = response.data["result"];
       if (result == null) {
         return List.empty();
@@ -125,7 +125,7 @@ class Repo {
       return _itemsCache[id];
     } else {
       final response = await RestClient.getHttp("/post/article/$id");
-      if (response.statusCode == 200 && response.data["statusCode"] == "200") {
+      if(RestClient.respSuccess(response)){
         Map articleResult = response.data["result"];
         String articleJson = JsonEncoder().convert(articleResult);
         Item parseItem = Item.fromJson(articleJson);
@@ -142,7 +142,7 @@ class Repo {
       return _itemsChannelCache[id];
     } else {
       final response = await RestClient.getHttp("/post/sub/source/detail/$id");
-      if (response.statusCode == 200 && response.data["statusCode"] == "200") {
+      if(RestClient.respSuccess(response)){
         Map channelResult = response.data["result"];
         if (channelResult != null) {
           // Pay attention: channelResult would be null sometimes
