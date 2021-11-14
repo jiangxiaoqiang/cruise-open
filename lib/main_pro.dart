@@ -3,6 +3,6 @@ import 'package:wheel/wheel.dart';
 
 void main() async {
   CommonUtils.initialApp(ConfigType.PRO).whenComplete(() => {
-    CruiseGlobalConfig.loadApp()
+    CruiseGlobalConfig.loadApp(ConfigType.PRO)
   });
 }
