@@ -55,6 +55,9 @@ dependencies:
       ref: main
   flutter_html: 2.1.2
 
+dependency_overrides:
+  flutter_secure_storage: 4.2.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
