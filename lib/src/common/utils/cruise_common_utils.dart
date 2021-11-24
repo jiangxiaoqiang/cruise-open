@@ -17,7 +17,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../view_manager.dart';
 
-class CommonUtils {
+class CruiseCommonUtils {
   static AbstractRoutes buildRoute() {
     final AbstractRoutes routes = PageRoutes(
         pages: <String, fishPage.Page<Object, dynamic>>{

@@ -1,10 +1,10 @@
 import 'package:cruise/src/common/feedback_rest_action.dart';
-import 'package:cruise/src/common/net/rest/http_result.dart';
 import 'package:cruise/src/common/style/global_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:wheel/wheel.dart';
 
 import 'feedback_controller.dart';
 

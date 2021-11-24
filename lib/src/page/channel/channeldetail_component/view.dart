@@ -1,5 +1,4 @@
 import 'package:cruise/src/common/channel_action.dart';
-import 'package:cruise/src/common/net/rest/http_result.dart';
 import 'package:cruise/src/models/Channel.dart';
 import 'package:cruise/src/models/api/sub_status.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
@@ -10,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/style.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:wheel/wheel.dart';
 
 import 'action.dart';
 import 'state.dart';

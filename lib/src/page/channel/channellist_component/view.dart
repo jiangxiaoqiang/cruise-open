@@ -1,5 +1,5 @@
 import 'package:animations/animations.dart';
-import 'package:cruise/src/common/utils/common_utils.dart';
+import 'package:cruise/src/common/utils/cruise_common_utils.dart';
 import 'package:cruise/src/common/view_manager.dart';
 import 'package:cruise/src/models/Channel.dart';
 import 'package:cruise/src/page/channel/channellist_component/action.dart';
@@ -50,7 +50,7 @@ Widget buildView(ChannelListState state, Dispatch dispatch, ViewService viewServ
             closedColor: Theme.of(context).scaffoldBackgroundColor,
             openColor: Theme.of(context).scaffoldBackgroundColor,
             transitionDuration: Duration(milliseconds: 500),
-            closedBuilder: (BuildContext c, VoidCallback action) => CommonUtils.getChannelViewType(currentView, state.channels[index]),
+            closedBuilder: (BuildContext c, VoidCallback action) => CruiseCommonUtils.getChannelViewType(currentView, state.channels[index]),
             openBuilder: (BuildContext c, VoidCallback action) => buildChannel(state.channels[index])),
       ),
     );

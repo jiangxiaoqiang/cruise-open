@@ -1,5 +1,5 @@
 import 'package:cruise/src/common/cruise_user.dart';
-import 'package:cruise/src/common/utils/common_utils.dart';
+import 'package:cruise/src/common/utils/cruise_common_utils.dart';
 import 'package:cruise/src/page/login.dart';
 import 'package:cruise/src/page/profile.dart';
 import 'package:fish_redux/fish_redux.dart';
@@ -27,7 +27,7 @@ class NavUtil {
   }
 
   static Future<void> navHome(BuildContext context) async {
-    final AbstractRoutes routes = CommonUtils.buildRoute();
+    final AbstractRoutes routes = CruiseCommonUtils.buildRoute();
     Widget page = routes.buildPage("home", null);
     Navigator.push(
       context,

@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
-import 'package:cruise/src/common/utils/common_utils.dart';
+import 'package:cruise/src/common/utils/cruise_common_utils.dart';
 import 'global_controller.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -15,7 +15,7 @@ class AppPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final currentTheme = ThemeManager.fromThemeName("lightTheme");
-    final AbstractRoutes routes = CommonUtils.buildRoute();
+    final AbstractRoutes routes = CruiseCommonUtils.buildRoute();
 
     return GetBuilder<GlobalController>(
         init: GlobalController(),

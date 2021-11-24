@@ -1,5 +1,4 @@
 import 'package:cruise/src/common/channel_action.dart';
-import 'package:cruise/src/common/net/rest/http_result.dart';
 import 'package:cruise/src/common/style/global_style.dart';
 import 'package:cruise/src/models/Channel.dart';
 import 'package:cruise/src/models/api/sub_status.dart';
@@ -10,6 +9,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/style.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:wheel/wheel.dart';
 
 class ChannelInformation extends HookWidget {
   const ChannelInformation({

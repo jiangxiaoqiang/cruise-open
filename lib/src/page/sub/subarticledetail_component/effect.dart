@@ -1,6 +1,6 @@
 import 'package:cruise/src/common/article_action.dart';
-import 'package:cruise/src/common/net/rest/http_result.dart';
 import 'package:fish_redux/fish_redux.dart';
+import 'package:wheel/wheel.dart';
 import 'action.dart';
 import 'state.dart';
 

@@ -1,5 +1,5 @@
 import 'package:animations/animations.dart';
-import 'package:cruise/src/common/utils/common_utils.dart';
+import 'package:cruise/src/common/utils/cruise_common_utils.dart';
 import 'package:cruise/src/common/view_manager.dart';
 import 'package:cruise/src/models/Channel.dart';
 import 'package:cruise/src/models/channel_suggestion.dart';
@@ -70,7 +70,7 @@ class CustomSearchDelegate extends SearchDelegate {
                   closedColor: Theme.of(context).scaffoldBackgroundColor,
                   openColor: Theme.of(context).scaffoldBackgroundColor,
                   transitionDuration: Duration(milliseconds: 500),
-                  closedBuilder: (BuildContext c, VoidCallback action) => CommonUtils.getChannelViewType(currentView, channels[index]),
+                  closedBuilder: (BuildContext c, VoidCallback action) => CruiseCommonUtils.getChannelViewType(currentView, channels[index]),
                   openBuilder: (BuildContext c, VoidCallback action) => buildChannel(channels[index], context)),
             ),
           );

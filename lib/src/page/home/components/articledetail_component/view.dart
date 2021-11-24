@@ -1,9 +1,8 @@
 import 'package:cruise/src/common/article_action.dart';
 import 'package:cruise/src/common/helpers.dart';
 import 'package:cruise/src/common/nav/nav_util.dart';
-import 'package:cruise/src/common/net/rest/http_result.dart';
 import 'package:cruise/src/common/repo.dart';
-import 'package:cruise/src/common/utils/common_utils.dart';
+import 'package:cruise/src/common/utils/cruise_common_utils.dart';
 import 'package:cruise/src/models/Channel.dart';
 import 'package:cruise/src/models/Item.dart';
 import 'package:cruise/src/models/api/fav_status.dart';
@@ -18,7 +17,8 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/style.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:html/dom.dart' as dom;
-import 'package:wheel/wheel.dart' show Auth;
+import 'package:wheel/wheel.dart' show Auth, HttpResult;
+import 'package:wheel/wheel.dart';
 
 import 'state.dart';
 
@@ -204,7 +204,7 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             InkWell(
-              onTap: () => CommonUtils.launchUrl(item.link),
+              onTap: () => CruiseCommonUtils.launchUrl(item.link),
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: Container(
@@ -261,7 +261,7 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
                   customImageRenders: defaultImageRenders,
                   onLinkTap:
                       (String? url, RenderContext context, Map<String, String> attributes, dom.Element? element) {
-                    CommonUtils.launchUrl(url);
+                        CruiseCommonUtils.launchUrl(url);
                   }),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

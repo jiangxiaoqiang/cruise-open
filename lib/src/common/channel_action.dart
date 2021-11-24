@@ -5,8 +5,8 @@ import 'package:cruise/src/models/api/sub_status.dart';
 import 'package:cruise/src/models/channel_suggestion.dart';
 import 'package:cruise/src/models/request/channel/channel_request.dart';
 import 'package:dio/dio.dart';
-import 'package:wheel/wheel.dart' show AppLogHandler, GlobalConfig, RestApiError, RestClient;
-import 'net/rest/http_result.dart';
+import 'package:wheel/wheel.dart' show AppLogHandler, GlobalConfig, HttpResult, RestApiError, RestClient;
+import 'package:wheel/wheel.dart';
 
 class ChannelAction {
   final baseUrl = GlobalConfig.getBaseUrl();

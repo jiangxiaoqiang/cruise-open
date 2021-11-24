@@ -1,6 +1,5 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:cruise/src/common/style/global_style.dart';
-import 'package:cruise/src/common/net/rest/http_result.dart';
 import 'package:cruise/src/page/login.dart';
 import 'package:cruise/src/page/reg/verify.dart';
 import 'package:flutter/material.dart';
