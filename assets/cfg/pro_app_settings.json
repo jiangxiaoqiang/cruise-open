@@ -1,4 +1,6 @@
 {
   "baseUrl": "https://api.poemhub.top",
-  "appId": 1
+  "appId": 1,
+  "logUrl": "https://api.poemhub.top",
+  "authUrl": "https://api.poemhub.top"
 }
