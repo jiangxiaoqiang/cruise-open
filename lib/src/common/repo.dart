@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
 
-import 'package:cruise/src/common/config/cruise_global_config.dart' as global;
 import 'package:cruise/src/common/cruise_user.dart';
 import 'package:cruise/src/models/Channel.dart';
 import 'package:cruise/src/models/Item.dart';
@@ -43,10 +42,6 @@ class Repo {
       Item kid = (await fetchArticleItem(kidId))!;
       if (assignDepth) kid.depth = depth;
       yield kid;
-      /*Stream stream = lazyFetchComments(item: kid, depth: kid.depth + 1);
-      await for (Item grandkid in stream) {
-        yield grandkid;
-      }*/
     }
   }
 
