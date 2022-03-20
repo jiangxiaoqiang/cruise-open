@@ -1,5 +1,4 @@
 import 'package:cruise/src/common/theme.dart';
-import 'package:cruise/src/common/utils/navigation_service.dart';
 import 'package:cruise/src/page/login.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,6 +7,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:cruise/src/common/utils/cruise_common_utils.dart';
+import 'package:wheel/wheel.dart';
 import 'global_controller.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
