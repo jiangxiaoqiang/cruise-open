@@ -20,9 +20,13 @@ jobs:
         with:
           flutter-version: '2.8.0'
       - uses: nttld/setup-ndk@v1
+        id: setup-ndk
         with:
           ndk-version: r21e
-      - run: ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk NDK_APPLICATION_MK=./Application.mk
+          add-to-path: false
+      - run: ./build.sh
+        env:
+          ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
       - name: Install tools
         run: |
           flutter precache
