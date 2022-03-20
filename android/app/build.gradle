@@ -34,6 +34,8 @@ android {
 
     lintOptions {
         disable 'InvalidPackage'
+        // https://stackoverflow.com/questions/62394034/flutter-can-not-build-android-apk
+        checkReleaseBuilds false
     }
 
     defaultConfig {
