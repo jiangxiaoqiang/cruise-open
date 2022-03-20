@@ -52,9 +52,7 @@ class Repo {
 
     await Future.wait(item.kids!.map((kidId) async {
       Item kid = (await fetchArticleItem(kidId))!;
-      if (kid != null) {
-        await prefetchComments(item: kid);
-      }
+      await prefetchComments(item: kid);
     }));
     return Future.value(result);
   }
@@ -139,12 +137,9 @@ class Repo {
       final response = await RestClient.getHttp("/post/sub/source/detail/$id");
       if(RestClient.respSuccess(response)){
         Map channelResult = response.data["result"];
-        if (channelResult != null) {
-          // Pay attention: channelResult would be null sometimes
-          String jsonContent = JsonEncoder().convert(channelResult);
-          Channel parseItem = Channel.fromJson(jsonContent);
-          _itemsChannelCache[id] = parseItem;
-        }
+        String jsonContent = JsonEncoder().convert(channelResult);
+        Channel parseItem = Channel.fromJson(jsonContent);
+        _itemsChannelCache[id] = parseItem;
       } else {
         AppLogHandler.logError(RestApiError('Item $id failed to fetch.'), JsonEncoder().convert(response));
       }
