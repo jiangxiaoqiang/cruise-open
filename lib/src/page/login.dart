@@ -121,12 +121,11 @@ class LoginPage extends HookWidget {
                                   if (_formKey.currentState!.validate() && phoneValid.value) {
                                     submitting.value = true;
                                     String userName = countryCode.value + username.value;
-                                    AuthResult result = await Auth.login(
-                                      username: userName,
-                                      password: password.value,
-                                      loginType: LoginType.PHONE
-                                    );
-
+                                    AppLoginRequest appLoginRequest = new AppLoginRequest(
+                                        password: password.value,
+                                        username: userName,
+                                        loginType: LoginType.PHONE);
+                                    AuthResult result = await Auth.login(appLoginRequest: appLoginRequest);
                                     if (result.result == Result.error) {
                                       Scaffold.of(context).showSnackBar(
                                         SnackBar(
