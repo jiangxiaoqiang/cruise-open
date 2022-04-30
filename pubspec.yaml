@@ -51,7 +51,7 @@ dependencies:
     git:
       url: https://github.com/jiangxiaoqiang/wheel.git
       ref: main
-  flutter_html: 3.0.0-alpha.3
+  flutter_html: 2.2.1
   video_player: 2.3.0
 
 dependency_overrides:
