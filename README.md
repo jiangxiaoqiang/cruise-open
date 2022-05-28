@@ -44,7 +44,18 @@
 默认使用Flutter官方源，但是有时确实下载包很慢或者根本无法下载，使用如下命令临时使用大陆镜像源：
 
 ```bash
-export PUB_HOSTED_URL=https://pub.flutter-io.cn && export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn && ~/apps/flutter/bin/flutter run -v
+export PUB_HOSTED_URL=https://pub.flutter-io.cn \ 
+&& export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn \
+&& ~/apps/flutter/bin/flutter run -v
+```
+
+如果使用fvm工具管理版本：
+
+
+```bash
+export PUB_HOSTED_URL=https://pub.flutter-io.cn \
+&& export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn \
+&& ~/fvm/versions/2.10.3/bin/flutter run -v
 ```
 
 

@@ -99,8 +99,8 @@ SPEC CHECKSUMS:
   uni_links: d97da20c7701486ba192624d99bffaaffcfc298a
   url_launcher: 6fef411d543ceb26efce54b05a0a40bfd74cbbef
   video_player_avfoundation: e489aac24ef5cf7af82702979ed16f2a5ef84cff
-  wakelock: b0843b2479edbf6504d8d262c2959446f35373aa
-  webview_flutter_wkwebview: 005fbd90c888a42c5690919a1527ecc6649e1162
+  wakelock: d0fc7c864128eac40eba1617cb5264d9c940b46f
+  webview_flutter_wkwebview: b7e70ef1ddded7e69c796c7390ee74180182971f
 
 PODFILE CHECKSUM: 348dad678b7cce6be8a224f25af1488a984f0e6a
 
