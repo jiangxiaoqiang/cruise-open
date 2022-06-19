@@ -49,8 +49,8 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: AppLocalizations.of(context)!.cruiseNavigatorHome),
           BottomNavigationBarItem(icon: Icon(Icons.subscriptions), label: AppLocalizations.of(context)!.cruiseNavigatorSubscribe),
-          BottomNavigationBarItem(icon: Icon(Icons.rss_feed), label: '频道'),
-          BottomNavigationBarItem(icon: Icon(Icons.school), label: '我的'),
+          BottomNavigationBarItem(icon: Icon(Icons.rss_feed), label: AppLocalizations.of(context)!.cruiseNavigatorChannel),
+          BottomNavigationBarItem(icon: Icon(Icons.school), label: AppLocalizations.of(context)!.cruiseNavigatorMine),
         ],
         currentIndex: state.selectIndex,
         fixedColor: Theme.of(context).primaryColor,

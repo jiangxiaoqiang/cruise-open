@@ -10,5 +10,13 @@
   "cruiseNavigatorSubscribe": "Subscribe",
     "@cruiseNavigatorSubscribe": {
     "description": "The subscribe navigate text"
+  },
+  "cruiseNavigatorChannel": "Channel",
+        "@cruiseNavigatorChannel": {
+        "description": "All Channel"
+  },
+  "cruiseNavigatorMine": "My",
+      "@cruiseNavigatorMine": {
+      "description": "My Space"
   }
 }

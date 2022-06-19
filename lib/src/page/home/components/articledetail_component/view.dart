@@ -166,10 +166,6 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
     }
   }
 
-  ImageSourceMatcher base64UriMatcher() => (attributes, element) =>
-      attributes["src"] != null &&
-      attributes["src"]!.startsWith("data:image") &&
-      attributes["src"]!.contains("base64,");
 
   Widget loadingWidget() {
     return Center(
@@ -189,13 +185,6 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
           )),
     );
   }
-
-  final Map<ImageSourceMatcher, ImageRender> defaultImageRenders = {
-    base64UriMatcher(): base64ImageRender(),
-    assetUriMatcher(): assetImageRender(),
-    networkSourceMatcher(extension: "svg"): svgNetworkImageRender(),
-    networkSourceMatcher(): networkImageRender(loadingWidget: loadingWidget),
-  };
 
   SingleChildScrollView buildListView(Item item, BuildContext context) {
     return SingleChildScrollView(
@@ -258,7 +247,6 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
                       fontSize: FontSize(19.0),
                     ),
                   },
-                  customImageRenders: defaultImageRenders,
                   onLinkTap:
                       (String? url, RenderContext context, Map<String, String> attributes, dom.Element? element) {
                         CruiseCommonUtils.launchUrl(url);
