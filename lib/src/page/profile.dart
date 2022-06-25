@@ -28,7 +28,7 @@ class ProfilePage extends HookWidget {
               args.putIfAbsent("selectIndex", () => 3);
               args.putIfAbsent("storiesType", () => StoriesType.profile);
               args.putIfAbsent("autoTriggerNav", () => true);
-              NavigationService.instance.navigateToReplacementWithParam("home",args);
+              NavigationService.instance.navigateToReplacementWithParam("home_page",args);
             }),
         title: Text(
           "个人信息",
