@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:intl/intl.dart';
 import 'package:wheel/wheel.dart' show Auth, NavigationService;
+import 'package:cruise/src/common/config/cruise_global_constant.dart' as CruiseGlobalConstant;
 
 class ProfilePage extends HookWidget {
   ProfilePage({this.isMe = false, required this.user});
@@ -28,7 +29,7 @@ class ProfilePage extends HookWidget {
               args.putIfAbsent("selectIndex", () => 3);
               args.putIfAbsent("storiesType", () => StoriesType.profile);
               args.putIfAbsent("autoTriggerNav", () => true);
-              NavigationService.instance.navigateToReplacementWithParam("home_page",args);
+              NavigationService.instance.navigateToReplacementWithParam(CruiseGlobalConstant.HOME_PAGE_NAME,args);
             }),
         title: Text(
           "个人信息",

@@ -5,6 +5,7 @@ import 'package:cruise/src/page/profile.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:wheel/wheel.dart' show Auth;
+import 'package:cruise/src/common/config/cruise_global_constant.dart' as CruiseGlobalConstant;
 
 class NavUtil {
 
@@ -28,7 +29,7 @@ class NavUtil {
 
   static Future<void> navHome(BuildContext context) async {
     final AbstractRoutes routes = CruiseCommonUtils.buildRoute();
-    Widget page = routes.buildPage("home", null);
+    Widget page = routes.buildPage(CruiseGlobalConstant.HOME_PAGE_NAME, null);
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => page),

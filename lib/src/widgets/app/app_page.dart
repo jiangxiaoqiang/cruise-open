@@ -7,6 +7,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:cruise/src/common/utils/cruise_common_utils.dart';
+import 'package:cruise/src/common/config/cruise_global_constant.dart' as CruiseGlobalConstant;
 import 'package:wheel/wheel.dart';
 import 'global_controller.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -48,7 +49,7 @@ class AppPage extends StatelessWidget {
               "login": (BuildContext context) => LoginPage(),
             },
 
-            home: routes.buildPage('home_page', {"selectIndex": 0}),
+            home: routes.buildPage(CruiseGlobalConstant.HOME_PAGE_NAME, {"selectIndex": 0}),
             onGenerateRoute: (RouteSettings settings) {
               return MaterialPageRoute<Object>(builder: (BuildContext context) {
                 return routes.buildPage(settings.name!, settings.arguments);
