@@ -57,7 +57,7 @@ class LoginPage extends HookWidget {
                         ),
                         SizedBox(
                             height: 45,
-                            width: screenWidth * 0.7,
+                            width: (screenWidth-20) * 0.72,
                             child: TextFormField(
                               autocorrect: false,
                               onChanged: (value) {

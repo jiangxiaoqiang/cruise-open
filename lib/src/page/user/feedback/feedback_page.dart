@@ -17,10 +17,10 @@ class FeedbackPage extends StatelessWidget {
 
     void handleSubmitFeedback(String feedback) async {
       submitting = true;
-      HttpResult result = await FeedbackRestAction.submitFeedback(feedback);
-      if (result.result == Result.error) {
+      var result = await FeedbackRestAction.submitFeedback(feedback);
+      if (result == "ok") {
         Fluttertoast.showToast(
-            msg: "意见提交失败",
+            msg: "意见提交失败," + result.toString(),
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 1,
@@ -91,7 +91,9 @@ class FeedbackPage extends StatelessWidget {
                                     child: ElevatedButton(
                                   style: GlobalStyle.getButtonStyle(context),
                                   onPressed: () async {
-                                    handleSubmitFeedback(feedbackContent!);
+                                    if(feedbackContent != null) {
+                                      handleSubmitFeedback(feedbackContent!);
+                                    }
                                   },
                                   child: submitting
                                       ? SizedBox(
