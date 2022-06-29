@@ -54,12 +54,17 @@ class CruiseSettingPage extends StatelessWidget {
                                   trailing: Icon(Icons.keyboard_arrow_right),
                                   title: Text("收藏"),
                                   onTap: () async {
-                                    var data = {'name': "fav"};
-                                    Widget page = FavArticlePage().buildPage(data);
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => page),
-                                    );
+                                    bool isLoggedIn = await Auth.isLoggedIn();
+                                    if (isLoggedIn) {
+                                      var data = {'name': "fav"};
+                                      Widget page = FavArticlePage().buildPage(data);
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => page),
+                                      );
+                                    }else{
+                                      NavUtil.navLogin(context);
+                                    }
                                   },
                                 ))))),
                 Padding(
