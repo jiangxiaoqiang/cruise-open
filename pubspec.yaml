@@ -22,7 +22,6 @@ dependencies:
   collection: ^1.14.0
   package_info: ^0.4.0
   fluttertoast: 8.0.3
-  #google_fonts: 1.0.0
   flutter_staggered_grid_view: ^0.3.0
   adaptive_breakpoints: ^0.0.2
   cupertino_icons: 1.0.4
@@ -44,9 +43,7 @@ dependencies:
   global_configuration: 2.0.0-nullsafety.1
   hive_flutter: 1.0.0
   eva_icons_flutter: 3.0.0
-  device_info: ^2.0.0
   fish_redux: 0.3.7
-  get: 4.3.8
   wheel:
     git:
       url: https://github.com/jiangxiaoqiang/wheel.git
