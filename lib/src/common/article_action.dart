@@ -22,7 +22,7 @@ class ArticleAction {
   }
 
   static Future<HttpResult> read({required String articleId}) async {
-    final response = await RestClient.putHttp("/post/article/read/" + articleId,null);
+    final response = await RestClient.putHttp("/post/article/read?id=" + articleId,null);
     if (response.statusCode == 200 && response.data["statusCode"] == "200") {
       return HttpResult(message: "SMS send success", result: Result.ok);
     }

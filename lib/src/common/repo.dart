@@ -117,7 +117,7 @@ class Repo {
     if (_itemsCache.containsKey(id)) {
       return _itemsCache[id];
     } else {
-      final response = await RestClient.getHttp("/post/article/$id");
+      final response = await RestClient.getHttp("/post/article?id=" + id.toString());
       if(RestClient.respSuccess(response)){
         Map articleResult = response.data["result"];
         String articleJson = JsonEncoder().convert(articleResult);

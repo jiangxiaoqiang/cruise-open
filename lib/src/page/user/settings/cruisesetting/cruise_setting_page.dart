@@ -57,12 +57,14 @@ class CruiseSettingPage extends StatelessWidget {
                                     bool isLoggedIn = await Auth.isLoggedIn();
                                     if (isLoggedIn) {
                                       var data = {'name': "fav"};
-                                      Widget page = FavArticlePage().buildPage(data);
+                                      Widget page =
+                                          FavArticlePage().buildPage(data);
                                       Navigator.push(
                                         context,
-                                        MaterialPageRoute(builder: (context) => page),
+                                        MaterialPageRoute(
+                                            builder: (context) => page),
                                       );
-                                    }else{
+                                    } else {
                                       NavUtil.navLogin(context);
                                     }
                                   },
@@ -98,12 +100,18 @@ class CruiseSettingPage extends StatelessWidget {
                                   trailing: Icon(Icons.keyboard_arrow_right),
                                   title: Text("阅读历史"),
                                   onTap: () async {
-                                    var data = {'name': "history"};
-                                    Widget page = HistoryPage().buildPage(data);
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => page),
-                                    );
+                                    bool isLoggedIn = await Auth.isLoggedIn();
+                                    if (isLoggedIn) {
+                                      var data = {'name': "history"};
+                                      Widget page = HistoryPage().buildPage(data);
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => page),
+                                      );
+                                    } else {
+                                      NavUtil.navLogin(context);
+                                    }
                                   },
                                 ))))),
                 Padding(
@@ -135,7 +143,8 @@ class CruiseSettingPage extends StatelessWidget {
                                 Widget aboutPage = AboutPage().buildPage(data);
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => aboutPage),
+                                  MaterialPageRoute(
+                                      builder: (context) => aboutPage),
                                 );
                               },
                             )))),
@@ -169,7 +178,8 @@ class CruiseSettingPage extends StatelessWidget {
                                 Widget payPage = PayPage().buildPage(data);
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => payPage),
+                                  MaterialPageRoute(
+                                      builder: (context) => payPage),
                                 );
                               },
                             )))),
