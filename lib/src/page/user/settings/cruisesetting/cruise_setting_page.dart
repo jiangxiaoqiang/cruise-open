@@ -103,7 +103,8 @@ class CruiseSettingPage extends StatelessWidget {
                                     bool isLoggedIn = await Auth.isLoggedIn();
                                     if (isLoggedIn) {
                                       var data = {'name': "history"};
-                                      Widget page = HistoryPage().buildPage(data);
+                                      Widget page =
+                                          HistoryPage().buildPage(data);
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -174,13 +175,18 @@ class CruiseSettingPage extends StatelessWidget {
                               trailing: Icon(Icons.keyboard_arrow_right),
                               title: Text("会员中心"),
                               onTap: () async {
-                                var data = {'name': "payPage"};
-                                Widget payPage = PayPage().buildPage(data);
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => payPage),
-                                );
+                                bool isLoggedIn = await Auth.isLoggedIn();
+                                if (isLoggedIn) {
+                                  var data = {'name': "payPage"};
+                                  Widget payPage = PayPage().buildPage(data);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => payPage),
+                                  );
+                                } else {
+                                  NavUtil.navLogin(context);
+                                }
                               },
                             )))),
               ],
