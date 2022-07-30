@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/style.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wheel/wheel.dart';
 
@@ -54,25 +53,11 @@ class ChannelInformation extends HookWidget {
       HttpResult result = await ChannelAction.sub(channelId: channelId, subStatus: subStatus);
 
       if (result.result == Result.error) {
-        Fluttertoast.showToast(
-            msg: "订阅失败",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0);
+        ToastUtils.showToast("订阅失败");
       } else {
         isFav.value = subStatus.statusCode == "sub" ? 1 : 0;
         counter.value.isFav = isFav.value;
-        Fluttertoast.showToast(
-            msg: subStatus.statusCode == "sub" ? "订阅成功" : "取消订阅成功",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0);
+        ToastUtils.showToast(subStatus.statusCode == "sub" ? "订阅成功" : "取消订阅成功");
       }
     }
 

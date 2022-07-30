@@ -2,7 +2,6 @@ import 'package:cruise/src/common/feedback_rest_action.dart';
 import 'package:cruise/src/common/style/global_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:wheel/wheel.dart';
 
@@ -19,23 +18,9 @@ class FeedbackPage extends StatelessWidget {
       submitting = true;
       var result = await FeedbackRestAction.submitFeedback(feedback);
       if (result == "ok") {
-        Fluttertoast.showToast(
-            msg: "意见提交失败," + result.toString(),
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0);
+        ToastUtils.showToast("意见提交失败");
       } else {
-        Fluttertoast.showToast(
-            msg: "提交成功",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0);
+        ToastUtils.showToast("提交成功");
       }
       submitting = false;
     }
@@ -91,7 +76,7 @@ class FeedbackPage extends StatelessWidget {
                                     child: ElevatedButton(
                                   style: GlobalStyle.getButtonStyle(context),
                                   onPressed: () async {
-                                    if(feedbackContent != null) {
+                                    if (feedbackContent != null) {
                                       handleSubmitFeedback(feedbackContent!);
                                     }
                                   },

@@ -2,7 +2,6 @@ import 'package:cruise/src/common/channel_action.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:wheel/wheel.dart';
 
 class AddChannel extends HookWidget {
@@ -21,23 +20,9 @@ class AddChannel extends HookWidget {
         );
 
         if (result.result == Result.error) {
-          Fluttertoast.showToast(
-              msg: "RSS添加失败，请检查地址是否正确",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.CENTER,
-              timeInSecForIosWeb: 1,
-              backgroundColor: Colors.red,
-              textColor: Colors.white,
-              fontSize: 16.0);
+          ToastUtils.showToast("RSS添加失败，请检查地址是否正确");
         } else {
-          Fluttertoast.showToast(
-              msg: "添加成功",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.CENTER,
-              timeInSecForIosWeb: 1,
-              backgroundColor: Colors.red,
-              textColor: Colors.white,
-              fontSize: 16.0);
+          ToastUtils.showToast("添加成功");
         }
         submitting.value = false;
       }

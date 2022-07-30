@@ -4,7 +4,6 @@ import 'package:cruise/src/page/login.dart';
 import 'package:cruise/src/page/reg/verify.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:wheel/wheel.dart';
 
 class RegPage extends HookWidget {
@@ -105,17 +104,10 @@ class RegPage extends HookWidget {
 
                                     if (result.result == Result.error) {
                                       submitting.value = false;
-                                      Fluttertoast.showToast(
-                                          msg: result.message,
-                                          toastLength: Toast.LENGTH_SHORT,
-                                          gravity: ToastGravity.CENTER,
-                                          timeInSecForIosWeb: 2,
-                                          backgroundColor: Colors.red,
-                                          textColor: Colors.black,
-                                          fontSize: 18.0);
+                                      ToastUtils.showToast(result.message);
                                     } else {
                                       Widget page;
-                                      page = VerifyPage(phone:phoneNumber);
+                                      page = VerifyPage(phone: phoneNumber);
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(builder: (context) => page),

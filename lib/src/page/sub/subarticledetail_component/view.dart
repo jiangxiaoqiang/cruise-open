@@ -13,7 +13,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/style.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:html/dom.dart' as dom;
 import 'package:wheel/wheel.dart';
 
@@ -53,14 +52,7 @@ Widget buildView(SubArticleDetailState state, Dispatch dispatch, ViewService vie
     HttpResult result = (await ArticleAction.upvote(articleId: item.id.toString(), action: action))!;
 
     if (result.result == Result.error) {
-      Fluttertoast.showToast(
-          msg: "点赞失败",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      ToastUtils.showToast("点赞失败");
     } else {
       if (upvoteStatus.statusCode == "upvote") {
         dispatch(SubArticleDetailActionCreator.onVote(UpvoteStatus.UPVOTE));
@@ -68,14 +60,7 @@ Widget buildView(SubArticleDetailState state, Dispatch dispatch, ViewService vie
       if (upvoteStatus.statusCode == "unupvote" && item.upvoteCount > 0) {
         dispatch(SubArticleDetailActionCreator.onVote(UpvoteStatus.UNUPVOTE));
       }
-      Fluttertoast.showToast(
-          msg: upvoteStatus.statusCode == "upvote" ? "点赞成功" : "取消点赞成功",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      ToastUtils.showToast(upvoteStatus.statusCode == "upvote" ? "点赞成功" : "取消点赞成功");
     }
   }
 
@@ -83,14 +68,7 @@ Widget buildView(SubArticleDetailState state, Dispatch dispatch, ViewService vie
     HttpResult result = (await ArticleAction.fav(articleId: item.id.toString(), action: action))!;
 
     if (result.result == Result.error) {
-      Fluttertoast.showToast(
-          msg: favStatus.statusCode == "fav" ? "添加收藏失败" : "取消收藏失败",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      ToastUtils.showToast(favStatus.statusCode == "fav" ? "添加收藏失败" : "取消收藏失败");
     } else {
       if (favStatus.statusCode == "fav") {
         dispatch(SubArticleDetailActionCreator.onFav(FavStatus.FAV));
@@ -98,14 +76,7 @@ Widget buildView(SubArticleDetailState state, Dispatch dispatch, ViewService vie
       if (favStatus.statusCode == "unfav" && item.favCount > 0) {
         dispatch(SubArticleDetailActionCreator.onFav(FavStatus.UNFAV));
       }
-      Fluttertoast.showToast(
-          msg: favStatus.statusCode == "fav" ? "添加收藏成功" : "取消收藏成功",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      ToastUtils.showToast(favStatus.statusCode == "fav" ? "添加收藏成功" : "取消收藏成功");
     }
   }
 
