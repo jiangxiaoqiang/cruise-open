@@ -8,7 +8,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/style.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 import 'package:wheel/wheel.dart';
 
 import 'action.dart';
@@ -55,25 +55,11 @@ Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewSe
     HttpResult result = await ChannelAction.sub(channelId: channelId, subStatus: subStatus);
 
     if (result.result == Result.error) {
-      Fluttertoast.showToast(
-          msg: "订阅失败",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      ToastUtils.showToast("订阅失败");
     } else {
       isFav = subStatus.statusCode == "sub" ? 1 : 0;
       item.isFav = isFav;
-      Fluttertoast.showToast(
-          msg: subStatus.statusCode == "sub" ? "订阅成功" : "取消订阅成功",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      ToastUtils.showToast(subStatus.statusCode == "sub" ? "订阅成功" : "取消订阅成功");
     }
     dispatch(ChannelDetailActionCreator.onSubscribe(item));
   }
@@ -187,9 +173,7 @@ Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewSe
                   sliver: viewService.buildComponent("articlelist"),
                 )
               else
-                SliverToBoxAdapter(
-                    child:Center(child: CircularProgressIndicator())
-                )
+                SliverToBoxAdapter(child: Center(child: CircularProgressIndicator()))
             ]),
           ),
         ),
