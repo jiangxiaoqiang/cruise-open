@@ -15,6 +15,7 @@
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
 		B363B24E289513CF003D4C3F /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A59DF182660AF6B0016ACF8 /* StoreKit.framework */; };
 		B363B24F289513CF003D4C3F /* StoreKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4A59DF182660AF6B0016ACF8 /* StoreKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C263E80A4720056BDEBC5416 /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFCB5253BA9E6D6B479F0E4E /* Pods_Runner.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -60,6 +61,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B363B24E289513CF003D4C3F /* StoreKit.framework in Frameworks */,
+				C263E80A4720056BDEBC5416 /* Pods_Runner.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
