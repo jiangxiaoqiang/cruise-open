@@ -13,24 +13,8 @@
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
-		B363B24E289513CF003D4C3F /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A59DF182660AF6B0016ACF8 /* StoreKit.framework */; };
-		B363B24F289513CF003D4C3F /* StoreKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4A59DF182660AF6B0016ACF8 /* StoreKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C263E80A4720056BDEBC5416 /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFCB5253BA9E6D6B479F0E4E /* Pods_Runner.framework */; };
+		EED26AB2408051596970CA26 /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFCB5253BA9E6D6B479F0E4E /* Pods_Runner.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		9705A1C41CF9048500538489 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 12;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				B363B24F289513CF003D4C3F /* StoreKit.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
@@ -60,8 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B363B24E289513CF003D4C3F /* StoreKit.framework in Frameworks */,
-				C263E80A4720056BDEBC5416 /* Pods_Runner.framework in Frameworks */,
+				EED26AB2408051596970CA26 /* Pods_Runner.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,7 +129,6 @@
 				97C146EA1CF9000F007C117D /* Sources */,
 				97C146EB1CF9000F007C117D /* Frameworks */,
 				97C146EC1CF9000F007C117D /* Resources */,
-				9705A1C41CF9048500538489 /* Embed Frameworks */,
 				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
 				F3EAD531956B601BEAF6F6D5 /* [CP] Embed Pods Frameworks */,
 				4AA4C6C12653A69200010D77 /* ShellScript */,
