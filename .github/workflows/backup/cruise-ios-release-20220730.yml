@@ -1,0 +1,91 @@
+name: Cruise-IOS-Pro
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    #
+    # more macOS version:
+    # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-10.15-Readme.md
+    #
+    runs-on: macos-12
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '12.x'
+      - uses: subosito/flutter-action@v1.5.1
+        with:
+          flutter-version: '2.8.0'
+          channel: 'stable'
+      #
+      # more xcode version path:
+      # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-10.15-Readme.md
+      #
+      - name: Select Xcode version
+        run: sudo xcode-select -s '/Applications/Xcode_13.3.1.app/Contents/Developer'
+      - name: Bundle install
+        run: |
+          cd ./ios
+          brew install gpg
+          curl -sSL https://rvm.io/mpapis.asc | gpg --import -
+          curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
+          echo 409B6B1796C275462A1703113804BB82D39DC0E3:6: | gpg --import-ownertrust
+          echo 7D2BAF1CF37B13E2069D6956105BD0E739499BDB:6: | gpg --import-ownertrust
+          curl -sSL https://get.rvm.io | bash -s -- --ignore-dotfiles
+          source $HOME/.rvm/scripts/rvm
+          source ~/.bash_profile
+          rvm --version
+          rvm install 2.7.2
+          rvm use --default 2.7.2
+          gem install cocoapods -v 1.10.0
+          gem install fastlane -v 2.177.0
+          bundle install
+      #
+      #  pod repo update resolve problem: https://stackoverflow.com/questions/56055142/cocoapods-could-not-find-compatible-versions-for-pod-firebase-coreonly
+      #
+      - name: Install tools
+        run: |
+          flutter precache
+          flutter pub get
+          cd ./ios
+          rm -f Podfile.lock
+          pod repo update
+          pod install
+      - run: flutter build ios --release --no-codesign --no-sound-null-safety -t lib/main_pro.dart
+      - name: Setup SSH Keys and known_hosts for fastlane match
+        run: |
+          SSH_PATH="$HOME/.ssh"
+          mkdir -p "$SSH_PATH"
+          touch "$SSH_PATH/known_hosts"
+          echo "$PRIVATE_KEY" > "$SSH_PATH/id_rsa"
+          chmod 700 "$SSH_PATH"
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          chmod 600 "$SSH_PATH/known_hosts"
+          chmod 600 "$SSH_PATH/id_rsa"
+          eval $(ssh-agent)
+          ssh-add "$SSH_PATH/id_rsa"
+        env:
+          PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Deploy to TestFlight/PGY
+        run: |
+          cd ./ios
+          bundle exec fastlane beta
+        env:
+          FLUTTER_ROOT: ${{ secrets.FLUTTER_ROOT }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          GIT_URL: ${{ secrets.GIT_URL }}
+          PGY_USER_KEY: ${{ secrets.PGY_USER_KEY }}
+          PGY_API_KEY: ${{ secrets.PGY_API_KEY }}
+          TEAM_ID: ${{ secrets.TEAM_ID }}
+          ITC_TEAM_ID: ${{ secrets.ITC_TEAM_ID }}
+          FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
+          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+          FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
+          FASTLANE_SESSION: ${{ secrets.FASTLANE_SESSION }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          MATCH_KEYCHAIN_NAME: ${{ secrets.MATCH_KEYCHAIN_NAME }}
+          MATCH_KEYCHAIN_PASSWORD: ${{ secrets.MATCH_KEYCHAIN_PASSWORD }}
+          DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS: ${{ secrets.DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS }}

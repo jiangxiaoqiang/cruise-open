@@ -3,7 +3,7 @@ domain = ENV['RUBY_GEMS_CHINA'] ? 'https://gems.ruby-china.com' : 'https://rubyg
 source domain
 
 gem "xcode-install"
-gem "fastlane","2.177.0"
+gem "fastlane"
 
 plugins_path = File.join(File.dirname(__FILE__), 'fastlane', 'Pluginfile')
 eval_gemfile(plugins_path) if File.exist?(plugins_path)
