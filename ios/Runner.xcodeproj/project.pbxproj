@@ -13,8 +13,6 @@
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
-		B363B24C289513CB003D4C3F /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFCB5253BA9E6D6B479F0E4E /* Pods_Runner.framework */; };
-		B363B24D289513CB003D4C3F /* Pods_Runner.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CFCB5253BA9E6D6B479F0E4E /* Pods_Runner.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B363B24E289513CF003D4C3F /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A59DF182660AF6B0016ACF8 /* StoreKit.framework */; };
 		B363B24F289513CF003D4C3F /* StoreKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4A59DF182660AF6B0016ACF8 /* StoreKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -26,7 +24,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				B363B24D289513CB003D4C3F /* Pods_Runner.framework in Embed Frameworks */,
 				B363B24F289513CF003D4C3F /* StoreKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -50,6 +47,8 @@
 		97C146FD1CF9000F007C117D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97C147001CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B363B25028951914003D4C3F /* device_info_plus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = device_info_plus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B363B25528951ACC003D4C3F /* device_info_plus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = device_info_plus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C67AE1E3A2441323763BF051 /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
 		CFCB5253BA9E6D6B479F0E4E /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2BB2811FD08B57309B05E96 /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
@@ -60,7 +59,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B363B24C289513CB003D4C3F /* Pods_Runner.framework in Frameworks */,
 				B363B24E289513CF003D4C3F /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,6 +69,8 @@
 		57BE39A4F872CC9CE567C051 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B363B25528951ACC003D4C3F /* device_info_plus.framework */,
+				B363B25028951914003D4C3F /* device_info_plus.framework */,
 				4A59DF182660AF6B0016ACF8 /* StoreKit.framework */,
 				CFCB5253BA9E6D6B479F0E4E /* Pods_Runner.framework */,
 			);

@@ -54,9 +54,7 @@ jobs:
           rm -f Podfile.lock
           pod repo update
           pod install
-      #- run: flutter pub get
-      #- run: flutter build apk
-      - run: flutter build ios --release --no-codesign --no-sound-null-safety -t lib/main_pro.dart --profile pro-pubspec.yaml
+      - run: flutter build ios --release --no-codesign --no-sound-null-safety -t lib/main_pro.dart
       - name: Setup SSH Keys and known_hosts for fastlane match
         run: |
           SSH_PATH="$HOME/.ssh"
