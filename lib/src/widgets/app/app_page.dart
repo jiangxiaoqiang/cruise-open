@@ -1,16 +1,16 @@
-import 'package:cruise/src/common/theme.dart';
-import 'package:cruise/src/page/login.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
-import 'package:cruise/src/common/utils/cruise_common_utils.dart';
-import 'package:cruise/src/common/config/cruise_global_constant.dart' as CruiseGlobalConstant;
-import 'package:wheel/wheel.dart';
-import 'global_controller.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get/get.dart';
+import 'package:wheel/wheel.dart';
+
+import '../../common/config/cruise_global_constant.dart';
+import '../../common/theme.dart';
+import '../../common/utils/cruise_common_utils.dart';
+import '../../page/login.dart';
+import 'global_controller.dart';
 
 class AppPage extends StatelessWidget {
   @override
@@ -33,7 +33,6 @@ class AppPage extends StatelessWidget {
             localizationsDelegates: [
               // ... app-specific localization delegate[s] here
               // TODO: uncomment the line below after codegen
-              // AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
@@ -49,7 +48,7 @@ class AppPage extends StatelessWidget {
               "login": (BuildContext context) => LoginPage(),
             },
 
-            home: routes.buildPage(CruiseGlobalConstant.HOME_PAGE_NAME, {"selectIndex": 0}),
+            home: routes.buildPage(HOME_PAGE_NAME, {"selectIndex": 0}),
             onGenerateRoute: (RouteSettings settings) {
               return MaterialPageRoute<Object>(builder: (BuildContext context) {
                 return routes.buildPage(settings.name!, settings.arguments);

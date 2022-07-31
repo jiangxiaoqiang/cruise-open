@@ -10,7 +10,7 @@ import 'state.dart';
 
 Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
   var context = viewService.context;
-  if(state.autoTriggerNav){
+  if (state.autoTriggerNav) {
     var homeModel = new HomeModel();
     homeModel.selectIndex = state.selectIndex;
     homeModel.storiesType = state.storiesType;
