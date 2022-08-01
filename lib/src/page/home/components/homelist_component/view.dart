@@ -3,14 +3,17 @@ import 'package:cruise/src/models/enumn/stories_type.dart';
 import 'package:cruise/src/page/channel/add_channel.dart';
 import 'package:cruise/src/page/user/settings/cruisesetting/cruise_setting_page.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
-import 'package:fish_redux/fish_redux.dart';
+import 'package:fish_redux/fish_redux.dart' as Redux;
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../../../../widgets/app/global_controller.dart';
 import 'action.dart';
 import 'state.dart';
 
-Widget buildView(HomeListState state, Dispatch dispatch, ViewService viewService) {
+Widget buildView(HomeListState state, Redux.Dispatch dispatch, Redux.ViewService viewService) {
   StoriesType currentStoriesType = state.currentStoriesType;
+  final GlobalController globalController = Get.put(GlobalController());
 
   Widget switchNavTab(StoriesType switchStoriesType, String tabName) {
     if (state.currentStoriesType == null || state.currentStoriesType != switchStoriesType) {
@@ -19,20 +22,24 @@ Widget buildView(HomeListState state, Dispatch dispatch, ViewService viewService
     return viewService.buildComponent(tabName);
   }
 
-  Widget nav(StoriesType currentStoriesType){
+  Widget nav(StoriesType currentStoriesType) {
     if (currentStoriesType == StoriesType.topStories) {
+      globalController.appBarTitle.value = "首页";
       return switchNavTab(StoriesType.topStories, "homelistdefault");
     } else if (currentStoriesType == StoriesType.channels) {
+      globalController.appBarTitle.value = "频道";
       return switchNavTab(StoriesType.channels, "channellistdefault");
     } else if (currentStoriesType == StoriesType.subStories) {
+      globalController.appBarTitle.value = "订阅";
       return switchNavTab(StoriesType.subStories, "sublistdefault");
     } else if (currentStoriesType == StoriesType.favStories) {
       return switchNavTab(StoriesType.favStories, "homelistdefault");
     } else if (currentStoriesType == StoriesType.profile) {
+      globalController.appBarTitle.value = "我的";
       return new CruiseSettingPage();
     } else if (currentStoriesType == StoriesType.originalStories) {
       return switchNavTab(StoriesType.originalStories, "homelistdefault");
-    } else if(currentStoriesType == StoriesType.historyStories){
+    } else if (currentStoriesType == StoriesType.historyStories) {
       return switchNavTab(StoriesType.historyStories, "homelistdefault");
     }
     return Container();
@@ -48,8 +55,9 @@ Widget buildView(HomeListState state, Dispatch dispatch, ViewService viewService
                 context,
               ),
               sliver: SliverAppBar(
+                centerTitle: true,
                 title: Text(
-                  '',
+                  globalController.appBarTitle.value,
                   style: TextStyle(
                     color: Theme.of(context).brightness == Brightness.light ? Colors.black : Colors.white,
                   ),
@@ -85,7 +93,7 @@ Widget buildView(HomeListState state, Dispatch dispatch, ViewService viewService
       },
       body: TabBarView(
         children: [currentStoriesType].map((type) {
-         return nav(type);
+          return nav(type);
         }).toList(),
       ),
     ),

@@ -26,12 +26,12 @@ dependencies:
   cupertino_icons: 1.0.4
   http: 0.13.1
   timeago: 3.0.2
-  animations: 2.0.0
+  animations: 2.0.3
   flutter_hooks: 0.16.0
   share: 2.0.1
   shimmer: 1.1.1
   crypto: 3.0.0
-  url_launcher: 6.0.2
+  url_launcher: 6.1.5
   uni_links: 0.4.0
   shared_preferences: 2.0.5
   state_notifier: 0.7.0

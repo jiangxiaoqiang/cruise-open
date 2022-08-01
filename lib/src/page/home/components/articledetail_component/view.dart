@@ -39,11 +39,11 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
     if (_initialSwipeOffset != null) {
       final offsetDifference = _initialSwipeOffset!.dx - _finalSwipeOffset!.dx;
       if (offsetDifference < 0) {
-        if (PaintingBinding.instance != null && PaintingBinding.instance!.imageCache != null) {
+        if (PaintingBinding.instance != null && PaintingBinding.instance.imageCache != null) {
           // https://mp.weixin.qq.com/s/yUm4UFggYLgDbj4_JCjEdg
           // https://musicfe.dev/flutter/
-          PaintingBinding.instance!.imageCache!.clear();
-          PaintingBinding.instance!.imageCache!.clearLiveImages();
+          PaintingBinding.instance.imageCache.clear();
+          PaintingBinding.instance.imageCache.clearLiveImages();
         }
         Navigator.pop(context);
       }
