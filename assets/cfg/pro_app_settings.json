@@ -2,5 +2,6 @@
   "baseUrl": "https://api.poemhub.top",
   "appId": 1,
   "logUrl": "https://api.poemhub.top",
-  "authUrl": "https://api.poemhub.top"
+  "authUrl": "https://api.poemhub.top",
+  "shareUrl": "https://api.poemhub.top"
 }

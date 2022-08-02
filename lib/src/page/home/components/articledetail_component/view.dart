@@ -286,7 +286,7 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
                   icon: Icon(
                     EvaIcons.share,
                   ),
-                  onPressed: () => handleShare(id: item.id, title: item.title, postUrl: item.link),
+                  onPressed: () => handleShare(id: item.id, title: item.title, postUrl: item.link, context: context),
                 ),
               ],
             ),

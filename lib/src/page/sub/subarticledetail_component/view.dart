@@ -248,7 +248,7 @@ Widget buildView(SubArticleDetailState state, Dispatch dispatch, ViewService vie
                   icon: Icon(
                     EvaIcons.share,
                   ),
-                  onPressed: () => handleShare(id: item.id, title: item.title, postUrl: item.link),
+                  onPressed: () => handleShare(id: item.id, title: item.title, postUrl: item.link, context: context),
                 ),
               ],
             ),
