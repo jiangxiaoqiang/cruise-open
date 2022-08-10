@@ -10,7 +10,6 @@ import 'package:cruise/src/models/request/article/article_request.dart';
 import 'package:http/http.dart' as http;
 import 'package:wheel/wheel.dart' show AppLogHandler, GlobalConfig, RestApiError, RestClient;
 
-
 class Repo {
   static final _itemsCache = <int, Item>{};
   static final _itemsChannelCache = <int, Channel>{};
@@ -18,8 +17,8 @@ class Repo {
   final baseUrl = GlobalConfig.getBaseUrl();
 
   static Future<List<Item>> getArticles(ArticleRequest request) async {
-      List<Item> articles = await _getArticles(request);
-      return articles;
+    List<Item> articles = await _getArticles(request);
+    return articles;
   }
 
   static Future<List<Channel>> getChannels(ArticleRequest request) async {
@@ -67,7 +66,7 @@ class Repo {
     final typeQuery = _getStoryTypeQuery(articleRequest.storiesType);
     Map jsonMap = articleRequest.toMap();
     final response = await RestClient.postHttp("$typeQuery", jsonMap);
-    if(RestClient.respSuccess(response)){
+    if (RestClient.respSuccess(response)) {
       Map result = response.data["result"];
       if (result == null) {
         return List.empty();
@@ -92,7 +91,7 @@ class Repo {
     final typeQuery = _getStoryTypeQuery(articleRequest.storiesType);
     Map jsonMap = articleRequest.toMap();
     final response = await RestClient.postHttp("$typeQuery", jsonMap);
-    if(RestClient.respSuccess(response)){
+    if (RestClient.respSuccess(response)) {
       Map result = response.data["result"];
       if (result == null) {
         return List.empty();
@@ -113,12 +112,24 @@ class Repo {
     return List.empty();
   }
 
+  static Future<Item?> fetchArticleDetail(int id) async {
+    final response = await RestClient.getHttp("/post/article/detail?id=" + id.toString());
+    if (RestClient.respSuccess(response)) {
+      Map articleResult = response.data["result"];
+      String articleJson = JsonEncoder().convert(articleResult);
+      Item parseItem = Item.fromJson(articleJson);
+      return parseItem;
+    } else {
+      AppLogHandler.logError(RestApiError('Item $id failed to fetch.'), JsonEncoder().convert(response));
+    }
+  }
+
   static Future<Item?> fetchArticleItem(int id) async {
     if (_itemsCache.containsKey(id)) {
       return _itemsCache[id];
     } else {
       final response = await RestClient.getHttp("/post/article?id=" + id.toString());
-      if(RestClient.respSuccess(response)){
+      if (RestClient.respSuccess(response)) {
         Map articleResult = response.data["result"];
         String articleJson = JsonEncoder().convert(articleResult);
         Item parseItem = Item.fromJson(articleJson);
@@ -135,7 +146,7 @@ class Repo {
       return _itemsChannelCache[id];
     } else {
       final response = await RestClient.getHttp("/post/sub/source/detail/$id");
-      if(RestClient.respSuccess(response)){
+      if (RestClient.respSuccess(response)) {
         Map channelResult = response.data["result"];
         String jsonContent = JsonEncoder().convert(channelResult);
         Channel parseItem = Channel.fromJson(jsonContent);

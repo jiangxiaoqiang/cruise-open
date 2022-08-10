@@ -8,7 +8,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/style.dart';
-// import 'package:fluttertoast/fluttertoast.dart';
 import 'package:wheel/wheel.dart';
 
 import 'action.dart';
