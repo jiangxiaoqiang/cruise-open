@@ -2,7 +2,6 @@
 
 一款简洁的RSS(Really Simple Syndication)阅读器，简单无广告，碎片时间随手翻一翻。
 
-
 ## 为什么Cruise
 
 写Cruise是需要阅读自己感兴趣的内容。且看各大媒体推送的内容：
@@ -33,11 +32,11 @@
 
 ### 分支
 
-| 分支名称  | 备注     |      |
-| --------- | -------- | ---- |
-| main      | 主分支   |      |
-| develop   | 开发分支 |      |
-| feature/* | 特性分支 |      |
+| 分支名称      | 备注   |     |
+| --------- | ---- | --- |
+| main      | 主分支  |     |
+| develop   | 开发分支 |     |
+| feature/* | 特性分支 |     |
 
 ### 构建
 
@@ -51,14 +50,17 @@ export PUB_HOSTED_URL=https://pub.flutter-io.cn \
 
 如果使用fvm工具管理版本：
 
-
 ```bash
 export PUB_HOSTED_URL=https://pub.flutter-io.cn \
 && export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn \
 && ~/fvm/versions/2.10.3/bin/flutter run -v
 ```
 
+### 运行界面
 
+![Kiku](docs/snapshot/home.jpeg)
+![Kiku](docs/snapshot/sub.jpeg)
+![Kiku](docs/snapshot/user-center.jpeg)
 
 ### About rss
 

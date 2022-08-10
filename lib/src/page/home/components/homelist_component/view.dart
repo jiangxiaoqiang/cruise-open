@@ -5,6 +5,7 @@ import 'package:cruise/src/page/user/settings/cruisesetting/cruise_setting_page.
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:fish_redux/fish_redux.dart' as Redux;
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 
 import '../../../../widgets/app/global_controller.dart';
@@ -24,18 +25,18 @@ Widget buildView(HomeListState state, Redux.Dispatch dispatch, Redux.ViewService
 
   Widget nav(StoriesType currentStoriesType) {
     if (currentStoriesType == StoriesType.topStories) {
-      globalController.appBarTitle.value = "首页";
+      globalController.appBarTitle.value = AppLocalizations.of(viewService.context)!.cruiseNavigatorHome;
       return switchNavTab(StoriesType.topStories, "homelistdefault");
     } else if (currentStoriesType == StoriesType.channels) {
-      globalController.appBarTitle.value = "频道";
+      globalController.appBarTitle.value = AppLocalizations.of(viewService.context)!.cruiseNavigatorChannel;
       return switchNavTab(StoriesType.channels, "channellistdefault");
     } else if (currentStoriesType == StoriesType.subStories) {
-      globalController.appBarTitle.value = "订阅";
+      globalController.appBarTitle.value = AppLocalizations.of(viewService.context)!.cruiseNavigatorSubscribe;
       return switchNavTab(StoriesType.subStories, "sublistdefault");
     } else if (currentStoriesType == StoriesType.favStories) {
       return switchNavTab(StoriesType.favStories, "homelistdefault");
     } else if (currentStoriesType == StoriesType.profile) {
-      globalController.appBarTitle.value = "我的";
+      globalController.appBarTitle.value = AppLocalizations.of(viewService.context)!.cruiseNavigatorMine;
       return new CruiseSettingPage();
     } else if (currentStoriesType == StoriesType.originalStories) {
       return switchNavTab(StoriesType.originalStories, "homelistdefault");
