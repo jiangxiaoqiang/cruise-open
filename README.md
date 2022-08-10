@@ -58,9 +58,9 @@ export PUB_HOSTED_URL=https://pub.flutter-io.cn \
 
 ### 运行界面
 
-![Kiku](docs/snapshot/home.jpeg)
-![Kiku](docs/snapshot/sub.jpeg)
-![Kiku](docs/snapshot/user-center.jpeg)
+| ![Kiku](docs/snapshot/home.jpeg)        | ![Kiku](docs/snapshot/sub.jpeg) |
+| --------------------------------------- | --------------------------------------- |
+| ![Kiku](docs/snapshot/user-center.jpeg) |                                         |
 
 ### About rss
 
