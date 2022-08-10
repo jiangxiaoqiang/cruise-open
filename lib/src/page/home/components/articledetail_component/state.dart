@@ -19,7 +19,7 @@ class ArticleDetailConnector extends ConnOp<ArticlePgState, ArticleDetailState> 
   @override
   ArticleDetailState get(ArticlePgState? state) {
     ArticleDetailState articleDetailState = state!.articleDetailState.clone();
-    if (articleDetailState.article.content.isEmpty) {
+    if (articleDetailState.article.content.isEmpty || articleDetailState.article.id != state.article.id) {
       // when fetched article detail info
       // using the newest article detail info and do not copy article detail info from parent article page
       articleDetailState.article = state.article;
