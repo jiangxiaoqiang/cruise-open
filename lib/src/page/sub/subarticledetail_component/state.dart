@@ -15,12 +15,15 @@ class SubArticleDetailState implements Cloneable<SubArticleDetailState> {
   }
 }
 
-class SubArticleDetailConnector
-    extends ConnOp<SubArticlePgState, SubArticleDetailState> {
+class SubArticleDetailConnector extends ConnOp<SubArticlePgState, SubArticleDetailState> {
   @override
   SubArticleDetailState get(SubArticlePgState? state) {
     SubArticleDetailState articleDetailState = state!.subArticleDetailState.clone();
-    articleDetailState.article = state.article;
+    if (articleDetailState.article.content.isEmpty || articleDetailState.article.id != state.article.id) {
+      // when fetched article detail info
+      // using the newest article detail info and do not copy article detail info from parent article page
+      articleDetailState.article = state.article;
+    }
     return articleDetailState;
   }
 

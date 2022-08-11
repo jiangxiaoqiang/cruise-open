@@ -64,9 +64,10 @@ class SetPwdPage extends HookWidget {
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {
                                 submitting.value = true;
-                                AuthResult result = await Auth.setPwd(
+                                AuthResult result = await UserService.regUser(
                                   phone: phone,
                                   password: password.value,
+                                  verifyCode: '123456',
                                 );
 
                                 if (result.result == Result.error) {
@@ -76,7 +77,7 @@ class SetPwdPage extends HookWidget {
                                     ),
                                   );
                                 } else {
-                                  NavUtil.navHome(context);
+                                  NavUtil.navProfile(context);
                                 }
                                 submitting.value = false;
                               }
