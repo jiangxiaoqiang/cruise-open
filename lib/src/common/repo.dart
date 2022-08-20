@@ -89,8 +89,8 @@ class Repo {
 
   static Future<List<Item>> _getArticles(ArticleRequest articleRequest) async {
     final typeQuery = _getStoryTypeQuery(articleRequest.storiesType);
-    Map jsonMap = articleRequest.toMap();
-    final response = await RestClient.postHttp("$typeQuery", jsonMap);
+    Map<String, dynamic>? jsonMap = articleRequest.toMap();
+    final response = await RestClient.get("$typeQuery", queryParameters: jsonMap);
     if (RestClient.respSuccess(response)) {
       Map result = response.data["result"];
       if (result == null) {
