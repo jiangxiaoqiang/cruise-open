@@ -61,6 +61,9 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
       if (upvoteStatus.statusCode == "unupvote" && item.upvoteCount > 0) {
         dispatch(ArticleDetailActionCreator.onVote(UpvoteStatus.UNUPVOTE));
       }
+      if (upvoteStatus.statusCode == "downvote") {
+        dispatch(ArticleDetailActionCreator.onVote(UpvoteStatus.DOWNVOTE));
+      }
       ToastUtils.showToast(upvoteStatus.statusCode == "upvote" ? "点赞成功" : "取消点赞成功");
     }
   }
@@ -94,7 +97,7 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
   void touchUpvote(String action, UpvoteStatus upvoteStatus) async {
     bool isLoggedIn = await Auth.isLoggedIn();
     if (!isLoggedIn) {
-      popDialog("登录后可点赞，确定去登陆吗?");
+      popDialog("登录后可操作，确定去登陆吗?");
     } else {
       handleVoteImpl(upvoteStatus, action);
     }
@@ -277,6 +280,16 @@ Widget buildView(ArticleDetailState state, Dispatch dispatch, ViewService viewSe
                                   ),
                             ),
                           ),
+                          if (item.isUpvote == -1)
+                            IconButton(
+                              icon: Icon(Icons.thumb_down, color: Theme.of(context).primaryColor),
+                              onPressed: () => touchUpvote("undownvote", UpvoteStatus.UNDOWNVOTE),
+                            ),
+                          if (item.isUpvote != -1)
+                            IconButton(
+                              icon: Icon(Icons.thumb_down),
+                              onPressed: () => touchUpvote("downvote", UpvoteStatus.DOWNVOTE),
+                            ),
                         ],
                       ),
                     ),
