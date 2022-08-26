@@ -49,6 +49,9 @@ SubArticleDetailState _onVote(SubArticleDetailState state, Action action) {
     newState.article.isUpvote = 0;
     newState.article.upvoteCount = newState.article.upvoteCount - 1;
   }
+  if (voteType == UpvoteStatus.DOWNVOTE && newState.article.isUpvote != -1) {
+    newState.article.isUpvote = -1;
+  }
   return newState;
 }
 

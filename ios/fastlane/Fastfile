@@ -34,9 +34,9 @@ platform :ios do
         export_method: "ad-hoc"
     )
 
+    gym
     pgyer(
-        api_key: ENV['PGY_API_KEY'],
-        user_key: ENV['PGY_USER_KEY']
+        api_key: ENV['PGY_API_KEY']
     )
   end
 
@@ -68,9 +68,9 @@ platform :ios do
         export_method: "ad-hoc"
     )
 
+    gym
     pgyer(
-        api_key: ENV['PGY_API_KEY'],
-        user_key: ENV['PGY_USER_KEY']
+        api_key: ENV['PGY_API_KEY']
     )
   end
 

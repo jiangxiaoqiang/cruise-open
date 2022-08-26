@@ -60,6 +60,9 @@ Widget buildView(SubArticleDetailState state, Dispatch dispatch, ViewService vie
       if (upvoteStatus.statusCode == "unupvote" && item.upvoteCount > 0) {
         dispatch(SubArticleDetailActionCreator.onVote(UpvoteStatus.UNUPVOTE));
       }
+      if (upvoteStatus.statusCode == "downvote") {
+        dispatch(SubArticleDetailActionCreator.onVote(UpvoteStatus.DOWNVOTE));
+      }
       ToastUtils.showToast(upvoteStatus.statusCode == "upvote" ? "点赞成功" : "取消点赞成功");
     }
   }
@@ -239,6 +242,16 @@ Widget buildView(SubArticleDetailState state, Dispatch dispatch, ViewService vie
                                   ),
                             ),
                           ),
+                          if (item.isUpvote == -1)
+                            IconButton(
+                              icon: Icon(Icons.thumb_down, color: Theme.of(context).primaryColor),
+                              onPressed: () => touchUpvote("undownvote", UpvoteStatus.UNDOWNVOTE),
+                            ),
+                          if (item.isUpvote != -1)
+                            IconButton(
+                              icon: Icon(Icons.thumb_down),
+                              onPressed: () => touchUpvote("downvote", UpvoteStatus.DOWNVOTE),
+                            ),
                         ],
                       ),
                     ),
