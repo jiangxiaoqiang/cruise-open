@@ -30,7 +30,7 @@ jobs:
         run: |
           cd ./ios
           gem install cocoapods -v 1.11.3
-          gem install fastlane -v 2.206.2
+          gem install fastlane -v 2.209.1
           bundle install
       #
       #  pod repo update resolve problem: https://stackoverflow.com/questions/56055142/cocoapods-could-not-find-compatible-versions-for-pod-firebase-coreonly
