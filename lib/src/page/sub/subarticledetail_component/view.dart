@@ -222,12 +222,12 @@ Widget buildView(SubArticleDetailState state, Dispatch dispatch, ViewService vie
                       padding: const EdgeInsets.only(bottom: 0.0),
                       child: Row(
                         children: [
-                          if (item.isUpvote == 1)
+                          if (item.upvoteStatus == 1)
                             IconButton(
                               icon: Icon(Icons.thumb_up, color: Theme.of(context).primaryColor),
                               onPressed: () => touchUpvote("unupvote", UpvoteStatus.UNUPVOTE),
                             ),
-                          if (item.isUpvote != 1)
+                          if (item.upvoteStatus != 1)
                             IconButton(
                               icon: Icon(Icons.thumb_up),
                               onPressed: () => touchUpvote("upvote", UpvoteStatus.UPVOTE),
@@ -242,12 +242,12 @@ Widget buildView(SubArticleDetailState state, Dispatch dispatch, ViewService vie
                                   ),
                             ),
                           ),
-                          if (item.isUpvote == -1)
+                          if (item.upvoteStatus == -1)
                             IconButton(
                               icon: Icon(Icons.thumb_down, color: Theme.of(context).primaryColor),
                               onPressed: () => touchUpvote("undownvote", UpvoteStatus.UNDOWNVOTE),
                             ),
-                          if (item.isUpvote != -1)
+                          if (item.upvoteStatus != -1)
                             IconButton(
                               icon: Icon(Icons.thumb_down),
                               onPressed: () => touchUpvote("downvote", UpvoteStatus.DOWNVOTE),

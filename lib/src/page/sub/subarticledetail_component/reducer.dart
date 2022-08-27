@@ -43,14 +43,17 @@ SubArticleDetailState _onVote(SubArticleDetailState state, Action action) {
   UpvoteStatus voteType = action.payload as UpvoteStatus;
   if (voteType == UpvoteStatus.UPVOTE && newState.article.isUpvote != 1) {
     newState.article.isUpvote = 1;
+    newState.article.upvoteStatus = 1;
     newState.article.upvoteCount = newState.article.upvoteCount + 1;
   }
   if (voteType == UpvoteStatus.UNUPVOTE && newState.article.isUpvote != 0) {
     newState.article.isUpvote = 0;
+    newState.article.upvoteStatus = 0;
     newState.article.upvoteCount = newState.article.upvoteCount - 1;
   }
   if (voteType == UpvoteStatus.DOWNVOTE && newState.article.isUpvote != -1) {
     newState.article.isUpvote = -1;
+    newState.article.upvoteStatus = -1;
   }
   return newState;
 }
