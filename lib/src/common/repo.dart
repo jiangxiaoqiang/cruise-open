@@ -12,7 +12,7 @@ import 'package:wheel/wheel.dart' show AppLogHandler, GlobalConfig, RestApiError
 
 class Repo {
   static final _itemsCache = <int, Item>{};
-  static final _itemsChannelCache = <int, Channel>{};
+  static final itemsChannelCache = <int, Channel>{};
   static final _usersCache = <String, CruiseUser>{};
   final baseUrl = GlobalConfig.getBaseUrl();
 
@@ -142,20 +142,20 @@ class Repo {
   }
 
   static Future<Channel?> fetchChannelItem(int id) async {
-    if (_itemsChannelCache.containsKey(id)) {
-      return _itemsChannelCache[id];
+    if (itemsChannelCache.containsKey(id)) {
+      return itemsChannelCache[id];
     } else {
       final response = await RestClient.getHttp("/post/sub/source/detail/$id");
       if (RestClient.respSuccess(response)) {
         Map channelResult = response.data["result"];
         String jsonContent = JsonEncoder().convert(channelResult);
         Channel parseItem = Channel.fromJson(jsonContent);
-        _itemsChannelCache[id] = parseItem;
+        itemsChannelCache[id] = parseItem;
       } else {
         AppLogHandler.logError(RestApiError('Item $id failed to fetch.'), JsonEncoder().convert(response));
       }
     }
-    return _itemsChannelCache[id];
+    return itemsChannelCache[id];
   }
 
   static Future<CruiseUser?> fetchUser(String id) async {
