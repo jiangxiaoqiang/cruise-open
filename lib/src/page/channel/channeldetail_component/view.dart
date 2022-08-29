@@ -10,7 +10,6 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/style.dart';
 import 'package:wheel/wheel.dart';
 
-import '../../../common/repo.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -57,9 +56,6 @@ Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewSe
     if (result.result == Result.error) {
       ToastUtils.showToast("订阅失败");
     } else {
-      if (Repo.itemsChannelCache.containsKey(channelId)) {
-        Repo.itemsChannelCache.remove(channelId);
-      }
       isFav = subStatus.statusCode == "sub" ? 1 : 0;
       item.isFav = isFav;
       ToastUtils.showToast(subStatus.statusCode == "sub" ? "订阅成功" : "取消订阅成功");

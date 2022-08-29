@@ -12,7 +12,6 @@ import 'package:wheel/wheel.dart' show AppLogHandler, GlobalConfig, RestApiError
 
 class Repo {
   static final _itemsCache = <int, Item>{};
-  static final itemsChannelCache = <int, Channel>{};
   static final _usersCache = <String, CruiseUser>{};
   final baseUrl = GlobalConfig.getBaseUrl();
 
@@ -142,20 +141,16 @@ class Repo {
   }
 
   static Future<Channel?> fetchChannelItem(int id) async {
-    if (itemsChannelCache.containsKey(id)) {
-      return itemsChannelCache[id];
+    final response = await RestClient.getHttp("/post/sub/source/detail/$id");
+    if (RestClient.respSuccess(response)) {
+      Map channelResult = response.data["result"];
+      String jsonContent = JsonEncoder().convert(channelResult);
+      Channel parseItem = Channel.fromJson(jsonContent);
+      return parseItem;
     } else {
-      final response = await RestClient.getHttp("/post/sub/source/detail/$id");
-      if (RestClient.respSuccess(response)) {
-        Map channelResult = response.data["result"];
-        String jsonContent = JsonEncoder().convert(channelResult);
-        Channel parseItem = Channel.fromJson(jsonContent);
-        itemsChannelCache[id] = parseItem;
-      } else {
-        AppLogHandler.logError(RestApiError('Item $id failed to fetch.'), JsonEncoder().convert(response));
-      }
+      AppLogHandler.logError(RestApiError('Item $id failed to fetch.'), JsonEncoder().convert(response));
     }
-    return itemsChannelCache[id];
+    return null;
   }
 
   static Future<CruiseUser?> fetchUser(String id) async {
