@@ -60,24 +60,6 @@ class ArticleDetail extends StatelessWidget {
       }
     }
 
-    void handleVoteImpl(UpvoteStatus upvoteStatus, String action) async {
-      HttpResult result = (await ArticleAction.upvote(articleId: item.id.toString(), action: action))!;
-      if (result.result == Result.error) {
-        ToastUtils.showToast("点赞失败");
-      } else {
-        if (upvoteStatus.statusCode == "upvote") {
-          // dispatch(ArticleDetailActionCreator.onVote(UpvoteStatus.UPVOTE));
-        }
-        if (upvoteStatus.statusCode == "unupvote" && item.upvoteCount > 0) {
-          // dispatch(ArticleDetailActionCreator.onVote(UpvoteStatus.UNUPVOTE));
-        }
-        if (upvoteStatus.statusCode == "downvote") {
-          // dispatch(ArticleDetailActionCreator.onVote(UpvoteStatus.DOWNVOTE));
-        }
-        ToastUtils.showToast(upvoteStatus.statusCode == "upvote" ? "点赞成功" : "取消点赞成功");
-      }
-    }
-
     void navToChannelDetail() async {
       Channel channel = (await Repo.fetchChannelItem(int.parse(item.subSourceId)))!;
       var data = {'name': "originalstories", "channel": channel};
@@ -119,7 +101,7 @@ class ArticleDetail extends StatelessWidget {
       if (!isLoggedIn) {
         popDialog("登录后可操作，确定去登陆吗?");
       } else {
-        handleVoteImpl(upvoteStatus, action);
+        articleDetailController.handleVoteImpl(upvoteStatus, action, item);
       }
     }
 
@@ -132,13 +114,7 @@ class ArticleDetail extends StatelessWidget {
       if (result.result == Result.error) {
         ToastUtils.showToast(favStatus.statusCode == "fav" ? "添加收藏失败" : "取消收藏失败");
       } else {
-        if (favStatus.statusCode == "fav") {
-          //dispatch(ArticleDetailActionCreator.onFav(FavStatus.FAV));
-        }
-        if (favStatus.statusCode == "unfav" && item.favCount > 0) {
-          //dispatch(ArticleDetailActionCreator.onFav(FavStatus.UNFAV));
-        }
-        ToastUtils.showToast(favStatus.statusCode == "fav" ? "添加收藏成功" : "取消收藏成功");
+        articleDetailController.handleFavImpl(favStatus, action, item);
       }
     }
 
