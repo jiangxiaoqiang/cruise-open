@@ -2,6 +2,9 @@ import 'package:cruise/src/models/Channel.dart';
 import 'package:cruise/src/models/Item.dart';
 import 'package:fish_redux/fish_redux.dart';
 
+import '../../../models/api/sub_status.dart';
+import '../../home/components/articlelist_component/action.dart';
+
 //TODO replace with your own action
 enum ChannelDetailAction {
   action,
@@ -23,7 +26,10 @@ class ChannelDetailActionCreator {
     return Action(ChannelDetailAction.fetch_channel_article_update, payload: articles);
   }
 
-  static Action onSubscribe(Channel channel) {
+  static Action onSubscribe(Channel channel, SubStatus subStatus) {
+    if (subStatus.statusCode != "sub") {
+      ArticleListActionCreator.onRemoveArticlesByChannel(channel.id);
+    }
     return Action(ChannelDetailAction.subscribe, payload: channel);
   }
 }

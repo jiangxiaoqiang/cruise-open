@@ -112,15 +112,20 @@ class Repo {
   }
 
   static Future<Item?> fetchArticleDetail(int id) async {
+    if (_itemsCache.containsKey(id)) {
+      return _itemsCache[id];
+    }
     final response = await RestClient.getHttp("/post/article/detail?id=" + id.toString());
     if (RestClient.respSuccess(response)) {
       Map articleResult = response.data["result"];
       String articleJson = JsonEncoder().convert(articleResult);
       Item parseItem = Item.fromJson(articleJson);
+      _itemsCache.putIfAbsent(id, () => parseItem);
       return parseItem;
     } else {
       AppLogHandler.logError(RestApiError('Item $id failed to fetch.'), JsonEncoder().convert(response));
     }
+    return null;
   }
 
   static Future<Item?> fetchArticleItem(int id) async {

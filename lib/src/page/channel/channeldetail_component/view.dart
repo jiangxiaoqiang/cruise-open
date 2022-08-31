@@ -60,7 +60,7 @@ Widget buildView(ChannelDetailState state, Dispatch dispatch, ViewService viewSe
       item.isFav = isFav;
       ToastUtils.showToast(subStatus.statusCode == "sub" ? "订阅成功" : "取消订阅成功");
     }
-    dispatch(ChannelDetailActionCreator.onSubscribe(item));
+    dispatch(ChannelDetailActionCreator.onSubscribe(item, subStatus));
   }
 
   return RawGestureDetector(
