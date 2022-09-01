@@ -1,11 +1,14 @@
 import 'package:cruise/src/models/Item.dart';
 import 'package:cruise/src/models/enumn/stories_type.dart';
 import 'package:cruise/src/models/request/article/article_request.dart';
-import 'package:fish_redux/fish_redux.dart';
+import 'package:cruise/src/page/sub/subarticlelist_component/sub_article_list.dart';
+import 'package:fish_redux/fish_redux.dart' as FGet;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import '../subarticlelist_component/sub_article_list_controller.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -15,12 +18,12 @@ bool isDispatched = false;
 RefreshController _refreshController = RefreshController(initialRefresh: false);
 ScrollController scrollController = ScrollController();
 
-Widget buildView(SubListDefaultState state, Dispatch dispatch, ViewService viewService) {
+Widget buildView(SubListDefaultState state, FGet.Dispatch dispatch, FGet.ViewService viewService) {
   ArticleRequest articleRequest = state.articleRequest;
   articleRequest.storiesType = state.currentStoriesType;
   if (state.isScrollTop) {
     dispatch(SubHomeListDefaultActionCreator.onResumeScrollTop());
-    if(scrollController.hasClients) {
+    if (scrollController.hasClients) {
       scrollController.animateTo(.0, duration: Duration(milliseconds: 200), curve: Curves.ease);
     }
   }
@@ -51,6 +54,12 @@ Widget buildView(SubListDefaultState state, Dispatch dispatch, ViewService viewS
     _refreshController.refreshCompleted();
   }
 
+  Widget buildArticleList() {
+    final SubArticleListController articleListController = Get.put(SubArticleListController());
+    articleListController.articles = state.subArticleListState.articles;
+    return new SubArticleList();
+  }
+
   return Scaffold(
     body: SafeArea(
         top: false,
@@ -58,12 +67,12 @@ Widget buildView(SubListDefaultState state, Dispatch dispatch, ViewService viewS
         child: Builder(
           builder: (context) {
             if (state.subArticleListState.articles.length == 0) {
-              if(state.articleLoadingStatus == LoadingStatus.complete) {
+              if (state.articleLoadingStatus == LoadingStatus.complete) {
                 // when the article not fetched, show loading animation
                 return Center(child: Text("无内容"));
-              }else if(state.articleLoadingStatus == LoadingStatus.loading){
+              } else if (state.articleLoadingStatus == LoadingStatus.loading) {
                 return Center(child: CircularProgressIndicator());
-              }else{
+              } else {
                 return Center(child: Text("无内容"));
               }
             }
@@ -116,7 +125,7 @@ Widget buildView(SubListDefaultState state, Dispatch dispatch, ViewService viewS
                             if (state.subArticleListState.articles.length > 0)
                               SliverPadding(
                                 padding: const EdgeInsets.symmetric(vertical: 8.0),
-                                sliver: viewService.buildComponent("subarticlelist"),
+                                sliver: buildArticleList(),
                               )
                           ],
                         ))));
