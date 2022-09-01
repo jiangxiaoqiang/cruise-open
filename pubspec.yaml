@@ -51,7 +51,7 @@ dependencies:
   video_player: 2.3.0
 
 dependency_overrides:
-  flutter_secure_storage: 4.2.1
+  flutter_secure_storage: 6.0.0
 
 dev_dependencies:
   flutter_test:

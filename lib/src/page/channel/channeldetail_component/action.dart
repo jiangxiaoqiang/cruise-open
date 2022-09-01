@@ -28,9 +28,9 @@ class ChannelDetailActionCreator {
   }
 
   static FGet.Action onSubscribe(Channel channel, SubStatus subStatus) {
-    if (subStatus.statusCode != "unsub") {
+    if (subStatus.statusCode != "sub") {
       final SubArticleListController articleListController = Get.put(SubArticleListController());
-      articleListController.articles.removeWhere((element) => element.id == channel.id);
+      articleListController.removeArticles(channel.id);
     }
     return FGet.Action(ChannelDetailAction.subscribe, payload: channel);
   }
