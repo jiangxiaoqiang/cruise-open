@@ -2,6 +2,7 @@ import 'package:cruise/src/models/Item.dart';
 import 'package:cruise/src/models/enumn/stories_type.dart';
 import 'package:cruise/src/models/home_model.dart';
 import 'package:fish_redux/fish_redux.dart';
+
 import 'action.dart';
 import 'state.dart';
 
@@ -14,7 +15,7 @@ Reducer<HomeState>? buildReducer() {
 HomeState _onScrollTop(HomeState state, Action action) {
   final HomeState newState = state.clone();
   newState.homeListState.homeListDefaultState.isScrollTop = true;
-  newState.homeListState.subListDefaultState.isScrollTop = true;
+  // newState.homeListState.subListDefaultState.isScrollTop = true;
   newState.homeListState.channelListDefaultState.isScrollTop = true;
   return newState;
 }

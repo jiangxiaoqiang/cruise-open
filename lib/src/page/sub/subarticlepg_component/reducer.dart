@@ -15,7 +15,5 @@ Reducer<SubArticlePgState>? buildReducer() {
 SubArticlePgState _onSetDetailArticle(SubArticlePgState state, Action action) {
   final SubArticlePgState newState = state.clone();
   Item article = (action.payload as Item);
-  newState.subArticleDetailState.article = article;
-  newState.subArticleDetailState.scrollController = state.scrollControllers[article.id]!;
   return newState;
 }

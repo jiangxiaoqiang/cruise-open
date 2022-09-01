@@ -1,6 +1,7 @@
 import 'package:cruise/src/common/search.dart';
 import 'package:cruise/src/models/enumn/stories_type.dart';
 import 'package:cruise/src/page/channel/add_channel.dart';
+import 'package:cruise/src/page/sub/sublistdefault_component/sub_list_default.dart';
 import 'package:cruise/src/page/user/settings/cruisesetting/cruise_setting_page.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:fish_redux/fish_redux.dart' as Redux;
@@ -9,6 +10,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 
 import '../../../../widgets/app/global_controller.dart';
+import '../../../sub/sublistdefault_component/sub_list_default_controller.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -32,7 +34,9 @@ Widget buildView(HomeListState state, Redux.Dispatch dispatch, Redux.ViewService
       return switchNavTab(StoriesType.channels, "channellistdefault");
     } else if (currentStoriesType == StoriesType.subStories) {
       globalController.appBarTitle.value = AppLocalizations.of(viewService.context)!.cruiseNavigatorSubscribe;
-      return switchNavTab(StoriesType.subStories, "sublistdefault");
+      final SubListDefaultController subListDefaultController = Get.put(SubListDefaultController());
+      subListDefaultController.initArticles();
+      return SubListDefault();
     } else if (currentStoriesType == StoriesType.favStories) {
       return switchNavTab(StoriesType.favStories, "homelistdefault");
     } else if (currentStoriesType == StoriesType.profile) {

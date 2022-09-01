@@ -4,7 +4,7 @@ import 'package:cruise/src/models/request/article/article_request.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 import 'action.dart';
 import 'state.dart';
@@ -20,7 +20,7 @@ Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService view
   articleRequest.storiesType = state.currentStoriesType;
   if (state.isScrollTop) {
     dispatch(HomeListDefaultActionCreator.onResumeScrollTop());
-    if(scrollController.hasClients) {
+    if (scrollController.hasClients) {
       scrollController.animateTo(.0, duration: Duration(milliseconds: 200), curve: Curves.ease);
     }
   }
@@ -58,12 +58,12 @@ Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService view
         child: Builder(
           builder: (context) {
             if (state.articleListState.articles.length == 0) {
-              if(state.articleLoadingStatus == LoadingStatus.complete) {
+              if (state.articleLoadingStatus == LoadingStatus.complete) {
                 // when the article not fetched, show loading animation
                 return Center(child: Text("无内容"));
-              }else if(state.articleLoadingStatus == LoadingStatus.loading){
+              } else if (state.articleLoadingStatus == LoadingStatus.loading) {
                 return Center(child: CircularProgressIndicator());
-              }else{
+              } else {
                 return Center(child: Text("无内容"));
               }
             }

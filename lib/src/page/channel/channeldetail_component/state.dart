@@ -3,7 +3,6 @@ import 'package:cruise/src/models/enumn/stories_type.dart';
 import 'package:cruise/src/models/request/article/article_request.dart';
 import 'package:cruise/src/page/channel/channelpg_component/state.dart';
 import 'package:cruise/src/page/home/components/articlelist_component/state.dart';
-import 'package:cruise/src/page/sub/subarticlelist_component/state.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 class ChannelDetailState implements Cloneable<ChannelDetailState> {
@@ -11,7 +10,6 @@ class ChannelDetailState implements Cloneable<ChannelDetailState> {
   int isFav = 0;
   StoriesType? currentStoriesType;
   ArticleListState articleListState = ArticleListState();
-  SubArticleListState subArticleListState = SubArticleListState();
   ArticleRequest? articleRequest;
 
   @override
