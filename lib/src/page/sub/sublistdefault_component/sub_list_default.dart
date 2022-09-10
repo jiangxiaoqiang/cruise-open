@@ -52,7 +52,7 @@ class SubListDefault extends StatelessWidget {
 
           void _onRefreshLoadingNewestArticle() async {
             var fetchNewestReq = new ArticleRequest(offset: null, pageSize: 10, pageNum: 1, storiesType: controller.currentStoriesType);
-            //dispatch(SubHomeListDefaultActionCreator.onFetchNewestArticles(fetchNewestReq));
+            controller.fetchNewestArticles(fetchNewestReq);
             await Future.delayed(Duration(milliseconds: 1000));
             _refreshController.refreshCompleted();
           }

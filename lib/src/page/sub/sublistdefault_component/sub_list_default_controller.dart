@@ -40,4 +40,13 @@ class SubListDefaultController extends GetxController {
       update();
     }
   }
+
+  Future fetchNewestArticles(ArticleRequest newArticleRequest) async {
+    List<Item> newestArticles = await Repo.getArticles(newArticleRequest);
+    if (newestArticles.isNotEmpty) {
+      articles.clear();
+      articles.addAll(newestArticles);
+      update();
+    }
+  }
 }

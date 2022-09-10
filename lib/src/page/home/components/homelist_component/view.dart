@@ -36,6 +36,7 @@ Widget buildView(HomeListState state, Redux.Dispatch dispatch, Redux.ViewService
       globalController.appBarTitle.value = AppLocalizations.of(viewService.context)!.cruiseNavigatorSubscribe;
       final SubListDefaultController subListDefaultController = Get.put(SubListDefaultController());
       subListDefaultController.initArticles();
+      subListDefaultController.currentStoriesType = StoriesType.subStories;
       return SubListDefault();
     } else if (currentStoriesType == StoriesType.favStories) {
       return switchNavTab(StoriesType.favStories, "homelistdefault");

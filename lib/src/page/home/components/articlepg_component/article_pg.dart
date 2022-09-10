@@ -9,7 +9,7 @@ import '../articledetail_component/article_detail_controller.dart';
 import 'article_pg_controller.dart';
 
 class ArticlePg extends StatelessWidget {
-  Widget navDetail(Item article) {
+  Widget navDetail(Item article, ArticlePgController articlePgController) {
     final ArticleDetailController articleDetailController = Get.put(ArticleDetailController());
     articleDetailController.initArticle(int.parse(article.id));
     return new ArticleDetail();
@@ -41,7 +41,7 @@ class ArticlePg extends StatelessWidget {
                     key: PageStorageKey(item.id),
                     controller: scrollControllers[item.id.toString()],
                     slivers: [
-                      SliverToBoxAdapter(child: navDetail(item)),
+                      SliverToBoxAdapter(child: navDetail(item, controller)),
                       //CommentList(item: item),
                     ],
                   )),
