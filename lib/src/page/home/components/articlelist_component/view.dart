@@ -2,17 +2,20 @@ import 'package:animations/animations.dart';
 import 'package:cruise/src/common/helpers.dart';
 import 'package:cruise/src/common/view_manager.dart';
 import 'package:cruise/src/models/Item.dart';
-import 'package:cruise/src/page/home/components/articlelist_component/action.dart';
-import 'package:fish_redux/fish_redux.dart';
+import 'package:fish_redux/fish_redux.dart' as Redux;
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:get/get.dart';
 
+import '../articlepg_component/article_pg.dart';
+import '../articlepg_component/article_pg_controller.dart';
 import 'state.dart';
 
-Widget buildView(ArticleListState state, Dispatch dispatch, ViewService viewService) {
+Widget buildView(ArticleListState state, Redux.Dispatch dispatch, Redux.ViewService viewService) {
   Widget buildArticle(Item item) {
-    dispatch(ArticleListActionCreator.onSetDetailArticle(item));
-    return viewService.buildComponent("articlepg");
+    final ArticlePgController articlePgController = Get.put(ArticlePgController());
+    articlePgController.article = item;
+    return new ArticlePg();
   }
 
   final currentView = ViewManager.fromViewName("itemCard");
