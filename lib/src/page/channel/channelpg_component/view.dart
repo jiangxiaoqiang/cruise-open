@@ -1,22 +1,23 @@
 import 'package:cruise/src/common/repo.dart';
 import 'package:cruise/src/models/Channel.dart';
+import 'package:cruise/src/page/channel/channeldetail_component/channel_detail.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
-import 'package:fish_redux/fish_redux.dart';
+import 'package:fish_redux/fish_redux.dart' as FGet;
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../channel_page.dart';
-import 'action.dart';
+import '../channeldetail_component/channel_detail_controller.dart';
 import 'state.dart';
 
-Widget buildView(ChannelPgState state, Dispatch dispatch, ViewService viewService) {
+Widget buildView(ChannelPgState state, FGet.Dispatch dispatch, FGet.ViewService viewService) {
   Channel item = state.channel;
   BuildContext context = viewService.context;
 
   Widget navChannelDetail(Channel channel) {
-    if (state.channelDetailState.channel == null) {
-      dispatch(ChannelPgActionCreator.onSetDetailChannel(channel));
-    }
-    return viewService.buildComponent("channeldetail");
+    final ChannelDetailController articlePgController = Get.put(ChannelDetailController());
+    articlePgController.channel = item;
+    return new ChannelDetail();
   }
 
   return Scaffold(
