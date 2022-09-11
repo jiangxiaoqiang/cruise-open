@@ -24,7 +24,7 @@ class SubListDefault extends StatelessWidget {
         builder: (controller) {
           ArticleRequest articleRequest = controller.articleRequest;
           articleRequest.storiesType = controller.currentStoriesType;
-          if (controller.isScrollTop) {
+          if (controller.isScrollTop.value) {
             //dispatch(SubHomeListDefaultActionCreator.onResumeScrollTop());
             if (scrollController.hasClients) {
               scrollController.animateTo(.0, duration: Duration(milliseconds: 200), curve: Curves.ease);

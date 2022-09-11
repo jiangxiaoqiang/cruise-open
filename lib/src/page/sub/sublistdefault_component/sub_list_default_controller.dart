@@ -11,11 +11,16 @@ class SubListDefaultController extends GetxController {
   StoriesType lastStoriesType = StoriesType.topStories;
   LoadingStatus articleLoadingStatus = LoadingStatus.loading;
   List<Item> articles = List.empty(growable: true);
-  bool isScrollTop = false;
+  var isScrollTop = false.obs;
 
   @override
   void onInit() {
     super.onInit();
+  }
+
+  void updateScrollUp(bool newScrollTop) {
+    isScrollTop.value = newScrollTop;
+    update();
   }
 
   Future initArticles() async {
