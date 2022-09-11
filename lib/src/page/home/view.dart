@@ -16,13 +16,15 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
     homeModel.storiesType = state.storiesType;
     dispatch(HomeActionCreator.onSwitchNav(homeModel));
   }
+
+  void _onItemDoubleTapped() {
+    // if tap the same navigator menu
+    // navigate to the top of tab
+    dispatch(HomeActionCreator.onScrollTop());
+    return;
+  }
+
   void _onItemTapped(int index) {
-    if (index == state.selectIndex) {
-      // if tap the same navigator menu
-      // navigate to the top of tab
-      dispatch(HomeActionCreator.onScrollTop());
-      return;
-    }
     var homeModel = new HomeModel();
     if (index == MenuType.my.value) {
       homeModel.selectIndex = index;
@@ -44,18 +46,22 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
   }
 
   return Scaffold(
-    body: viewService.buildComponent("homelist"),
-    bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: AppLocalizations.of(context)!.cruiseNavigatorHome),
-          BottomNavigationBarItem(icon: Icon(Icons.subscriptions), label: AppLocalizations.of(context)!.cruiseNavigatorSubscribe),
-          BottomNavigationBarItem(icon: Icon(Icons.rss_feed), label: AppLocalizations.of(context)!.cruiseNavigatorChannel),
-          BottomNavigationBarItem(icon: Icon(Icons.school), label: AppLocalizations.of(context)!.cruiseNavigatorMine),
-        ],
-        currentIndex: state.selectIndex,
-        fixedColor: Theme.of(context).primaryColor,
-        onTap: _onItemTapped,
-        unselectedItemColor: Color(0xff666666),
-        type: BottomNavigationBarType.fixed),
-  );
+      body: viewService.buildComponent("homelist"),
+      bottomNavigationBar: GestureDetector(
+        onDoubleTap: () {
+          _onItemDoubleTapped();
+        },
+        child: BottomNavigationBar(
+            items: [
+              BottomNavigationBarItem(icon: Icon(Icons.home), label: AppLocalizations.of(context)!.cruiseNavigatorHome),
+              BottomNavigationBarItem(icon: Icon(Icons.subscriptions), label: AppLocalizations.of(context)!.cruiseNavigatorSubscribe),
+              BottomNavigationBarItem(icon: Icon(Icons.rss_feed), label: AppLocalizations.of(context)!.cruiseNavigatorChannel),
+              BottomNavigationBarItem(icon: Icon(Icons.school), label: AppLocalizations.of(context)!.cruiseNavigatorMine),
+            ],
+            currentIndex: state.selectIndex,
+            fixedColor: Theme.of(context).primaryColor,
+            onTap: _onItemTapped,
+            unselectedItemColor: Color(0xff666666),
+            type: BottomNavigationBarType.fixed),
+      ));
 }
