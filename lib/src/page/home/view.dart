@@ -52,14 +52,14 @@ Widget buildView(HomeState state, FGet.Dispatch dispatch, FGet.ViewService viewS
     bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
-              icon: InkWell(
+              icon: GestureDetector(
                   onDoubleTap: () {
                     _onItemDoubleTapped();
                   },
                   child: Icon(Icons.home)),
               label: AppLocalizations.of(context)!.cruiseNavigatorHome),
           BottomNavigationBarItem(
-              icon: InkWell(
+              icon: GestureDetector(
                   onDoubleTap: () {
                     final SubListDefaultController subListDefaultController = Get.put(SubListDefaultController());
                     subListDefaultController.updateScrollUp(true);
