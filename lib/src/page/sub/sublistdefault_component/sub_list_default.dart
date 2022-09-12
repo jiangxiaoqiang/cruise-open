@@ -70,10 +70,10 @@ class SubListDefault extends StatelessWidget {
                 child: Builder(
                   builder: (context) {
                     if (controller.articles.length == 0) {
-                      if (controller.articleLoadingStatus == LoadingStatus.complete) {
+                      if (controller.articleLoadingStatus.value == LoadingStatus.complete) {
                         // when the article not fetched, show loading animation
                         return Center(child: Text("无内容"));
-                      } else if (controller.articleLoadingStatus == LoadingStatus.loading) {
+                      } else if (controller.articleLoadingStatus.value == LoadingStatus.loading) {
                         return Center(child: CircularProgressIndicator());
                       } else {
                         return Center(child: Text("无内容"));

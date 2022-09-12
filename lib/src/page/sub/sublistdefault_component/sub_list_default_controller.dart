@@ -9,7 +9,7 @@ class SubListDefaultController extends GetxController {
   ArticleRequest articleRequest = new ArticleRequest(pageSize: 10, pageNum: 1, storiesType: StoriesType.topStories);
   StoriesType currentStoriesType = StoriesType.topStories;
   StoriesType lastStoriesType = StoriesType.topStories;
-  LoadingStatus articleLoadingStatus = LoadingStatus.loading;
+  var articleLoadingStatus = LoadingStatus.loading.obs;
   List<Item> articles = List.empty(growable: true);
   var isScrollTop = false.obs;
 
@@ -31,7 +31,8 @@ class SubListDefaultController extends GetxController {
     // 这里注意即使文章为空也要设置状态
     List<int> ids = articles.map((e) => int.parse(e.id)).toList();
     articles = fetchedArticles;
-    // ctx.dispatch(SubHomeListDefaultActionCreator.onSetArticleIds(ids, articles, articleRequest));
+    articleLoadingStatus.value = LoadingStatus.complete;
+    update();
   }
 
   Future loadingMoreArticles() async {
