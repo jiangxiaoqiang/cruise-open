@@ -16,7 +16,7 @@ Widget buildView(ChannelPgState state, FGet.Dispatch dispatch, FGet.ViewService 
 
   Widget navChannelDetail(Channel channel) {
     final ChannelDetailController articlePgController = Get.put(ChannelDetailController());
-    articlePgController.channel = item;
+    articlePgController.channel.value = item;
     return new ChannelDetail();
   }
 

@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 import 'package:wheel/wheel.dart';
 
 import '../../../common/channel_action.dart';
-import '../../../models/Channel.dart';
 import '../../../models/api/sub_status.dart';
 import '../../sub/subarticlelist_component/sub_article_list_controller.dart';
 import 'channel_detail_controller.dart';
@@ -26,7 +25,6 @@ class ChannelDetail extends StatelessWidget {
     return GetBuilder<ChannelDetailController>(
         init: ChannelDetailController(),
         builder: (controller) {
-          Channel item = controller.channel;
           int isFav = controller.isFav;
           Offset? _initialSwipeOffset;
           Offset? _finalSwipeOffset;
@@ -60,7 +58,7 @@ class ChannelDetail extends StatelessWidget {
               ToastUtils.showToast("订阅失败");
             } else {
               isFav = subStatus.statusCode == "sub" ? 1 : 0;
-              item.isFav = isFav;
+              controller.updateChannelFav(isFav);
               ToastUtils.showToast(subStatus.statusCode == "sub" ? "订阅成功" : "取消订阅成功");
             }
             if (subStatus.statusCode != "sub") {
@@ -100,7 +98,7 @@ class ChannelDetail extends StatelessWidget {
                           padding: const EdgeInsets.only(bottom: 8.0),
                           child: Container(
                             child: Text(
-                              item.subName == "" ? "" : item.subName,
+                              controller.channel.value.subName == "" ? "" : controller.channel.value.subName,
                               style: Theme.of(context).textTheme.headline5!.copyWith(
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -108,7 +106,7 @@ class ChannelDetail extends StatelessWidget {
                           ),
                         ),
                       )),
-                      if (item.isFav == 1)
+                      if (controller.channel.value.isFav == 1)
                         SliverToBoxAdapter(
                             child: Padding(
                           padding: const EdgeInsets.only(top: 8, bottom: 8.0, right: 1),
@@ -123,11 +121,11 @@ class ChannelDetail extends StatelessWidget {
                                   color: Theme.of(context).canvasColor,
                                 ),
                                 shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(5.0)),
-                                onPressed: () => touchSub(item.id.toString(), SubStatus.UNSUB),
+                                onPressed: () => touchSub(controller.channel.value.id.toString(), SubStatus.UNSUB),
                                 label: Text("已订阅"),
                               )),
                         )),
-                      if (item.isFav != 1)
+                      if (controller.channel.value.isFav != 1)
                         SliverToBoxAdapter(
                             child: Padding(
                           padding: const EdgeInsets.only(top: 8, bottom: 8.0, right: 1),
@@ -137,7 +135,7 @@ class ChannelDetail extends StatelessWidget {
                               child: RaisedButton(
                                 color: Theme.of(context).primaryColor,
                                 shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(5.0)),
-                                onPressed: () => touchSub(item.id.toString(), SubStatus.SUB),
+                                onPressed: () => touchSub(controller.channel.value.id.toString(), SubStatus.SUB),
                                 child: Text("订阅"),
                               )),
                         )),
@@ -153,7 +151,7 @@ class ChannelDetail extends StatelessWidget {
                           text: TextSpan(
                             children: <TextSpan>[
                               TextSpan(
-                                text: item.author,
+                                text: controller.channel.value.author,
                                 style: Theme.of(context).textTheme.caption!.copyWith(
                                       color: Theme.of(context).primaryColor,
                                     ),
@@ -162,10 +160,10 @@ class ChannelDetail extends StatelessWidget {
                           ),
                         ),
                       )),
-                      if (item.content != "")
+                      if (controller.channel.value.content != "")
                         SliverToBoxAdapter(
                             child: Html(
-                          data: item.content,
+                          data: controller.channel.value.content,
                           style: {
                             "body": Style(
                               fontSize: FontSize(19.0),
