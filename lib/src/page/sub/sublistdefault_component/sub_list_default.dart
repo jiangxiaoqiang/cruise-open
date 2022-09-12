@@ -89,6 +89,8 @@ class SubListDefault extends StatelessWidget {
                           return true;
                         },
                         child: CupertinoScrollbar(
+                            // https://stackoverflow.com/questions/69853729/flutter-the-scrollbars-scrollcontroller-has-no-scrollposition-attached
+                            controller: scrollController,
                             child: SmartRefresher(
                                 onRefresh: _onRefreshLoadingNewestArticle,
                                 enablePullUp: true,
