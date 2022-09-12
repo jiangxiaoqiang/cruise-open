@@ -27,6 +27,9 @@ Widget buildView(HomeState state, FGet.Dispatch dispatch, FGet.ViewService viewS
   }
 
   void _onItemTapped(int index) {
+    if (index == state.selectIndex) {
+      return;
+    }
     var homeModel = new HomeModel();
     if (index == MenuType.my.value) {
       homeModel.selectIndex = index;
@@ -40,7 +43,7 @@ Widget buildView(HomeState state, FGet.Dispatch dispatch, FGet.ViewService viewS
       homeModel.selectIndex = index;
       homeModel.storiesType = StoriesType.channels;
     }
-    if (index == MenuType.follow.value) {
+    if (index == MenuType.sub.value) {
       homeModel.selectIndex = index;
       homeModel.storiesType = StoriesType.subStories;
     }

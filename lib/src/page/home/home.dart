@@ -44,7 +44,7 @@ class HomeDefault extends StatelessWidget {
               homeModel.selectIndex = index;
               homeModel.storiesType = StoriesType.channels;
             }
-            if (index == MenuType.follow.value) {
+            if (index == MenuType.sub.value) {
               homeModel.selectIndex = index;
               homeModel.storiesType = StoriesType.subStories;
             }

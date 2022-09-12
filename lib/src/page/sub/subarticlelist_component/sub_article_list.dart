@@ -28,7 +28,7 @@ class SubArticleList extends StatelessWidget {
           return SliverList(
             delegate: SliverChildBuilderDelegate((context, index) {
               return Slidable(
-                key: Key("article-list-" + controller.articles[index].id.toString()),
+                key: Key("article-list-" + controller.articles.value[index].id.toString()),
                 closeOnScroll: true,
                 actionPane: SlidableScrollActionPane(),
                 actions: <Widget>[],
@@ -52,12 +52,12 @@ class SubArticleList extends StatelessWidget {
                     closedColor: Theme.of(context).scaffoldBackgroundColor,
                     openColor: Theme.of(context).scaffoldBackgroundColor,
                     transitionDuration: Duration(milliseconds: 500),
-                    closedBuilder: (BuildContext c, VoidCallback action) => getViewType(currentView, controller.articles[index]),
-                    openBuilder: (BuildContext c, VoidCallback action) => buildArticle(controller.articles[index]),
+                    closedBuilder: (BuildContext c, VoidCallback action) => getViewType(currentView, controller.articles.value[index]),
+                    openBuilder: (BuildContext c, VoidCallback action) => buildArticle(controller.articles.value[index]),
                   ),
                 ),
               );
-            }, childCount: controller.articles.length),
+            }, childCount: controller.articles.value.length),
           );
         });
   }
