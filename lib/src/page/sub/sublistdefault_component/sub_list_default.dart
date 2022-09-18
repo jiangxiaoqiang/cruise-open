@@ -25,9 +25,10 @@ class SubListDefault extends StatelessWidget {
           ArticleRequest articleRequest = controller.articleRequest;
           articleRequest.storiesType = controller.currentStoriesType;
           if (controller.isScrollTop.value) {
-            //dispatch(SubHomeListDefaultActionCreator.onResumeScrollTop());
             if (scrollController.hasClients) {
               scrollController.animateTo(.0, duration: Duration(milliseconds: 200), curve: Curves.ease);
+              // reset to the original value
+              controller.isScrollTop.value = false;
             }
           }
 
@@ -53,7 +54,6 @@ class SubListDefault extends StatelessWidget {
           void _onRefreshLoadingNewestArticle() async {
             var fetchNewestReq = new ArticleRequest(offset: null, pageSize: 10, pageNum: 1, storiesType: controller.currentStoriesType);
             controller.fetchNewestArticles(fetchNewestReq);
-            await Future.delayed(Duration(milliseconds: 1000));
             _refreshController.refreshCompleted();
           }
 

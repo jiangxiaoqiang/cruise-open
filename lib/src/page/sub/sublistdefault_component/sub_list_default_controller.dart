@@ -37,9 +37,6 @@ class SubListDefaultController extends GetxController {
 
   Future loadingMoreArticles() async {
     articleRequest.pageNum = articleRequest.pageNum + 1;
-    if (articleRequest.offset != null && articleRequest.offset! > 0) {
-      //articleRequest.offset = articleRequest.offset;
-    }
     List<Item> extraArticles = await Repo.getArticles(articleRequest);
     if (extraArticles.isNotEmpty) {
       articles.value.addAll(extraArticles);

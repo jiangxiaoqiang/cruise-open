@@ -92,9 +92,6 @@ class Repo {
     final response = await RestClient.get("$typeQuery", queryParameters: jsonMap);
     if (RestClient.respSuccess(response)) {
       Map result = response.data["result"];
-      if (result == null) {
-        return List.empty();
-      }
       List articles = result["list"];
       List<Item> items = List.empty(growable: true);
       articles.forEach((element) {
