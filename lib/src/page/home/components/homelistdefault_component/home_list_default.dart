@@ -1,3 +1,4 @@
+import 'package:cruise/src/common/repo.dart';
 import 'package:cruise/src/page/sub/subarticlelist_component/sub_article_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -25,14 +26,20 @@ class HomeListDefault extends StatelessWidget {
           ArticleRequest articleRequest = controller.articleRequest;
           articleRequest.storiesType = controller.currentStoriesType;
           if (controller.isScrollTop) {
-            //dispatch(HomeListDefaultActionCreator.onResumeScrollTop());
             if (scrollController.hasClients) {
               scrollController.animateTo(.0, duration: Duration(milliseconds: 200), curve: Curves.ease);
             }
           }
 
-          void _loadingMoreArticle() {
-            //dispatch(HomeListDefaultActionCreator.onLoadingMoreArticles(articleRequest));
+          Future<void> _loadingMoreArticle() async {
+            articleRequest.pageNum = articleRequest.pageNum + 1;
+            if (controller.articleRequest.offset != null && controller.articleRequest.offset! > 0) {
+              articleRequest.offset = controller.articleRequest.offset;
+            }
+            List<Item> articles = await Repo.getArticles(articleRequest);
+            if (articles.isNotEmpty) {
+              controller.appendArticles(articles);
+            }
             _refreshController.loadComplete();
           }
 

@@ -22,4 +22,9 @@ class HomeListDefaultController extends GetxController {
     articleLoadingStatus.value = LoadingStatus.complete;
     update();
   }
+
+  void appendArticles(List<Item> articlesNew) {
+    articles.addAll(articlesNew);
+    update();
+  }
 }

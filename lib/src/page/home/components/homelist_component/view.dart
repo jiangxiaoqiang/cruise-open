@@ -52,9 +52,15 @@ Widget buildView(HomeListState state, Redux.Dispatch dispatch, Redux.ViewService
       globalController.appBarTitle.value = AppLocalizations.of(viewService.context)!.cruiseNavigatorMine;
       return new CruiseSettingPage();
     } else if (currentStoriesType == StoriesType.originalStories) {
-      return switchNavTab(StoriesType.originalStories, "homelistdefault");
+      final HomeListDefaultController subListDefaultController = Get.put(HomeListDefaultController());
+      subListDefaultController.initArticles(StoriesType.originalStories);
+      subListDefaultController.currentStoriesType = StoriesType.originalStories;
+      return HomeListDefault();
     } else if (currentStoriesType == StoriesType.historyStories) {
-      return switchNavTab(StoriesType.historyStories, "homelistdefault");
+      final HomeListDefaultController subListDefaultController = Get.put(HomeListDefaultController());
+      subListDefaultController.initArticles(StoriesType.historyStories);
+      subListDefaultController.currentStoriesType = StoriesType.historyStories;
+      return HomeListDefault();
     }
     return Container();
   }
