@@ -12,4 +12,9 @@ class SubArticleListController extends GetxController {
     articles.value.removeWhere((element) => element.subSourceId == channelId);
     update();
   }
+
+  void removeArticlesById(String articleId) {
+    articles.value.removeWhere((element) => element.id == articleId);
+    update();
+  }
 }

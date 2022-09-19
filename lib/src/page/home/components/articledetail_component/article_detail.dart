@@ -16,6 +16,7 @@ import '../../../../models/Item.dart';
 import '../../../../models/api/fav_status.dart';
 import '../../../../models/api/upvote_status.dart';
 import '../../../channel/channelpg_component/page.dart';
+import '../../../sub/subarticlelist_component/sub_article_list_controller.dart';
 import 'article_detail_controller.dart';
 
 class ArticleDetail extends StatelessWidget {
@@ -115,6 +116,8 @@ class ArticleDetail extends StatelessWidget {
         ToastUtils.showToast(favStatus.statusCode == "fav" ? "添加收藏失败" : "取消收藏失败");
       } else {
         articleDetailController.handleFavImpl(favStatus, action, item);
+        final SubArticleListController articleListController = Get.put(SubArticleListController());
+        articleListController.removeArticlesById(item.id.toString());
       }
     }
 

@@ -11,6 +11,8 @@ import 'package:get/get.dart';
 
 import '../../../../widgets/app/global_controller.dart';
 import '../../../sub/sublistdefault_component/sub_list_default_controller.dart';
+import '../homelistdefault_component/home_list_default.dart';
+import '../homelistdefault_component/home_list_default_controller.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -39,7 +41,10 @@ Widget buildView(HomeListState state, Redux.Dispatch dispatch, Redux.ViewService
       subListDefaultController.currentStoriesType = StoriesType.subStories;
       return SubListDefault();
     } else if (currentStoriesType == StoriesType.favStories) {
-      return switchNavTab(StoriesType.favStories, "homelistdefault");
+      final HomeListDefaultController subListDefaultController = Get.put(HomeListDefaultController());
+      subListDefaultController.initArticles();
+      subListDefaultController.currentStoriesType = StoriesType.favStories;
+      return HomeListDefault();
     } else if (currentStoriesType == StoriesType.profile) {
       globalController.appBarTitle.value = AppLocalizations.of(viewService.context)!.cruiseNavigatorMine;
       return new CruiseSettingPage();

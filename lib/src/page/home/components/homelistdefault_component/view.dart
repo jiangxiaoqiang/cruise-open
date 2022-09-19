@@ -1,11 +1,14 @@
 import 'package:cruise/src/models/Item.dart';
 import 'package:cruise/src/models/enumn/stories_type.dart';
 import 'package:cruise/src/models/request/article/article_request.dart';
-import 'package:fish_redux/fish_redux.dart';
+import 'package:fish_redux/fish_redux.dart' as FGet;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
+import '../../../sub/subarticlelist_component/sub_article_list.dart';
+import '../../../sub/subarticlelist_component/sub_article_list_controller.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -15,7 +18,7 @@ bool isDispatched = false;
 RefreshController _refreshController = RefreshController(initialRefresh: false);
 ScrollController scrollController = ScrollController();
 
-Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService viewService) {
+Widget buildView(HomeListDefaultState state, FGet.Dispatch dispatch, FGet.ViewService viewService) {
   ArticleRequest articleRequest = state.articleRequest;
   articleRequest.storiesType = state.currentStoriesType;
   if (state.isScrollTop) {
@@ -49,6 +52,12 @@ Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService view
     dispatch(HomeListDefaultActionCreator.onFetchNewestArticles(fetchNewestReq));
     await Future.delayed(Duration(milliseconds: 1000));
     _refreshController.refreshCompleted();
+  }
+
+  Widget buildArticleList(List<Item> articles) {
+    final SubArticleListController articleListController = Get.put(SubArticleListController());
+    articleListController.articles.value = articles;
+    return new SubArticleList();
   }
 
   return Scaffold(
@@ -116,7 +125,7 @@ Widget buildView(HomeListDefaultState state, Dispatch dispatch, ViewService view
                             if (state.articleListState.articles.length > 0)
                               SliverPadding(
                                 padding: const EdgeInsets.symmetric(vertical: 8.0),
-                                sliver: viewService.buildComponent("articlelist"),
+                                sliver: buildArticleList(state.articleListState.articles),
                               )
                           ],
                         ))));
