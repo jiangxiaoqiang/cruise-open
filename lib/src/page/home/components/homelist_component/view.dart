@@ -30,7 +30,10 @@ Widget buildView(HomeListState state, Redux.Dispatch dispatch, Redux.ViewService
   Widget nav(StoriesType currentStoriesType) {
     if (currentStoriesType == StoriesType.topStories) {
       globalController.appBarTitle.value = AppLocalizations.of(viewService.context)!.cruiseNavigatorHome;
-      return switchNavTab(StoriesType.topStories, "homelistdefault");
+      final HomeListDefaultController subListDefaultController = Get.put(HomeListDefaultController());
+      subListDefaultController.initArticles(StoriesType.topStories);
+      subListDefaultController.currentStoriesType = StoriesType.topStories;
+      return HomeListDefault();
     } else if (currentStoriesType == StoriesType.channels) {
       globalController.appBarTitle.value = AppLocalizations.of(viewService.context)!.cruiseNavigatorChannel;
       return switchNavTab(StoriesType.channels, "channellistdefault");
@@ -42,7 +45,7 @@ Widget buildView(HomeListState state, Redux.Dispatch dispatch, Redux.ViewService
       return SubListDefault();
     } else if (currentStoriesType == StoriesType.favStories) {
       final HomeListDefaultController subListDefaultController = Get.put(HomeListDefaultController());
-      subListDefaultController.initArticles();
+      subListDefaultController.initArticles(StoriesType.favStories);
       subListDefaultController.currentStoriesType = StoriesType.favStories;
       return HomeListDefault();
     } else if (currentStoriesType == StoriesType.profile) {

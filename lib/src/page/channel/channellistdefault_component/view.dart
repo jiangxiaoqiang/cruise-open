@@ -48,7 +48,7 @@ Widget buildView(ChannelListDefaultState state, Dispatch dispatch, ViewService v
     _refreshController.loadComplete();
   }
 
-  void _autoPreloadMoreChannels(ScrollNotification? notification) {
+  void _autoPreloadMoreChannels(ScrollNotification notification) {
     if (notification is ScrollUpdateNotification) {
       ScrollMetrics metrics = notification.metrics;
       double buttonDistance = metrics.extentAfter;
@@ -80,11 +80,14 @@ Widget buildView(ChannelListDefaultState state, Dispatch dispatch, ViewService v
           }
           return NotificationListener(
               onNotification: (scrollNotification) {
+                if (scrollNotification is! ScrollNotification) {
+                  return false;
+                }
                 if (scrollNotification is ScrollUpdateNotification && scrollNotification.depth == 0) {
                   _onScroll(scrollNotification.metrics.pixels);
                 }
 
-                _autoPreloadMoreChannels(scrollNotification as ScrollNotification);
+                _autoPreloadMoreChannels(scrollNotification);
                 return true;
               },
               child: CupertinoScrollbar(

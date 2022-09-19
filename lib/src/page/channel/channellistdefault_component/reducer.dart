@@ -2,9 +2,9 @@ import 'dart:math';
 
 import 'package:cruise/src/models/Channel.dart';
 import 'package:cruise/src/models/Item.dart';
-import 'package:cruise/src/page/home/components/homelistdefault_component/action.dart';
 import 'package:fish_redux/fish_redux.dart';
 
+import '../../home/components/homelistdefault_component/action.dart';
 import 'action.dart';
 import 'state.dart';
 

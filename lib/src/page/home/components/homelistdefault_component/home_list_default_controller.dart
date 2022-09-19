@@ -11,12 +11,12 @@ class HomeListDefaultController extends GetxController {
   StoriesType lastStoriesType = StoriesType.topStories;
   var articleLoadingStatus = LoadingStatus.loading.obs;
   bool isScrollTop = false;
-  var articles = List.empty(growable: true).obs;
+  RxList<Item> articles = List<Item>.empty(growable: true).obs;
 
-  Future initArticles() async {
+  Future initArticles(StoriesType storiesType) async {
     articleRequest.pageNum = 1;
     articleRequest.offset = null;
-    articleRequest.storiesType = StoriesType.favStories;
+    articleRequest.storiesType = storiesType;
     List<Item> fetchedArticles = await Repo.getArticles(articleRequest);
     articles.value = fetchedArticles;
     articleLoadingStatus.value = LoadingStatus.complete;

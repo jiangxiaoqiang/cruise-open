@@ -7,6 +7,7 @@ import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import '../../../../models/Item.dart';
 import '../../../../models/enumn/stories_type.dart';
 import '../../../../models/request/article/article_request.dart';
+import '../../../sub/subarticlelist_component/sub_article_list_controller.dart';
 import 'home_list_default_controller.dart';
 
 const APPBAR_SCROLL_OFFSET = 100;
@@ -56,6 +57,12 @@ class HomeListDefault extends StatelessWidget {
             _refreshController.refreshCompleted();
           }
 
+          Widget buildArticleList(List<Item> articles) {
+            final SubArticleListController articleListController = Get.put(SubArticleListController());
+            articleListController.articles.value = articles;
+            return new SubArticleList();
+          }
+
           return Scaffold(
             body: SafeArea(
                 top: false,
@@ -82,6 +89,8 @@ class HomeListDefault extends StatelessWidget {
                           return true;
                         },
                         child: CupertinoScrollbar(
+                            // https://stackoverflow.com/questions/69853729/flutter-the-scrollbars-scrollcontroller-has-no-scrollposition-attached
+                            controller: scrollController,
                             child: SmartRefresher(
                                 onRefresh: _onRefreshLoadingNewestArticle,
                                 enablePullUp: true,
@@ -121,7 +130,7 @@ class HomeListDefault extends StatelessWidget {
                                     if (controller.articles.length > 0)
                                       SliverPadding(
                                         padding: const EdgeInsets.symmetric(vertical: 8.0),
-                                        sliver: new SubArticleList(),
+                                        sliver: buildArticleList(controller.articles.value),
                                       )
                                   ],
                                 ))));

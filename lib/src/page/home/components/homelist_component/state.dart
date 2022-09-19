@@ -1,6 +1,5 @@
 import 'package:cruise/src/models/enumn/stories_type.dart';
 import 'package:cruise/src/page/channel/channellistdefault_component/state.dart';
-import 'package:cruise/src/page/home/components/homelistdefault_component/state.dart';
 import 'package:cruise/src/page/user/discover/state.dart';
 import 'package:cruise/src/page/user/fav/state.dart';
 import 'package:cruise/src/page/user/history/state.dart';
@@ -10,14 +9,12 @@ import '../../state.dart';
 
 class HomeListState implements Cloneable<HomeListState> {
   StoriesType currentStoriesType = StoriesType.topStories;
-  HomeListDefaultState homeListDefaultState = HomeListDefaultState();
   ChannelListDefaultState channelListDefaultState = ChannelListDefaultState();
 
   @override
   HomeListState clone() {
     return HomeListState()
       ..currentStoriesType = this.currentStoriesType
-      ..homeListDefaultState = this.homeListDefaultState
       ..channelListDefaultState = this.channelListDefaultState;
   }
 }
