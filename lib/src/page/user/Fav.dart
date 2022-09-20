@@ -1,11 +1,10 @@
-import 'package:cruise/src/component/home_list.dart';
-import 'package:cruise/src/models/Item.dart';
 import 'package:cruise/src/models/enumn/stories_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-class Fav extends HookWidget {
+import '../home/components/homelist_component/home_list.dart';
 
+class Fav extends HookWidget {
   Fav({
     Key? key,
     required this.currentStoriesType,
@@ -15,11 +14,6 @@ class Fav extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    return Scaffold(
-      body: SafeArea(
-        child:HomeList(currentStoriesType: currentStoriesType,)
-      )
-    );
+    return Scaffold(body: SafeArea(child: HomeList()));
   }
 }

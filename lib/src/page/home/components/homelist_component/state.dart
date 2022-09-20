@@ -5,8 +5,6 @@ import 'package:cruise/src/page/user/fav/state.dart';
 import 'package:cruise/src/page/user/history/state.dart';
 import 'package:fish_redux/fish_redux.dart';
 
-import '../../state.dart';
-
 class HomeListState implements Cloneable<HomeListState> {
   StoriesType currentStoriesType = StoriesType.topStories;
   ChannelListDefaultState channelListDefaultState = ChannelListDefaultState();
@@ -16,19 +14,6 @@ class HomeListState implements Cloneable<HomeListState> {
     return HomeListState()
       ..currentStoriesType = this.currentStoriesType
       ..channelListDefaultState = this.channelListDefaultState;
-  }
-}
-
-class HomeListConnector extends ConnOp<HomeState, HomeListState> {
-  @override
-  HomeListState get(HomeState? state) {
-    HomeListState subState = state!.homeListState.clone();
-    return subState;
-  }
-
-  @override
-  void set(HomeState state, HomeListState subState) {
-    state.homeListState = subState;
   }
 }
 

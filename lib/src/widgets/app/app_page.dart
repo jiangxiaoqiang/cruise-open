@@ -1,4 +1,3 @@
-import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -6,9 +5,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:wheel/wheel.dart';
 
-import '../../common/config/cruise_global_constant.dart';
 import '../../common/theme.dart';
-import '../../common/utils/cruise_common_utils.dart';
+import '../../page/home/home.dart';
+import '../../page/home/home_controller.dart';
 import '../../page/login.dart';
 import 'global_controller.dart';
 
@@ -16,7 +15,11 @@ class AppPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final currentTheme = ThemeManager.fromThemeName("lightTheme");
-    final AbstractRoutes routes = CruiseCommonUtils.buildRoute();
+
+    Widget buildHomePage() {
+      final HomeController homeController = Get.put(HomeController());
+      return new HomeDefault();
+    }
 
     return GetBuilder<GlobalController>(
         init: GlobalController(),
@@ -48,12 +51,8 @@ class AppPage extends StatelessWidget {
               "login": (BuildContext context) => LoginPage(),
             },
 
-            home: routes.buildPage(HOME_PAGE_NAME, {"selectIndex": 0}),
-            onGenerateRoute: (RouteSettings settings) {
-              return MaterialPageRoute<Object>(builder: (BuildContext context) {
-                return routes.buildPage(settings.name!, settings.arguments);
-              });
-            },
+            home: buildHomePage(),
+            onGenerateRoute: (RouteSettings settings) {},
           );
         });
   }
