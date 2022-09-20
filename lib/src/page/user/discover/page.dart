@@ -1,5 +1,3 @@
-import 'package:cruise/src/page/home/components/homelist_component/component.dart';
-import 'package:cruise/src/page/home/components/homelist_component/state.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'effect.dart';
@@ -14,9 +12,7 @@ class DiscoverPage extends Page<DiscoverState, Map<String, dynamic>> {
           effect: buildEffect(),
           reducer: buildReducer(),
           view: buildView,
-          dependencies: Dependencies<DiscoverState>(adapter: null, slots: <String, Dependent<DiscoverState>>{
-            'homelist': DiscoverConnector() + HomeListComponent(),
-          }),
+          dependencies: Dependencies<DiscoverState>(adapter: null, slots: <String, Dependent<DiscoverState>>{}),
           middleware: <Middleware<DiscoverState>>[],
         );
 }

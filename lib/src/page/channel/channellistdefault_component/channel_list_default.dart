@@ -7,6 +7,8 @@ import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import '../../../models/Item.dart';
 import '../../../models/enumn/stories_type.dart';
 import '../../../models/request/article/article_request.dart';
+import '../channellist_component/channel_list.dart';
+import '../channellist_component/channel_list_controller.dart';
 import 'channel_list_default_controller.dart';
 
 const APPBAR_SCROLL_OFFSET = 100;
@@ -44,7 +46,9 @@ class ChannelListDefault extends StatelessWidget {
           }
 
           Widget navChannelPage() {
-            return Text("data"); //viewService.buildComponent("channellist");
+            final ChannelListController channelListController = Get.put(ChannelListController());
+            channelListController.channels.value = controller.channels.value;
+            return new ChannelList();
           }
 
           void _loadingMoreChannel() {

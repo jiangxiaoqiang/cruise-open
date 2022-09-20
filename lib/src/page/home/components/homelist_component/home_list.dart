@@ -35,8 +35,7 @@ class HomeList extends StatelessWidget {
             } else if (currentStoriesType == StoriesType.channels) {
               globalController.appBarTitle.value = AppLocalizations.of(context)!.cruiseNavigatorChannel;
               final ChannelListDefaultController subListDefaultController = Get.put(ChannelListDefaultController());
-              //subListDefaultController.initArticles();
-              //subListDefaultController.currentStoriesType = StoriesType.subStories;
+              subListDefaultController.init();
               return ChannelListDefault();
             } else if (currentStoriesType == StoriesType.subStories) {
               globalController.appBarTitle.value = AppLocalizations.of(context)!.cruiseNavigatorSubscribe;
