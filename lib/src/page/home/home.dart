@@ -6,8 +6,10 @@ import 'package:get/get.dart';
 import '../../models/enumn/stories_type.dart';
 import '../../models/home_model.dart';
 import '../../models/system_enumn.dart';
+import '../sub/sublistdefault_component/sub_list_default_controller.dart';
 import 'components/homelist_component/home_list.dart';
 import 'components/homelist_component/home_list_controller.dart';
+import 'components/homelistdefault_component/home_list_default_controller.dart';
 import 'home_controller.dart';
 
 class HomeDefault extends StatelessWidget {
@@ -26,6 +28,7 @@ class HomeDefault extends StatelessWidget {
           void _onItemDoubleTapped() {
             // if tap the same navigator menu
             // navigate to the top of tab
+
             return;
           }
 
@@ -57,9 +60,22 @@ class HomeDefault extends StatelessWidget {
                 },
                 child: BottomNavigationBar(
                     items: [
-                      BottomNavigationBarItem(icon: Icon(Icons.home), label: AppLocalizations.of(context)!.cruiseNavigatorHome),
                       BottomNavigationBarItem(
-                          icon: Icon(Icons.subscriptions), label: AppLocalizations.of(context)!.cruiseNavigatorSubscribe),
+                          icon: GestureDetector(
+                              onDoubleTap: () {
+                                final HomeListDefaultController subListDefaultController = Get.put(HomeListDefaultController());
+                                subListDefaultController.updateScroll(true);
+                              },
+                              child: Icon(Icons.home)),
+                          label: AppLocalizations.of(context)!.cruiseNavigatorHome),
+                      BottomNavigationBarItem(
+                          icon: GestureDetector(
+                              onDoubleTap: () {
+                                final SubListDefaultController subListDefaultController = Get.put(SubListDefaultController());
+                                subListDefaultController.updateScrollUp(true);
+                              },
+                              child: Icon(Icons.subscriptions)),
+                          label: AppLocalizations.of(context)!.cruiseNavigatorSubscribe),
                       BottomNavigationBarItem(icon: Icon(Icons.rss_feed), label: AppLocalizations.of(context)!.cruiseNavigatorChannel),
                       BottomNavigationBarItem(icon: Icon(Icons.school), label: AppLocalizations.of(context)!.cruiseNavigatorMine),
                     ],

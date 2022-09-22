@@ -10,7 +10,7 @@ class HomeListDefaultController extends GetxController {
   StoriesType currentStoriesType = StoriesType.topStories;
   StoriesType lastStoriesType = StoriesType.topStories;
   var articleLoadingStatus = LoadingStatus.loading.obs;
-  bool isScrollTop = false;
+  var isScrollTop = false.obs;
   RxList<Item> articles = List<Item>.empty(growable: true).obs;
 
   Future initArticles(StoriesType storiesType) async {
@@ -25,6 +25,11 @@ class HomeListDefaultController extends GetxController {
 
   void appendArticles(List<Item> articlesNew) {
     articles.addAll(articlesNew);
+    update();
+  }
+
+  void updateScroll(bool scrollToTop) {
+    isScrollTop.value = scrollToTop;
     update();
   }
 }
