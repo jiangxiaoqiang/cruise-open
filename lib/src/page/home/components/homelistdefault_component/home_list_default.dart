@@ -77,7 +77,7 @@ class HomeListDefault extends StatelessWidget {
                 bottom: false,
                 child: Builder(
                   builder: (context) {
-                    if (controller.articles.length == 0) {
+                    if (controller.articles.value.length == 0) {
                       if (controller.articleLoadingStatus == LoadingStatus.complete) {
                         // when the article not fetched, show loading animation
                         return Center(child: Text("无内容"));
@@ -138,7 +138,7 @@ class HomeListDefault extends StatelessWidget {
                                     if (controller.articles.length > 0)
                                       SliverPadding(
                                         padding: const EdgeInsets.symmetric(vertical: 8.0),
-                                        sliver: buildArticleList(controller.articles.value),
+                                        sliver: buildArticleList(controller.articles.value.values.toList()),
                                       )
                                   ],
                                 ))));
