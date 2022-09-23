@@ -4,7 +4,7 @@ import 'package:cruise/src/models/Channel.dart';
 import 'package:cruise/src/models/Item.dart';
 import 'package:fish_redux/fish_redux.dart';
 
-import '../../home/components/homelistdefault_component/action.dart';
+import '../../../models/article/article_payload.dart';
 import 'action.dart';
 import 'state.dart';
 
