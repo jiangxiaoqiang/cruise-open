@@ -26,6 +26,7 @@ class HomeListDefault extends StatelessWidget {
           ArticleRequest articleRequest = controller.articleRequest;
           articleRequest.storiesType = controller.currentStoriesType;
           if (controller.isScrollTop.value) {
+            controller.isScrollTop.value = false;
             if (scrollController.hasClients) {
               scrollController.animateTo(.0, duration: Duration(milliseconds: 200), curve: Curves.ease);
             }

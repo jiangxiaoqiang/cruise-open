@@ -53,38 +53,34 @@ class HomeDefault extends StatelessWidget {
           }
 
           return Scaffold(
-              body: new HomeList(),
-              bottomNavigationBar: GestureDetector(
-                onDoubleTap: () {
-                  _onItemDoubleTapped();
-                },
-                child: BottomNavigationBar(
-                    items: [
-                      BottomNavigationBarItem(
-                          icon: GestureDetector(
-                              onDoubleTap: () {
-                                final HomeListDefaultController subListDefaultController = Get.put(HomeListDefaultController());
-                                subListDefaultController.updateScroll(true);
-                              },
-                              child: Icon(Icons.home)),
-                          label: AppLocalizations.of(context)!.cruiseNavigatorHome),
-                      BottomNavigationBarItem(
-                          icon: GestureDetector(
-                              onDoubleTap: () {
-                                final SubListDefaultController subListDefaultController = Get.put(SubListDefaultController());
-                                subListDefaultController.updateScrollUp(true);
-                              },
-                              child: Icon(Icons.subscriptions)),
-                          label: AppLocalizations.of(context)!.cruiseNavigatorSubscribe),
-                      BottomNavigationBarItem(icon: Icon(Icons.rss_feed), label: AppLocalizations.of(context)!.cruiseNavigatorChannel),
-                      BottomNavigationBarItem(icon: Icon(Icons.school), label: AppLocalizations.of(context)!.cruiseNavigatorMine),
-                    ],
-                    currentIndex: controller.selectIndex.value,
-                    fixedColor: Theme.of(context).primaryColor,
-                    onTap: _onItemTapped,
-                    unselectedItemColor: Color(0xff666666),
-                    type: BottomNavigationBarType.fixed),
-              ));
+            body: new HomeList(),
+            bottomNavigationBar: BottomNavigationBar(
+                items: [
+                  BottomNavigationBarItem(
+                      icon: GestureDetector(
+                          onDoubleTap: () {
+                            final HomeListDefaultController subListDefaultController = Get.put(HomeListDefaultController());
+                            subListDefaultController.updateScroll(true);
+                          },
+                          child: Icon(Icons.home)),
+                      label: AppLocalizations.of(context)!.cruiseNavigatorHome),
+                  BottomNavigationBarItem(
+                      icon: GestureDetector(
+                          onDoubleTap: () {
+                            final SubListDefaultController subListDefaultController = Get.put(SubListDefaultController());
+                            subListDefaultController.updateScrollUp(true);
+                          },
+                          child: Icon(Icons.subscriptions)),
+                      label: AppLocalizations.of(context)!.cruiseNavigatorSubscribe),
+                  BottomNavigationBarItem(icon: Icon(Icons.rss_feed), label: AppLocalizations.of(context)!.cruiseNavigatorChannel),
+                  BottomNavigationBarItem(icon: Icon(Icons.school), label: AppLocalizations.of(context)!.cruiseNavigatorMine),
+                ],
+                currentIndex: controller.selectIndex.value,
+                fixedColor: Theme.of(context).primaryColor,
+                onTap: _onItemTapped,
+                unselectedItemColor: Color(0xff666666),
+                type: BottomNavigationBarType.fixed),
+          );
         });
   }
 }
