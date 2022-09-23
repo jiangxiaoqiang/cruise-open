@@ -1,3 +1,4 @@
+import 'package:cruise/src/page/channel/channelpg_component/channel_pg_controller.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ import '../../../../models/Channel.dart';
 import '../../../../models/Item.dart';
 import '../../../../models/api/fav_status.dart';
 import '../../../../models/api/upvote_status.dart';
-import '../../../channel/channelpg_component/page.dart';
+import '../../../channel/channelpg_component/channel_pg.dart';
 import '../../../sub/subarticlelist_component/sub_article_list_controller.dart';
 import 'article_detail_controller.dart';
 
@@ -63,12 +64,9 @@ class ArticleDetail extends StatelessWidget {
 
     void navToChannelDetail() async {
       Channel channel = (await Repo.fetchChannelItem(int.parse(item.subSourceId)))!;
-      var data = {'name': "originalstories", "channel": channel};
-      Widget page = ChannelpgPage().buildPage(data);
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => page),
-      );
+      final ChannelPgController articlePgController = Get.put(ChannelPgController());
+      articlePgController.channel.value = channel;
+      Get.to(ChannelPg());
     }
 
     void popDialog(String tips) {

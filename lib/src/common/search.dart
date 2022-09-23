@@ -4,17 +4,19 @@ import 'package:cruise/src/common/view_manager.dart';
 import 'package:cruise/src/models/Channel.dart';
 import 'package:cruise/src/models/channel_suggestion.dart';
 import 'package:cruise/src/models/request/channel/channel_request.dart';
-import 'package:cruise/src/page/channel/channelpg_component/page.dart';
-import 'package:fish_redux/fish_redux.dart';
+import 'package:fish_redux/fish_redux.dart' as FGet;
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:get/get.dart';
 
+import '../page/channel/channelpg_component/channel_pg.dart';
+import '../page/channel/channelpg_component/channel_pg_controller.dart';
 import 'channel_action.dart';
 
 class CustomSearchDelegate extends SearchDelegate {
-  ViewService? viewService;
+  FGet.ViewService? viewService;
 
-  CustomSearchDelegate(ViewService viewService) {
+  CustomSearchDelegate(FGet.ViewService viewService) {
     this.viewService = viewService;
   }
 
@@ -47,8 +49,9 @@ class CustomSearchDelegate extends SearchDelegate {
 
   Widget buildChannel(Channel channel, BuildContext context) {
     if (viewService != null) {
-      var data = {'name': "originalstories", "channel": channel};
-      return ChannelpgPage().buildPage(data);
+      final ChannelPgController articlePgController = Get.put(ChannelPgController());
+      articlePgController.channel.value = channel;
+      Get.to(ChannelPg());
     }
     return Container();
   }
@@ -70,7 +73,8 @@ class CustomSearchDelegate extends SearchDelegate {
                   closedColor: Theme.of(context).scaffoldBackgroundColor,
                   openColor: Theme.of(context).scaffoldBackgroundColor,
                   transitionDuration: Duration(milliseconds: 500),
-                  closedBuilder: (BuildContext c, VoidCallback action) => CruiseCommonUtils.getChannelViewType(currentView, channels[index]),
+                  closedBuilder: (BuildContext c, VoidCallback action) =>
+                      CruiseCommonUtils.getChannelViewType(currentView, channels[index]),
                   openBuilder: (BuildContext c, VoidCallback action) => buildChannel(channels[index], context)),
             ),
           );

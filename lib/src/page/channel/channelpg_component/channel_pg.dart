@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 
 import '../../../common/repo.dart';
 import '../../../models/Channel.dart';
-import '../../channel_page.dart';
 import '../channeldetail_component/channel_detail.dart';
 import '../channeldetail_component/channel_detail_controller.dart';
 import 'channel_pg_controller.dart';
@@ -16,12 +15,18 @@ class ChannelPg extends StatelessWidget {
     return GetBuilder<ChannelPgController>(
         init: ChannelPgController(),
         builder: (controller) {
-          Channel item = controller.channel;
+          Channel item = controller.channel.value;
 
           Widget navChannelDetail(Channel channel) {
             final ChannelDetailController articlePgController = Get.put(ChannelDetailController());
             articlePgController.channel.value = item;
             return new ChannelDetail();
+          }
+
+          void navChannelPg(Channel channel) {
+            final ChannelPgController articlePgController = Get.put(ChannelPgController());
+            articlePgController.channel.value = channel;
+            Get.to(ChannelPg());
           }
 
           return Scaffold(
@@ -34,10 +39,7 @@ class ChannelPg extends StatelessWidget {
                     icon: Icon(EvaIcons.cornerLeftUp),
                     onPressed: () async {
                       Channel parent = (await Repo.fetchChannelItem(item.parent))!;
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => ChannelPage(item: parent)),
-                      );
+                      navChannelPg(parent);
                     },
                   ),
               ],
