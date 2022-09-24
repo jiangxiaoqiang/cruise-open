@@ -4,7 +4,6 @@ import 'package:cruise/src/common/view_manager.dart';
 import 'package:cruise/src/models/Channel.dart';
 import 'package:cruise/src/models/channel_suggestion.dart';
 import 'package:cruise/src/models/request/channel/channel_request.dart';
-import 'package:fish_redux/fish_redux.dart' as FGet;
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
@@ -14,11 +13,7 @@ import '../page/channel/channelpg_component/channel_pg_controller.dart';
 import 'channel_action.dart';
 
 class CustomSearchDelegate extends SearchDelegate {
-  FGet.ViewService? viewService;
-
-  CustomSearchDelegate(FGet.ViewService viewService) {
-    this.viewService = viewService;
-  }
+  CustomSearchDelegate() {}
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -48,11 +43,9 @@ class CustomSearchDelegate extends SearchDelegate {
   }
 
   Widget buildChannel(Channel channel, BuildContext context) {
-    if (viewService != null) {
-      final ChannelPgController articlePgController = Get.put(ChannelPgController());
-      articlePgController.channel.value = channel;
-      Get.to(ChannelPg());
-    }
+    final ChannelPgController articlePgController = Get.put(ChannelPgController());
+    articlePgController.channel.value = channel;
+    Get.to(ChannelPg());
     return Container();
   }
 
