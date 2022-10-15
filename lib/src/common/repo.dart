@@ -151,6 +151,13 @@ class Repo {
       Map channelResult = response.data["result"];
       String jsonContent = JsonEncoder().convert(channelResult);
       Channel parseItem = Channel.fromJson(jsonContent);
+      List<dynamic> it = channelResult["articleDTOList"];
+      List<Item> items = List.empty(growable: true);
+      it.forEach((element) {
+        Item localItem = Item.fromMap(element);
+        items.add(localItem);
+      });
+      parseItem.articleDTOList = items;
       return parseItem;
     } else {
       AppLogHandler.logError(RestApiError('Item $id failed to fetch.'), JsonEncoder().convert(response));

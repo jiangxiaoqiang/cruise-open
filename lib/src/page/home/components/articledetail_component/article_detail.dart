@@ -63,10 +63,12 @@ class ArticleDetail extends StatelessWidget {
     }
 
     void navToChannelDetail() async {
-      Channel channel = (await Repo.fetchChannelItem(int.parse(item.subSourceId)))!;
-      final ChannelPgController articlePgController = Get.put(ChannelPgController());
-      articlePgController.channel.value = channel;
-      Get.to(ChannelPg());
+      if (int.parse(item.subSourceId) > 0) {
+        Channel channel = (await Repo.fetchChannelItem(int.parse(item.subSourceId)))!;
+        final ChannelPgController articlePgController = Get.put(ChannelPgController());
+        articlePgController.channel.value = channel;
+        Get.to(ChannelPg());
+      }
     }
 
     void popDialog(String tips) {

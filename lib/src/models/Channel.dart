@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cruise/src/common/history.dart';
+import 'package:cruise/src/models/Item.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class Channel {
@@ -25,7 +26,8 @@ class Channel {
       this.isFav = 0,
       this.intro = "",
       this.favIconUrl = "",
-      this.localIconUrl = ""});
+      this.localIconUrl = "",
+      this.articleDTOList});
 
   int depth;
   String author;
@@ -48,6 +50,7 @@ class Channel {
   String intro;
   String favIconUrl;
   String localIconUrl;
+  List<Item>? articleDTOList;
 
   factory Channel.fromJson(String str) => Channel.fromMap(json.decode(str));
 
@@ -58,21 +61,20 @@ class Channel {
   String get ago => timeago.format(DateTime.fromMillisecondsSinceEpoch(pubTime));
 
   factory Channel.fromMap(Map<String, dynamic> json) => Channel(
-        id: json["id"],
-        isFav: json["isFav"] == null ? 0 : json["isFav"],
-        author: json["author"] == null ? "" : json["author"],
-        deleted: json["deleted"] == null ? false : json["deleted"],
-        content: json["content"] == null ? "" : json["content"],
-        dead: json["dead"] == null ? false : json["dead"],
-        pubTime: json["pubTime"] == null ? 0 : json["pubTime"],
-        title: json["title"] == null ? "" : json["title"],
-        subName: json["subName"] == null ? "" : json["subName"],
-        subUrl: json["subUrl"] == null ? "" : json["subUrl"],
-        intro: json["intro"] == null ? "" : json["intro"],
-        favIconUrl: json["favIconUrl"] == null ? "" : json["favIconUrl"],
-        localIconUrl: json["localIconUrl"] == null ? "" : json["localIconUrl"],
-        iconData: json["iconData"] == null ? "" : json["iconData"],
-      );
+      id: json["id"],
+      isFav: json["isFav"] == null ? 0 : json["isFav"],
+      author: json["author"] == null ? "" : json["author"],
+      deleted: json["deleted"] == null ? false : json["deleted"],
+      content: json["content"] == null ? "" : json["content"],
+      dead: json["dead"] == null ? false : json["dead"],
+      pubTime: json["pubTime"] == null ? 0 : json["pubTime"],
+      title: json["title"] == null ? "" : json["title"],
+      subName: json["subName"] == null ? "" : json["subName"],
+      subUrl: json["subUrl"] == null ? "" : json["subUrl"],
+      intro: json["intro"] == null ? "" : json["intro"],
+      favIconUrl: json["favIconUrl"] == null ? "" : json["favIconUrl"],
+      localIconUrl: json["localIconUrl"] == null ? "" : json["localIconUrl"],
+      iconData: json["iconData"] == null ? "" : json["iconData"]);
 
   Map<String, dynamic> toMap() => {
         "id": id,

@@ -22,6 +22,9 @@ class ChannelDetailController extends GetxController {
     Channel? channelResponse = await Repo.fetchChannelItem(channelId);
     if (channelResponse != null) {
       channel.value = channelResponse;
+      if (channelResponse.articleDTOList != null) {
+        articles.value = channelResponse.articleDTOList!;
+      }
       update();
     }
   }
