@@ -20,6 +20,7 @@ class ChannelPg extends StatelessWidget {
           Widget navChannelDetail(Channel channel) {
             final ChannelDetailController articlePgController = Get.put(ChannelDetailController());
             articlePgController.channel.value = item;
+            articlePgController.getChannelArticles(int.parse(item.id));
             return new ChannelDetail();
           }
 

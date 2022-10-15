@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 
+import '../../../common/repo.dart';
 import '../../../models/Channel.dart';
+import '../../../models/Item.dart';
 import '../../../models/enumn/stories_type.dart';
 import '../../../models/request/article/article_request.dart';
 
@@ -9,10 +11,18 @@ class ChannelDetailController extends GetxController {
   int isFav = 0;
   StoriesType? currentStoriesType;
   ArticleRequest? articleRequest;
-  var articles = List.empty(growable: true);
+  RxList<Item> articles = List<Item>.empty(growable: true).obs;
 
   void updateChannelFav(int isFav) {
     channel.value.isFav = isFav;
     update();
+  }
+
+  Future<void> getChannelArticles(int channelId) async {
+    Channel? channelResponse = await Repo.fetchChannelItem(channelId);
+    if (channelResponse != null) {
+      channel.value = channelResponse;
+      update();
+    }
   }
 }

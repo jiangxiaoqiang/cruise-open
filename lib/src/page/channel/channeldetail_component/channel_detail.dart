@@ -67,6 +67,12 @@ class ChannelDetail extends StatelessWidget {
             }
           }
 
+          Widget navSubArticleList() {
+            final SubArticleListController articleDetailController = Get.put(SubArticleListController());
+            articleDetailController.articles.value = controller.articles;
+            return new SubArticleList();
+          }
+
           return RawGestureDetector(
               gestures: {
                 AllowMultipleHorizontalDragGestureRecognizer:
@@ -174,7 +180,7 @@ class ChannelDetail extends StatelessWidget {
                       if (controller.articles.length > 0)
                         SliverPadding(
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          sliver: new SubArticleList(),
+                          sliver: navSubArticleList(),
                         )
                       else
                         SliverToBoxAdapter(child: Center(child: CircularProgressIndicator()))

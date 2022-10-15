@@ -4,29 +4,28 @@ import 'package:cruise/src/common/history.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class Channel {
-  Channel({
-    this.depth = 0,
-    this.author = "Unknown",
-    this.deleted = false,
-    this.content = "",
-    this.dead = false,
-    this.poll = 0,
-    this.parent = 0,
-    this.parts,
-    this.descendants,
-    this.id = "0",
-    this.kids,
-    this.score = 0,
-    this.iconData = "",
-    this.pubTime = 0,
-    this.title = "Unknown",
-    this.subName = "Unknown",
-    this.subUrl = "",
-    this.isFav = 0,
-    this.intro = "",
-    this.favIconUrl="",
-    this.localIconUrl=""
-  });
+  Channel(
+      {this.depth = 0,
+      this.author = "Unknown",
+      this.deleted = false,
+      this.content = "",
+      this.dead = false,
+      this.poll = 0,
+      this.parent = 0,
+      this.parts,
+      this.descendants,
+      this.id = "0",
+      this.kids,
+      this.score = 0,
+      this.iconData = "",
+      this.pubTime = 0,
+      this.title = "Unknown",
+      this.subName = "Unknown",
+      this.subUrl = "",
+      this.isFav = 0,
+      this.intro = "",
+      this.favIconUrl = "",
+      this.localIconUrl = ""});
 
   int depth;
   String author;
@@ -65,12 +64,6 @@ class Channel {
         deleted: json["deleted"] == null ? false : json["deleted"],
         content: json["content"] == null ? "" : json["content"],
         dead: json["dead"] == null ? false : json["dead"],
-        poll: json["poll"] == null ? null : json["poll"],
-        parent: json["parent"] == null ? null : json["parent"],
-        parts: json["parts"] == null ? [] : List<int>.from(json["parts"].map((x) => x)),
-        descendants: json["descendants"] == null ? 0 : json["descendants"],
-        kids: json["kids"] == null ? [] : List<int>.from(json["kids"].map((x) => x)),
-        score: json["score"] == null ? 0 : json["score"],
         pubTime: json["pubTime"] == null ? 0 : json["pubTime"],
         title: json["title"] == null ? "" : json["title"],
         subName: json["subName"] == null ? "" : json["subName"],

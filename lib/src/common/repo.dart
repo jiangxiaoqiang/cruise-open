@@ -143,6 +143,9 @@ class Repo {
   }
 
   static Future<Channel?> fetchChannelItem(int id) async {
+    if (id <= 0) {
+      return null;
+    }
     final response = await RestClient.getHttp("/post/sub/source/detail/$id");
     if (RestClient.respSuccess(response)) {
       Map channelResult = response.data["result"];

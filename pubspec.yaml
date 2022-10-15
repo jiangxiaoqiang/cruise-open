@@ -45,7 +45,7 @@ dependencies:
   wheel:
     git:
       url: https://github.com/RedDwarfTech/wheel.git
-      ref: main
+      ref: b2589b45d582825d1628209c263af9ce17514f00
   flutter_html: 3.0.0-alpha.5
   video_player: 2.3.0
 
