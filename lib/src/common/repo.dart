@@ -74,7 +74,7 @@ class Repo {
       List<Channel> items = List.empty(growable: true);
       channels.forEach((element) {
         if (element != null) {
-          HashMap<String, Object> map = HashMap.from(element);
+          HashMap<String, Object?> map = HashMap.from(element);
           Channel item = Channel.fromMap(map);
           items.add(item);
         } else {
