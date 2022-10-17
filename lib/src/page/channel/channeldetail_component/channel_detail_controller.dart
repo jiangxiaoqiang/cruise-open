@@ -11,7 +11,7 @@ class ChannelDetailController extends GetxController {
   int isFav = 0;
   StoriesType? currentStoriesType;
   ArticleRequest? articleRequest;
-  RxList<Item> articles = List<Item>.empty(growable: true).obs;
+  List<Item> articles = List<Item>.empty(growable: true);
 
   void updateChannelFav(int isFav) {
     channel.value.isFav = isFav;
@@ -23,7 +23,7 @@ class ChannelDetailController extends GetxController {
     if (channelResponse != null) {
       channel.value = channelResponse;
       if (channelResponse.articleDTOList != null) {
-        articles.value = channelResponse.articleDTOList!;
+        articles = channelResponse.articleDTOList!;
       }
       update();
     }

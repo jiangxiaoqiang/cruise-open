@@ -45,7 +45,7 @@ class ArticleDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Item item = articleDetailController.article.value;
+    Item item = articleDetailController.article;
 
     void _onHorizontalDragEnd(DragEndDetails details) {
       if (_initialSwipeOffset != null) {
@@ -282,7 +282,7 @@ class ArticleDetail extends StatelessWidget {
                 color: Theme.of(context).scaffoldBackgroundColor,
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: buildListView(controller.article.value, context),
+                  child: buildListView(controller.article, context),
                 ),
               ));
         });

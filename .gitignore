@@ -22,6 +22,7 @@ doc/api/
 .DS_Store
 .fvm
 .vscode
+.fleet
 
 .flutter-plugins
 .flutter-plugins-dependencies

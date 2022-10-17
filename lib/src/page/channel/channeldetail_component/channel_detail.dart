@@ -53,7 +53,6 @@ class ChannelDetail extends StatelessWidget {
 
           void touchSub(String channelId, SubStatus subStatus) async {
             HttpResult result = await ChannelAction.sub(channelId: channelId, subStatus: subStatus);
-
             if (result.result == Result.error) {
               ToastUtils.showToast("订阅失败");
             } else {
