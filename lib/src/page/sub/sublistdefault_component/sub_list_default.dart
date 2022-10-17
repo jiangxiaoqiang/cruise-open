@@ -59,7 +59,7 @@ class SubListDefault extends StatelessWidget {
 
           Widget buildArticleList() {
             final SubArticleListController articleListController = Get.put(SubArticleListController());
-            articleListController.articles.value = controller.articles.value;
+            articleListController.subArticles = controller.articles.value;
             return new SubArticleList();
           }
 

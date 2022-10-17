@@ -67,7 +67,7 @@ class HomeListDefault extends StatelessWidget {
 
           Widget buildArticleList(List<Item> articles) {
             final SubArticleListController articleListController = Get.put(SubArticleListController());
-            articleListController.articles.value = articles;
+            articleListController.subArticles = articles;
             return new SubArticleList();
           }
 

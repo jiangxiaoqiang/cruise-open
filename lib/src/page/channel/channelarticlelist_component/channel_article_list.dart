@@ -1,6 +1,5 @@
 import 'package:animations/animations.dart';
 import 'package:cruise/src/page/home/components/articlepg_component/article_pg_controller.dart';
-import 'package:cruise/src/page/sub/subarticlelist_component/sub_article_list_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -10,8 +9,9 @@ import '../../../common/helpers.dart';
 import '../../../common/view_manager.dart';
 import '../../../models/Item.dart';
 import '../../home/components/articlepg_component/article_pg.dart';
+import 'channel_article_list_controller.dart';
 
-class SubArticleList extends StatelessWidget {
+class ChannelArticleList extends StatelessWidget {
   Widget buildArticle(Item item) {
     final ArticlePgController articlePgController = Get.put(ArticlePgController());
     articlePgController.article = item;
@@ -22,8 +22,8 @@ class SubArticleList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SubArticleListController>(
-        init: SubArticleListController(),
+    return GetBuilder<ChannelArticleListController>(
+        init: ChannelArticleListController(),
         builder: (controller) {
           return SliverList(
             delegate: SliverChildBuilderDelegate((context, index) {

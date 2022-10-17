@@ -7,23 +7,23 @@ import '../../../models/enumn/stories_type.dart';
 import '../../../models/request/article/article_request.dart';
 
 class ChannelDetailController extends GetxController {
-  var channel = Channel().obs;
+  var channel = Channel();
   int isFav = 0;
   StoriesType? currentStoriesType;
   ArticleRequest? articleRequest;
-  List<Item> articles = List<Item>.empty(growable: true);
+  List<Item> channelDetailArticles = List<Item>.empty(growable: true);
 
   void updateChannelFav(int isFav) {
-    channel.value.isFav = isFav;
+    channel.isFav = isFav;
     update();
   }
 
   Future<void> getChannelArticles(int channelId) async {
     Channel? channelResponse = await Repo.fetchChannelItem(channelId);
     if (channelResponse != null) {
-      channel.value = channelResponse;
+      channel = channelResponse;
       if (channelResponse.articleDTOList != null) {
-        articles = channelResponse.articleDTOList!;
+        channelDetailArticles = channelResponse.articleDTOList!;
       }
       update();
     }

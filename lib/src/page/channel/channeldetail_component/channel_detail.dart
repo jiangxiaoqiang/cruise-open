@@ -1,4 +1,3 @@
-import 'package:cruise/src/page/sub/subarticlelist_component/sub_article_list.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
@@ -8,8 +7,11 @@ import 'package:get/get.dart';
 import 'package:wheel/wheel.dart';
 
 import '../../../common/channel_action.dart';
+import '../../../models/Item.dart';
 import '../../../models/api/sub_status.dart';
 import '../../sub/subarticlelist_component/sub_article_list_controller.dart';
+import '../channelarticlelist_component/channel_article_list.dart';
+import '../channelarticlelist_component/channel_article_list_controller.dart';
 import 'channel_detail_controller.dart';
 
 class AllowMultipleHorizontalDragGestureRecognizer extends HorizontalDragGestureRecognizer {
@@ -66,10 +68,10 @@ class ChannelDetail extends StatelessWidget {
             }
           }
 
-          Widget navSubArticleList() {
-            final SubArticleListController articleDetailController = Get.put(SubArticleListController());
-            articleDetailController.articles.value = controller.articles;
-            return new SubArticleList();
+          Widget navChannelArticleList(List<Item> articles) {
+            final ChannelArticleListController subArticleListController = Get.put(ChannelArticleListController());
+            subArticleListController.subArticles = articles;
+            return new ChannelArticleList();
           }
 
           return RawGestureDetector(
@@ -103,7 +105,7 @@ class ChannelDetail extends StatelessWidget {
                           padding: const EdgeInsets.only(bottom: 8.0),
                           child: Container(
                             child: Text(
-                              controller.channel.value.subName == "" ? "" : controller.channel.value.subName,
+                              controller.channel.subName == "" ? "" : controller.channel.subName,
                               style: Theme.of(context).textTheme.headline5!.copyWith(
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -111,7 +113,7 @@ class ChannelDetail extends StatelessWidget {
                           ),
                         ),
                       )),
-                      if (controller.channel.value.isFav == 1)
+                      if (controller.channel.isFav == 1)
                         SliverToBoxAdapter(
                             child: Padding(
                           padding: const EdgeInsets.only(top: 8, bottom: 8.0, right: 1),
@@ -126,11 +128,11 @@ class ChannelDetail extends StatelessWidget {
                                   color: Theme.of(context).canvasColor,
                                 ),
                                 shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(5.0)),
-                                onPressed: () => touchSub(controller.channel.value.id.toString(), SubStatus.UNSUB),
+                                onPressed: () => touchSub(controller.channel.id.toString(), SubStatus.UNSUB),
                                 label: Text("已订阅"),
                               )),
                         )),
-                      if (controller.channel.value.isFav != 1)
+                      if (controller.channel.isFav != 1)
                         SliverToBoxAdapter(
                             child: Padding(
                           padding: const EdgeInsets.only(top: 8, bottom: 8.0, right: 1),
@@ -140,7 +142,7 @@ class ChannelDetail extends StatelessWidget {
                               child: RaisedButton(
                                 color: Theme.of(context).primaryColor,
                                 shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(5.0)),
-                                onPressed: () => touchSub(controller.channel.value.id.toString(), SubStatus.SUB),
+                                onPressed: () => touchSub(controller.channel.id.toString(), SubStatus.SUB),
                                 child: Text("订阅"),
                               )),
                         )),
@@ -156,7 +158,7 @@ class ChannelDetail extends StatelessWidget {
                           text: TextSpan(
                             children: <TextSpan>[
                               TextSpan(
-                                text: controller.channel.value.author,
+                                text: controller.channel.author,
                                 style: Theme.of(context).textTheme.caption!.copyWith(
                                       color: Theme.of(context).primaryColor,
                                     ),
@@ -165,10 +167,10 @@ class ChannelDetail extends StatelessWidget {
                           ),
                         ),
                       )),
-                      if (controller.channel.value.content != "")
+                      if (controller.channel.content != "")
                         SliverToBoxAdapter(
                             child: Html(
-                          data: controller.channel.value.content,
+                          data: controller.channel.content,
                           style: {
                             "body": Style(
                               fontSize: FontSize(19.0),
@@ -176,13 +178,11 @@ class ChannelDetail extends StatelessWidget {
                           },
                           //onLinkTap: (url) => CommonUtils.launchUrl(url),
                         )),
-                      if (controller.articles.length > 0)
+                      if (controller.channelDetailArticles.length > 0)
                         SliverPadding(
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          sliver: navSubArticleList(),
+                          sliver: navChannelArticleList(controller.channelDetailArticles),
                         )
-                      else
-                        SliverToBoxAdapter(child: Center(child: CircularProgressIndicator()))
                     ]),
                   ),
                 ),
