@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wheel/wheel.dart';
 
+import '../../fav/fav.dart';
+
 class CruiseSettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -51,7 +53,7 @@ class CruiseSettingPage extends StatelessWidget {
                                   onTap: () async {
                                     bool isLoggedIn = await Auth.isLoggedIn();
                                     if (isLoggedIn) {
-                                      var data = {'name': "fav"};
+                                      Get.to(Fav());
                                     } else {
                                       NavUtil.navLogin(context);
                                     }
