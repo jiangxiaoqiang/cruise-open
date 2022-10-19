@@ -1,7 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:cruise/src/page/home/components/articlepg_component/article_pg_controller.dart';
 import 'package:cruise/src/page/sub/subarticlelist_component/sub_article_list_controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';

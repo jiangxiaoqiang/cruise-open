@@ -44,7 +44,7 @@ class CustomSearchDelegate extends SearchDelegate {
 
   Widget buildChannel(Channel channel, BuildContext context) {
     final ChannelPgController articlePgController = Get.put(ChannelPgController());
-    articlePgController.channel.value = channel;
+    articlePgController.channelId.value = channel.id;
     Get.to(ChannelPg());
     return Container();
   }

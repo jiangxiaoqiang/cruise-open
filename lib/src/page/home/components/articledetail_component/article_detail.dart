@@ -1,6 +1,5 @@
 import 'package:cruise/src/page/channel/channelpg_component/channel_pg_controller.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
@@ -10,9 +9,7 @@ import 'package:wheel/wheel.dart';
 import '../../../../common/article_action.dart';
 import '../../../../common/helpers.dart';
 import '../../../../common/nav/nav_util.dart';
-import '../../../../common/repo.dart';
 import '../../../../common/utils/cruise_common_utils.dart';
-import '../../../../models/Channel.dart';
 import '../../../../models/Item.dart';
 import '../../../../models/api/fav_status.dart';
 import '../../../../models/api/upvote_status.dart';
@@ -64,10 +61,12 @@ class ArticleDetail extends StatelessWidget {
 
     void navToChannelDetail() async {
       if (int.parse(item.subSourceId) > 0) {
-        Channel channel = (await Repo.fetchChannelItem(int.parse(item.subSourceId)))!;
+        //Channel channel = (await Repo.fetchChannelItem(int.parse(item.subSourceId)))!;
         final ChannelPgController articlePgController = Get.put(ChannelPgController());
-        articlePgController.channel.value = channel;
+        articlePgController.channelId.value = item.subSourceId;
         Get.to(ChannelPg());
+      } else {
+        ToastUtils.showToast("channel id less than 0");
       }
     }
 
@@ -271,6 +270,9 @@ class ArticleDetail extends StatelessWidget {
     return GetBuilder<ArticleDetailController>(
         init: ArticleDetailController(),
         builder: (controller) {
+          if (int.parse(controller.article.subSourceId) <= 0) {
+            return Center(child: CircularProgressIndicator());
+          }
           return GestureDetector(
               onHorizontalDragStart: _onHorizontalDragStart,
               onHorizontalDragUpdate: _onHorizontalDragUpdate,
