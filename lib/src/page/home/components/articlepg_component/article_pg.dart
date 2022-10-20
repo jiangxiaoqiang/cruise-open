@@ -11,7 +11,9 @@ import 'article_pg_controller.dart';
 class ArticlePg extends StatelessWidget {
   Widget navDetail(Item article, ArticlePgController articlePgController) {
     final ArticleDetailController articleDetailController = Get.put(ArticleDetailController());
-    articleDetailController.initArticle(int.parse(article.id));
+    if (int.parse(article.id) != int.parse(articleDetailController.article.id)) {
+      articleDetailController.initArticle(int.parse(article.id));
+    }
     return new ArticleDetail();
   }
 
