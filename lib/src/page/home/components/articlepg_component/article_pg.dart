@@ -14,7 +14,16 @@ class ArticlePg extends StatelessWidget {
     if (int.parse(article.id) != int.parse(articleDetailController.article.id)) {
       articleDetailController.initArticle(int.parse(article.id));
     }
-    return new ArticleDetail();
+    return FutureBuilder(
+        future: articleDetailController.initArticle(int.parse(article.id)),
+        builder: (context, AsyncSnapshot snapshot) {
+          if (snapshot.hasData) {
+            articleDetailController.article = snapshot.data;
+            return new ArticleDetail();
+          } else {
+            return Center(child: CircularProgressIndicator());
+          }
+        });
   }
 
   @override

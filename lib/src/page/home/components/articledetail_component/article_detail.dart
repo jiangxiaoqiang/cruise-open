@@ -54,6 +54,7 @@ class ArticleDetail extends StatelessWidget {
             PaintingBinding.instance.imageCache.clear();
             PaintingBinding.instance.imageCache.clearLiveImages();
           }
+          articleDetailController.article = new Item();
           Navigator.pop(context);
         }
       }
@@ -61,7 +62,6 @@ class ArticleDetail extends StatelessWidget {
 
     void navToChannelDetail() async {
       if (int.parse(item.subSourceId) > 0) {
-        //Channel channel = (await Repo.fetchChannelItem(int.parse(item.subSourceId)))!;
         final ChannelPgController articlePgController = Get.put(ChannelPgController());
         articlePgController.channelId.value = item.subSourceId;
         Get.to(ChannelPg());

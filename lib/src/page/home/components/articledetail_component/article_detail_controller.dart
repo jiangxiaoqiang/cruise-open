@@ -15,12 +15,12 @@ class ArticleDetailController extends GetxController {
     super.onInit();
   }
 
-  Future<void> initArticle(int id) async {
+  Future<Item> initArticle(int id) async {
     Item? articleWithContent = await Repo.fetchArticleDetail(id);
     if (articleWithContent != null) {
-      article = articleWithContent;
-      update();
+      return articleWithContent;
     }
+    return new Item();
   }
 
   void upVote() {}
