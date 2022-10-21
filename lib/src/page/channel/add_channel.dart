@@ -28,6 +28,11 @@ class AddChannel extends HookWidget {
       }
     }
 
+    ButtonStyle textButtonStyle = ElevatedButton.styleFrom(
+        onPrimary: Colors.black,
+        foregroundColor: Theme.of(context).primaryColor,
+        shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)));
+
     return Scaffold(
         body: SafeArea(
       child: Form(
@@ -74,9 +79,8 @@ class AddChannel extends HookWidget {
                           minWidth: screenWidth * 0.85,
                           height: 50.0,
                           child: Center(
-                              child: RaisedButton(
-                            color: Theme.of(context).primaryColor,
-                            shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
+                              child: ElevatedButton(
+                            style: textButtonStyle,
                             onPressed: () async {
                               handleAddChannel();
                             },

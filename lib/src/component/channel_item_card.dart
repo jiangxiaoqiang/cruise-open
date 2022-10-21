@@ -50,6 +50,11 @@ class ChannelItemCard extends HookWidget {
       foregroundImage = defaultImage;
     }
 
+    ButtonStyle textButtonStyle = ElevatedButton.styleFrom(
+        foregroundColor: Theme.of(context).primaryColor, shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(5.0)));
+
+    ButtonStyle textButtonStyleColor = ElevatedButton.styleFrom(foregroundColor: Theme.of(context).primaryColor);
+
     return Card(
       key: Key(counter.value.id.toString()),
       child: Padding(
@@ -86,8 +91,8 @@ class ChannelItemCard extends HookWidget {
                       child: ButtonTheme(
                           minWidth: 100,
                           height: 40.0,
-                          child: RaisedButton.icon(
-                            color: Theme.of(context).primaryColor,
+                          child: ElevatedButton.icon(
+                            style: textButtonStyleColor,
                             icon: Icon(
                               EvaIcons.checkmarkCircle,
                               size: 16,
@@ -102,9 +107,8 @@ class ChannelItemCard extends HookWidget {
                       child: ButtonTheme(
                           minWidth: 100,
                           height: 40.0,
-                          child: RaisedButton(
-                            color: Theme.of(context).primaryColor,
-                            shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(5.0)),
+                          child: ElevatedButton(
+                            style: textButtonStyle,
                             onPressed: () => touchSub(counter.value.id.toString(), SubStatus.SUB),
                             child: Text("订阅"),
                           )),

@@ -74,6 +74,11 @@ class ChannelDetail extends StatelessWidget {
             return new ChannelArticleList();
           }
 
+          ButtonStyle textButtonStyle = ElevatedButton.styleFrom(
+              onPrimary: Colors.black,
+              foregroundColor: Theme.of(context).primaryColor,
+              shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(5.0)));
+
           return RawGestureDetector(
               gestures: {
                 AllowMultipleHorizontalDragGestureRecognizer:
@@ -120,14 +125,13 @@ class ChannelDetail extends StatelessWidget {
                           child: ButtonTheme(
                               minWidth: 50,
                               height: 40.0,
-                              child: RaisedButton.icon(
-                                color: Theme.of(context).primaryColor,
+                              child: ElevatedButton.icon(
+                                style: textButtonStyle,
                                 icon: Icon(
                                   EvaIcons.checkmarkCircle,
                                   size: 16,
                                   color: Theme.of(context).canvasColor,
                                 ),
-                                shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(5.0)),
                                 onPressed: () => touchSub(controller.channel.id.toString(), SubStatus.UNSUB),
                                 label: Text("已订阅"),
                               )),
@@ -139,9 +143,8 @@ class ChannelDetail extends StatelessWidget {
                           child: ButtonTheme(
                               minWidth: 50,
                               height: 40.0,
-                              child: RaisedButton(
-                                color: Theme.of(context).primaryColor,
-                                shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(5.0)),
+                              child: ElevatedButton(
+                                style: textButtonStyle,
                                 onPressed: () => touchSub(controller.channel.id.toString(), SubStatus.SUB),
                                 child: Text("订阅"),
                               )),
