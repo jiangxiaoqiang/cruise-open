@@ -1,4 +1,5 @@
 import 'package:cruise/src/common/nav/nav_util.dart';
+import 'package:cruise/src/page/user/discover/discovery.dart';
 import 'package:cruise/src/page/user/feedback/feedback_page.dart';
 import 'package:cruise/src/page/user/settings/main/main_page.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
@@ -8,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:wheel/wheel.dart';
 
 import '../../fav/fav.dart';
+import '../../history/hostorylist.dart';
 
 class CruiseSettingPage extends StatelessWidget {
   @override
@@ -70,7 +72,7 @@ class CruiseSettingPage extends StatelessWidget {
                               trailing: Icon(Icons.keyboard_arrow_right),
                               title: Text("发现"),
                               onTap: () async {
-                                var data = {'name': "originalstories"};
+                                Get.to(() => Discovery());
                               },
                             )))),
                 Padding(
@@ -87,7 +89,7 @@ class CruiseSettingPage extends StatelessWidget {
                                   onTap: () async {
                                     bool isLoggedIn = await Auth.isLoggedIn();
                                     if (isLoggedIn) {
-                                      var data = {'name': "history"};
+                                      Get.to(() => HistoryList());
                                     } else {
                                       NavUtil.navLogin(context);
                                     }

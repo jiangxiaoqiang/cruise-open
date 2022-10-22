@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../models/enumn/stories_type.dart';
+import '../../home/components/homelist_component/home_list_controller.dart';
 import 'discovery_controller.dart';
 
 class Discovery extends StatelessWidget {
@@ -12,6 +14,8 @@ class Discovery extends StatelessWidget {
         init: DiscoveryController(),
         builder: (controller) {
           Widget navDiscoverList() {
+            final HomeListController homeListController = Get.put(HomeListController());
+            homeListController.currentStoriesType.value = StoriesType.originalStories;
             return new HomeList();
           }
 
