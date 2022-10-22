@@ -19,7 +19,6 @@ class HomeListDefaultController extends GetxController {
     articleRequest.storiesType = storiesType;
     List<Item> fetchedArticles = await Repo.getArticles(articleRequest);
     if (fetchedArticles.isNotEmpty) {
-      articles.value.clear();
       fetchedArticles.forEach((element) {
         articles.value.putIfAbsent(element.title, () => element);
       });

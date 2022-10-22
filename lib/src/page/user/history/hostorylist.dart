@@ -16,7 +16,16 @@ class HistoryList extends StatelessWidget {
           Widget navDiscoverList() {
             final HomeListController homeListController = Get.put(HomeListController());
             homeListController.currentStoriesType.value = StoriesType.historyStories;
-            return new HomeList();
+            return FutureBuilder(
+                future: homeListController.initArticles(StoriesType.historyStories),
+                builder: (context, AsyncSnapshot snapshot) {
+                  if (snapshot.hasData) {
+                    homeListController.articles = snapshot.data;
+                    return new HomeList();
+                  } else {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                });
           }
 
           return Scaffold(body: SafeArea(child: navDiscoverList()));

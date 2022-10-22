@@ -13,13 +13,22 @@ class Fav extends StatelessWidget {
     return GetBuilder<FavController>(
         init: FavController(),
         builder: (controller) {
-          Widget navDiscoverList() {
+          Widget navFavList() {
             final HomeListController homeListController = Get.put(HomeListController());
             homeListController.currentStoriesType.value = StoriesType.favStories;
-            return new HomeList();
+            return FutureBuilder(
+                future: homeListController.initArticles(StoriesType.favStories),
+                builder: (context, AsyncSnapshot snapshot) {
+                  if (snapshot.hasData) {
+                    homeListController.articles = snapshot.data;
+                    return new HomeList();
+                  } else {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                });
           }
 
-          return Scaffold(body: SafeArea(child: navDiscoverList()));
+          return Scaffold(body: SafeArea(child: navFavList()));
         });
   }
 }

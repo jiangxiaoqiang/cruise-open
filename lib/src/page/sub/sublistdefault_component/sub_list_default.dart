@@ -59,7 +59,7 @@ class SubListDefault extends StatelessWidget {
 
           Widget buildArticleList() {
             final SubArticleListController articleListController = Get.put(SubArticleListController());
-            articleListController.subArticles = controller.articles.value;
+            articleListController.subArticles = controller.articles;
             return new SubArticleList();
           }
 
@@ -69,7 +69,7 @@ class SubListDefault extends StatelessWidget {
                 bottom: false,
                 child: Builder(
                   builder: (context) {
-                    if (controller.articles.value.length == 0) {
+                    if (controller.articles.length == 0) {
                       if (controller.articleLoadingStatus.value == LoadingStatus.complete) {
                         // when the article not fetched, show loading animation
                         return Center(child: Text("无内容"));
@@ -127,7 +127,7 @@ class SubListDefault extends StatelessWidget {
                                         context,
                                       ),
                                     ),
-                                    if (controller.articles.value.length > 0)
+                                    if (controller.articles.length > 0)
                                       SliverPadding(
                                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                                         sliver: buildArticleList(),

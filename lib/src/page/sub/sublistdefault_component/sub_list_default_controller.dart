@@ -10,7 +10,7 @@ class SubListDefaultController extends GetxController {
   StoriesType currentStoriesType = StoriesType.topStories;
   StoriesType lastStoriesType = StoriesType.topStories;
   var articleLoadingStatus = LoadingStatus.loading.obs;
-  RxList<Item> articles = List<Item>.empty(growable: true).obs;
+  List<Item> articles = List<Item>.empty(growable: true);
   var isScrollTop = false.obs;
 
   @override
@@ -24,13 +24,14 @@ class SubListDefaultController extends GetxController {
   }
 
   Future initArticles() async {
+    if (articles.isNotEmpty) return;
     articleRequest.pageNum = 1;
     articleRequest.offset = null;
     articleRequest.storiesType = StoriesType.subStories;
     List<Item> fetchedArticles = await Repo.getArticles(articleRequest);
     // 这里注意即使文章为空也要设置状态
-    List<int> ids = articles.value.map((e) => int.parse(e.id)).toList();
-    articles.value = fetchedArticles;
+    List<int> ids = articles.map((e) => int.parse(e.id)).toList();
+    articles = fetchedArticles;
     articleLoadingStatus.value = LoadingStatus.complete;
     update();
   }
@@ -39,7 +40,7 @@ class SubListDefaultController extends GetxController {
     articleRequest.pageNum = articleRequest.pageNum + 1;
     List<Item> extraArticles = await Repo.getArticles(articleRequest);
     if (extraArticles.isNotEmpty) {
-      articles.value.addAll(extraArticles);
+      articles.addAll(extraArticles);
       update();
     }
   }
@@ -47,8 +48,8 @@ class SubListDefaultController extends GetxController {
   Future fetchNewestArticles(ArticleRequest newArticleRequest) async {
     List<Item> newestArticles = await Repo.getArticles(newArticleRequest);
     if (newestArticles.isNotEmpty) {
-      articles.value.clear();
-      articles.value.addAll(newestArticles);
+      articles.clear();
+      articles.addAll(newestArticles);
       update();
     }
   }
