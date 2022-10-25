@@ -48,6 +48,7 @@ dependencies:
       ref: b2589b45d582825d1628209c263af9ce17514f00
   flutter_html: 3.0.0-alpha.5
   video_player: 2.4.7
+  async: 2.9.0
 
 dependency_overrides:
   flutter_secure_storage: 6.0.0

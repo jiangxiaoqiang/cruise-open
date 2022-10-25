@@ -11,7 +11,7 @@ import 'package:http/http.dart' as http;
 import 'package:wheel/wheel.dart' show AppLogHandler, GlobalConfig, RestApiError, RestClient;
 
 class Repo {
-  static final _itemsCache = <int, Item>{};
+  static final articlesCache = <int, Item>{};
   static final _usersCache = <String, CruiseUser>{};
   final baseUrl = GlobalConfig.getBaseUrl();
 
@@ -109,15 +109,15 @@ class Repo {
   }
 
   static Future<Item?> fetchArticleDetail(int id) async {
-    if (_itemsCache.containsKey(id)) {
-      return _itemsCache[id];
+    if (articlesCache.containsKey(id)) {
+      return articlesCache[id];
     }
     final response = await RestClient.getHttp("/post/article/detail?id=" + id.toString());
     if (RestClient.respSuccess(response)) {
       Map articleResult = response.data["result"];
       String articleJson = JsonEncoder().convert(articleResult);
       Item parseItem = Item.fromJson(articleJson);
-      _itemsCache.putIfAbsent(id, () => parseItem);
+      articlesCache.putIfAbsent(id, () => parseItem);
       return parseItem;
     } else {
       AppLogHandler.logError(RestApiError('Item $id failed to fetch.'), JsonEncoder().convert(response));
@@ -126,19 +126,19 @@ class Repo {
   }
 
   static Future<Item?> fetchArticleItem(int id) async {
-    if (_itemsCache.containsKey(id)) {
-      return _itemsCache[id];
+    if (articlesCache.containsKey(id)) {
+      return articlesCache[id];
     } else {
       final response = await RestClient.getHttp("/post/article?id=" + id.toString());
       if (RestClient.respSuccess(response)) {
         Map articleResult = response.data["result"];
         String articleJson = JsonEncoder().convert(articleResult);
         Item parseItem = Item.fromJson(articleJson);
-        _itemsCache[id] = parseItem;
+        articlesCache[id] = parseItem;
       } else {
         AppLogHandler.logError(RestApiError('Item $id failed to fetch.'), JsonEncoder().convert(response));
       }
-      return _itemsCache[id];
+      return articlesCache[id];
     }
   }
 

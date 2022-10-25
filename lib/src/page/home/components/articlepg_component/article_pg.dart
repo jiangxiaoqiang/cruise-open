@@ -14,11 +14,12 @@ class ArticlePg extends StatelessWidget {
     if (int.parse(article.id) != int.parse(articleDetailController.article.id)) {
       articleDetailController.initArticle(int.parse(article.id));
     }
-    return FutureBuilder(
+
+    return FutureBuilder<String>(
         future: articleDetailController.initArticle(int.parse(article.id)),
         builder: (context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
-            articleDetailController.article = snapshot.data;
+            articleDetailController.run = false;
             return new ArticleDetail();
           } else {
             return Center(child: CircularProgressIndicator());
