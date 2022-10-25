@@ -34,6 +34,7 @@ class ArticleDetailController extends GetxController {
       run = false;
       if (articleWithContent != null) {
         article = articleWithContent;
+        update();
         return articleWithContent.id;
       }
     }
