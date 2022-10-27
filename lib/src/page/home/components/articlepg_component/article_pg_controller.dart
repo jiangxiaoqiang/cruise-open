@@ -27,12 +27,12 @@ class ArticlePgController extends GetxController {
         run = false;
         if (articleWithContent != null) {
           article = articleWithContent;
-          update();
           return articleWithContent.id;
         }
+        update();
       } catch (e) {
         run = false;
-        print("fetch article failed: " + id.toString());
+        print("fetch article failed:" + id.toString());
         return "-1";
       }
     }

@@ -47,7 +47,6 @@ class Repo {
     List<Item> result = [];
     if (item.parent != null) result.add(item);
     if (item.kids!.isEmpty) return Future.value(result);
-
     await Future.wait(item.kids!.map((kidId) async {
       Item kid = (await fetchArticleItem(kidId))!;
       await prefetchComments(item: kid);
