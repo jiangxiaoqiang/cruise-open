@@ -5,6 +5,7 @@ import '../../../../models/Item.dart';
 
 class ArticlePgController extends GetxController {
   var article = Item();
+
   //ScrollController articlePgscrollController = new ScrollController();
   bool showToTopBtn = false;
   bool run = false;
@@ -21,12 +22,18 @@ class ArticlePgController extends GetxController {
     if (!run) {
       // https://stackoverflow.com/questions/74194103/how-to-avoid-the-flutter-request-server-flood
       run = true;
-      Item? articleWithContent = await Repo.fetchArticleDetail(id);
-      run = false;
-      if (articleWithContent != null) {
-        article = articleWithContent;
-        //update();
-        return articleWithContent.id;
+      try {
+        Item? articleWithContent = await Repo.fetchArticleDetail(id);
+        run = false;
+        if (articleWithContent != null) {
+          article = articleWithContent;
+          update();
+          return articleWithContent.id;
+        }
+      } catch (e) {
+        run = false;
+        print("fetch article failed: " + id.toString());
+        return "-1";
       }
     }
     return Future.value(new Item().id);
