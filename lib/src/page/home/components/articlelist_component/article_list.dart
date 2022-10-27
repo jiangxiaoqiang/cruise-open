@@ -27,7 +27,17 @@ class ArticleList extends StatelessWidget {
           Widget buildArticle(Item item) {
             final ArticlePgController articlePgController = Get.put(ArticlePgController());
             articlePgController.article = item;
-            return new ArticlePg();
+
+            return FutureBuilder<String>(
+                future: articlePgController.initArticle(int.parse(item.id)),
+                builder: (context, AsyncSnapshot snapshot) {
+                  if (snapshot.hasData) {
+                    articlePgController.run = false;
+                    return new ArticlePg();
+                  } else {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                });
           }
 
           final currentView = ViewManager.fromViewName("itemCard");

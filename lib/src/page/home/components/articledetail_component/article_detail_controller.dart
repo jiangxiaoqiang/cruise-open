@@ -1,4 +1,3 @@
-import 'package:async/async.dart';
 import 'package:get/get.dart';
 import 'package:wheel/wheel.dart' as Wheel;
 
@@ -10,7 +9,6 @@ import '../../../../models/api/upvote_status.dart';
 
 class ArticleDetailController extends GetxController {
   var article = Item();
-  AsyncMemoizer _memoization = AsyncMemoizer<String>();
   bool run = false;
 
   @override
@@ -34,7 +32,7 @@ class ArticleDetailController extends GetxController {
       run = false;
       if (articleWithContent != null) {
         article = articleWithContent;
-        update();
+        //update();
         return articleWithContent.id;
       }
     }

@@ -1,30 +1,18 @@
 import 'package:cruise/src/common/config/cruise_global_config.dart' as global;
+import 'package:cruise/src/page/home/components/articledetail_component/article_detail_wrapper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../models/Item.dart';
-import '../articledetail_component/article_detail.dart';
 import '../articledetail_component/article_detail_controller.dart';
 import 'article_pg_controller.dart';
 
 class ArticlePg extends StatelessWidget {
   Widget navDetail(Item article, ArticlePgController articlePgController) {
     final ArticleDetailController articleDetailController = Get.put(ArticleDetailController());
-    if (int.parse(article.id) != int.parse(articleDetailController.article.id)) {
-      articleDetailController.initArticle(int.parse(article.id));
-    }
-
-    return FutureBuilder<String>(
-        future: articleDetailController.initArticle(int.parse(article.id)),
-        builder: (context, AsyncSnapshot snapshot) {
-          if (snapshot.hasData) {
-            articleDetailController.run = false;
-            return new ArticleDetail();
-          } else {
-            return Center(child: CircularProgressIndicator());
-          }
-        });
+    articleDetailController.article = article;
+    return new ArticleDetailWrapper();
   }
 
   @override
@@ -33,7 +21,6 @@ class ArticlePg extends StatelessWidget {
         init: ArticlePgController(),
         builder: (controller) {
           Item item = controller.article;
-          Map<String, ScrollController> scrollControllers = controller.scrollControllers;
 
           return PageStorage(
               bucket: global.pageStorageBucket,
@@ -50,8 +37,8 @@ class ArticlePg extends StatelessWidget {
                   },
                   child: CupertinoScrollbar(
                       child: CustomScrollView(
-                    key: PageStorageKey(item.id),
-                    controller: scrollControllers[item.id.toString()],
+                    key: PageStorageKey("article-page-" + item.id),
+                    //controller: new ScrollController(),
                     slivers: [
                       SliverToBoxAdapter(child: navDetail(item, controller)),
                       //CommentList(item: item),

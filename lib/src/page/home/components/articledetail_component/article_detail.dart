@@ -122,7 +122,8 @@ class ArticleDetail extends StatelessWidget {
 
     SingleChildScrollView buildListView(Item item, BuildContext context) {
       return SingleChildScrollView(
-          key: PageStorageKey("detail" + item.id),
+          key: PageStorageKey<String>("article-detail-" + item.id),
+          controller: new ScrollController(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
