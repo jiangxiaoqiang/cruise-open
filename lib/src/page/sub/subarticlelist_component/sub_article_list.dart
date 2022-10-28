@@ -20,10 +20,14 @@ class SubArticleList extends StatelessWidget {
             // https://stackoverflow.com/questions/74198771/is-it-possible-to-keep-the-page-scroll-position-when-using-futurebuilder-and-get
             articlePgController.run = false;
             return new ArticlePg();
-          } else if (snapshot.hasData && int.parse(snapshot.data) == -1) {
-            return Center(child: Text("fetch article failed"));
+          } else if (snapshot.hasData && int.parse(snapshot.data) < 0) {
+            return Scaffold(
+                appBar: AppBar(leading: const BackButton(key: ValueKey<String>('back'))),
+                body: SafeArea(child: Center(child: Text(articlePgController.loadResult))));
           } else {
-            return Center(child: CircularProgressIndicator());
+            return Scaffold(
+                appBar: AppBar(leading: const BackButton(key: ValueKey<String>('back'))),
+                body: SafeArea(child: Center(child: CircularProgressIndicator())));
           }
         });
   }
