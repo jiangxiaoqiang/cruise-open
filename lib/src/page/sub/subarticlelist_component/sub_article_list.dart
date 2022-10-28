@@ -8,23 +8,11 @@ import 'package:get/get.dart';
 import '../../../common/helpers.dart';
 import '../../../common/view_manager.dart';
 import '../../../models/Item.dart';
-import '../../home/components/articlepg_component/article_pg.dart';
 
 class SubArticleList extends StatelessWidget {
   Widget buildArticle(Item item) {
     final ArticlePgController articlePgController = Get.put(ArticlePgController());
-    return FutureBuilder<String>(
-        future: articlePgController.initArticle(int.parse(item.id)),
-        builder: (context, AsyncSnapshot snapshot) {
-          if (snapshot.hasData && int.parse(snapshot.data) > 0) {
-            // https://stackoverflow.com/questions/74198771/is-it-possible-to-keep-the-page-scroll-position-when-using-futurebuilder-and-get
-            return new ArticlePg();
-          } else {
-            return Scaffold(
-                appBar: AppBar(leading: const BackButton(key: ValueKey<String>('back'))),
-                body: SafeArea(child: Center(child: CircularProgressIndicator())));
-          }
-        });
+    return articlePgController.buildArticlePage(item);
   }
 
   final currentView = ViewManager.fromViewName("itemCard");

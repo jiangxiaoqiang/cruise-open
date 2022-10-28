@@ -8,14 +8,12 @@ import 'package:get/get.dart';
 import '../../../common/helpers.dart';
 import '../../../common/view_manager.dart';
 import '../../../models/Item.dart';
-import '../../home/components/articlepg_component/article_pg.dart';
 import 'channel_article_list_controller.dart';
 
 class ChannelArticleList extends StatelessWidget {
   Widget buildArticle(Item item) {
     final ArticlePgController articlePgController = Get.put(ArticlePgController());
-    articlePgController.article = item;
-    return new ArticlePg();
+    return articlePgController.buildArticlePage(item);
   }
 
   final currentView = ViewManager.fromViewName("itemCard");

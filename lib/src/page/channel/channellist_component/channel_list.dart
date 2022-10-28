@@ -1,5 +1,4 @@
 import 'package:animations/animations.dart';
-import 'package:cruise/src/page/home/components/articlepg_component/article_pg.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -8,6 +7,8 @@ import 'package:get/get.dart';
 import '../../../common/utils/cruise_common_utils.dart';
 import '../../../common/view_manager.dart';
 import '../../../models/Channel.dart';
+import '../channelpg_component/channel_pg.dart';
+import '../channelpg_component/channel_pg_controller.dart';
 import 'channel_list_controller.dart';
 
 class ChannelList extends StatelessWidget {
@@ -19,8 +20,9 @@ class ChannelList extends StatelessWidget {
           final currentView = ViewManager.fromViewName("itemCard");
 
           Widget buildChannel(Channel channel) {
-            //dispatch(ChannelListActionCreator.onSetDetailChannel(channel));
-            return new ArticlePg();
+            final ChannelPgController articlePgController = Get.put(ChannelPgController());
+            articlePgController.channelId.value = channel.id;
+            return ChannelPg();
           }
 
           return SliverList(

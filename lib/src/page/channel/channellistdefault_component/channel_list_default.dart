@@ -39,7 +39,6 @@ class ChannelListDefault extends StatelessWidget {
           articleRequest.storiesType = StoriesType.channels;
           StoriesType storiesType = StoriesType.channels;
           if (controller.isScrollTop) {
-            // dispatch(ChannelListDefaultActionCreator.onResumeScrollTop());
             if (scrollController.hasClients) {
               scrollController.animateTo(.0, duration: Duration(milliseconds: 200), curve: Curves.ease);
             }
@@ -47,13 +46,8 @@ class ChannelListDefault extends StatelessWidget {
 
           Widget navChannelPage() {
             final ChannelListController channelListController = Get.put(ChannelListController());
-            channelListController.channels.value = controller.channels.value;
+            channelListController.channels.value = controller.channels;
             return new ChannelList();
-          }
-
-          void _loadingMoreChannel() {
-            //dispatch(ChannelListDefaultActionCreator.onLoadingMoreChannels(articleRequest));
-            _refreshController.loadComplete();
           }
 
           void _autoPreloadMoreChannels(ScrollNotification notification) {
@@ -62,12 +56,16 @@ class ChannelListDefault extends StatelessWidget {
               double buttonDistance = metrics.extentAfter;
               if (buttonDistance < 800 && !isDispatched) {
                 isDispatched = true;
-                _loadingMoreChannel();
+                controller.loadingMoreChannel(_refreshController);
               }
               if (buttonDistance > 800) {
                 isDispatched = false;
               }
             }
+          }
+
+          Future<void> _loadingMoreChannel() async {
+            controller.loadingMoreChannel(_refreshController);
           }
 
           return Scaffold(
@@ -99,6 +97,7 @@ class ChannelListDefault extends StatelessWidget {
                         return true;
                       },
                       child: CupertinoScrollbar(
+                          controller: scrollController,
                           child: SmartRefresher(
                               onRefresh: () {
                                 _refreshController.refreshCompleted();
