@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:synchronized/synchronized.dart';
 
 import '../../../../common/repo.dart';
 import '../../../../models/Item.dart';
@@ -6,28 +7,15 @@ import '../../../../models/Item.dart';
 class ArticlePgController extends GetxController {
   var article = Item();
   bool showToTopBtn = false;
-  bool run = false;
-  String loadResult = "加载中...";
+  var lock = new Lock();
 
   Future<String> initArticle(int id) async {
-    if (!run) {
+    return await lock.synchronized(() async {
+      // Only this block can run (once) until done
       // https://stackoverflow.com/questions/74194103/how-to-avoid-the-flutter-request-server-flood
-      run = true;
-      try {
-        Item? articleWithContent = await Repo.fetchArticleDetail(id);
-        run = false;
-        if (articleWithContent != null) {
-          article = articleWithContent;
-          return articleWithContent.id;
-        }
-        update();
-      } catch (e) {
-        run = false;
-        print("fetch article failed:" + id.toString());
-        loadResult = e.toString();
-        return "-1";
-      }
-    }
-    return Future.value(new Item().id);
+      Item articleWithContent = await Repo.fetchArticleDetail(id);
+      article = articleWithContent;
+      return articleWithContent.id;
+    });
   }
 }

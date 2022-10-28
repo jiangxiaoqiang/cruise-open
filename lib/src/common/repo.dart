@@ -107,9 +107,9 @@ class Repo {
     return List.empty();
   }
 
-  static Future<Item?> fetchArticleDetail(int id) async {
+  static Future<Item> fetchArticleDetail(int id) async {
     if (articlesCache.containsKey(id)) {
-      return articlesCache[id];
+      return articlesCache[id]!;
     }
     final response = await RestClient.getHttp("/post/article/detail?id=" + id.toString());
     if (RestClient.respSuccess(response)) {
@@ -121,7 +121,7 @@ class Repo {
     } else {
       AppLogHandler.logError(RestApiError('Item $id failed to fetch.'), JsonEncoder().convert(response));
     }
-    return null;
+    return Future.value(new Item());
   }
 
   static Future<Item?> fetchArticleItem(int id) async {

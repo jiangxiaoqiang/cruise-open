@@ -18,12 +18,7 @@ class SubArticleList extends StatelessWidget {
         builder: (context, AsyncSnapshot snapshot) {
           if (snapshot.hasData && int.parse(snapshot.data) > 0) {
             // https://stackoverflow.com/questions/74198771/is-it-possible-to-keep-the-page-scroll-position-when-using-futurebuilder-and-get
-            articlePgController.run = false;
             return new ArticlePg();
-          } else if (snapshot.hasData && int.parse(snapshot.data) < 0) {
-            return Scaffold(
-                appBar: AppBar(leading: const BackButton(key: ValueKey<String>('back'))),
-                body: SafeArea(child: Center(child: Text(articlePgController.loadResult))));
           } else {
             return Scaffold(
                 appBar: AppBar(leading: const BackButton(key: ValueKey<String>('back'))),
