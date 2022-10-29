@@ -1,11 +1,11 @@
+import 'package:cruise/src/models/Item.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:cruise/src/models/Item.dart';
 
 class ItemCard extends StatelessWidget {
   const ItemCard({
-     Key? key,
+    Key? key,
     required this.item,
   }) : super(key: key);
 
@@ -21,11 +21,10 @@ class ItemCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (item.domain != "")
-                Text(
-                  item.domain,
-                  style: Theme.of(context).textTheme.caption,
-                ),
+              Text(
+                item.domain.isEmpty ? "--" : item.domain,
+                style: Theme.of(context).textTheme.caption,
+              ),
               if (item.type == StoryType.comment)
                 Text(
                   "Comment",

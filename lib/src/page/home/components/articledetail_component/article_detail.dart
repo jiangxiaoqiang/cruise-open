@@ -141,18 +141,17 @@ class ArticleDetail extends StatelessWidget {
                   ),
                 ),
               ),
-              if (item.domain != "")
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
-                  child: InkWell(
-                      onTap: () async {
-                        navToChannelDetail();
-                      },
-                      child: Text(
-                        item.domain,
-                        style: getDomainStyle(item),
-                      )),
-                ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: InkWell(
+                    onTap: () async {
+                      navToChannelDetail();
+                    },
+                    child: Text(
+                      item.domain.isEmpty ? "--" : item.domain,
+                      style: getDomainStyle(item),
+                    )),
+              ),
               InkWell(
                 onTap: () {},
                 child: RichText(
