@@ -29,8 +29,6 @@ class SubListDefaultController extends GetxController {
     articleRequest.offset = null;
     articleRequest.storiesType = StoriesType.subStories;
     List<Item> fetchedArticles = await Repo.getArticles(articleRequest);
-    // 这里注意即使文章为空也要设置状态
-    List<int> ids = articles.map((e) => int.parse(e.id)).toList();
     articles = fetchedArticles;
     articleLoadingStatus.value = LoadingStatus.complete;
     update();

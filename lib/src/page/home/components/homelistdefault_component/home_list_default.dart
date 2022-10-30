@@ -59,10 +59,7 @@ class HomeListDefault extends StatelessWidget {
           }
 
           void _onRefreshLoadingNewestArticle() async {
-            var fetchNewestReq = new ArticleRequest(offset: null, pageSize: 10, pageNum: 1, storiesType: controller.currentStoriesType);
-            //dispatch(HomeListDefaultActionCreator.onFetchNewestArticles(fetchNewestReq));
-            await Future.delayed(Duration(milliseconds: 1000));
-            _refreshController.refreshCompleted();
+            controller.loadNewestArticles(_refreshController);
           }
 
           Widget buildArticleList(List<Item> articles) {
@@ -77,7 +74,7 @@ class HomeListDefault extends StatelessWidget {
                 bottom: false,
                 child: Builder(
                   builder: (context) {
-                    if (controller.articles.value.length == 0) {
+                    if (controller.articles.length == 0) {
                       if (controller.articleLoadingStatus == LoadingStatus.complete) {
                         // when the article not fetched, show loading animation
                         return Center(child: Text("无内容"));
@@ -138,7 +135,7 @@ class HomeListDefault extends StatelessWidget {
                                     if (controller.articles.length > 0)
                                       SliverPadding(
                                         padding: const EdgeInsets.symmetric(vertical: 8.0),
-                                        sliver: buildArticleList(controller.articles.value.values.toList()),
+                                        sliver: buildArticleList(controller.articles.values.toList()),
                                       )
                                   ],
                                 ))));

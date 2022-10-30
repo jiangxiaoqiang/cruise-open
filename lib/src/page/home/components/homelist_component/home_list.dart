@@ -46,19 +46,19 @@ class HomeList extends StatelessWidget {
             } else if (currentStoriesType == StoriesType.favStories) {
               final HomeListDefaultController subListDefaultController = Get.put(HomeListDefaultController());
               subListDefaultController.currentStoriesType = StoriesType.favStories;
-              subListDefaultController.articles.value = controller.articles;
+              subListDefaultController.articles = controller.articles;
               return HomeListDefault();
             } else if (currentStoriesType == StoriesType.profile) {
               globalController.appBarTitle.value = AppLocalizations.of(context)!.cruiseNavigatorMine;
               return new CruiseSettingPage();
             } else if (currentStoriesType == StoriesType.originalStories) {
               final HomeListDefaultController subListDefaultController = Get.put(HomeListDefaultController());
-              subListDefaultController.articles.value = controller.articles;
+              subListDefaultController.articles = controller.articles;
               subListDefaultController.currentStoriesType = StoriesType.originalStories;
               return HomeListDefault();
             } else if (currentStoriesType == StoriesType.historyStories) {
               final HomeListDefaultController subListDefaultController = Get.put(HomeListDefaultController());
-              subListDefaultController.articles.value = controller.articles;
+              subListDefaultController.articles = controller.articles;
               subListDefaultController.currentStoriesType = StoriesType.historyStories;
               return HomeListDefault();
             }
