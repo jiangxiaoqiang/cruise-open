@@ -11,7 +11,7 @@ import '../../../models/Item.dart';
 import 'channel_article_list_controller.dart';
 
 class ChannelArticleList extends StatelessWidget {
-  Widget buildArticle(Item item) {
+  Widget buildArticle(ArticleItem item) {
     final ArticlePgController articlePgController = Get.put(ArticlePgController());
     return articlePgController.buildArticlePage(item);
   }

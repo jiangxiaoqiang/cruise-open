@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import '../../../models/Item.dart';
 
 class SubArticleListController extends GetxController {
-  List<Item> subArticles = List<Item>.empty(growable: true);
-  var article = (new Item()).obs;
+  List<ArticleItem> subArticles = List<ArticleItem>.empty(growable: true);
+  var article = (new ArticleItem()).obs;
   var channelId = 0.obs;
   var loadingStatus = LoadingStatus.loading.obs;
 

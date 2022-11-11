@@ -1,14 +1,14 @@
+import 'package:cruise/src/models/Item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:cruise/src/models/Item.dart';
 
 class CompactTile extends StatelessWidget {
   const CompactTile({
-     Key? key,
+    Key? key,
     required this.item,
   }) : super(key: key);
 
-  final Item item;
+  final ArticleItem item;
 
   @override
   Widget build(BuildContext context) {
@@ -49,9 +49,7 @@ class CompactTile extends StatelessWidget {
                         TextSpan(
                           text: "  ${item.score}p",
                           style: Theme.of(context).textTheme.caption!.copyWith(
-                                color: item.isVoted()
-                                    ? Theme.of(context).primaryColor
-                                    : Theme.of(context).iconTheme.color,
+                                color: item.isVoted() ? Theme.of(context).primaryColor : Theme.of(context).iconTheme.color,
                               ),
                         ),
                         TextSpan(

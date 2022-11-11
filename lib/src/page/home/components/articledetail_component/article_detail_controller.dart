@@ -2,46 +2,19 @@ import 'package:get/get.dart';
 import 'package:wheel/wheel.dart' as Wheel;
 
 import '../../../../common/article_action.dart';
-import '../../../../common/repo.dart';
 import '../../../../models/Item.dart';
 import '../../../../models/api/fav_status.dart';
 import '../../../../models/api/upvote_status.dart';
 
 class ArticleDetailController extends GetxController {
-  var article = Item();
-  bool run = false;
+  var article = ArticleItem();
 
   @override
   void onInit() {
     super.onInit();
   }
 
-  Future<String> initArticle(int id) async {
-    /*return await this._memoization.runOnce(() async {
-      Item? articleWithContent = await Repo.fetchArticleDetail(id);
-      if (articleWithContent != null) {
-        article = articleWithContent;
-        return articleWithContent.id;
-      }
-      return "0";
-    });*/
-    if (!run) {
-      // https://stackoverflow.com/questions/74194103/how-to-avoid-the-flutter-request-server-flood
-      run = true;
-      Item? articleWithContent = await Repo.fetchArticleDetail(id);
-      run = false;
-      if (articleWithContent != null) {
-        article = articleWithContent;
-        //update();
-        return articleWithContent.id;
-      }
-    }
-    return Future.value(new Item().id);
-  }
-
-  void upVote() {}
-
-  void handleVoteImpl(UpvoteStatus upvoteStatus, String action, Item item) async {
+  void handleVoteImpl(UpvoteStatus upvoteStatus, String action, ArticleItem item) async {
     Wheel.HttpResult result = (await ArticleAction.upvote(articleId: item.id.toString(), action: action))!;
     if (result.result == Wheel.Result.error) {
       Wheel.ToastUtils.showToast("点赞失败");
@@ -64,7 +37,7 @@ class ArticleDetailController extends GetxController {
     }
   }
 
-  void handleFavImpl(FavStatus favStatus, String action, Item item) async {
+  void handleFavImpl(FavStatus favStatus, String action, ArticleItem item) async {
     if (favStatus.statusCode == "fav") {
       article.isFav = 1;
       article.favCount = article.favCount + 1;

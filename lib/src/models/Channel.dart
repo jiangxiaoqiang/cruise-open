@@ -50,7 +50,7 @@ class Channel {
   String intro;
   String favIconUrl;
   String localIconUrl;
-  List<Item>? articleDTOList;
+  List<ArticleItem>? articleDTOList;
 
   factory Channel.fromJson(String str) => Channel.fromMap(json.decode(str));
 

@@ -11,7 +11,7 @@ class ChannelDetailController extends GetxController {
   int isFav = 0;
   StoriesType? currentStoriesType;
   ArticleRequest? articleRequest;
-  List<Item> channelDetailArticles = List<Item>.empty(growable: true);
+  List<ArticleItem> channelDetailArticles = List<ArticleItem>.empty(growable: true);
 
   void updateChannelFav(int isFav) {
     channel.isFav = isFav;

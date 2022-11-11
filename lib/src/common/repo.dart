@@ -11,12 +11,12 @@ import 'package:http/http.dart' as http;
 import 'package:wheel/wheel.dart' show AppLogHandler, GlobalConfig, RestApiError, RestClient;
 
 class Repo {
-  static final articlesCache = <int, Item>{};
+  static final articlesCache = <int, ArticleItem>{};
   static final _usersCache = <String, CruiseUser>{};
   final baseUrl = GlobalConfig.getBaseUrl();
 
-  static Future<List<Item>> getArticles(ArticleRequest request) async {
-    List<Item> articles = await _getArticles(request);
+  static Future<List<ArticleItem>> getArticles(ArticleRequest request) async {
+    List<ArticleItem> articles = await _getArticles(request);
     return articles;
   }
 
@@ -25,36 +25,36 @@ class Repo {
     return channels;
   }
 
-  static Future<List<String>> getCommentsIds({required Item item}) async {
-    Stream<Item> stream = lazyFetchComments(item: item, assignDepth: false);
+  static Future<List<String>> getCommentsIds({required ArticleItem item}) async {
+    Stream<ArticleItem> stream = lazyFetchComments(item: item, assignDepth: false);
     List<String> comments = [];
-    await for (Item comment in stream) {
+    await for (ArticleItem comment in stream) {
       comments.add(comment.id);
     }
     return comments;
   }
 
-  static Stream<Item> lazyFetchComments({required Item item, int depth = 0, bool assignDepth = true}) async* {
+  static Stream<ArticleItem> lazyFetchComments({required ArticleItem item, int depth = 0, bool assignDepth = true}) async* {
     if (item.kids!.isEmpty) return;
     for (int kidId in item.kids!) {
-      Item kid = (await fetchArticleItem(kidId))!;
+      ArticleItem kid = (await fetchArticleItem(kidId))!;
       if (assignDepth) kid.depth = depth;
       yield kid;
     }
   }
 
-  static Future<List<Item>> prefetchComments({required Item item}) async {
-    List<Item> result = [];
+  static Future<List<ArticleItem>> prefetchComments({required ArticleItem item}) async {
+    List<ArticleItem> result = [];
     if (item.parent != null) result.add(item);
     if (item.kids!.isEmpty) return Future.value(result);
     await Future.wait(item.kids!.map((kidId) async {
-      Item kid = (await fetchArticleItem(kidId))!;
+      ArticleItem kid = (await fetchArticleItem(kidId))!;
       await prefetchComments(item: kid);
     }));
     return Future.value(result);
   }
 
-  static Future<List<Item?>> fetchByIds(List<int> ids) async {
+  static Future<List<ArticleItem?>> fetchByIds(List<int> ids) async {
     return Future.wait(ids.map((itemId) {
       return fetchArticleItem(itemId);
     }));
@@ -85,18 +85,18 @@ class Repo {
     return List.empty();
   }
 
-  static Future<List<Item>> _getArticles(ArticleRequest articleRequest) async {
+  static Future<List<ArticleItem>> _getArticles(ArticleRequest articleRequest) async {
     final typeQuery = _getStoryTypeQuery(articleRequest.storiesType);
     Map<String, dynamic>? jsonMap = articleRequest.toMap();
     final response = await RestClient.get("$typeQuery", queryParameters: jsonMap);
     if (RestClient.respSuccess(response)) {
       Map result = response.data["result"];
       List articles = result["list"];
-      List<Item> items = List.empty(growable: true);
+      List<ArticleItem> items = List.empty(growable: true);
       articles.forEach((element) {
         if (element != null) {
           HashMap<String, Object> map = HashMap.from(element);
-          Item item = Item.fromMap(map);
+          ArticleItem item = ArticleItem.fromMap(map);
           items.add(item);
         } else {
           print("null article");
@@ -107,7 +107,7 @@ class Repo {
     return List.empty();
   }
 
-  static Future<Item> fetchArticleDetail(int id) async {
+  static Future<ArticleItem> fetchArticleDetail(int id) async {
     if (articlesCache.containsKey(id)) {
       return articlesCache[id]!;
     }
@@ -115,16 +115,16 @@ class Repo {
     if (RestClient.respSuccess(response)) {
       Map articleResult = response.data["result"];
       String articleJson = JsonEncoder().convert(articleResult);
-      Item parseItem = Item.fromJson(articleJson);
+      ArticleItem parseItem = ArticleItem.fromJson(articleJson);
       articlesCache.putIfAbsent(id, () => parseItem);
       return parseItem;
     } else {
       AppLogHandler.logError(RestApiError('Item $id failed to fetch.'), JsonEncoder().convert(response));
     }
-    return Future.value(new Item());
+    return Future.value(new ArticleItem());
   }
 
-  static Future<Item?> fetchArticleItem(int id) async {
+  static Future<ArticleItem?> fetchArticleItem(int id) async {
     if (articlesCache.containsKey(id)) {
       return articlesCache[id];
     } else {
@@ -132,7 +132,7 @@ class Repo {
       if (RestClient.respSuccess(response)) {
         Map articleResult = response.data["result"];
         String articleJson = JsonEncoder().convert(articleResult);
-        Item parseItem = Item.fromJson(articleJson);
+        ArticleItem parseItem = ArticleItem.fromJson(articleJson);
         articlesCache[id] = parseItem;
       } else {
         AppLogHandler.logError(RestApiError('Item $id failed to fetch.'), JsonEncoder().convert(response));
@@ -151,9 +151,9 @@ class Repo {
       String jsonContent = JsonEncoder().convert(channelResult);
       Channel parseItem = Channel.fromJson(jsonContent);
       List<dynamic> it = channelResult["articleDTOList"];
-      List<Item> items = List.empty(growable: true);
+      List<ArticleItem> items = List.empty(growable: true);
       it.forEach((element) {
-        Item localItem = Item.fromMap(element);
+        ArticleItem localItem = ArticleItem.fromMap(element);
         items.add(localItem);
       });
       parseItem.articleDTOList = items;

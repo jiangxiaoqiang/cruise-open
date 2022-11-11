@@ -34,10 +34,7 @@ class HomeListDefault extends StatelessWidget {
 
           Future<void> _loadingMoreArticle() async {
             articleRequest.pageNum = articleRequest.pageNum + 1;
-            if (controller.articleRequest.offset != null && controller.articleRequest.offset! > 0) {
-              articleRequest.offset = controller.articleRequest.offset;
-            }
-            List<Item> articles = await Repo.getArticles(articleRequest);
+            List<ArticleItem> articles = await Repo.getArticles(articleRequest);
             if (articles.isNotEmpty) {
               controller.appendArticles(articles);
             }
@@ -62,7 +59,7 @@ class HomeListDefault extends StatelessWidget {
             controller.loadNewestArticles(_refreshController);
           }
 
-          Widget buildArticleList(List<Item> articles) {
+          Widget buildArticleList(List<ArticleItem> articles) {
             final SubArticleListController articleListController = Get.put(SubArticleListController());
             articleListController.subArticles = articles;
             return new SubArticleList();

@@ -4,5 +4,5 @@ import '../request/article/article_request.dart';
 class ArticlePayload {
   ArticleRequest? articleRequest;
   List<int>? articleIds;
-  List<Item>? articles;
+  List<ArticleItem>? articles;
 }

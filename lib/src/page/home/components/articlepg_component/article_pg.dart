@@ -9,7 +9,7 @@ import '../articledetail_component/article_detail_controller.dart';
 import 'article_pg_controller.dart';
 
 class ArticlePg extends StatelessWidget {
-  Widget navDetail(Item article, ArticlePgController articlePgController) {
+  Widget navDetail(ArticleItem article, ArticlePgController articlePgController) {
     final ArticleDetailController articleDetailController = Get.put(ArticleDetailController());
     articleDetailController.article = article;
     return new ArticleDetailWrapper();
@@ -20,7 +20,7 @@ class ArticlePg extends StatelessWidget {
     return GetBuilder<ArticlePgController>(
         init: ArticlePgController(),
         builder: (controller) {
-          Item item = controller.article;
+          ArticleItem item = controller.article;
 
           return PageStorage(
               bucket: global.pageStorageBucket,

@@ -8,7 +8,7 @@ import '../../../../models/Item.dart';
 import 'article_pg.dart';
 
 class ArticlePgController extends GetxController {
-  var article = Item();
+  var article = ArticleItem();
   bool showToTopBtn = false;
   var lock = new Lock();
 
@@ -16,13 +16,13 @@ class ArticlePgController extends GetxController {
     return await lock.synchronized(() async {
       // Only this block can run (once) until done
       // https://stackoverflow.com/questions/74194103/how-to-avoid-the-flutter-request-server-flood
-      Item articleWithContent = await Repo.fetchArticleDetail(id);
+      ArticleItem articleWithContent = await Repo.fetchArticleDetail(id);
       article = articleWithContent;
       return articleWithContent.id;
     });
   }
 
-  Widget buildArticlePage(Item item) {
+  Widget buildArticlePage(ArticleItem item) {
     return FutureBuilder<String>(
         future: initArticle(int.parse(item.id)),
         builder: (context, AsyncSnapshot snapshot) {

@@ -10,7 +10,7 @@ class SubListDefaultController extends GetxController {
   StoriesType currentStoriesType = StoriesType.topStories;
   StoriesType lastStoriesType = StoriesType.topStories;
   var articleLoadingStatus = LoadingStatus.loading.obs;
-  List<Item> articles = List<Item>.empty(growable: true);
+  List<ArticleItem> articles = List<ArticleItem>.empty(growable: true);
   var isScrollTop = false.obs;
 
   @override
@@ -28,7 +28,7 @@ class SubListDefaultController extends GetxController {
     articleRequest.pageNum = 1;
     articleRequest.offset = null;
     articleRequest.storiesType = StoriesType.subStories;
-    List<Item> fetchedArticles = await Repo.getArticles(articleRequest);
+    List<ArticleItem> fetchedArticles = await Repo.getArticles(articleRequest);
     articles = fetchedArticles;
     articleLoadingStatus.value = LoadingStatus.complete;
     update();
@@ -36,7 +36,7 @@ class SubListDefaultController extends GetxController {
 
   Future loadingMoreArticles() async {
     articleRequest.pageNum = articleRequest.pageNum + 1;
-    List<Item> extraArticles = await Repo.getArticles(articleRequest);
+    List<ArticleItem> extraArticles = await Repo.getArticles(articleRequest);
     if (extraArticles.isNotEmpty) {
       articles.addAll(extraArticles);
       update();
@@ -44,7 +44,7 @@ class SubListDefaultController extends GetxController {
   }
 
   Future fetchNewestArticles(ArticleRequest newArticleRequest) async {
-    List<Item> newestArticles = await Repo.getArticles(newArticleRequest);
+    List<ArticleItem> newestArticles = await Repo.getArticles(newArticleRequest);
     if (newestArticles.isNotEmpty) {
       articles.clear();
       articles.addAll(newestArticles);

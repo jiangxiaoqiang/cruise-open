@@ -31,10 +31,10 @@ class ArticleAction {
   }
 
   /// get article by ids
-  static Future<List<Item>> fetchArticleByIds(List<int> ids) async {
-    List<Item> articles = [];
+  static Future<List<ArticleItem>> fetchArticleByIds(List<int> ids) async {
+    List<ArticleItem> articles = [];
     for (int id in ids) {
-      Item article = (await Repo.fetchArticleItem(id))!;
+      ArticleItem article = (await Repo.fetchArticleItem(id))!;
       articles.add(article);
     }
     return articles;

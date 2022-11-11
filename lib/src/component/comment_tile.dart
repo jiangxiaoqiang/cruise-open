@@ -1,19 +1,19 @@
+import 'package:cruise/src/models/Item.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:cruise/src/models/Item.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CommentTile extends HookWidget {
   const CommentTile({
-     Key? key,
+    Key? key,
     required this.comment,
     required this.author,
     this.isCollapsed = false,
   }) : super(key: key);
 
-  final Item comment;
+  final ArticleItem comment;
   final String author;
   final bool isCollapsed;
 
@@ -40,7 +40,7 @@ class CommentTile extends HookWidget {
     }
   }
 
-  Widget _buildAuthor(BuildContext context, Item comment) {
+  Widget _buildAuthor(BuildContext context, ArticleItem comment) {
     if (comment.deleted) {
       return Text(
         "<deleted>",

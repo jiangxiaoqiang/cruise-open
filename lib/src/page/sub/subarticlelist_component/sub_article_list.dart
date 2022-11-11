@@ -10,7 +10,7 @@ import '../../../common/view_manager.dart';
 import '../../../models/Item.dart';
 
 class SubArticleList extends StatelessWidget {
-  Widget buildArticle(Item item) {
+  Widget buildArticle(ArticleItem item) {
     final ArticlePgController articlePgController = Get.put(ArticlePgController());
     return articlePgController.buildArticlePage(item);
   }

@@ -7,7 +7,7 @@ import '../../../../models/request/article/article_request.dart';
 
 class HomeListController extends GetxController {
   var currentStoriesType = StoriesType.topStories.obs;
-  var articles = Map<String, Item>();
+  var articles = Map<String, ArticleItem>();
   ArticleRequest articleRequest = new ArticleRequest(pageSize: 10, pageNum: 1, storiesType: StoriesType.topStories);
 
   void updateStories(StoriesType storiesType) {
@@ -15,11 +15,11 @@ class HomeListController extends GetxController {
     update();
   }
 
-  Future<Map<String, Item>> initArticles(StoriesType storiesType) async {
+  Future<Map<String, ArticleItem>> initArticles(StoriesType storiesType) async {
     articleRequest.pageNum = 1;
     articleRequest.offset = null;
     articleRequest.storiesType = storiesType;
-    List<Item> fetchedArticles = await Repo.getArticles(articleRequest);
+    List<ArticleItem> fetchedArticles = await Repo.getArticles(articleRequest);
     if (fetchedArticles.isNotEmpty) {
       articles.clear();
       fetchedArticles.forEach((element) {

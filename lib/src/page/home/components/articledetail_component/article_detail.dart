@@ -32,7 +32,7 @@ class ArticleDetail extends StatelessWidget {
   }
 
   /// 是否是编辑选择频道链接显示不同的颜色
-  TextStyle getDomainStyle(Item article) {
+  TextStyle getDomainStyle(ArticleItem article) {
     if (article.editorPick == 1) {
       return new TextStyle(color: Color(0xFFFFA826), fontSize: 15);
     } else {
@@ -42,7 +42,7 @@ class ArticleDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Item item = articleDetailController.article;
+    ArticleItem item = articleDetailController.article;
 
     void _onHorizontalDragEnd(DragEndDetails details) {
       if (_initialSwipeOffset != null) {
@@ -54,7 +54,7 @@ class ArticleDetail extends StatelessWidget {
             PaintingBinding.instance.imageCache.clear();
             PaintingBinding.instance.imageCache.clearLiveImages();
           }
-          articleDetailController.article = new Item();
+          articleDetailController.article = new ArticleItem();
           Navigator.pop(context);
         }
       }
@@ -120,7 +120,7 @@ class ArticleDetail extends StatelessWidget {
       }
     }
 
-    SingleChildScrollView buildListView(Item item, BuildContext context) {
+    SingleChildScrollView buildListView(ArticleItem item, BuildContext context) {
       return SingleChildScrollView(
           key: PageStorageKey<String>("article-detail-" + item.id),
           controller: new ScrollController(),

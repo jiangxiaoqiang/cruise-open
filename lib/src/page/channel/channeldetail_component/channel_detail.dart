@@ -68,7 +68,7 @@ class ChannelDetail extends StatelessWidget {
             }
           }
 
-          Widget navChannelArticleList(List<Item> articles) {
+          Widget navChannelArticleList(List<ArticleItem> articles) {
             final ChannelArticleListController subArticleListController = Get.put(ChannelArticleListController());
             subArticleListController.subArticles = articles;
             return new ChannelArticleList();

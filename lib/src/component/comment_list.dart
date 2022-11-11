@@ -1,5 +1,5 @@
-import 'package:cruise/src/common/repo.dart';
 import 'package:cruise/src/common/helpers.dart';
+import 'package:cruise/src/common/repo.dart';
 import 'package:cruise/src/component/comment_tile.dart';
 import 'package:cruise/src/component/loading_item.dart';
 import 'package:cruise/src/models/Item.dart';
@@ -14,7 +14,7 @@ class CommentList extends HookWidget {
     required this.item,
   }) : super(key: key);
 
-  final Item item;
+  final ArticleItem item;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class CommentList extends HookWidget {
             if (comments.value.isEmpty || index > comments.value.length - 1) {
               _child = LoadingItem(count: 1);
             } else {
-              Item comment = comments.value[index];
+              ArticleItem comment = comments.value[index];
 
               _child = InkWell(
                 onTap: () async {

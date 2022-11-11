@@ -13,8 +13,8 @@ enum StoryType {
 
 enum LoadingStatus { loading, complete }
 
-class Item {
-  Item(
+class ArticleItem {
+  ArticleItem(
       {this.depth = 0,
       this.author = "Unknown",
       this.deleted = false,
@@ -65,7 +65,7 @@ class Item {
   int upvoteCount;
   String subSourceId;
 
-  factory Item.fromJson(String str) => Item.fromMap(json.decode(str));
+  factory ArticleItem.fromJson(String str) => ArticleItem.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
@@ -75,7 +75,7 @@ class Item {
 
   String get ago => timeago.format(DateTime.fromMillisecondsSinceEpoch(pubTime));
 
-  factory Item.fromMap(Map<String, dynamic> json) => Item(
+  factory ArticleItem.fromMap(Map<String, dynamic> json) => ArticleItem(
         id: json["id"],
         author: json["author"] == null ? "" : json["author"],
         deleted: json["deleted"] == null ? false : json["deleted"],

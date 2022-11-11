@@ -9,7 +9,7 @@ class ItemTile extends StatelessWidget {
     required this.item,
   }) : super(key: key);
 
-  final Item item;
+  final ArticleItem item;
 
   @override
   Widget build(BuildContext context) {

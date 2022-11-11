@@ -20,7 +20,7 @@ String buildShareURL(String id) {
   return GlobalConfig.getShareUrl() + "/product/cruise/share/$id";
 }
 
-void handleUpvote(context, {required Item item}) async {
+void handleUpvote(context, {required ArticleItem item}) async {
   HistoryManager.addToVoteCache(item.id);
   AuthResult result = await Auth.vote(itemId: "${item.id}");
 
@@ -32,7 +32,7 @@ void handleUpvote(context, {required Item item}) async {
   }
 }
 
-Widget getViewType(ViewType type, Item item) {
+Widget getViewType(ViewType type, ArticleItem item) {
   switch (type) {
     case ViewType.compactTile:
       return CompactTile(item: item);
