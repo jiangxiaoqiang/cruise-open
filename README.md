@@ -1,6 +1,6 @@
 # cruise-open
 
-english | [中文]([cruise-open/README.zh-CN.md at main · jiangxiaoqiang/cruise-open · GitHub](https://github.com/jiangxiaoqiang/cruise-open/blob/main/README.zh-CN.md))
+english | [中文](https://github.com/jiangxiaoqiang/cruise-open/blob/main/README.zh-CN.md)
 
 Cruise is a simple RSS reader across all platform.
 
