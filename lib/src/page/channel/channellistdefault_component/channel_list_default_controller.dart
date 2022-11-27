@@ -1,25 +1,28 @@
 import 'package:get/get.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
+import 'package:synchronized/synchronized.dart';
 
 import '../../../common/repo.dart';
 import '../../../models/Channel.dart';
 import '../../../models/Item.dart';
-import '../../../models/enumn/stories_type.dart';
-import '../../../models/request/article/article_request.dart';
+import '../../../models/request/channel/channel_request.dart';
 
 class ChannelListDefaultController extends GetxController {
-  ArticleRequest articleRequest = new ArticleRequest(pageNum: 1, pageSize: 15, storiesType: StoriesType.channels);
+  ChannelRequest articleRequest = new ChannelRequest(pageNum: 1, pageSize: 15, name: '');
   LoadingStatus channelLoadingStatus = LoadingStatus.loading;
   bool isScrollTop = false;
   List<Channel> channels = List<Channel>.empty(growable: true);
+  var lock = new Lock();
 
   Future init() async {
-    ArticleRequest articleRequest = new ArticleRequest(pageSize: 15, pageNum: 1, storiesType: StoriesType.channels);
-    List<Channel> fetchedChannel = await Repo.getChannels(articleRequest);
-    if (fetchedChannel.isNotEmpty) {
-      channels.addAll(fetchedChannel);
-      update();
-    }
+    return await lock.synchronized(() async {
+      ChannelRequest articleRequest = new ChannelRequest(pageSize: 15, pageNum: 1, name: '');
+      List<Channel> fetchedChannel = await Repo.getChannels(articleRequest);
+      if (fetchedChannel.isNotEmpty) {
+        channels.addAll(fetchedChannel);
+        update();
+      }
+    });
   }
 
   void loadingMoreChannel(RefreshController _refreshController) async {

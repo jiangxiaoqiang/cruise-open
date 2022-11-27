@@ -6,7 +6,6 @@ import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 import '../../../models/Item.dart';
 import '../../../models/enumn/stories_type.dart';
-import '../../../models/request/article/article_request.dart';
 import '../channellist_component/channel_list.dart';
 import '../channellist_component/channel_list_controller.dart';
 import 'channel_list_default_controller.dart';
@@ -35,8 +34,6 @@ class ChannelListDefault extends StatelessWidget {
     return GetBuilder<ChannelListDefaultController>(
         init: ChannelListDefaultController(),
         builder: (controller) {
-          ArticleRequest articleRequest = controller.articleRequest;
-          articleRequest.storiesType = StoriesType.channels;
           StoriesType storiesType = StoriesType.channels;
           if (controller.isScrollTop) {
             if (scrollController.hasClients) {

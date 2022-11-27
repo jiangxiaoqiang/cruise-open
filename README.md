@@ -50,6 +50,18 @@ export PUB_HOSTED_URL=https://pub.flutter-io.cn \
 && ~/fvm/versions/2.10.3/bin/flutter run -v
 ```
 
+构建ipa(iOS and iPadOS application archive file)包：
+
+```bash
+~/fvm/versions/{version}/bin/flutter build ipa 
+```
+
+在设备上运行应用，可以断开USB线：
+
+```bash
+~/fvm/versions/{version}/bin/flutter run --release
+```
+
 ### 运行界面
 
 | ![Kiku](docs/snapshot/home.jpeg)        | ![Kiku](docs/snapshot/sub.jpeg) |

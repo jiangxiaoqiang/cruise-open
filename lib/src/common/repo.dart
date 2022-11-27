@@ -10,8 +10,11 @@ import 'package:cruise/src/models/request/article/article_request.dart';
 import 'package:http/http.dart' as http;
 import 'package:wheel/wheel.dart' show AppLogHandler, GlobalConfig, RestApiError, RestClient;
 
+import '../models/request/channel/channel_request.dart';
+
 class Repo {
   static final articlesCache = <int, ArticleItem>{};
+  static final channelsCache = <String, List<Channel>>{};
   static final _usersCache = <String, CruiseUser>{};
   final baseUrl = GlobalConfig.getBaseUrl();
 
@@ -20,8 +23,13 @@ class Repo {
     return articles;
   }
 
-  static Future<List<Channel>> getChannels(ArticleRequest request) async {
+  static Future<List<Channel>> getChannels(ChannelRequest request) async {
+    String requestJson = request.toJson();
+    if (channelsCache.containsKey(requestJson)) {
+      return channelsCache[requestJson]!;
+    }
     List<Channel> channels = await _getChannels(request);
+    channelsCache.putIfAbsent(requestJson, () => channels);
     return channels;
   }
 
@@ -60,8 +68,8 @@ class Repo {
     }));
   }
 
-  static Future<List<Channel>> _getChannels(ArticleRequest articleRequest) async {
-    final typeQuery = _getStoryTypeQuery(articleRequest.storiesType);
+  static Future<List<Channel>> _getChannels(ChannelRequest articleRequest) async {
+    final typeQuery = _getStoryTypeQuery(StoriesType.channels);
     Map jsonMap = articleRequest.toMap();
     final response = await RestClient.postHttp("$typeQuery", jsonMap);
     if (RestClient.respSuccess(response)) {

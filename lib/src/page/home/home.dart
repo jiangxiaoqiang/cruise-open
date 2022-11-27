@@ -22,14 +22,6 @@ class HomeDefault extends StatelessWidget {
             var homeModel = new HomeModel();
             homeModel.selectIndex = controller.selectIndex.value;
             homeModel.storiesType = controller.storiesType.value;
-            //dispatch(HomeActionCreator.onSwitchNav(homeModel));
-          }
-
-          void _onItemDoubleTapped() {
-            // if tap the same navigator menu
-            // navigate to the top of tab
-
-            return;
           }
 
           void _onItemTapped(int index) {

@@ -7,7 +7,6 @@ import 'package:wheel/wheel.dart';
 
 import '../../common/theme.dart';
 import '../../page/home/home.dart';
-import '../../page/home/home_controller.dart';
 import '../../page/login.dart';
 import 'global_controller.dart';
 
@@ -17,7 +16,6 @@ class AppPage extends StatelessWidget {
     final currentTheme = ThemeManager.fromThemeName("lightTheme");
 
     Widget buildHomePage() {
-      final HomeController homeController = Get.put(HomeController());
       return new HomeDefault();
     }
 

@@ -3,9 +3,13 @@ import 'package:cruise/src/models/enumn/stories_type.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:wheel/wheel.dart' show Auth, NavigationService;
-import 'package:cruise/src/common/config/cruise_global_constant.dart' as CruiseGlobalConstant;
+import 'package:wheel/wheel.dart';
+
+import 'home/home.dart';
+import 'home/home_controller.dart';
 
 class ProfilePage extends HookWidget {
   ProfilePage({this.isMe = false, required this.user});
@@ -25,16 +29,13 @@ class ProfilePage extends HookWidget {
         leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
-              Map<String,Object> args = new Map();
-              args.putIfAbsent("selectIndex", () => 3);
-              args.putIfAbsent("storiesType", () => StoriesType.profile);
-              args.putIfAbsent("autoTriggerNav", () => true);
-              NavigationService.instance.navigateToReplacementWithParam(CruiseGlobalConstant.HOME_PAGE_NAME,args);
+              final HomeController homeController = Get.put(HomeController());
+              homeController.updateNav(3, StoriesType.profile);
+              Get.to(() => new HomeDefault());
             }),
         title: Text(
           "个人信息",
         ),
-
         actions: [
           if (isMe)
             IconButton(

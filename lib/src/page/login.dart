@@ -130,8 +130,6 @@ class LoginPage extends HookWidget {
                                       );
                                     } else {
                                       NavUtil.navProfile(context);
-                                      //NavigationService.instance.navigateToReplacement("home");
-                                      //Navigator.pop(context);
                                     }
                                     submitting.value = false;
                                   }

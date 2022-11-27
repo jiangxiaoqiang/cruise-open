@@ -3,7 +3,6 @@ import 'package:cruise/src/page/user/discover/discovery.dart';
 import 'package:cruise/src/page/user/feedback/feedback_page.dart';
 import 'package:cruise/src/page/user/settings/main/main_page.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wheel/wheel.dart';
