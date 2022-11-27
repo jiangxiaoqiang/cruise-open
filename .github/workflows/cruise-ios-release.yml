@@ -61,7 +61,7 @@ jobs:
       - name: Deploy to TestFlight/PGY
         run: |
           cd ./ios
-          bundle exec fastlane beta
+        #  bundle exec fastlane beta
         env:
           FLUTTER_ROOT: ${{ secrets.FLUTTER_ROOT }}
           APPLE_ID: ${{ secrets.APPLE_ID }}
