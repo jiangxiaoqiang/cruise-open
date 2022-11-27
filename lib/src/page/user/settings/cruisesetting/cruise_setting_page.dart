@@ -34,7 +34,6 @@ class CruiseSettingPage extends StatelessWidget {
                                 bool isLoggedIn = await Auth.isLoggedIn();
                                 if (isLoggedIn) {
                                   NavUtil.navProfile(context);
-                                  //page = BottomNavigationDemo(type: BottomNavigationDemoType.withLabels);
                                 } else {
                                   NavUtil.navLogin(context);
                                 }

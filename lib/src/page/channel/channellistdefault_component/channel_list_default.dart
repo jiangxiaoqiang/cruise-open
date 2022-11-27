@@ -25,7 +25,6 @@ void _onScroll(offset) {
   appBarAlpha = alpha;
 }
 
-RefreshController _refreshController = RefreshController(initialRefresh: false);
 ScrollController scrollController = ScrollController();
 
 class ChannelListDefault extends StatelessWidget {
@@ -34,6 +33,8 @@ class ChannelListDefault extends StatelessWidget {
     return GetBuilder<ChannelListDefaultController>(
         init: ChannelListDefaultController(),
         builder: (controller) {
+          RefreshController _refreshController = RefreshController(initialRefresh: false);
+
           StoriesType storiesType = StoriesType.channels;
           if (controller.isScrollTop) {
             if (scrollController.hasClients) {

@@ -13,7 +13,6 @@ import '../subarticlelist_component/sub_article_list_controller.dart';
 const APPBAR_SCROLL_OFFSET = 100;
 double appBarAlpha = 0;
 bool isDispatched = false;
-RefreshController _refreshController = RefreshController(initialRefresh: false);
 ScrollController scrollController = ScrollController();
 
 class SubListDefault extends StatelessWidget {
@@ -22,6 +21,8 @@ class SubListDefault extends StatelessWidget {
     return GetBuilder<SubListDefaultController>(
         init: SubListDefaultController(),
         builder: (controller) {
+          RefreshController _refreshController = RefreshController(initialRefresh: false);
+
           ArticleRequest articleRequest = controller.articleRequest;
           articleRequest.storiesType = controller.currentStoriesType;
           if (controller.isScrollTop.value) {

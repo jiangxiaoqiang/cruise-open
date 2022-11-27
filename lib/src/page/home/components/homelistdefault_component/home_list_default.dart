@@ -14,7 +14,6 @@ import 'home_list_default_controller.dart';
 const APPBAR_SCROLL_OFFSET = 100;
 double appBarAlpha = 0;
 bool isDispatched = false;
-RefreshController _refreshController = RefreshController(initialRefresh: false);
 ScrollController scrollController = ScrollController();
 
 class HomeListDefault extends StatelessWidget {
@@ -23,6 +22,8 @@ class HomeListDefault extends StatelessWidget {
     return GetBuilder<HomeListDefaultController>(
         init: HomeListDefaultController(),
         builder: (controller) {
+          RefreshController _refreshController = RefreshController(initialRefresh: false);
+
           ArticleRequest articleRequest = controller.articleRequest;
           articleRequest.storiesType = controller.currentStoriesType;
           if (controller.isScrollTop.value) {
