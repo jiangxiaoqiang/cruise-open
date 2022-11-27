@@ -1,5 +1,7 @@
 # cruise-open
 
+english | [中文]([cruise-open/README.zh-CN.md at main · jiangxiaoqiang/cruise-open · GitHub](https://github.com/jiangxiaoqiang/cruise-open/blob/main/README.zh-CN.md))
+
 Cruise is a simple RSS reader across all platform.
 
 ## Background
@@ -24,20 +26,20 @@ export PUB_HOSTED_URL=https://pub.flutter-io.cn \
 && ~/fvm/versions/2.10.3/bin/flutter run -v
 ```
 
-build the ipa(iOS and iPadOS application archive file) package so that you can install into your own iOS devices, you can use altstore to install the ipa into your iOS devices without:
+build the ipa(iOS and iPadOS application archive file) package so that you can install into your own iOS devices, you can use altstore to install the ipa into your iOS devices without jailbreak or pay money for sign the app:
 
 ```bash
 ~/fvm/versions/{version}/bin/flutter build ipa --export-options-plist=/Users/xiaoqiangjiang/source/reddwarf/frontend/cruise-open/ios/Runner/Info.plist --release
 ~/fvm/versions/3.3.0/bin/flutter build ipa --export-options-plist=/Users/xiaoqiangjiang/source/reddwarf/frontend/cruise-open/ios/Runner/Info.plist --release
 ```
 
-在设备上运行应用，可以断开USB线：
+run cruise in your devices without the usb cable connection, this application only valid for 7 days with iOS devices：
 
 ```bash
 ~/fvm/versions/{version}/bin/flutter run --release
 ```
 
-### 运行界面
+### UI
 
 | ![Kiku](docs/snapshot/home.jpeg)        | ![Kiku](docs/snapshot/sub.jpeg) |
 | --------------------------------------- | ------------------------------- |
