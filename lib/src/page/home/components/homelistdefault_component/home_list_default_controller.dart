@@ -16,21 +16,23 @@ class HomeListDefaultController extends GetxController {
   var articles = Map<String, ArticleItem>();
 
   Future initArticles(StoriesType storiesType) async {
-    articleRequest.pageNum = 1;
-    articleRequest.offset = null;
-    articleRequest.storiesType = storiesType;
-    List<ArticleItem> fetchedArticles = await Repo.getArticles(articleRequest);
-    if (fetchedArticles.isNotEmpty) {
-      fetchedArticles.forEach((element) {
-        articles.putIfAbsent(element.title, () => element);
-      });
-      int maxArticleId = fetchedArticles.map((e) => int.parse(e.id)).toList().max;
-      if (articleRequest.offset == null) {
-        articleRequest.offset = maxArticleId;
+    if (articles.length == 0) {
+      articleRequest.pageNum = 1;
+      articleRequest.offset = null;
+      articleRequest.storiesType = storiesType;
+      List<ArticleItem> fetchedArticles = await Repo.getArticles(articleRequest);
+      if (fetchedArticles.isNotEmpty) {
+        fetchedArticles.forEach((element) {
+          articles.putIfAbsent(element.title, () => element);
+        });
+        int maxArticleId = fetchedArticles.map((e) => int.parse(e.id)).toList().max;
+        if (articleRequest.offset == null) {
+          articleRequest.offset = maxArticleId;
+        }
       }
+      articleLoadingStatus = LoadingStatus.complete;
+      update();
     }
-    articleLoadingStatus = LoadingStatus.complete;
-    update();
   }
 
   Future<void> loadNewestArticles(RefreshController _refreshController) async {
