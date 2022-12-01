@@ -14,4 +14,4 @@ set -x
 export PUB_HOSTED_URL=https://mirrors.tuna.tsinghua.edu.cn/dart-pub
 export FLUTTER_STORAGE_BASE_URL=https://mirrors.tuna.tsinghua.edu.cn/flutter
 
-~/apps/flutter/bin/flutter pub upgrade
+~/fvm/versions/3.3.0/bin/flutter pub upgrade

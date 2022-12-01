@@ -1,4 +1,11 @@
 {
   "baseUrl": "https://beta-api.poemhub.top",
-  "appId": 1
+  "appId": 1,
+  "logUrl": "https://api.poemhub.top",
+  "authUrl": "https://api.poemhub.top",
+  "shareUrl": "https://api.poemhub.top",
+  "userName": "cruiseUserName",
+  "accessToken": "cruiseAccessToken",
+  "refreshToken": "cruiseRefreshToken",
+  "registerTime": "cruiseRegisterTime"
 }

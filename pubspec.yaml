@@ -42,10 +42,11 @@ dependencies:
   global_configuration: 2.0.0-nullsafety.1
   hive_flutter: 1.0.0
   eva_icons_flutter: 3.0.0
+  # https://stackoverflow.com/questions/54689346/select-branch-in-git-dependency
   wheel:
     git:
       url: https://github.com/RedDwarfTech/wheel.git
-      ref: b2589b45d582825d1628209c263af9ce17514f00
+      ref: main
   flutter_html: 3.0.0-alpha.5
   video_player: 2.4.7
   synchronized: 3.0.0+3
