@@ -7,5 +7,6 @@
   "userName": "cruiseUserName",
   "accessToken": "cruiseAccessToken",
   "refreshToken": "cruiseRefreshToken",
-  "registerTime": "cruiseRegisterTime"
+  "registerTime": "cruiseRegisterTime",
+  "wechatAppId": "xxxxxxxxxiwjklkldldd"
 }

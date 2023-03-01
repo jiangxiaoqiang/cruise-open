@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wheel/wheel.dart';
 
+import '../../../pay/wechatpay/wechat_pay_page.dart';
 import '../../fav/fav.dart';
 import '../../history/hostorylist.dart';
 
@@ -142,18 +143,34 @@ class CruiseSettingPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                         child: Container(
                             color: Colors.white,
-                            child: ListTile(
-                              leading: Icon(EvaIcons.heart),
-                              trailing: Icon(Icons.keyboard_arrow_right),
-                              title: Text("会员中心"),
-                              onTap: () async {
-                                bool isLoggedIn = await Auth.isLoggedIn();
-                                if (isLoggedIn) {
-                                  var data = {'name': "payPage"};
-                                } else {
-                                  NavUtil.navLogin(context);
-                                }
-                              },
+                            child: Column(
+                              children: [
+                                ListTile(
+                                  leading: Icon(EvaIcons.heart),
+                                  trailing: Icon(Icons.keyboard_arrow_right),
+                                  title: Text("会员中心"),
+                                  onTap: () async {
+                                    bool isLoggedIn = await Auth.isLoggedIn();
+                                    if (isLoggedIn) {
+                                    } else {
+                                      NavUtil.navLogin(context);
+                                    }
+                                  },
+                                ),
+                                ListTile(
+                                  leading: Icon(Icons.payment),
+                                  trailing: Icon(Icons.keyboard_arrow_right),
+                                  title: Text("支付"),
+                                  onTap: () async {
+                                    bool isLoggedIn = await Auth.isLoggedIn();
+                                    if (isLoggedIn) {
+                                      Get.to(() => WechatPayPage());
+                                    } else {
+                                      NavUtil.navLogin(context);
+                                    }
+                                  },
+                                )
+                              ],
                             )))),
               ],
             ),

@@ -8,10 +8,26 @@ import '../../../../models/api/upvote_status.dart';
 
 class ArticleDetailController extends GetxController {
   var article = ArticleItem();
+  var key = ''.obs;
 
   @override
   void onInit() {
     super.onInit();
+    // avoid to send multiple http request when UI refresh
+    debounce(key, saveReadHistory, time: Duration(seconds: 2));
+  }
+
+  void changeKey(String value) {
+    key.value = value;
+  }
+
+  void saveReadHistory(String id) async{
+    Wheel.HttpResult result = (await ArticleAction.read(articleId: id));
+    if (result.result == Wheel.Result.error) {
+
+    } else {
+
+    }
   }
 
   void handleVoteImpl(UpvoteStatus upvoteStatus, String action, ArticleItem item) async {

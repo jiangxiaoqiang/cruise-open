@@ -12,6 +12,7 @@ class ArticlePg extends StatelessWidget {
   Widget navDetail(ArticleItem article, ArticlePgController articlePgController) {
     final ArticleDetailController articleDetailController = Get.put(ArticleDetailController());
     articleDetailController.article = article;
+    articleDetailController.changeKey(article.id);
     return new ArticleDetailWrapper();
   }
 
