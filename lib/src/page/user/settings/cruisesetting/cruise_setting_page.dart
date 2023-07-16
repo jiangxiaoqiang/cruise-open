@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wheel/wheel.dart';
 
+import '../../../pay/pay.dart';
 import '../../../pay/wechatpay/wechat_pay_page.dart';
 import '../../fav/fav.dart';
 import '../../history/hostorylist.dart';
@@ -152,6 +153,7 @@ class CruiseSettingPage extends StatelessWidget {
                                   onTap: () async {
                                     bool isLoggedIn = await Auth.isLoggedIn();
                                     if (isLoggedIn) {
+                                      Get.to(() => Pay());
                                     } else {
                                       NavUtil.navLogin(context);
                                     }

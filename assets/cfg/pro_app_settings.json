@@ -8,5 +8,6 @@
   "accessToken": "cruiseAccessToken",
   "refreshToken": "cruiseRefreshToken",
   "registerTime": "cruiseRegisterTime",
-  "wechatAppId": "xxxxxxxxxiwjklkldldd"
+  "wechatAppId": "xxxxxxxxxiwjklkldldd",
+  "nickname": "nickname"
 }

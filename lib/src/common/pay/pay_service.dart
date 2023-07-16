@@ -5,7 +5,7 @@ import 'package:cruise/src/common/rest_log.dart';
 import 'package:cruise/src/models/pay/pay_verify_model.dart';
 import 'package:wheel/wheel.dart' show AppLogHandler, RestApiError, RestClient;
 
-class Pay {
+class PayService {
   static Future<int> verifyReceipt(PayVerifyModel payVerifyModel) async {
     try {
       Map jsonMap = payVerifyModel.toMap();

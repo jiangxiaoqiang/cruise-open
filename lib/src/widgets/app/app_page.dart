@@ -5,7 +5,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:wheel/wheel.dart';
 
-import '../../common/theme.dart';
 import '../../page/home/home.dart';
 import '../../page/login.dart';
 import 'global_controller.dart';

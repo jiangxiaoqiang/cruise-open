@@ -28,7 +28,7 @@ class ArticleItem {
       this.kids,
       this.readStatus = false,
       this.score,
-      this.pubTime = 0,
+      this.pubTime = "",
       this.editorPick = 0,
       this.title = "Unknown",
       this.type,
@@ -53,7 +53,7 @@ class ArticleItem {
   String id;
   List<int>? kids;
   int? score;
-  int pubTime;
+  String pubTime;
   int editorPick;
   String title;
   StoryType? type;
@@ -73,7 +73,7 @@ class ArticleItem {
 
   String get domain => Uri.parse(link).host;
 
-  String get ago => timeago.format(DateTime.fromMillisecondsSinceEpoch(pubTime));
+  String get ago => timeago.format(DateTime.parse(pubTime));
 
   factory ArticleItem.fromMap(Map<String, dynamic> json) => ArticleItem(
         id: json["id"],
